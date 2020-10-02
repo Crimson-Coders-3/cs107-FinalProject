@@ -1,4 +1,7 @@
 #include <iostream>
 using namespace std;
 
-cout << "Test was successful." << endl;
+int main(){
+	cout << "Test was successful." << endl;
+	return 0;
+}
