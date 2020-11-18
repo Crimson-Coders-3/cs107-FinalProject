@@ -21,7 +21,7 @@ cd ${CURRENT_PATH}
 # library sources
 # =============== 
 MAL_DIRECTORY=${PROJECT_ROOT}/AutoDiff
-MAL_SO_NAME=MyAwesomeLibrary
+MAL_SO_NAME=AutoDiff
 
 # ====================== 
 # folder directory paths

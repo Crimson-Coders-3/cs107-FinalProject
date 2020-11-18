@@ -12,6 +12,7 @@ addons:
       - gcc-6
       - g++-6
       - cmake
+      - lcov
 script:
   # Link gcc-6 and g++-6 to their standard commands
   - sudo ln -s /usr/bin/gcc-6 /usr/local/bin/gcc
@@ -23,3 +24,10 @@ script:
   - gcc -v && g++ -v && cmake --version
   # Run your build commands next
 
+after_success:
+# Create lcov report
+- lcov --capture --directory . --output-file coverage.info
+- lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
+- lcov --list coverage.info # debug info
+# Uploading report to CodeCov
+- bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports"
