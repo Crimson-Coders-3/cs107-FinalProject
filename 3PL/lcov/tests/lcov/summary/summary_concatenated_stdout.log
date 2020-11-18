@@ -1,0 +1,5 @@
+Reading tracefile concatenated.info
+Summary coverage rate:
+  lines......: 80.0% (760 of 950 lines)
+  functions..: 60.0% (30 of 50 functions)
+  branches...: 20.0% (685 of 3428 branches)

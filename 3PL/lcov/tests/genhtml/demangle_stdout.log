@@ -1,0 +1,12 @@
+Reading data file demangle.info.tmp
+Resolved relative source file path "file.tmp" with CWD to "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/genhtml/file.tmp".
+Found 1 entries.
+Found common filename prefix "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests"
+Writing .css and .png files.
+Generating output.
+Processing file genhtml/file.tmp
+Writing directory view page.
+Overall coverage rate:
+  lines......: 100.0% (1 of 1 line)
+  functions..: 0.0% (0 of 3 functions)
+  branches...: no data found

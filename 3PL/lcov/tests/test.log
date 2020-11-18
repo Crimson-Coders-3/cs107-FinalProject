@@ -1,0 +1,717 @@
+DATE .......: 2020-11-18 18:27:48 -0500
+LCOV .......: 
+  lcov: LCOV version 1.0
+GCOV .......: 
+  Apple LLVM version 12.0.0 (clang-1200.0.31.1)
+    Optimized build.
+    Default target: x86_64-apple-darwin19.6.0
+    Host CPU: skylake
+CPUINFO ....: 
+/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests//bin/testsuite_init: line 25: /proc/cpuinfo: No such file or directory
+MEMINFO ....: 
+/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests//bin/testsuite_init: line 28: /proc/meminfo: No such file or directory
+
+======================================================================
+DATE .......: 2020-11-18 18:27:48 -0500
+TESTNAME ...: genhtml/full.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/genhtml/full.sh"
+OUTPUT .....: 
+  STDOUT_START
+  Reading data file /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/full.info
+  Found 5 entries.
+  Found common filename prefix "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/src"
+  Writing .css and .png files.
+  Generating output.
+  Processing file build/info/mem_c.h
+  Processing file config/basic/mem.h
+  Processing file target/misc.c
+  Processing file tools/build/misc.c
+  Processing file www/list.c
+  Writing directory view page.
+  Overall coverage rate:
+    lines......: 100.0% (950 of 950 lines)
+    functions..: 100.0% (50 of 50 functions)
+    branches...: 100.0% (3428 of 3428 branches)
+  STDOUT_STOP
+  STDERR_START
+  STDERR_STOP
+  Checking coverage rates in stdout
+  Comparing output for full_stdout.log and /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/full.counts:
+  line hit: 950 == 950
+  line found: 950 == 950
+  functions hit: 50 == 50
+  functions found: 50 == 50
+  branches hit: 3428 == 3428
+  branches found: 3428 == 3428
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:48 -0500
+TESTNAME ...: genhtml/part1.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/genhtml/part1.sh"
+OUTPUT .....: 
+  STDOUT_START
+  Reading data file /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/part1.info
+  Found 5 entries.
+  Found common filename prefix "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/src"
+  Writing .css and .png files.
+  Generating output.
+  Processing file build/info/mem_c.h
+  Processing file config/basic/mem.h
+  Processing file target/misc.c
+  Processing file tools/build/misc.c
+  Processing file www/list.c
+  Writing directory view page.
+  Overall coverage rate:
+    lines......: 40.5% (385 of 950 lines)
+    functions..: 54.0% (27 of 50 functions)
+    branches...: 9.7% (333 of 3428 branches)
+  STDOUT_STOP
+  STDERR_START
+  STDERR_STOP
+  Checking coverage rates in stdout
+  Comparing output for part1_stdout.log and /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/part1.counts:
+  line hit: 385 == 385
+  line found: 950 == 950
+  functions hit: 27 == 27
+  functions found: 50 == 50
+  branches hit: 333 == 333
+  branches found: 3428 == 3428
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:48 -0500
+TESTNAME ...: genhtml/part2.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/genhtml/part2.sh"
+OUTPUT .....: 
+  STDOUT_START
+  Reading data file /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/part2.info
+  Found 5 entries.
+  Found common filename prefix "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/src"
+  Writing .css and .png files.
+  Generating output.
+  Processing file build/info/mem_c.h
+  Processing file config/basic/mem.h
+  Processing file target/misc.c
+  Processing file tools/build/misc.c
+  Processing file www/list.c
+  Writing directory view page.
+  Overall coverage rate:
+    lines......: 39.5% (375 of 950 lines)
+    functions..: 6.0% (3 of 50 functions)
+    branches...: 10.3% (352 of 3428 branches)
+  STDOUT_STOP
+  STDERR_START
+  STDERR_STOP
+  Checking coverage rates in stdout
+  Comparing output for part2_stdout.log and /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/part2.counts:
+  line hit: 375 == 375
+  line found: 950 == 950
+  functions hit: 3 == 3
+  functions found: 50 == 50
+  branches hit: 352 == 352
+  branches found: 3428 == 3428
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:49 -0500
+TESTNAME ...: genhtml/target.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/genhtml/target.sh"
+OUTPUT .....: 
+  STDOUT_START
+  Reading data file /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/target.info
+  Found 5 entries.
+  Found common filename prefix "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/src"
+  Writing .css and .png files.
+  Generating output.
+  Processing file build/info/mem_c.h
+  Processing file config/basic/mem.h
+  Processing file target/misc.c
+  Processing file tools/build/misc.c
+  Processing file www/list.c
+  Writing directory view page.
+  Overall coverage rate:
+    lines......: 80.0% (760 of 950 lines)
+    functions..: 60.0% (30 of 50 functions)
+    branches...: 20.0% (685 of 3428 branches)
+  STDOUT_STOP
+  STDERR_START
+  STDERR_STOP
+  Checking coverage rates in stdout
+  Comparing output for target_stdout.log and /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/target.counts:
+  line hit: 760 == 760
+  line found: 950 == 950
+  functions hit: 30 == 30
+  functions found: 50 == 50
+  branches hit: 685 == 685
+  branches found: 3428 == 3428
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:49 -0500
+TESTNAME ...: genhtml/zero.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/genhtml/zero.sh"
+OUTPUT .....: 
+  STDOUT_START
+  Reading data file /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/zero.info
+  Found 5 entries.
+  Found common filename prefix "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/src"
+  Writing .css and .png files.
+  Generating output.
+  Processing file build/info/mem_c.h
+  Processing file config/basic/mem.h
+  Processing file target/misc.c
+  Processing file tools/build/misc.c
+  Processing file www/list.c
+  Writing directory view page.
+  Overall coverage rate:
+    lines......: 0.0% (0 of 950 lines)
+    functions..: 0.0% (0 of 50 functions)
+    branches...: 0.0% (0 of 3428 branches)
+  STDOUT_STOP
+  STDERR_START
+  STDERR_STOP
+  Checking coverage rates in stdout
+  Comparing output for zero_stdout.log and /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/zero.counts:
+  line hit: 0 == 0
+  line found: 950 == 950
+  functions hit: 0 == 0
+  functions found: 50 == 50
+  branches hit: 0 == 0
+  branches found: 3428 == 3428
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:49 -0500
+TESTNAME ...: genhtml/demangle.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/genhtml/demangle.sh"
+OUTPUT .....: 
+  Run 1: No demangling
+  CMDLINE: genhtml --config-file /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcovrc  demangle.info.tmp -o out_demangle 
+  STDOUT_START
+  Reading data file demangle.info.tmp
+  Resolved relative source file path "file.tmp" with CWD to "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/genhtml/file.tmp".
+  Found 1 entries.
+  Found common filename prefix "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests"
+  Writing .css and .png files.
+  Generating output.
+  Processing file genhtml/file.tmp
+  Writing directory view page.
+  Overall coverage rate:
+    lines......: 100.0% (1 of 1 line)
+    functions..: 0.0% (0 of 3 functions)
+    branches...: no data found
+  STDOUT_STOP
+  STDERR_START
+  STDERR_STOP
+  Found function names:
+                <td class="coverFn"><a href="file.tmp.gcov.html#1">_Z7myfunc2v</a></td>
+                <td class="coverFnLo">0</td>
+                <td class="coverFn"><a href="file.tmp.gcov.html#1">__Z7myfunc3v</a></td>
+                <td class="coverFnLo">0</td>
+                <td class="coverFn"><a href="file.tmp.gcov.html#1">myfunc1</a></td>
+                <td class="coverFnLo">0</td>
+  Success - found myfunc1
+  
+  Run 2: Demangle using defaults
+  CMDLINE: genhtml --config-file /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcovrc  demangle.info.tmp -o out_demangle --demangle-cpp
+  STDOUT_START
+  Reading data file demangle.info.tmp
+  Resolved relative source file path "file.tmp" with CWD to "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/genhtml/file.tmp".
+  Found 1 entries.
+  Found common filename prefix "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests"
+  Writing .css and .png files.
+  Generating output.
+  Processing file genhtml/file.tmp
+  Writing directory view page.
+  Overall coverage rate:
+    lines......: 100.0% (1 of 1 line)
+    functions..: 0.0% (0 of 3 functions)
+    branches...: no data found
+  STDOUT_STOP
+  STDERR_START
+  STDERR_STOP
+  Found function names:
+                <td class="coverFn"><a href="file.tmp.gcov.html#1">myfunc2()</a></td>
+                <td class="coverFnLo">0</td>
+                <td class="coverFn"><a href="file.tmp.gcov.html#1">myfunc3()</a></td>
+                <td class="coverFnLo">0</td>
+                <td class="coverFn"><a href="file.tmp.gcov.html#1">myfunc1</a></td>
+                <td class="coverFnLo">0</td>
+  Success - found myfunc[23]() converted by c++filt
+  
+  Run 3: Demangle using custom demangling tool
+  CMDLINE: genhtml --config-file /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcovrc  demangle.info.tmp -o out_demangle --demangle-cpp --rc genhtml_demangle_cpp_tool=/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/genhtml/mycppfilt.sh
+  STDOUT_START
+  Reading data file demangle.info.tmp
+  Resolved relative source file path "file.tmp" with CWD to "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/genhtml/file.tmp".
+  Found 1 entries.
+  Found common filename prefix "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests"
+  Writing .css and .png files.
+  Generating output.
+  Processing file genhtml/file.tmp
+  Writing directory view page.
+  Overall coverage rate:
+    lines......: 100.0% (1 of 1 line)
+    functions..: 0.0% (0 of 3 functions)
+    branches...: no data found
+  STDOUT_STOP
+  STDERR_START
+  STDERR_STOP
+  Found function names:
+                <td class="coverFn"><a href="file.tmp.gcov.html#1">aaa_Z7myfunc2v</a></td>
+                <td class="coverFnLo">0</td>
+                <td class="coverFn"><a href="file.tmp.gcov.html#1">aaa__Z7myfunc3v</a></td>
+                <td class="coverFnLo">0</td>
+                <td class="coverFn"><a href="file.tmp.gcov.html#1">aaamyfunc1</a></td>
+                <td class="coverFnLo">0</td>
+  Success - found myfunc prefixed by mycppfilt.sh
+  
+  Run 4: Demangle with params set
+  CMDLINE: genhtml --config-file /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcovrc  demangle.info.tmp -o out_demangle --demangle-cpp --rc genhtml_demangle_cpp_tool=/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/genhtml/mycppfilt.sh --rc genhtml_demangle_cpp_params='bbb'
+  STDOUT_START
+  Reading data file demangle.info.tmp
+  Resolved relative source file path "file.tmp" with CWD to "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/genhtml/file.tmp".
+  Found 1 entries.
+  Found common filename prefix "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests"
+  Writing .css and .png files.
+  Generating output.
+  Processing file genhtml/file.tmp
+  Writing directory view page.
+  Overall coverage rate:
+    lines......: 100.0% (1 of 1 line)
+    functions..: 0.0% (0 of 3 functions)
+    branches...: no data found
+  STDOUT_STOP
+  STDERR_START
+  STDERR_STOP
+  Found function names:
+                <td class="coverFn"><a href="file.tmp.gcov.html#1">bbb_Z7myfunc2v</a></td>
+                <td class="coverFnLo">0</td>
+                <td class="coverFn"><a href="file.tmp.gcov.html#1">bbb__Z7myfunc3v</a></td>
+                <td class="coverFnLo">0</td>
+                <td class="coverFn"><a href="file.tmp.gcov.html#1">bbbmyfunc1</a></td>
+                <td class="coverFnLo">0</td>
+  Success - found myfunc prefixed by custom prefix
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:50 -0500
+TESTNAME ...: lcov/add/zero.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcov/add/zero.sh"
+OUTPUT .....: 
+  + echo 'Adding files...'
+  Adding files...
+  + lcov --config-file /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcovrc -a /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/zero.info -o add_zero.info
+  Combining tracefiles.
+  Reading tracefile /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/zero.info
+  Writing data to add_zero.info
+  Summary coverage rate:
+    lines......: 0.0% (0 of 950 lines)
+    functions..: 0.0% (0 of 50 functions)
+    branches...: 0.0% (0 of 3428 branches)
+  + echo 'Normalizing result...'
+  Normalizing result...
+  + norminfo add_zero.info 1
+  + echo 'Comparing with reference...'
+  Comparing with reference...
+  + diff -u /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/zero.info norm_add_zero.info
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:50 -0500
+TESTNAME ...: lcov/add/zero2.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcov/add/zero2.sh"
+OUTPUT .....: 
+  + echo 'Adding files...'
+  Adding files...
+  + lcov --config-file /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcovrc -a /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/zero.info -a /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/zero.info -o add_zero.info
+  Combining tracefiles.
+  Reading tracefile /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/zero.info
+  Reading tracefile /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/zero.info
+  Writing data to add_zero.info
+  Summary coverage rate:
+    lines......: 0.0% (0 of 950 lines)
+    functions..: 0.0% (0 of 50 functions)
+    branches...: 0.0% (0 of 3428 branches)
+  + echo 'Normalizing result...'
+  Normalizing result...
+  + norminfo add_zero.info 1
+  + echo 'Comparing with reference...'
+  Comparing with reference...
+  + diff -u /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/zero.info norm_add_zero.info
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:50 -0500
+TESTNAME ...: lcov/add/full.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcov/add/full.sh"
+OUTPUT .....: 
+  + echo 'Adding files...'
+  Adding files...
+  + lcov --config-file /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcovrc -a /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/full.info -o add_full.info
+  Combining tracefiles.
+  Reading tracefile /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/full.info
+  Writing data to add_full.info
+  Summary coverage rate:
+    lines......: 100.0% (950 of 950 lines)
+    functions..: 100.0% (50 of 50 functions)
+    branches...: 100.0% (3428 of 3428 branches)
+  + echo 'Normalizing result...'
+  Normalizing result...
+  + norminfo add_full.info 1
+  + echo 'Comparing with reference...'
+  Comparing with reference...
+  + diff -u /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/full.info norm_add_full.info
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:51 -0500
+TESTNAME ...: lcov/add/full2.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcov/add/full2.sh"
+OUTPUT .....: 
+  + echo 'Adding files...'
+  Adding files...
+  + lcov --config-file /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcovrc -a /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/full.info -a /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/full.info -o add_full.info
+  Combining tracefiles.
+  Reading tracefile /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/full.info
+  Reading tracefile /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/full.info
+  Writing data to add_full.info
+  Summary coverage rate:
+    lines......: 100.0% (950 of 950 lines)
+    functions..: 100.0% (50 of 50 functions)
+    branches...: 100.0% (3428 of 3428 branches)
+  + echo 'Normalizing result...'
+  Normalizing result...
+  + norminfo add_full.info 0.5
+  + echo 'Comparing with reference...'
+  Comparing with reference...
+  + diff -u /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/full.info norm_add_full.info
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:51 -0500
+TESTNAME ...: lcov/add/part.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcov/add/part.sh"
+OUTPUT .....: 
+  + echo 'Adding files...'
+  Adding files...
+  + lcov --config-file /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcovrc -a /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/part1.info -o add_part1.info
+  Combining tracefiles.
+  Reading tracefile /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/part1.info
+  Writing data to add_part1.info
+  Summary coverage rate:
+    lines......: 40.5% (385 of 950 lines)
+    functions..: 54.0% (27 of 50 functions)
+    branches...: 9.7% (333 of 3428 branches)
+  + echo 'Normalizing result...'
+  Normalizing result...
+  + norminfo add_part1.info 1
+  + echo 'Comparing with reference...'
+  Comparing with reference...
+  + diff -u /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/part1.info norm_add_part1.info
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:51 -0500
+TESTNAME ...: lcov/add/part2.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcov/add/part2.sh"
+OUTPUT .....: 
+  + echo 'Adding files...'
+  Adding files...
+  + lcov --config-file /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcovrc -a /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/part1.info -a /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/part2.info -o add_target.info
+  Combining tracefiles.
+  Reading tracefile /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/part1.info
+  Reading tracefile /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/part2.info
+  Writing data to add_target.info
+  Summary coverage rate:
+    lines......: 80.0% (760 of 950 lines)
+    functions..: 60.0% (30 of 50 functions)
+    branches...: 20.0% (685 of 3428 branches)
+  + echo 'Normalizing result...'
+  Normalizing result...
+  + norminfo add_target.info 1
+  + echo 'Comparing with reference...'
+  Comparing with reference...
+  + diff -u /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/target.info norm_add_target.info
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:52 -0500
+TESTNAME ...: lcov/add/concatenated4.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcov/add/concatenated4.sh"
+OUTPUT .....: 
+  + echo 'Adding files...'
+  Adding files...
+  + lcov --config-file /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcovrc -a concatenated.info -o add_target.info
+  Combining tracefiles.
+  Reading tracefile concatenated.info
+  Writing data to add_target.info
+  Summary coverage rate:
+    lines......: 80.0% (760 of 950 lines)
+    functions..: 60.0% (30 of 50 functions)
+    branches...: 20.0% (685 of 3428 branches)
+  + echo 'Normalizing result...'
+  Normalizing result...
+  + norminfo add_target.info 0.25
+  + echo 'Comparing with reference...'
+  Comparing with reference...
+  + diff -u /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/target.info norm_add_target.info
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:52 -0500
+TESTNAME ...: lcov/diff/test.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcov/diff/test.sh"
+OUTPUT .....: 
+  Capturing coverage data from .
+  Found LLVM gcov version 12.0.0, which emulates gcov version 4.2.0
+  Scanning . for .gcda files ...
+  Found 1 data files in .
+  Processing prog.gcda
+  Finished .info-file creation
+  Capturing coverage data from .
+  Found LLVM gcov version 12.0.0, which emulates gcov version 4.2.0
+  Scanning . for .gcda files ...
+  Found 1 data files in .
+  Processing prog.gcda
+  Finished .info-file creation
+  Reading tracefile old/prog.info
+  Reading diff diff
+  Converting /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcov/diff/old/prog.c
+  1 entry converted, 0 entries left unchanged.
+  Writing data to patched.info
+  Summary coverage rate:
+    lines......: 40.0% (6 of 15 lines)
+    functions..: 66.7% (2 of 3 functions)
+    branches...: 14.3% (1 of 7 branches)
+  Patched coverage data file matches expected file
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:53 -0500
+TESTNAME ...: lcov/misc/help.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcov/misc/help.sh"
+OUTPUT .....: 
+  Usage: lcov [OPTIONS]
+  
+  Use lcov to collect coverage data from either the currently running Linux
+  kernel or from a user space application. Specify the --directory option to
+  get coverage data for a user space program.
+  
+  Misc:
+    -h, --help                      Print this help, then exit
+    -v, --version                   Print version number, then exit
+    -q, --quiet                     Do not print progress messages
+  
+  Operation:
+    -z, --zerocounters              Reset all execution counts to zero
+    -c, --capture                   Capture coverage data
+    -a, --add-tracefile FILE        Add contents of tracefiles
+    -e, --extract FILE PATTERN      Extract files matching PATTERN from FILE
+    -r, --remove FILE PATTERN       Remove files matching PATTERN from FILE
+    -l, --list FILE                 List contents of tracefile FILE
+        --diff FILE DIFF            Transform tracefile FILE according to DIFF
+        --summary FILE              Show summary coverage data for tracefiles
+  
+  Options:
+    -i, --initial                   Capture initial zero coverage data
+    -t, --test-name NAME            Specify test name to be stored with data
+    -o, --output-file FILENAME      Write data to FILENAME instead of stdout
+    -d, --directory DIR             Use .da files in DIR instead of kernel
+    -f, --follow                    Follow links when searching .da files
+    -k, --kernel-directory KDIR     Capture kernel coverage data only from KDIR
+    -b, --base-directory DIR        Use DIR as base directory for relative paths
+        --convert-filenames         Convert filenames when applying diff
+        --strip DEPTH               Strip initial DEPTH directory levels in diff
+        --path PATH                 Strip PATH from tracefile when applying diff
+        --(no-)checksum             Enable (disable) line checksumming
+        --(no-)compat-libtool       Enable (disable) libtool compatibility mode
+        --gcov-tool TOOL            Specify gcov tool location
+        --ignore-errors ERRORS      Continue after ERRORS (gcov, source, graph)
+        --no-recursion              Exclude subdirectories from processing
+        --to-package FILENAME       Store unprocessed coverage data in FILENAME
+        --from-package FILENAME     Capture from unprocessed data in FILENAME
+        --no-markers                Ignore exclusion markers in source code
+        --derive-func-data          Generate function data from line data
+        --list-full-path            Print full path during a list operation
+        --(no-)external             Include (ignore) data for external files
+        --config-file FILENAME      Specify configuration file location
+        --rc SETTING=VALUE          Override configuration file setting
+        --compat MODE=on|off|auto   Set compat MODE (libtool, hammer, split_crc)
+        --include PATTERN           Include files matching PATTERN
+        --exclude PATTERN           Exclude files matching PATTERN
+  
+  For more information see: http://ltp.sourceforge.net/coverage/lcov.php
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:53 -0500
+TESTNAME ...: lcov/misc/version.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcov/misc/version.sh"
+OUTPUT .....: 
+  lcov: LCOV version 1.0
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:53 -0500
+TESTNAME ...: lcov/summary/zero.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcov/summary/zero.sh"
+OUTPUT .....: 
+  Reading tracefile /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/zero.info
+  Summary coverage rate:
+    lines......: 0.0% (0 of 950 lines)
+    functions..: 0.0% (0 of 50 functions)
+    branches...: 0.0% (0 of 3428 branches)
+  Comparing output for summary_zero_stdout.log and /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/zero.counts:
+  line hit: 0 == 0
+  line found: 950 == 950
+  functions hit: 0 == 0
+  functions found: 50 == 50
+  branches hit: 0 == 0
+  branches found: 3428 == 3428
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:53 -0500
+TESTNAME ...: lcov/summary/full.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcov/summary/full.sh"
+OUTPUT .....: 
+  Reading tracefile /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/full.info
+  Summary coverage rate:
+    lines......: 100.0% (950 of 950 lines)
+    functions..: 100.0% (50 of 50 functions)
+    branches...: 100.0% (3428 of 3428 branches)
+  Comparing output for summary_full_stdout.log and /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/full.counts:
+  line hit: 950 == 950
+  line found: 950 == 950
+  functions hit: 50 == 50
+  functions found: 50 == 50
+  branches hit: 3428 == 3428
+  branches found: 3428 == 3428
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:54 -0500
+TESTNAME ...: lcov/summary/target.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcov/summary/target.sh"
+OUTPUT .....: 
+  Reading tracefile /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/target.info
+  Summary coverage rate:
+    lines......: 80.0% (760 of 950 lines)
+    functions..: 60.0% (30 of 50 functions)
+    branches...: 20.0% (685 of 3428 branches)
+  Comparing output for summary_target_stdout.log and /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/target.counts:
+  line hit: 760 == 760
+  line found: 950 == 950
+  functions hit: 30 == 30
+  functions found: 50 == 50
+  branches hit: 685 == 685
+  branches found: 3428 == 3428
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:54 -0500
+TESTNAME ...: lcov/summary/part1.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcov/summary/part1.sh"
+OUTPUT .....: 
+  Reading tracefile /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/part1.info
+  Summary coverage rate:
+    lines......: 40.5% (385 of 950 lines)
+    functions..: 54.0% (27 of 50 functions)
+    branches...: 9.7% (333 of 3428 branches)
+  Comparing output for summary_part1_stdout.log and /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/part1.counts:
+  line hit: 385 == 385
+  line found: 950 == 950
+  functions hit: 27 == 27
+  functions found: 50 == 50
+  branches hit: 333 == 333
+  branches found: 3428 == 3428
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:54 -0500
+TESTNAME ...: lcov/summary/part2.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcov/summary/part2.sh"
+OUTPUT .....: 
+  Reading tracefile /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/part2.info
+  Summary coverage rate:
+    lines......: 39.5% (375 of 950 lines)
+    functions..: 6.0% (3 of 50 functions)
+    branches...: 10.3% (352 of 3428 branches)
+  Comparing output for summary_part2_stdout.log and /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/part2.counts:
+  line hit: 375 == 375
+  line found: 950 == 950
+  functions hit: 3 == 3
+  functions found: 50 == 50
+  branches hit: 352 == 352
+  branches found: 3428 == 3428
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:54 -0500
+TESTNAME ...: lcov/summary/concatenated.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcov/summary/concatenated.sh"
+OUTPUT .....: 
+  Reading tracefile concatenated.info
+  Summary coverage rate:
+    lines......: 80.0% (760 of 950 lines)
+    functions..: 60.0% (30 of 50 functions)
+    branches...: 20.0% (685 of 3428 branches)
+  Comparing output for summary_concatenated_stdout.log and /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/target.counts:
+  line hit: 760 == 760
+  line found: 950 == 950
+  functions hit: 30 == 30
+  functions found: 50 == 50
+  branches hit: 685 == 685
+  branches found: 3428 == 3428
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:54 -0500
+TESTNAME ...: lcov/summary/concatenated2.sh
+COMMAND ....: "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/lcov/summary/concatenated2.sh"
+OUTPUT .....: 
+  Reading tracefile concatenated2.info
+  Summary coverage rate:
+    lines......: 80.0% (760 of 950 lines)
+    functions..: 60.0% (30 of 50 functions)
+    branches...: 20.0% (685 of 3428 branches)
+  Comparing output for summary_concatenated2_stdout.log and /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/target.counts:
+  line hit: 760 == 760
+  line found: 950 == 950
+  functions hit: 30 == 30
+  functions found: 50 == 50
+  branches hit: 685 == 685
+  branches found: 3428 == 3428
+EXITCODE ...: 0
+RESULT .....: pass
+
+======================================================================
+DATE .......: 2020-11-18 18:27:54 -0500
+EXECUTED ...: 23
+PASSED .....: 23
+FAILED .....: 0
+SKIPPED ....: 0

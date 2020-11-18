@@ -1,0 +1,15 @@
+Reading data file /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/part2.info
+Found 5 entries.
+Found common filename prefix "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/src"
+Writing .css and .png files.
+Generating output.
+Processing file build/info/mem_c.h
+Processing file config/basic/mem.h
+Processing file target/misc.c
+Processing file tools/build/misc.c
+Processing file www/list.c
+Writing directory view page.
+Overall coverage rate:
+  lines......: 39.5% (375 of 950 lines)
+  functions..: 6.0% (3 of 50 functions)
+  branches...: 10.3% (352 of 3428 branches)

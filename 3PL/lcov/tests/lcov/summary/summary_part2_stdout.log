@@ -1,0 +1,5 @@
+Reading tracefile /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/lcov/tests/part2.info
+Summary coverage rate:
+  lines......: 39.5% (375 of 950 lines)
+  functions..: 6.0% (3 of 50 functions)
+  branches...: 10.3% (352 of 3428 branches)
