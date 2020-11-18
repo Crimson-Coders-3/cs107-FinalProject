@@ -22,10 +22,12 @@ endif()
 # Enable coverage profiling
 OPTION(COVERAGE "Enable Code Coverage Settings" OFF)
 if(COVERAGE)
-  if(CMAKE_C_COMPILER_ID MATCHES "GNU")
+  # Original code in course repo has line 27 and line 30, 
+  # I commented them out. Otherwise, it wouldn't work for MacOS
+  #if(CMAKE_C_COMPILER_ID MATCHES "GNU")
     set(CMAKE_CXX_FLAGS "-g -O0 --coverage -fprofile-arcs -ftest-coverage --coverage -fno-inline -fno-inline-small-functions -fno-default-inline")
     # set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
-  endif()
+  #endif()
 endif()
 
 # ======================== #
