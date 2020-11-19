@@ -25,3 +25,14 @@ TEST(Getter,int){
     EXPECT_EQ(x1.real(),real);  // note: EXECT_EQ used only for integers
     EXPECT_EQ(x1.dual(),dual);
 }
+
+TEST(Getter,int){
+    int real = 3;
+    int dual = 7;
+    Dual<int> x1(real,dual);
+    Dual<int> x2(x1);
+
+    /* test getters */
+    EXPECT_EQ(x1.real(),real);  // note: EXECT_EQ used only for integers
+    EXPECT_EQ(x1.dual(),dual);
+}

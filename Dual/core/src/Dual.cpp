@@ -2,25 +2,30 @@
 
 template <typename Scalar>
 Dual<Scalar>::Dual(Scalar real, Scalar dual)
-    : mReal(real)
-    , mDual(dual)
+    : adReal(real)
+    , adDual(dual)
 {}
 
 template <typename Scalar>
 template <typename Scalar2>
 Dual<Scalar>::Dual(const Dual<Scalar2>& rhs)
-    : mReal(rhs.real())
-    , mDual(rhs.dual())
+    : adReal(rhs.real())
+    , adDual(rhs.dual())
 {}
 
 template <typename Scalar>
-Scalar Dual<Scalar>::real() const
-{
-    return mReal;
+Scalar Dual<Scalar>::real() const {
+    return adReal;
 }
 
 template <typename Scalar>
-Scalar Dual<Scalar>::dual() const
-{
-    return mDual;
+Scalar Dual<Scalar>::dual() const {
+    return adDual;
+}
+
+template <typename Scalar>
+Dual<Scalar>& Dual<Scalar>::operator=(Scalar rhs){
+    mReal = rhs; 
+    mDual = Scalar(); 
+    return *this;
 }
