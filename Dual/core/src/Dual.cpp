@@ -1,4 +1,7 @@
 #include "Dual.h"
+#include <math.h>
+
+#define PI 3.141592653589793238
 
 template <typename Scalar>
 Dual<Scalar>::Dual(){
@@ -271,4 +274,87 @@ Dual<Scalar> operator/(Scalar lhs, const Dual<Scalar>& rhs){
 template <typename Scalar>
 Dual<Scalar> operator/(const Dual<Scalar>& lhs, const Dual<Scalar>& rhs){
     return Dual<Scalar>(lhs.real()/rhs.real(), (lhs.dual()*rhs.real()-lhs.real()*rhs.dual())/(rhs.real()*rhs.real()) );
+}
+
+// math operator
+template <typename Scalar>    
+Dual<Scalar> acos(const Dual<Scalar>& z){
+    return Dual<Scalar>(acos(z.real()), -z.dual() / sqrt(1 - z.real() * z.real()));
+}
+
+
+template <typename Scalar>    
+Dual<Scalar> asin(const Dual<Scalar>& z){
+    return Dual<Scalar>(asin(z.real()), z.dual() / sqrt(1 - z.real() * z.real()));
+}
+
+template <typename Scalar>   
+Dual<Scalar> atan(const Dual<Scalar>& z){
+    return Dual<Scalar>(atan(z.real()), z.dual() / (1 + z.real() * z.real()));
+}
+
+template <typename Scalar>     
+Dual<Scalar> atan2(const Dual<Scalar>& y, const Dual<Scalar>& x){
+    Dual<Scalar> z = y / x;
+    Scalar quadrant = x.real()<0 ? (y.real()<0 ? -PI : PI) : 0; 
+    return Dual<Scalar>(atan(z.real()) + quadrant, z.dual() / (1 + z.real() * z.real()));
+}
+
+template <typename Scalar> 
+Dual<Scalar> cos(const Dual<Scalar>& z){
+    return Dual<Scalar>(cos(z.real()), -z.dual() * sin(z.real()));
+}
+
+template <typename Scalar>   
+Dual<Scalar> cosh(const Dual<Scalar>& z){
+    return Dual<Scalar>(cosh(z.real()), z.dual() * sinh(z.real()));
+}
+
+template <typename Scalar>    
+Dual<Scalar> exp(const Dual<Scalar>& z){
+    Scalar x = exp(z.real());
+    return Dual<Scalar>(x, z.dual() * x);
+}
+
+template <typename Scalar>    
+Dual<Scalar> log(const Dual<Scalar>& z){
+    return Dual<Scalar>(log(z.real()), z.dual() / z.real());
+}
+
+template <typename Scalar>    
+Dual<Scalar> log10(const Dual<Scalar>& z){
+    return log(z) / log(10);
+}
+
+template <typename Scalar>    
+Dual<Scalar> pow(const Dual<Scalar>& x, const Dual<Scalar>& y){
+    return exp(log(x) * y);
+}
+
+template <typename Scalar>     
+Dual<Scalar> sin(const Dual<Scalar>& z){
+    return Dual<Scalar>(sin(z.real()), z.dual() * cos(z.real()));
+}
+
+template <typename Scalar>     
+Dual<Scalar> sinh(const Dual<Scalar>& z){
+    return Dual<Scalar>(sinh(z.real()), z.dual() * cosh(z.real()));
+}
+
+template <typename Scalar>     
+Dual<Scalar> sqrt(const Dual<Scalar>& z){
+    Scalar x = sqrt(z.real());
+    return Dual<Scalar>(x, z.dual() / (2 * x));
+}
+
+template <typename Scalar>     
+Dual<Scalar> tan(const Dual<Scalar>& z){
+    Scalar x = tan(z.real());
+    return Dual<Scalar>(x, z.dual() / (cos(z.real()*cos(z.real()))));
+}
+
+template <typename Scalar>   
+Dual<Scalar> tanh(const Dual<Scalar>& z){
+    Scalar x = tanh(z.real());
+    return Dual<Scalar>(x, z.dual() * (1 - x * x));
 }

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string>
+#include <math.h>
 
 /* googletest header files */
 #include "gtest/gtest.h"
@@ -469,4 +470,33 @@ TEST(NonMemberOperator,Divide){
 	Dual<double> quo3 = 5.0 / x;
 	EXPECT_NEAR(quo3.real(),5.0/3,DTOL); 
 	EXPECT_NEAR(quo3.dual(),(-5.0*9.0)/9,DTOL);
+}
+
+TEST(MATH,ACOS){
+	Dual<double> x(-0.5,4.0);
+	Dual<double> acosx = acos(x);
+	EXPECT_NEAR(acosx.real(),acos(-0.5),DTOL);
+	EXPECT_NEAR(acosx.dual(),-4.0/sqrt(1 - 0.25),DTOL);
+}
+
+TEST(MATH,ASIN){
+	Dual<double> x(-0.5,4.0);
+	Dual<double> asinx = asin(x);
+	EXPECT_NEAR(asinx.real(),asin(-0.5),DTOL);
+	EXPECT_NEAR(asinx.dual(),4.0/sqrt(1 - 0.25),DTOL);
+}
+
+TEST(MATH,ATAN){
+	Dual<double> x(-0.5,4.0);
+	Dual<double> atanx = atan(x);
+	EXPECT_NEAR(atanx.real(),atan(-0.5),DTOL);
+	EXPECT_NEAR(atanx.dual(),4.0/(1 + 0.25),DTOL);
+}
+
+TEST(MATH,ATAN2){
+	Dual<double> x(-10.0,4.0);
+	Dual<double> y(10.0,2.0);
+	Dual<double> atanx2 = atan2(x,y);
+	EXPECT_NEAR(atanx2.real(),atan2(-10.0,10.0),DTOL);
+	//EXPECT_NEAR(atanx2.dual(),4.0/(1 + 0.25),DTOL);
 }
