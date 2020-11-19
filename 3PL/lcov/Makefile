@@ -123,4 +123,7 @@ rpms: lcov-$(VERSION).tar.gz
 test: check
 
 check:
+	# For Linux 
 	@make -s -C tests check
+	# For MacOS
+	#@make -s -C tests check LDFLAGS=-lprofile_rt

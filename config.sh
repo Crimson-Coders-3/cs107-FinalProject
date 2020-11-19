@@ -51,7 +51,7 @@ help() {
     echo -e " ${aC}Options List:${eC}"
     echo "  [OPTION]:"
     echo "    --3pl       -3pl    build the 3rd party libraries:  gtest"
-    echo "    --library   -lib    build MyAwesomeLibrary"
+    echo "    --library   -lib    build AutoDiff Dual"
     echo "    --app       -app    build the App which uses MyAwesomeLibrary"
     echo " "
     echo "    --help      -h      displays this help message"
@@ -178,7 +178,7 @@ fi
 # =================================================================== #
 if [ $BUILD_APP == 0 -a $BUILD_LIB == 0 -a $BUILD_3PL == 0 ]; then
   echo "================================================"
-  echo "Building the GTest, MyAwesomeLibrary, and App..."
+  echo "Building the GTest, AutoDiff Dual, and App..."
   echo "================================================"
   echo " "
 
@@ -188,7 +188,7 @@ if [ $BUILD_APP == 0 -a $BUILD_LIB == 0 -a $BUILD_3PL == 0 ]; then
   ./build_3PL.sh $cmd_args
 
   cd ..
-  cd AutoDiff
+  cd Dual
 
   # build library
   ./config.sh $cmd_args
@@ -220,10 +220,10 @@ fi
 
 if [ $BUILD_LIB == 1 ]; then
   echo "============================"
-  echo "Building AutoDiffLibrary..."
+  echo "Building DualLibrary..."
   echo "============================"
 
-  cd AutoDiff
+  cd Dual
   ./config.sh $cmd_args
   cd ..
 fi
