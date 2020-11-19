@@ -98,7 +98,7 @@ class Dual{
     template <typename Scalar> Dual<Scalar> exp(const Dual<Scalar>& z);
     template <typename Scalar> Dual<Scalar> log(const Dual<Scalar>& z);
     template <typename Scalar> Dual<Scalar> log10(const Dual<Scalar>& z);
-    template <typename Scalar> Dual<Scalar> pow(const Dual<Scalar>& x, const Dual<Scalar>& y);
+    template <typename Scalar> Dual<Scalar> pow(const Dual<Scalar>& x, Scalar y);
     template <typename Scalar> Dual<Scalar> sin(const Dual<Scalar>& z);
     template <typename Scalar> Dual<Scalar> sinh(const Dual<Scalar>& z);
     template <typename Scalar> Dual<Scalar> sqrt(const Dual<Scalar>& z);

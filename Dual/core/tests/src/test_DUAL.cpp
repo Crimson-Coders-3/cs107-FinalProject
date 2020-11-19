@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string>
 #include <math.h>
+#include <cmath>
 
 /* googletest header files */
 #include "gtest/gtest.h"
@@ -498,5 +499,82 @@ TEST(MATH,ATAN2){
 	Dual<double> y(10.0,2.0);
 	Dual<double> atanx2 = atan2(x,y);
 	EXPECT_NEAR(atanx2.real(),atan2(-10.0,10.0),DTOL);
-	//EXPECT_NEAR(atanx2.dual(),4.0/(1 + 0.25),DTOL);
+	EXPECT_NEAR(atanx2.dual(),atan(x/y).dual(),DTOL);
+}
+
+TEST(MATH,COS){
+	Dual<double> x(-0.5,4.0);
+	Dual<double> cosx = cos(x);
+	EXPECT_NEAR(cosx.real(),cos(-0.5),DTOL);
+	EXPECT_NEAR(cosx.dual(),-sin(-0.5)*4.0,DTOL);
+}
+
+TEST(MATH,COSH){
+	Dual<double> x(-0.5,4.0);
+	Dual<double> coshx = cosh(x);
+	EXPECT_NEAR(coshx.real(),cosh(-0.5),DTOL);
+	EXPECT_NEAR(coshx.dual(),sinh(-0.5)*4.0,DTOL);
+}
+
+TEST(MATH,EXP){
+	Dual<double> x(-0.5,4.0);
+	Dual<double> expx = exp(x);
+	EXPECT_NEAR(expx.real(),exp(-0.5),DTOL);
+	EXPECT_NEAR(expx.dual(),4.0*exp(-0.5),DTOL);
+}
+
+TEST(MATH,LOG){
+	Dual<double> x(0.5,4.0);
+	Dual<double> logx = log(x);
+	EXPECT_NEAR(logx.real(),log(0.5),DTOL);
+	EXPECT_NEAR(logx.dual(),4.0/(0.5),DTOL);
+}
+
+TEST(MATH,LOG10){
+	Dual<double> x(0.5,4.0);
+	Dual<double> logx10 = log10(x);
+	EXPECT_NEAR(logx10.real(),log10(0.5),DTOL);
+	EXPECT_NEAR(logx10.dual(),4.0/(log(10)*(0.5)),DTOL);
+}
+
+TEST(MATH,POW){
+	Dual<double> x(0.5,4.0);
+	Dual<double> powx = pow(x,3.0);
+	EXPECT_NEAR(powx.real(),pow(0.5,3.0),DTOL);
+	EXPECT_NEAR(powx.dual(),pow(0.5,2.0)*4.0*3.0,DTOL);
+}
+
+TEST(MATH,SIN){
+	Dual<double> x(0.5,4.0);
+	Dual<double> sinx = sin(x);
+	EXPECT_NEAR(sinx.real(),sin(0.5),DTOL);
+	EXPECT_NEAR(sinx.dual(),cos(0.5)*4,DTOL);
+}
+
+TEST(MATH,SINH){
+	Dual<double> x(0.5,4.0);
+	Dual<double> sinhx = sinh(x);
+	EXPECT_NEAR(sinhx.real(),sinh(0.5),DTOL);
+	EXPECT_NEAR(sinhx.dual(),cosh(0.5)*4.0,DTOL);
+}
+
+TEST(MATH,SQRT){
+	Dual<double> x(9.00,4.0);
+	Dual<double> sqrtx = sqrt(x);
+	EXPECT_NEAR(sqrtx.real(),3.0,DTOL);
+	EXPECT_NEAR(sqrtx.dual(),pow(x,0.5).dual(),DTOL);
+}
+
+TEST(MATH,TAN){
+	Dual<double> x(0.5,4.0);
+	Dual<double> tanx = tan(x);
+	EXPECT_NEAR(tanx.real(),tan(0.5),DTOL);
+	EXPECT_NEAR(tanx.dual(),4.0/(cos(0.5)*cos(0.5)),DTOL);
+}
+
+TEST(MATH,TANH){
+	Dual<double> x(0.5,4.0);
+	Dual<double> tanhx = tanh(x);
+	EXPECT_NEAR(tanhx.real(),tanh(0.5),DTOL);
+	EXPECT_NEAR(tanhx.dual(),4.0*(1-tanh(0.5)*tanh(0.5)),DTOL);
 }

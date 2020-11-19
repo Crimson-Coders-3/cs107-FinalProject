@@ -326,9 +326,9 @@ Dual<Scalar> log10(const Dual<Scalar>& z){
     return log(z) / log(10);
 }
 
-template <typename Scalar>    
-Dual<Scalar> pow(const Dual<Scalar>& x, const Dual<Scalar>& y){
-    return exp(log(x) * y);
+template <typename Scalar> 
+Dual<Scalar> pow(const Dual<Scalar>& x, Scalar y){
+    return Dual<Scalar>(pow(x.real(),y),x.dual()*y*pow(x.real(),y-1));
 }
 
 template <typename Scalar>     
@@ -350,7 +350,7 @@ Dual<Scalar> sqrt(const Dual<Scalar>& z){
 template <typename Scalar>     
 Dual<Scalar> tan(const Dual<Scalar>& z){
     Scalar x = tan(z.real());
-    return Dual<Scalar>(x, z.dual() / (cos(z.real()*cos(z.real()))));
+    return Dual<Scalar>(x, z.dual() / (cos(z.real())*cos(z.real())) );
 }
 
 template <typename Scalar>   

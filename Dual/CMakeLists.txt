@@ -4,9 +4,6 @@ PROJECT(Dual)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-
-# I commented the line below because it raised an error
-# even though this line is in the GitHub repo
 set(CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/lib)
 
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH ON)
@@ -22,7 +19,7 @@ endif()
 # Enable coverage profiling
 OPTION(COVERAGE "Enable Code Coverage Settings" OFF)
 if(COVERAGE)
-  # Original code in course repo has line 27 and line 30, 
+  # Original code in course repo has line 24 and line 27, 
   # I commented them out. Otherwise, it wouldn't work for MacOS
   # if(CMAKE_C_COMPILER_ID MATCHES "GNU")
     set(CMAKE_CXX_FLAGS "-g -O0 --coverage -fprofile-arcs -ftest-coverage --coverage -fno-inline -fno-inline-small-functions -fno-default-inline")
