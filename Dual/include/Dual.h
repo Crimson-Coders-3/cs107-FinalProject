@@ -2,9 +2,12 @@
 #define DUAL_H
 
 /* system header files */
+#include <iostream>
 #ifndef DOXYGEN_IGNORE
 #  include <stdio.h>
 #endif
+
+using namespace std;
 
 template <typename Scalar>
 class Dual{
@@ -13,6 +16,7 @@ class Dual{
         
         /* constructors */
         Dual();
+        Dual(Scalar real);
         Dual(Scalar real, Scalar dual);
         template <typename Scalar2> Dual(const Dual<Scalar2>& rhs);
         
@@ -37,21 +41,34 @@ class Dual{
         Scalar adDual;
     };
 
-#ifdef USE_OSTREAM
-
-    template <typename CharT, typename Traits, typename Scalar> 
-    std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, const Dual<Scalar>& rhs);
-
-#endif  
-
+    template <typename Scalar> 
+    ostream& operator<<(ostream& os, const Dual<Scalar>& rhs);
+    
     template <typename Scalar> bool operator==(const Dual<Scalar>& a, Scalar b);
     template <typename Scalar> bool operator==(Scalar a, const Dual<Scalar>& b);
     template <typename Scalar1, typename Scalar2> bool operator==(const Dual<Scalar1>& a, const Dual<Scalar2>& b);
+
+    template <typename Scalar> bool operator!=(const Dual<Scalar>& a, Scalar b);
+    template <typename Scalar> bool operator!=(Scalar a, const Dual<Scalar>& b);
+    template <typename Scalar1, typename Scalar2> bool operator!=(const Dual<Scalar1>& a, const Dual<Scalar2>& b);
   
     template <typename Scalar> bool operator<(const Dual<Scalar>& a, Scalar b);
     template <typename Scalar> bool operator<(Scalar a, const Dual<Scalar>& b);
     template <typename Scalar1, typename Scalar2> bool operator<(const Dual<Scalar1>& a, const Dual<Scalar2>& b);
+
+    template <typename Scalar> bool operator<=(const Dual<Scalar>& a, Scalar b);
+    template <typename Scalar> bool operator<=(Scalar a, const Dual<Scalar>& b);
+    template <typename Scalar1, typename Scalar2> bool operator<=(const Dual<Scalar1>& a, const Dual<Scalar2>& b);
+
+    template <typename Scalar> bool operator>(const Dual<Scalar>& a, Scalar b);
+    template <typename Scalar> bool operator>(Scalar a, const Dual<Scalar>& b);
+    template <typename Scalar1, typename Scalar2> bool operator>(const Dual<Scalar1>& a, const Dual<Scalar2>& b);
+
+    template <typename Scalar> bool operator>=(const Dual<Scalar>& a, Scalar b);
+    template <typename Scalar> bool operator>=(Scalar a, const Dual<Scalar>& b);
+    template <typename Scalar1, typename Scalar2> bool operator>=(const Dual<Scalar1>& a, const Dual<Scalar2>& b);
   
+    // negative sign
     template <typename Scalar> Dual<Scalar> operator-(const Dual<Scalar>& rhs);
     
     template <typename Scalar> Dual<Scalar> operator+(const Dual<Scalar>& lhs, Scalar rhs);
@@ -63,35 +80,15 @@ class Dual{
     template <typename Scalar> Dual<Scalar> operator+(Scalar lhs, const Dual<Scalar>& rhs);
     template <typename Scalar> Dual<Scalar> operator*(Scalar lhs, const Dual<Scalar>& rhs);
     template <typename Scalar> Dual<Scalar> operator/(Scalar lhs, const Dual<Scalar>& rhs);
-    
-    /*
-    template <typename Scalar1, typename Scalar2>
-    Dual<typename Promote<Scalar1, Scalar2>::RT> operator+(const Dual<Scalar1>& lhs, const Dual<Scalar2>& rhs);
 
-    template <typename Scalar1, typename Scalar2>
-    Dual<typename Promote<Scalar1, Scalar2>::RT> operator-(const Dual<Scalar1>& lhs, const Dual<Scalar2>& rhs);
+    // can only allow Dual<int> + Dual<int>, Dual<float> + Dual<float>, Dual<double> + Dual<double>
+    // to do: Dual<int> + Dual<double> ...
+    template <typename Scalar> Dual<Scalar> operator-(const Dual<Scalar>& a, const Dual<Scalar>& b);
+    template <typename Scalar> Dual<Scalar> operator+(const Dual<Scalar>& a, const Dual<Scalar>& b);
+    template <typename Scalar> Dual<Scalar> operator*(const Dual<Scalar>& a, const Dual<Scalar>& b);
+    template <typename Scalar> Dual<Scalar> operator/(const Dual<Scalar>& a, const Dual<Scalar>& b);
 
-    template <typename Scalar1, typename Scalar2>
-    Dual<typename Promote<Scalar1, Scalar2>::RT> operator*(const Dual<Scalar1>& lhs, const Dual<Scalar2>& rhs);
-
-    template <typename Scalar1, typename Scalar2>
-    Dual<typename Promote<Scalar1, Scalar2>::RT> operator/(const Dual<Scalar1>& lhs, const Dual<Scalar2>& rhs);
-    */
-
-    // This is a convenience function template similar to std::make_pair.
-    template <typename Scalar> Dual<Scalar> makeDual(Scalar re, Scalar du);
-
-
-    // We define generic functions real, dual, and conf... 
-    template <typename Element> const Element& real(const Element& x);
-    template <typename Element> double dual(const Element& x);       
-    template <typename Element> const Element& conj(const Element& x); 
-    
-    //...and specialize them for anything dual.
-    template <typename Scalar> Scalar real(const Dual<Scalar>& z); 
-    template <typename Scalar> Scalar dual(const Dual<Scalar>& z);  
-    template <typename Scalar> Dual<Scalar> conj(const Dual<Scalar>& z);
-
+    // math operators
     template <typename Scalar> Dual<Scalar> acos(const Dual<Scalar>& z);
     template <typename Scalar> Dual<Scalar> asin(const Dual<Scalar>& z);
     template <typename Scalar> Dual<Scalar> atan(const Dual<Scalar>& z);
