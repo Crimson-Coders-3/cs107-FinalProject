@@ -26,13 +26,24 @@ TEST(Getter,int){
     EXPECT_EQ(x1.dual(),dual);
 }
 
-TEST(Getter,int){
-    int real = 3;
+TEST(Constructor,int){
+	int real = 3;
     int dual = 7;
+    /* test constructor using object of the same class */
     Dual<int> x1(real,dual);
-    Dual<int> x2(x1);
+	Dual<int> x2(x1);
 
-    /* test getters */
-    EXPECT_EQ(x1.real(),real);  // note: EXECT_EQ used only for integers
-    EXPECT_EQ(x1.dual(),dual);
+    EXPECT_EQ(x2.real(),real);
+    EXPECT_EQ(x2.dual(),dual);
+}
+
+TEST(Constructor, default){
+	/* test default constructor */
+	Dual<int> x;
+	EXPECT_EQ(x.real(),0);
+    EXPECT_EQ(x.dual(),0);
+
+    Dual<double> y;
+	EXPECT_NEAR(y.real(), 0.00, DTOL);
+	EXPECT_NEAR(y.dual(), 0.00, DTOL);
 }

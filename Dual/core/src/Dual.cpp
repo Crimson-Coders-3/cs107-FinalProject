@@ -1,6 +1,12 @@
 #include "Dual.h"
 
 template <typename Scalar>
+Dual<Scalar>::Dual(){
+    this->adReal = 0;
+    this->adDual = 0;
+}
+
+template <typename Scalar>
 Dual<Scalar>::Dual(Scalar real, Scalar dual)
     : adReal(real)
     , adDual(dual)
@@ -25,7 +31,7 @@ Scalar Dual<Scalar>::dual() const {
 
 template <typename Scalar>
 Dual<Scalar>& Dual<Scalar>::operator=(Scalar rhs){
-    mReal = rhs; 
-    mDual = Scalar(); 
+    adReal = rhs.real(); 
+    adDual = rhs.dual(); 
     return *this;
 }

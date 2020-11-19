@@ -12,7 +12,8 @@ class Dual{
     public:
         
         /* constructors */
-        Dual(Scalar real = Scalar(), Scalar dual = Scalar());
+        Dual();
+        Dual(Scalar real, Scalar dual);
         template <typename Scalar2> Dual(const Dual<Scalar2>& rhs);
         
         /* getters */
@@ -32,8 +33,8 @@ class Dual{
         template <typename Scalar2> Dual<Scalar>& operator/=(const Dual<Scalar2>& rhs);
 
     private:
-        Scalar mReal;
-        Scalar mDual;
+        Scalar adReal;
+        Scalar adDual;
     };
 
 #ifdef USE_OSTREAM
