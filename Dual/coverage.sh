@@ -47,17 +47,17 @@ cd ${COVERAGE_DIRECTORY}
 
 # gather coverage info
 if [ -d "${TESTPATH}" ]; then
-    lcov --capture -d ${SRCPATH} -d ${TESTPATH} -o AWESOME_COV.info
+    lcov --capture -d ${SRCPATH} -d ${TESTPATH} -o DUAL_COV.info
 else
     echo -e "${rC}ERROR:${eC} Need to compile GTEST to get code coverage!"
     exit 1
 fi
 
 # remove usr and gtest info
-lcov --remove AWESOME_COV.info "/usr/*" "${INSTALL_PATH}/*" "${TEST_SRC_PATH}/*" -o AWESOME_COV.info
+lcov --remove DUAL_COV.info "/usr/*" "${INSTALL_PATH}/*" "${TEST_SRC_PATH}/*" -o DUAL_COV.info
 
 # generate html version of coverage
-genhtml AWESOME_COV.info -o CODE_COVERAGE
+genhtml DUAL_COV.info -o CODE_COVERAGE
 cd ..
 
 echo 
