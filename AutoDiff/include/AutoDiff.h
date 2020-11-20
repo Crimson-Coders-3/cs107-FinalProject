@@ -15,29 +15,32 @@ class AutoDiff {
 
 
    /////////////////////////////////////////// OVERLOAD OPERATORS
-   // overload +
+   // overload autodiff + autodiff
    AutoDiff operator + ( AutoDiff &obj );
 
-   // overload autodiff + constant
+   // overload autodiff + double
    AutoDiff operator + ( double a );
 
    // overload unary negation
    AutoDiff operator - ();
 
-   // overload -
+   // overload autodiff - autodiff
    AutoDiff operator - ( AutoDiff &obj );
 
-   // overload *
-   AutoDiff operator * ( AutoDiff &obj );
-  
-   // overload autodiff * constant
-   AutoDiff operator * ( double con );
+   // overload autodiff - double
+   AutoDiff operator - ( double a );
 
-   // overload /
+   // overload autodiff * autodiff
+   AutoDiff operator * ( AutoDiff &obj );
+
+   // overload autodiff * double
+   AutoDiff operator * ( double a );
+
+   // overload autodiff / autodiff
    AutoDiff operator / ( AutoDiff &obj );
 
-   // overload power (exponent)
-   AutoDiff pow ( AutoDiff a, AutoDiff b );
+   // overload autodiff / double
+   AutoDiff operator / ( double a );
 
    double getVal();
    double getDer();
@@ -47,19 +50,24 @@ class AutoDiff {
 
 }; // close AutoDiff class
 
-
-AutoDiff sin(AutoDiff input);
-AutoDiff cos(AutoDiff input);
-AutoDiff tan(AutoDiff input);
-AutoDiff arcsin(AutoDiff input);
-AutoDiff arccos(AutoDiff input);
-AutoDiff arctan(AutoDiff input);
-AutoDiff exp(AutoDiff input);
-AutoDiff log(AutoDiff input);
-AutoDiff pow(AutoDiff input, double exponent);
-AutoDiff sinh(AutoDiff input);
-AutoDiff cosh(AutoDiff input);
-AutoDiff tanh(AutoDiff input);
+AutoDiff operator + (double lhs, AutoDiff &rhs);
+AutoDiff operator - (double lhs, AutoDiff &rhs);
+AutoDiff operator * (double lhs, AutoDiff &rhs);
+AutoDiff operator / (double lhs, AutoDiff &rhs);
+AutoDiff pow ( AutoDiff &a, AutoDiff &b );
+AutoDiff pow ( AutoDiff &obj, double a );
+AutoDiff pow (double lhs, AutoDiff &rhs);
+AutoDiff exp ( AutoDiff &a );
+AutoDiff sin(AutoDiff &input);
+AutoDiff cos(AutoDiff &input);
+AutoDiff tan(AutoDiff &input);
+AutoDiff asin(AutoDiff &input);
+AutoDiff acos(AutoDiff &input);
+AutoDiff atan(AutoDiff &input);
+AutoDiff log(AutoDiff &input);
+AutoDiff sinh(AutoDiff &input);
+AutoDiff cosh(AutoDiff &input);
+AutoDiff tanh(AutoDiff &input);
 
 // overload AutoDiffToy * float
 //AutoDiff operator * (float lhs, AutoDiff rhs);
