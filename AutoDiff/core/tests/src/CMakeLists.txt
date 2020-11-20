@@ -1,0 +1,16 @@
+enable_testing()
+include(CTest)
+
+include_directories(${gtest_dir}/include)
+link_directories(${gtest_dir}/lib)
+
+file(GLOB TEST_H *.h *.hpp)
+
+set(TEST_SRC
+    test_AD.cpp
+)
+
+add_library(ADTest SHARED ${TEST_SRC} ${TEST_H})
+if(APPLE)
+  target_link_libraries(ADTest gtest gtest_main)
+endif()
