@@ -1,8 +1,7 @@
 # cs107-FinalProject
 
-Master: [![Build Status](https://travis-ci.com/Crimson-Coders-3/cs107-FinalProject.svg?token=b3u4uQsijMxdCtTBnkQy&branch=master)](https://travis-ci.com/Crimson-Coders-3/cs107-FinalProject)
- | M1B Test Branch: [![Build Status](https://travis-ci.com/Crimson-Coders-3/cs107-FinalProject.svg?token=b3u4uQsijMxdCtTBnkQy&branch=m1b_branch)](https://travis-ci.com/Crimson-Coders-3/cs107-FinalProject)
- | [![codecov](https://codecov.io/gh/Crimson-Coders-3/cs107-FinalProject/branch/master/graph/badge.svg?token=K3Q5S3JJKG)](undefined)
+M2 Test Branch: [![Build Status](https://travis-ci.com/Crimson-Coders-3/cs107-FinalProject.svg?token=b3u4uQsijMxdCtTBnkQy&branch=m2-final)](https://travis-ci.com/Crimson-Coders-3/cs107-FinalProject)
+ | [![codecov](https://codecov.io/gh/Crimson-Coders-3/cs107-FinalProject/branch/m2-final/graph/badge.svg?token=K3Q5S3JJKG)](https://codecov.io/gh/Crimson-Coders-3/cs107-FinalProject)
 
 Final Project for CS107 (Fall 2020)
 Group #3
