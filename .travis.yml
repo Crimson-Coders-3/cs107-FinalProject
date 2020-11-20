@@ -24,8 +24,12 @@ script:
   - gcc -v && g++ -v && cmake --version
   # Run your build commands next
 
+codecov:
+  token: 843dde7d-f4ee-4903-9253-47333903a444
+
 after_success:
 # Create lcov report
+- codecov
 - lcov --capture --directory . --output-file coverage.info
 - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
 - lcov --list coverage.info # debug info
