@@ -1,37 +1,23 @@
-dist: trusty
-sudo: required
-language:
-  - cpp
-compiler:
-  - gcc
+language: cpp
+os: linux
+compiler: gcc
+
 addons:
   apt:
-    sources:
-      - ubuntu-toolchain-r-test
     packages:
-      - gcc-6
-      - g++-6
-      - cmake
-      - lcov
-script:
-  # Link gcc-6 and g++-6 to their standard commands
-  - sudo ln -s /usr/bin/gcc-6 /usr/local/bin/gcc
-  - sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
-  # Export CC and CXX to tell cmake which compiler to use
-  - export CC=/usr/bin/gcc-6
-  - export CXX=/usr/bin/g++-6
-  # Check versions of gcc, g++ and cmake
-  - gcc -v && g++ -v && cmake --version
-  # Run your build commands next
+    - lcov
 
-env:
-  - CODECOV_TOKEN=843dde7d-f4ee-4903-9253-47333903a444
+script:
+- cd 3PL
+- bash build_3PL.sh
+- cd ..
+- cd AutoDiff
+- bash config.sh
+- cd ..
 
 after_success:
-# Create lcov report
-- codecov
-- lcov --capture --directory . --output-file coverage.info
-- lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
-- lcov --list coverage.info # debug info
-# Uploading report to CodeCov
-- bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports"
+- cd AutoDiff 
+- bash coverage.sh
+# Uploading to CodeCov
+- bash <(curl -s https://codecov.io/bash) -f ./coverage/AD_COV.info || echo "Codecov did not collect coverage reports"
+- cd ..
