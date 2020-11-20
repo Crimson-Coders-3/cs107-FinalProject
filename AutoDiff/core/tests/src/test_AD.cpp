@@ -85,7 +85,7 @@ TEST(OPERATOR,SUBBEFORE){
 	AutoDiff y(-0.5,4.0);
 	AutoDiff sum = x - y;
 	
-	EXPECT_NEAR(sum.getVal(),8.5,DTOL);
+	EXPECT_NEAR(sum.getVal(),9.5,DTOL);
     EXPECT_NEAR(sum.getDer(),-4.0,DTOL);
 }
 
@@ -165,10 +165,10 @@ TEST(MATH,EXP){
 
 /////////////////////////////////////////// LOG TESTS
 TEST(MATH,LOG){
-	AutoDiff x(-0.5,4.0);
+	AutoDiff x(0.5,4.0);
 	AutoDiff logx = log(x);
-	EXPECT_NEAR(logx.getVal(),log(-0.5),DTOL);
-	EXPECT_NEAR(logx.getDer(),(1/(-0.5)) * 4.0, DTOL);
+	EXPECT_NEAR(logx.getVal(),log(0.5),DTOL);
+	EXPECT_NEAR(logx.getDer(),(1/(0.5)) * 4.0, DTOL);
 }
 
 
@@ -178,16 +178,16 @@ TEST(MATH,LEFTPOW){
 	AutoDiff x(-0.5,4.0);
 	AutoDiff powx = pow(x, 2.0);
 	EXPECT_NEAR(powx.getVal(),pow(-0.5, 2.0),DTOL);
-	EXPECT_NEAR(powx.getDer(),2.0*pow(-0.5, 1.0), DTOL);
+	EXPECT_NEAR(powx.getDer(),4.0*2.0*pow(-0.5, 1.0), DTOL);
 }
 
 // autodiff & autodiff (e.g. x^y)
 TEST(MATH,POW_TWOVAR){
-	AutoDiff x(-0.5,4.0);
+	AutoDiff x(0.5,4.0);
 	AutoDiff y(2.0,3.0);
 	AutoDiff powxy = pow(x, y);
-	EXPECT_NEAR(powxy.getVal(),pow(-0.5, 2.0),DTOL);
-	EXPECT_NEAR(powxy.getDer(),pow(-0.5, 2.0) * 3.0 * log(-0.5) + pow(-0.5, 2.0 - 1.0) * 2.0 * 4.0, DTOL);
+	EXPECT_NEAR(powxy.getVal(),pow(0.5, 2.0),DTOL);
+	EXPECT_NEAR(powxy.getDer(),pow(0.5, 2.0) * 3.0 * log(0.5) + pow(0.5, 2.0 - 1.0) * 2.0 * 4.0, DTOL);
 }
 
 // double ^ autodiff (e.g. 2^x)
@@ -220,7 +220,7 @@ TEST(MATH,COS){
 TEST(MATH,TAN){
 	AutoDiff x(-0.5,4.0);
 	AutoDiff tanx = tan(x);
-	EXPECT_NEAR(tanx.getVal(),cos(-0.5),DTOL);
+	EXPECT_NEAR(tanx.getVal(),tan(-0.5),DTOL);
 	EXPECT_NEAR(tanx.getDer(), (1/pow(cos(-0.5), 2)) * 4.0,DTOL);
 }
 
@@ -229,7 +229,7 @@ TEST(MATH,ARCSIN){
 	AutoDiff x(-0.5,4.0);
 	AutoDiff arcsinx = asin(x);
 	EXPECT_NEAR(arcsinx.getVal(),asin(-0.5),DTOL);
-	EXPECT_NEAR(arcsinx.getDer(), (1/pow(cos(-0.5), 2)) * 4.0,DTOL);
+	EXPECT_NEAR(arcsinx.getDer(),(1/sqrt(1-pow(-0.5, 2)))*4.0,DTOL);
 }
 
 // arccos autodiff
