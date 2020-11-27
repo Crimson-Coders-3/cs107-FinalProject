@@ -9,7 +9,7 @@
 #   config.sh*         # executable file
 #   coverage.sh*       # executable file that generate test coverage
 #   CMakeLists.txt
-#     core             # location of source code
+#   core             # location of source code
 
 set -euo pipefail
 
@@ -67,7 +67,7 @@ FC_FLAGS=
 # Coverage Flag
 # - turns off optimizations
 # =========================
-COVERAGE=OFF
+COVERAGE=ON
 
 # ======================== 
 # compiler option defaults
@@ -368,6 +368,7 @@ fi
 
 if [ ${COVERAGE} == "ON" ]; then
     echo "Building code coverage..."
+    chmod +x coverage.sh
     ./coverage.sh
 fi
 # =================================================================== 

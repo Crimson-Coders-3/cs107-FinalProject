@@ -9,6 +9,7 @@ BUILD_APP=0
 BUILD_TYPE=0
 CLEAN_DIST=0
 CLEAN=0
+
 # ============== #
 # print strings
 # ============== #
@@ -52,8 +53,7 @@ help() {
     echo "  [OPTION]:"
     echo "    --3pl       -3pl    build the 3rd party libraries:  gtest"
     echo "    --library   -lib    build AutoDiff Dual"
-    echo "    --app       -app    build the App which uses MyAwesomeLibrary"
-    echo " "
+    echo "    --app       -app    build the App which uses AutoDiff, Dual libraries"
     echo "    --help      -h      displays this help message"
     echo "    --clean     -c      removes local build directories"
     echo "    --distclean -dc     removes builds and install directories"
@@ -178,19 +178,22 @@ fi
 # =================================================================== #
 if [ $BUILD_APP == 0 -a $BUILD_LIB == 0 -a $BUILD_3PL == 0 ]; then
   echo "================================================"
-  echo "Building the GTest, AutoDiff Dual, and App..."
+  echo "Building the GTest, AutoDiff, Dual, and App..."
   echo "================================================"
   echo " "
 
-  cd 3PL
-
   # build 3PL libraries
+  cd 3PL
   ./build_3PL.sh $cmd_args
 
+  # build AutoDiff libraries
+  cd ..
+  cd AutoDiff
+  ./config.sh $cmd_args
+
+  # build Dual libraries
   cd ..
   cd Dual
-
-  # build library
   ./config.sh $cmd_args
 
 #  cd ..
@@ -199,7 +202,7 @@ if [ $BUILD_APP == 0 -a $BUILD_LIB == 0 -a $BUILD_3PL == 0 ]; then
   # build app
 #  ./config.sh $cmd_args
 
-#  cd ..
+  cd ..
 
   echo
   echo "================================================"
@@ -220,10 +223,18 @@ fi
 
 if [ $BUILD_LIB == 1 ]; then
   echo "============================"
-  echo "Building DualLibrary..."
+  echo "Building Dual Library..."
   echo "============================"
 
   cd Dual
+  ./config.sh $cmd_args
+  cd ..
+
+  echo "============================"
+  echo "Building AutoDiff Library..."
+  echo "============================"
+
+  cd AutoDiff
   ./config.sh $cmd_args
   cd ..
 fi
