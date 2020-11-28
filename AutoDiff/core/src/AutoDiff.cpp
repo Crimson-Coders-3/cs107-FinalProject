@@ -286,7 +286,6 @@ AutoDiff tanh(AutoDiff &input)
     return AutoDiff(val,dv);
 }
 
-int main() {
 
   /*
   AutoDiff test = AutoDiff(2.0);
@@ -327,6 +326,3 @@ int main() {
 
   //std::cout << "a4" << std::endl;
   //a4.print();*/
-
-  return 0;
-}
