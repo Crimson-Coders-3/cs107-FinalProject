@@ -3,7 +3,9 @@
 # ================
 # project_root
 #   install            # install directory
-#   MyAwesomeLibrary   # source code
+#   Dual               # source code
+#     core             # location of source code
+#   AutoDiff           # source code
 #     core             # location of source code
 
 set -euo pipefail
@@ -20,8 +22,12 @@ cd ${CURRENT_PATH}
 # =============== #
 # library sources
 # =============== #
-MAL_DIRECTORY=${PROJECT_ROOT}/MyAwesomeLibrary/install
-MAL_SO_NAME=MyAwesomeLibrary
+AD_DIRECTORY=${PROJECT_ROOT}/AutoDiff/install
+AD_SO_NAME=AutoDiffLibrary
+
+DUAL_DIRECTORY=${PROJECT_ROOT}/Dual/install
+DUAL_SO_NAME=DualLibrary
+
 
 # =========== #
 # App sources 
@@ -45,7 +51,8 @@ GTEST_DIRECTORY=${INSTALL_3RD_PARTY_PATH}/googletest
 # ================== #
 # compiling defaults
 # ================== #
-BUILD_MAL=1
+BUILD_AD=1
+BUILD_DUAL=1
 BUILD_CLEAN=0
 BUILD_TEST=1
 
@@ -131,7 +138,8 @@ do
   elif [ "$var" == "--clean" -o "$var" == "-clean" -o "$var" == "-c" ]; then
     echo ${opt_str} "Clean and rebuild"
     BUILD_CLEAN=1
-    BUILD_MAL=0
+    BUILD_AD=0
+    BUILD_DUAL=0
 
   elif [ "$var" == "--release" -o "$var" == "-release" -o "$var" == "-opt" ]; then
     echo ${opt_str} "Compiling in optimized mode"
@@ -275,17 +283,23 @@ fi
 # ====================== #
 # check source directory
 # ====================== #
-if [ ! -d "${MAL_DIRECTORY}" ]; then
+if [ ! -d "${AD_DIRECTORY}" ]; then
   echo " "
-  echo -e "${rC}Error:${eC} ${MAL_DIRECTORY} does not exist. Please build MyAwesomeLibrary First!"
+  echo -e "${rC}Error:${eC} ${AD_DIRECTORY} does not exist. Please build AutoDiff First!"
+  exit 1
+fi
+
+if [ ! -d "${DUAL_DIRECTORY}" ]; then
+  echo " "
+  echo -e "${rC}Error:${eC} ${DUAL_DIRECTORY} does not exist. Please build Dual First!"
   exit 1
 fi
 
 # =================================================================== #
 COMPILE_FAIL=0
-if [ $BUILD_MAL == 1 ]; then
+if [ $BUILD_AD == 1 ]; then
   echo " "
-  echo -e "${mC} ========== Building MyAwesomeLibrary ========= ${eC}"
+  echo -e "${mC} ========== Building AutoDiff Library ========= ${eC}"
   echo "   Compiling Options:"
   echo "          Build Type: ${BUILD_TYPE}"
   echo "    Install Location: ${COMPILE_INSTALL_DIRECTORY}"
@@ -318,8 +332,8 @@ if [ $BUILD_MAL == 1 ]; then
         -D CMAKE_INSTALL_PREFIX=${COMPILE_INSTALL_DIRECTORY}        \
         -D CMAKE_BUILD_TYPE=${BUILD_TYPE}                           \
         -D gtest_dir=${GTEST_DIRECTORY}                             \
-        -D awesome_dir=${MAL_DIRECTORY}                             \
-        -d awesome_so=${MAL_SO_NAME}                                \
+        -D autodiff_dir=${AD_DIRECTORY}                             \
+        -d autodiff_so=${AD_SO_NAME}                                \
         -D UNIT_TEST=${UNIT_TEST}                                   \
         -G "Unix Makefiles" ${APP_DIRECTORY} | tee cmake_config.out
 

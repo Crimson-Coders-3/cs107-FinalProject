@@ -14,8 +14,8 @@ set(APP_SRC
 # Create executable called "mixed" which depends on main.cpp
 add_executable(app_demo main.cpp)
 
-# Link our library "MyAwesomeLibrary" to our executable
-target_link_libraries(app_demo ${awesome_lb})
+# Link our library "AutoDiffLibrary" to our executable
+target_link_libraries(app_demo ${autodiff_lb})
 
 # Install targets into specific directories
 install(TARGETS app_demo

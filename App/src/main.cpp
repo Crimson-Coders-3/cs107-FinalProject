@@ -1,29 +1,18 @@
-/* system header files */
-#include <stdio.h>
+# include "AutoDiff.h"
+#include <math.h>
+#include <typeinfo>
 #include <iostream>
+#include <string>
+#include <cmath>
 
-/* header files */
-#include "MyAwesomeLibrary.hpp"
+using namespace std;
 
-int main(int argc, char **argv){
-    double seed1 = 1.9;
-    double seed2 = 4.4;
+int main(){
+        AutoDiff x(2.0,2.0);
+        cout << x.getVal() << endl;
+        cout << x.getDer() << endl;
 
-    AutoDiff<double> x1(1.0,seed1);
-    AutoDiff<double> x2(2.0,seed2);
-    
-    /* add operator */
-    AutoDiff<double> c = x1 + x2;
-
-    std::cout << "     v, dv\n";
-    std::cout << "  x1[" << x1.val() << ", " << x1.dval() << "]\n"
-              << "+ x2[" << x2.val() << ", " << x2.dval() << "]\n"
-              << "  ==========\n"
-              << "   c[" <<  c.val() << ", " <<  c.dval() << "]\n";
-
-    
-    /* add equal operator */
-    x1 += c;
-
-    return 0;
+        AutoDiff y = (x +2.0+x)*3.0 /3.2 *x + 2.0 + x;
+        cout << y.getVal() << endl;
+        cout << y.getDer() << endl;
 }

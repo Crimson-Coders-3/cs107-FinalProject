@@ -19,7 +19,7 @@ set(libs
 add_subdirectory(${TEST_SRC_PATH})
 
 add_executable(${TEST_EXE} test_main.cpp)
-target_link_libraries(${TEST_EXE} AppTest ${awesome_lb} ${libs})
+target_link_libraries(${TEST_EXE} AppTest ${autodiff_lb} ${libs})
 target_link_libraries(${TEST_EXE} pthread)
 
 add_test(NAME ${TEST_EXE}

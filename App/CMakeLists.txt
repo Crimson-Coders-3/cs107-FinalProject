@@ -1,5 +1,5 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
-PROJECT(Skeleton-App)
+PROJECT(App)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
@@ -20,17 +20,17 @@ endif()
 # ======================================= #
 # Library paths
 set(gtest_dir   "" CACHE PATH "GTest install directory location")
-set(awesome_dir "" CACHE PATH "MyAwesomeLibrary path e.g. <awesome_dir>/<awesome_so>")
-set(awesome_so MyAwesomeLibrary CACHE STRING "Awesome shared object name")
+set(autodiff_dir "" CACHE PATH "AutoDiffLibrary path e.g. <autodiff_dir>/<autodiff_so>")
+set(autodiff_so AutoDiffLibrary CACHE STRING "AutoDiff shared object name")
 # ======================================= #
 
 # ======================================= #
 # Library header files to be included
-include_directories(${awesome_dir}/include
+include_directories(${autodiff_dir}/include
                     ./include)
 
 # Libraries to be linked
-find_library(awesome_lb NAMES ${awesome_so} PATHS ${awesome_dir}/lib)
+find_library(autodiff_lb NAMES ${autodiff_so} PATHS ${autodiff_dir}/lib)
 # ======================================= #
 
 # ======================================= #
