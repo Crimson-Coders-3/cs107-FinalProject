@@ -67,7 +67,7 @@ FC_FLAGS=
 # Coverage Flag
 # - turns off optimizations
 # =========================
-COVERAGE=ON
+COVERAGE=OFF
 
 # ======================== 
 # compiler option defaults

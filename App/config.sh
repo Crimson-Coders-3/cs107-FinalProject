@@ -23,10 +23,10 @@ cd ${CURRENT_PATH}
 # library sources
 # =============== #
 AD_DIRECTORY=${PROJECT_ROOT}/AutoDiff/install
-AD_SO_NAME=AutoDiffLibrary
+AD_SO_NAME=AutoDiff
 
 DUAL_DIRECTORY=${PROJECT_ROOT}/Dual/install
-DUAL_SO_NAME=DualLibrary
+DUAL_SO_NAME=Dual
 
 
 # =========== #

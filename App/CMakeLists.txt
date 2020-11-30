@@ -20,8 +20,8 @@ endif()
 # ======================================= #
 # Library paths
 set(gtest_dir   "" CACHE PATH "GTest install directory location")
-set(autodiff_dir "" CACHE PATH "AutoDiffLibrary path e.g. <autodiff_dir>/<autodiff_so>")
-set(autodiff_so AutoDiffLibrary CACHE STRING "AutoDiff shared object name")
+set(autodiff_dir "" CACHE PATH "AutoDiff path e.g. <autodiff_dir>/<autodiff_so>")
+set(autodiff_so AutoDiff CACHE STRING "AutoDiff shared object name")
 # ======================================= #
 
 # ======================================= #

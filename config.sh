@@ -196,11 +196,11 @@ if [ $BUILD_APP == 0 -a $BUILD_LIB == 0 -a $BUILD_3PL == 0 ]; then
   cd Dual
   ./config.sh $cmd_args
 
-#  cd ..
-#  cd App
+  cd ..
+  cd App
 
   # build app
-#  ./config.sh $cmd_args
+  ./config.sh $cmd_args
 
   cd ..
 
