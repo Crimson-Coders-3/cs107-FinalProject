@@ -13,38 +13,29 @@ AutoDiff::AutoDiff(double a, double b) {
 
   //std::cout << "constructor called and value set" << std::endl;
   //std::cout << b << std::endl;
- 
   val = a;
   der = b;
-
 }
 
 /////////////////////////////////////////// OVERLOAD OPERATORS
 
 /////////////////////// +
 // overload autodiff + autodiff
-AutoDiff AutoDiff::operator + ( AutoDiff &obj ) {
-  AutoDiff c = AutoDiff(0.0);
-
-  c.val = val + obj.val;
-  c.der = der + obj.der;
-
-  return c;
+AutoDiff AutoDiff::operator += (const AutoDiff &obj) {
+  val += obj.getVal();
+  der += obj.getDer();
+  return *this;
 };
 
 // overload autodiff + double
-AutoDiff AutoDiff::operator + ( double a ) {
-  AutoDiff c = AutoDiff(0.0);
-
-  c.val = val + a;
-  c.der = der;
-
-  return c;
+AutoDiff AutoDiff::operator += ( double a ) {
+  val += a;
+  return *this;
 };
 
 // overload double + AutoDiff
-AutoDiff operator + (double lhs, AutoDiff &rhs) {
-    return rhs + lhs;
+AutoDiff operator + (double lhs, const AutoDiff &rhs) {
+    return AutoDiff(lhs+rhs.getVal(),rhs.getDer());
 }
 
 
@@ -62,11 +53,11 @@ AutoDiff AutoDiff::operator - () {
 
 /////////////////////// -
 // overload autodiff - autodiff
-AutoDiff AutoDiff::operator - ( AutoDiff &obj ) {
+AutoDiff AutoDiff::operator - ( const AutoDiff &obj) {
   AutoDiff c = AutoDiff(0.0);
 
-  c.val = val - obj.val;
-  c.der = der - obj.der;
+  c.val = val - obj.getVal();
+  c.der = der - obj.getDer();
 
   return c;
 };
@@ -82,14 +73,14 @@ AutoDiff AutoDiff::operator - ( double a ) {
 };
 
 // overload double - AutoDiff
-AutoDiff operator - (double lhs, AutoDiff &rhs) {
+AutoDiff operator - (double lhs, const AutoDiff &rhs) {
     return - rhs + lhs;
 }
 
 
 /////////////////////// *
 // overload autodiff * autodiff
-AutoDiff AutoDiff::operator * ( AutoDiff &obj ) {
+AutoDiff AutoDiff::operator * ( const AutoDiff &obj) {
   AutoDiff c = AutoDiff(0.0);
 
   c.val = val * obj.val;
@@ -109,14 +100,14 @@ AutoDiff AutoDiff::operator * ( double a ) {
 };
 
 // overload double * AutoDiff
-AutoDiff operator * (double lhs, AutoDiff &rhs) {
+AutoDiff operator * (double lhs, const AutoDiff &rhs) {
     return rhs * lhs;
 }
 
 
 /////////////////////// /
 // overload autodiff / autodiff
-AutoDiff AutoDiff::operator / ( AutoDiff &obj ) {
+AutoDiff AutoDiff::operator / ( const AutoDiff &obj) {
   AutoDiff c = AutoDiff(0.0);
 
   c.val = val / obj.val;
@@ -136,14 +127,14 @@ AutoDiff AutoDiff::operator / ( double a ) {
 };
 
 // overload double / AutoDiff
-AutoDiff operator / (double lhs, AutoDiff &rhs) {
+AutoDiff operator / (double lhs, const AutoDiff &rhs) {
     return pow(rhs, -1.0) * lhs;
 }
 
 
 /////////////////////// pow
 // autodiff ^ autodiff
-AutoDiff pow ( AutoDiff &a, AutoDiff &b ) {
+AutoDiff pow ( AutoDiff &a, const AutoDiff &b ) {
   AutoDiff c = AutoDiff(0.0);
 
   c.val = std::pow(a.val, b.val);
@@ -163,7 +154,7 @@ AutoDiff pow ( AutoDiff &obj, double a ) {
 };
 
 // double ^ autodiff
-AutoDiff pow (double lhs, AutoDiff &rhs) {
+AutoDiff pow (double lhs, const AutoDiff &rhs) {
   AutoDiff c = AutoDiff(0.0);
 
   c.val = std::pow(2, rhs.val);
@@ -189,12 +180,12 @@ AutoDiff exp ( AutoDiff &a ) {
 /////////////////////////////////////////// VIEW PUBLIC VAL / DER VARS
 
 // get val
-double AutoDiff::getVal(){
+double AutoDiff::getVal() const {
   return val;
 }
 
 // get der
-double AutoDiff::getDer(){
+double AutoDiff::getDer() const {
   return der;
 }
 
@@ -206,7 +197,7 @@ void AutoDiff::print() {
   std::cout << "print function called --- val: " << val << " " << "der: " << der << std::endl; 
 } 
 
-AutoDiff sin(AutoDiff &input)
+AutoDiff sin(const AutoDiff &input)
 {
 
     double val = sin( (input.getVal()));
@@ -214,7 +205,7 @@ AutoDiff sin(AutoDiff &input)
     return AutoDiff(val,dv);
 }
 
-AutoDiff cos(AutoDiff &input)
+AutoDiff cos(const AutoDiff &input)
 {   
     
     double val = cos(input.getVal());
@@ -222,7 +213,7 @@ AutoDiff cos(AutoDiff &input)
     return AutoDiff(val,dv);
 }
 
-AutoDiff tan(AutoDiff &input)
+AutoDiff tan(const AutoDiff &input)
 {
     
     double val = tan(input.getVal());
@@ -230,7 +221,7 @@ AutoDiff tan(AutoDiff &input)
     return AutoDiff(val,dv);
 }
 
-AutoDiff asin(AutoDiff &input)
+AutoDiff asin(const AutoDiff &input)
 {
     
     double val = asin(input.getVal());
@@ -238,7 +229,7 @@ AutoDiff asin(AutoDiff &input)
     return AutoDiff(val,dv);
 }
 
-AutoDiff acos(AutoDiff &input)
+AutoDiff acos(const AutoDiff &input)
 {
     
     double val = acos(input.getVal());
@@ -246,7 +237,7 @@ AutoDiff acos(AutoDiff &input)
     return AutoDiff(val,dv);
 }
 
-AutoDiff atan(AutoDiff &input)
+AutoDiff atan(const AutoDiff &input)
 {
     
     double val = atan(input.getVal());
@@ -254,7 +245,7 @@ AutoDiff atan(AutoDiff &input)
     return AutoDiff(val,dv);
 }
 
-AutoDiff log(AutoDiff &input)
+AutoDiff log(const AutoDiff &input)
 {
     
     double val = log(input.getVal());
@@ -262,7 +253,7 @@ AutoDiff log(AutoDiff &input)
     return AutoDiff(val,dv);
 }
 
-AutoDiff sinh(AutoDiff &input)
+AutoDiff sinh(const AutoDiff &input)
 {
     
     double val = sinh(input.getVal());
@@ -270,7 +261,7 @@ AutoDiff sinh(AutoDiff &input)
     return AutoDiff(val,dv);
 }
 
-AutoDiff cosh(AutoDiff &input)
+AutoDiff cosh(const AutoDiff &input)
 {
     
     double val = cosh(input.getVal());
@@ -278,51 +269,10 @@ AutoDiff cosh(AutoDiff &input)
     return AutoDiff(val,dv);
 }
 
-AutoDiff tanh(AutoDiff &input)
+AutoDiff tanh(const AutoDiff &input)
 {
     
     double val = tanh(input.getVal());
     double dv = (1/pow(cosh(input.getVal()), 2)) * input.getDer();
     return AutoDiff(val,dv);
 }
-
-
-  /*
-  AutoDiff test = AutoDiff(2.0);
-  AutoDiff output = pow(test, 3.0);
-  output.print();
-
-  AutoDiff test2 = AutoDiff(2.0);
-  AutoDiff output2 = sin(output);
-  output2.print();
-
-  AutoDiff test3 = AutoDiff(2.0);
-  AutoDiff output3 = exp(output);
-  output2.print();
-
-  // each of these is a "variable"
-  AutoDiff a1 = AutoDiff(2.0); 
-  AutoDiff a2 = AutoDiff(0.5);
-
-  std::cout << "a1" << std::endl;
-  a1.print();
-  std::cout << "a2" << std::endl;
-  a2.print();
-
-  AutoDiff a5 = a1.operator+(a2);
-
-  AutoDiff a3 = a1 + a2;
-
-  std::cout << "a3" << std::endl;
-  a3.print();
-
-  std::cout << typeid(a3).name() << std::endl;
-
-  AutoDiff a4 = sin(a3);
-  std::cout << "a4" << std::endl;
-  a4.print();
-
-  AutoDiff a6 = a4 + 2.0;
-
-  //std::cout << "a4" << std::endl;
-  //a4.print();*/

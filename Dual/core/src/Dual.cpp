@@ -3,358 +3,352 @@
 
 #define PI 3.141592653589793238
 
-template <typename Scalar>
-Dual<Scalar>::Dual(){
+
+Dual<double>::Dual(){
     this->adReal = 0;
     this->adDual = 1;
 }
 
-template <typename Scalar>
-Dual<Scalar>::Dual(Scalar real){
+
+Dual<double>::Dual(double real){
     this->adReal = real;
     this->adDual = 1;
 }
 
-template <typename Scalar>
-Dual<Scalar>::Dual(Scalar real, Scalar dual)
+
+Dual<double>::Dual(double real, double dual)
     : adReal(real)
     , adDual(dual)
 {}
 
-template <typename Scalar>
-template <typename Scalar2>
-Dual<Scalar>::Dual(const Dual<Scalar2>& rhs)
+
+Dual<double>::Dual(const Dual<double>& rhs)
     : adReal(rhs.real())
     , adDual(rhs.dual())
 {}
 
-template <typename Scalar>
-Scalar Dual<Scalar>::real() const {
+
+double Dual<double>::real() const {
     return adReal;
 }
 
-template <typename Scalar>
-Scalar Dual<Scalar>::dual() const {
+
+double Dual<double>::dual() const {
     return adDual;
 }
 
-template <typename Scalar>
-Dual<Scalar>& Dual<Scalar>::operator=(Scalar rhs){
+
+Dual<double>& Dual<double>::operator=(double rhs){
     this->adReal = rhs; 
     this->adDual = 0; 
     return *this;
 }
 
-template <typename Scalar>
-Dual<Scalar>& Dual<Scalar>::operator+=(Scalar rhs){
+
+Dual<double>& Dual<double>::operator+=(double rhs){
     this->adReal += rhs; 
     return *this;
 }
 
-template <typename Scalar>
-Dual<Scalar>& Dual<Scalar>::operator-=(Scalar rhs){
+
+Dual<double>& Dual<double>::operator-=(double rhs){
     this->adReal -= rhs; 
     return *this;
 } 
 
-template <typename Scalar>
-Dual<Scalar>& Dual<Scalar>::operator*=(Scalar rhs){
+
+Dual<double>& Dual<double>::operator*=(double rhs){
     this->adReal *= rhs;
     this->adDual *= rhs;
     return *this;
 } 
 
-template <typename Scalar>
-Dual<Scalar>& Dual<Scalar>::operator/=(Scalar rhs){
+
+Dual<double>& Dual<double>::operator/=(double rhs){
     this->adReal /= rhs;
     this->adDual /= rhs;
     return *this;
 }
 
-template <typename Scalar>
-template <typename Scalar2>
-Dual<Scalar>& Dual<Scalar>::operator=(const Dual<Scalar2>& rhs){
+
+
+Dual<double>& Dual<double>::operator=(const Dual<double>& rhs){
     this->adReal = rhs.real(); 
     this->adDual = rhs.dual(); 
     return *this;
 }
 
-template <typename Scalar>
-template <typename Scalar2>
-Dual<Scalar>& Dual<Scalar>::operator+=(const Dual<Scalar2>& rhs){
+
+
+Dual<double>& Dual<double>::operator+=(const Dual<double>& rhs){
     this->adReal += rhs.real(); 
     this->adDual += rhs.dual(); 
     return *this;
 }  
 
-template <typename Scalar>
-template <typename Scalar2>
-Dual<Scalar>& Dual<Scalar>::operator-=(const Dual<Scalar2>& rhs){
+
+
+Dual<double>& Dual<double>::operator-=(const Dual<double>& rhs){
     this->adReal -= rhs.real(); 
     this->adDual -= rhs.dual(); 
     return *this;
 }
 
-template <typename Scalar>
-template <typename Scalar2>
-Dual<Scalar>& Dual<Scalar>::operator*=(const Dual<Scalar2>& rhs){
+
+
+Dual<double>& Dual<double>::operator*=(const Dual<double>& rhs){
     this->adDual *= rhs.real();
     this->adDual += this->adReal * rhs.dual();
     this->adReal *= rhs.real(); 
     return *this;
 }
 
-template <typename Scalar>
-template <typename Scalar2>
-Dual<Scalar>& Dual<Scalar>::operator/=(const Dual<Scalar2>& rhs){
+
+
+Dual<double>& Dual<double>::operator/=(const Dual<double>& rhs){
+    this->adDual = (this->adDual*rhs.real()-this.adReal()*rhs.dual())/(rhs.real()*rhs.real())
     this->adReal /= rhs.real(); 
-    this->adDual -= this->adReal * rhs.dual();
-    this->adDual /= rhs.real();
     return *this;
 }
 
 // Non-member functions
-template <typename Scalar> 
-ostream& operator<<(ostream& os, const Dual<Scalar>& rhs){
+ostream& operator<<(ostream& os, const Dual<double>& rhs){
     os << rhs.real() << "+" << rhs.dual() << "e";
     return os;
 }
 
-template <typename Scalar> 
-bool operator!=(const Dual<Scalar>& b, Scalar a){
+ 
+bool operator!=(const Dual<double>& b, double a){
     return a != b.real();
 }
 
-template <typename Scalar> 
-bool operator!=(Scalar a, const Dual<Scalar>& b){
+ 
+bool operator!=(double a, const Dual<double>& b){
     return a != b.real();
 }
 
-template <typename Scalar1, typename Scalar2> 
-bool operator!=(const Dual<Scalar1>& a, const Dual<Scalar2>& b){
+bool operator!=(const Dual<double>& a, const Dual<double>& b){
     return a.real() != b.real();
 }
 
-template <typename Scalar> 
-bool operator==(const Dual<Scalar>& b, Scalar a){
+ 
+bool operator==(const Dual<double>& b, double a){
     return a == b.real();
 }
 
-template <typename Scalar> 
-bool operator==(Scalar a, const Dual<Scalar>& b){
+ 
+bool operator==(double a, const Dual<double>& b){
     return a == b.real();
 }
 
-template <typename Scalar1, typename Scalar2> 
-bool operator==(const Dual<Scalar1>& a, const Dual<Scalar2>& b){
+
+bool operator==(const Dual<double1>& a, const Dual<double2>& b){
     return a.real() == b.real();
 }
 
-template <typename Scalar> 
-bool operator<(const Dual<Scalar>& a, Scalar b){
+ 
+bool operator<(const Dual<double>& a, double b){
     return a.real() < b;
 }
 
-template <typename Scalar> 
-bool operator<(Scalar a, const Dual<Scalar>& b){
+ 
+bool operator<(double a, const Dual<double>& b){
     return a < b.real();
 }
 
-template <typename Scalar1, typename Scalar2> 
-bool operator<(const Dual<Scalar1>& a, const Dual<Scalar2>& b){
+
+bool operator<(const Dual<double>& a, const Dual<double>& b){
     return a.real() < b.real();
 }
 
-template <typename Scalar> 
-bool operator>(const Dual<Scalar>& a, Scalar b){
+ 
+bool operator>(const Dual<double>& a, double b){
     return a.real() > b;
 }
 
-template <typename Scalar> 
-bool operator>(Scalar a, const Dual<Scalar>& b){
+ 
+bool operator>(double a, const Dual<double>& b){
     return a > b.real();
 }
 
-template <typename Scalar1, typename Scalar2> 
-bool operator>(const Dual<Scalar1>& a, const Dual<Scalar2>& b){
+
+bool operator>(const Dual<double>& a, const Dual<double>& b){
     return a.real() > b.real();
 }
 
-template <typename Scalar> 
-bool operator<=(const Dual<Scalar>& a, Scalar b){
+ 
+bool operator<=(const Dual<double>& a, double b){
     return a.real() <= b;
 }
 
-template <typename Scalar> 
-bool operator<=(Scalar a, const Dual<Scalar>& b){
+ 
+bool operator<=(double a, const Dual<double>& b){
     return a <= b.real();
 }
 
-template <typename Scalar1, typename Scalar2> 
-bool operator<=(const Dual<Scalar1>& a, const Dual<Scalar2>& b){
+
+bool operator<=(const Dual<double>& a, const Dual<double>& b){
     return a.real() <= b.real();
 }
 
-template <typename Scalar> 
-bool operator>=(const Dual<Scalar>& a, Scalar b){
+ 
+bool operator>=(const Dual<double>& a, double b){
     return a.real() >= b;
 }
 
-template <typename Scalar> 
-bool operator>=(Scalar a, const Dual<Scalar>& b){
+ 
+bool operator>=(double a, const Dual<double>& b){
     return a >= b.real();
 }
 
-template <typename Scalar1, typename Scalar2> 
-bool operator>=(const Dual<Scalar1>& a, const Dual<Scalar2>& b){
+
+bool operator>=(const Dual<double>& a, const Dual<double>& b){
     return a.real() >= b.real();
 }
 
-template <typename Scalar>
-Dual<Scalar> operator-(const Dual<Scalar>& rhs){
-    return Dual<Scalar>(-rhs.real(), -rhs.dual());
+// negate sign
+Dual<double> operator-(const Dual<double>& rhs){
+    return Dual<double>(-rhs.real(), -rhs.dual());
 } 
     
-template <typename Scalar>
-Dual<Scalar> operator-(const Dual<Scalar>& lhs, Scalar rhs){
-    return Dual<Scalar>(lhs.real() - rhs, lhs.dual());
+
+Dual<double> operator-(const Dual<double>& lhs, double rhs){
+    return Dual<double>(lhs.real() - rhs, lhs.dual());
 }
 
-template <typename Scalar>
-Dual<Scalar> operator-(Scalar lhs, const Dual<Scalar>& rhs){
-    return Dual<Scalar>(lhs - rhs.real(), -rhs.dual());
+
+Dual<double> operator-(double lhs, const Dual<double>& rhs){
+    return Dual<double>(lhs - rhs.real(), -rhs.dual());
 }
 
-template <typename Scalar>
-Dual<Scalar> operator-(const Dual<Scalar>& a, const Dual<Scalar>& b){
-    return Dual<Scalar>(a.real() - b.real(), a.dual() - b.dual());
+
+Dual<double> operator-(const Dual<double>& a, const Dual<double>& b){
+    return Dual<double>(a.real() - b.real(), a.dual() - b.dual());
 }
 
-template <typename Scalar>
-Dual<Scalar> operator+(const Dual<Scalar>& lhs, Scalar rhs){
-    return Dual<Scalar>(lhs.real() + rhs, lhs.dual());
+
+Dual<double> operator+(const Dual<double>& lhs, double rhs){
+    return Dual<double>(lhs.real() + rhs, lhs.dual());
 }
 
-template <typename Scalar>
-Dual<Scalar> operator+(Scalar lhs, const Dual<Scalar>& rhs){
-    return Dual<Scalar>(lhs + rhs.real(), rhs.dual());
+
+Dual<double> operator+(double lhs, const Dual<double>& rhs){
+    return Dual<double>(lhs + rhs.real(), rhs.dual());
 }
 
-template <typename Scalar>
-Dual<Scalar> operator+(const Dual<Scalar>& a, const Dual<Scalar>& b){
-    return Dual<Scalar>(a.real() + b.real(), a.dual() + b.dual());
+
+Dual<double> operator+(const Dual<double>& a, const Dual<double>& b){
+    return Dual<double>(a.real() + b.real(), a.dual() + b.dual());
 }
 
-template <typename Scalar>
-Dual<Scalar> operator*(const Dual<Scalar>& lhs, Scalar rhs){
-    return Dual<Scalar>(lhs.real() * rhs, lhs.dual() * rhs);
+
+Dual<double> operator*(const Dual<double>& lhs, double rhs){
+    return Dual<double>(lhs.real() * rhs, lhs.dual() * rhs);
 }
 
-template <typename Scalar>
-Dual<Scalar> operator*(Scalar lhs, const Dual<Scalar>& rhs){
-    return Dual<Scalar>(lhs * rhs.real(), lhs * rhs.dual());
+
+Dual<double> operator*(double lhs, const Dual<double>& rhs){
+    return Dual<double>(lhs * rhs.real(), lhs * rhs.dual());
 }
 
-template <typename Scalar>
-Dual<Scalar> operator*(const Dual<Scalar>& a, const Dual<Scalar>& b){
-    return Dual<Scalar>(a.real() * b.real(), a.dual() * b.real() + b.dual() * a.real());
+
+Dual<double> operator*(const Dual<double>& a, const Dual<double>& b){
+    return Dual<double>(a.real() * b.real(), a.dual() * b.real() + b.dual() * a.real());
 }
 
-template <typename Scalar>
-Dual<Scalar> operator/(const Dual<Scalar>& lhs, Scalar rhs){
-    return Dual<Scalar>(lhs.real() / rhs, lhs.dual() / rhs);
+
+Dual<double> operator/(const Dual<double>& lhs, double rhs){
+    return Dual<double>(lhs.real() / rhs, lhs.dual() / rhs);
 }
 
-template <typename Scalar>
-Dual<Scalar> operator/(Scalar lhs, const Dual<Scalar>& rhs){
-    lhs /= rhs.real(); 
-    return Dual<Scalar>(lhs, -lhs * rhs.dual() / rhs.real());
+
+Dual<double> operator/(double lhs, const Dual<double>& rhs){
+    return Dual<double>(lhs/rhs.real(), (rhs.real()-lhs * rhs.dual()) / (rhs.real()*rhs.real()));
 }
 
-template <typename Scalar>
-Dual<Scalar> operator/(const Dual<Scalar>& lhs, const Dual<Scalar>& rhs){
-    return Dual<Scalar>(lhs.real()/rhs.real(), (lhs.dual()*rhs.real()-lhs.real()*rhs.dual())/(rhs.real()*rhs.real()) );
+
+Dual<double> operator/(const Dual<double>& lhs, const Dual<double>& rhs){
+    return Dual<double>(lhs.real()/rhs.real(), (lhs.dual()*rhs.real()-lhs.real()*rhs.dual())/(rhs.real()*rhs.real()) );
 }
 
 // math operator
-template <typename Scalar>    
-Dual<Scalar> acos(const Dual<Scalar>& z){
-    return Dual<Scalar>(acos(z.real()), -z.dual() / sqrt(1 - z.real() * z.real()));
+    
+Dual<double> acos(const Dual<double>& z){
+    return Dual<double>(acos(z.real()), -z.dual() / sqrt(1 - z.real() * z.real()));
 }
 
 
-template <typename Scalar>    
-Dual<Scalar> asin(const Dual<Scalar>& z){
-    return Dual<Scalar>(asin(z.real()), z.dual() / sqrt(1 - z.real() * z.real()));
+    
+Dual<double> asin(const Dual<double>& z){
+    return Dual<double>(asin(z.real()), z.dual() / sqrt(1 - z.real() * z.real()));
 }
 
-template <typename Scalar>   
-Dual<Scalar> atan(const Dual<Scalar>& z){
-    return Dual<Scalar>(atan(z.real()), z.dual() / (1 + z.real() * z.real()));
+   
+Dual<double> atan(const Dual<double>& z){
+    return Dual<double>(atan(z.real()), z.dual() / (1 + z.real() * z.real()));
 }
 
-template <typename Scalar>     
-Dual<Scalar> atan2(const Dual<Scalar>& y, const Dual<Scalar>& x){
-    Dual<Scalar> z = y / x;
-    Scalar quadrant = x.real()<0 ? (y.real()<0 ? -PI : PI) : 0; 
-    return Dual<Scalar>(atan(z.real()) + quadrant, z.dual() / (1 + z.real() * z.real()));
+     
+Dual<double> atan2(const Dual<double>& y, const Dual<double>& x){
+    Dual<double> z = y / x;
+    return Dual<double>(atan2(y.real(),x.real()), z.dual() / (1 + z.real() * z.real()));
 }
 
-template <typename Scalar> 
-Dual<Scalar> cos(const Dual<Scalar>& z){
-    return Dual<Scalar>(cos(z.real()), -z.dual() * sin(z.real()));
+ 
+Dual<double> cos(const Dual<double>& z){
+    return Dual<double>(cos(z.real()), -z.dual() * sin(z.real()));
 }
 
-template <typename Scalar>   
-Dual<Scalar> cosh(const Dual<Scalar>& z){
-    return Dual<Scalar>(cosh(z.real()), z.dual() * sinh(z.real()));
+   
+Dual<double> cosh(const Dual<double>& z){
+    return Dual<double>(cosh(z.real()), z.dual() * sinh(z.real()));
 }
 
-template <typename Scalar>    
-Dual<Scalar> exp(const Dual<Scalar>& z){
-    Scalar x = exp(z.real());
-    return Dual<Scalar>(x, z.dual() * x);
+    
+Dual<double> exp(const Dual<double>& z){
+    double x = exp(z.real());
+    return Dual<double>(x, z.dual() * x);
 }
 
-template <typename Scalar>    
-Dual<Scalar> log(const Dual<Scalar>& z){
-    return Dual<Scalar>(log(z.real()), z.dual() / z.real());
+    
+Dual<double> log(const Dual<double>& z){
+    return Dual<double>(log(z.real()), z.dual() / z.real());
 }
 
-template <typename Scalar>    
-Dual<Scalar> log10(const Dual<Scalar>& z){
+    
+Dual<double> log10(const Dual<double>& z){
     return log(z) / log(10);
 }
 
-template <typename Scalar>    
-Dual<Scalar> pow(const Dual<Scalar>& x, const Dual<Scalar>& y){
-    return exp(log(x) * y);
+    
+Dual<double> pow(const Dual<double>& x, const Dual<double>& y){
+    return Dual<double>(pow(x.real(),y.real()), y.real()*y.dual()*pow(x.real(),y.real()-1)*x.dual());
 }
 
-template <typename Scalar>     
-Dual<Scalar> sin(const Dual<Scalar>& z){
-    return Dual<Scalar>(sin(z.real()), z.dual() * cos(z.real()));
+     
+Dual<double> sin(const Dual<double>& z){
+    return Dual<double>(sin(z.real()), z.dual() * cos(z.real()));
 }
 
-template <typename Scalar>     
-Dual<Scalar> sinh(const Dual<Scalar>& z){
-    return Dual<Scalar>(sinh(z.real()), z.dual() * cosh(z.real()));
+     
+Dual<double> sinh(const Dual<double>& z){
+    return Dual<double>(sinh(z.real()), z.dual() * cosh(z.real()));
 }
 
-template <typename Scalar>     
-Dual<Scalar> sqrt(const Dual<Scalar>& z){
-    Scalar x = sqrt(z.real());
-    return Dual<Scalar>(x, z.dual() / (2 * x));
+     
+Dual<double> sqrt(const Dual<double>& z){
+    double x = sqrt(z.real());
+    return Dual<double>(x, z.dual() / (2 * x));
 }
 
-template <typename Scalar>     
-Dual<Scalar> tan(const Dual<Scalar>& z){
-    Scalar x = tan(z.real());
-    return Dual<Scalar>(x, z.dual() / (cos(z.real()*cos(z.real()))));
+     
+Dual<double> tan(const Dual<double>& z){
+    double x = tan(z.real());
+    return Dual<double>(x, z.dual() / (cos(z.real()*cos(z.real()))) );
 }
 
-template <typename Scalar>   
-Dual<Scalar> tanh(const Dual<Scalar>& z){
-    Scalar x = tanh(z.real());
-    return Dual<Scalar>(x, z.dual() * (1 - x * x));
+   
+Dual<double> tanh(const Dual<double>& z){
+    double x = tanh(z.real());
+    return Dual<double>(x, z.dual() * (1 - x * x));
 }

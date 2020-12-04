@@ -9,100 +9,100 @@
 
 using namespace std;
 
-template <typename Scalar>
+template <typename double>
 class Dual{
 
     public:
         
         /* constructors */
         Dual();
-        Dual(Scalar real);
-        Dual(Scalar real, Scalar dual);
-        template <typename Scalar2> Dual(const Dual<Scalar2>& rhs);
+        Dual(double real);
+        Dual(double real, double dual);
+        Dual(const Dual<double>& rhs);
         
         /* getters */
-        Scalar real() const;
-        Scalar dual() const;
+        double real() const;
+        double dual() const;
   
-        Dual<Scalar>& operator=(Scalar rhs);
-        Dual<Scalar>& operator+=(Scalar rhs); 
-        Dual<Scalar>& operator-=(Scalar rhs);  
-        Dual<Scalar>& operator*=(Scalar rhs); 
-        Dual<Scalar>& operator/=(Scalar rhs);
+        Dual<double>& operator=(double rhs);
+        Dual<double>& operator+=(double rhs); 
+        Dual<double>& operator-=(double rhs);  
+        Dual<double>& operator*=(double rhs); 
+        Dual<double>& operator/=(double rhs);
         
-        template <typename Scalar2> Dual<Scalar>& operator=(const Dual<Scalar2>& rhs);
-        template <typename Scalar2> Dual<Scalar>& operator+=(const Dual<Scalar2>& rhs);
-        template <typename Scalar2> Dual<Scalar>& operator-=(const Dual<Scalar2>& rhs); 
-        template <typename Scalar2> Dual<Scalar>& operator*=(const Dual<Scalar2>& rhs);
-        template <typename Scalar2> Dual<Scalar>& operator/=(const Dual<Scalar2>& rhs);
+        Dual<double>& operator=(const Dual<double>& rhs);
+        Dual<double>& operator+=(const Dual<double>& rhs);
+        Dual<double>& operator-=(const Dual<double>& rhs); 
+        Dual<double>& operator*=(const Dual<double>& rhs);
+        Dual<double>& operator/=(const Dual<double>& rhs);
 
     private:
-        Scalar adReal;
-        Scalar adDual;
+        double adReal;
+        double adDual;
     };
 
-    template <typename Scalar> 
-    ostream& operator<<(ostream& os, const Dual<Scalar>& rhs);
     
-    template <typename Scalar> bool operator==(const Dual<Scalar>& a, Scalar b);
-    template <typename Scalar> bool operator==(Scalar a, const Dual<Scalar>& b);
-    template <typename Scalar1, typename Scalar2> bool operator==(const Dual<Scalar1>& a, const Dual<Scalar2>& b);
-
-    template <typename Scalar> bool operator!=(const Dual<Scalar>& a, Scalar b);
-    template <typename Scalar> bool operator!=(Scalar a, const Dual<Scalar>& b);
-    template <typename Scalar1, typename Scalar2> bool operator!=(const Dual<Scalar1>& a, const Dual<Scalar2>& b);
-  
-    template <typename Scalar> bool operator<(const Dual<Scalar>& a, Scalar b);
-    template <typename Scalar> bool operator<(Scalar a, const Dual<Scalar>& b);
-    template <typename Scalar1, typename Scalar2> bool operator<(const Dual<Scalar1>& a, const Dual<Scalar2>& b);
-
-    template <typename Scalar> bool operator<=(const Dual<Scalar>& a, Scalar b);
-    template <typename Scalar> bool operator<=(Scalar a, const Dual<Scalar>& b);
-    template <typename Scalar1, typename Scalar2> bool operator<=(const Dual<Scalar1>& a, const Dual<Scalar2>& b);
-
-    template <typename Scalar> bool operator>(const Dual<Scalar>& a, Scalar b);
-    template <typename Scalar> bool operator>(Scalar a, const Dual<Scalar>& b);
-    template <typename Scalar1, typename Scalar2> bool operator>(const Dual<Scalar1>& a, const Dual<Scalar2>& b);
-
-    template <typename Scalar> bool operator>=(const Dual<Scalar>& a, Scalar b);
-    template <typename Scalar> bool operator>=(Scalar a, const Dual<Scalar>& b);
-    template <typename Scalar1, typename Scalar2> bool operator>=(const Dual<Scalar1>& a, const Dual<Scalar2>& b);
-  
-    // negative sign
-    template <typename Scalar> Dual<Scalar> operator-(const Dual<Scalar>& rhs);
+    ostream& operator<<(ostream& os, const Dual<double>& rhs);
     
-    template <typename Scalar> Dual<Scalar> operator+(const Dual<Scalar>& lhs, Scalar rhs);
-    template <typename Scalar> Dual<Scalar> operator-(const Dual<Scalar>& lhs, Scalar rhs);
-    template <typename Scalar> Dual<Scalar> operator*(const Dual<Scalar>& lhs, Scalar rhs);
-    template <typename Scalar> Dual<Scalar> operator/(const Dual<Scalar>& lhs, Scalar rhs);
+    bool operator==(const Dual<double>& a, double b);
+    bool operator==(double a, const Dual<double>& b);
+    bool operator==(const Dual<double>& a, const Dual<double>& b);
 
-    template <typename Scalar> Dual<Scalar> operator-(Scalar lhs, const Dual<Scalar>& rhs);
-    template <typename Scalar> Dual<Scalar> operator+(Scalar lhs, const Dual<Scalar>& rhs);
-    template <typename Scalar> Dual<Scalar> operator*(Scalar lhs, const Dual<Scalar>& rhs);
-    template <typename Scalar> Dual<Scalar> operator/(Scalar lhs, const Dual<Scalar>& rhs);
+    bool operator!=(const Dual<double>& a, double b);
+    bool operator!=(double a, const Dual<double>& b);
+    bool operator!=(const Dual<double>& a, const Dual<double>& b);
+  
+    bool operator<(const Dual<double>& a, double b);
+    bool operator<(double a, const Dual<double>& b);
+    bool operator<(const Dual<double>& a, const Dual<double>& b);
+
+    bool operator<=(const Dual<double>& a, double b);
+    bool operator<=(double a, const Dual<double>& b);
+    bool operator<=(const Dual<double>& a, const Dual<double>& b);
+
+    bool operator>(const Dual<double>& a, double b);
+    bool operator>(double a, const Dual<double>& b);
+    bool operator>(const Dual<double>& a, const Dual<double>& b);
+
+    bool operator>=(const Dual<double>& a, double b);
+    bool operator>=(double a, const Dual<double>& b);
+    bool operator>=(const Dual<double>& a, const Dual<double>& b);
+  
+    // negate sign
+    Dual<double> operator-(const Dual<double>& rhs);
+    
+    Dual<double> operator+(const Dual<double>& lhs, double rhs);
+    Dual<double> operator-(const Dual<double>& lhs, double rhs);
+    Dual<double> operator*(const Dual<double>& lhs, double rhs);
+    Dual<double> operator/(const Dual<double>& lhs, double rhs);
+
+    Dual<double> operator-(double lhs, const Dual<double>& rhs);
+    Dual<double> operator+(double lhs, const Dual<double>& rhs);
+    Dual<double> operator*(double lhs, const Dual<double>& rhs);
+    Dual<double> operator/(double lhs, const Dual<double>& rhs);
 
     // can only allow Dual<int> + Dual<int>, Dual<float> + Dual<float>, Dual<double> + Dual<double>
     // to do: Dual<int> + Dual<double> ...
-    template <typename Scalar> Dual<Scalar> operator-(const Dual<Scalar>& a, const Dual<Scalar>& b);
-    template <typename Scalar> Dual<Scalar> operator+(const Dual<Scalar>& a, const Dual<Scalar>& b);
-    template <typename Scalar> Dual<Scalar> operator*(const Dual<Scalar>& a, const Dual<Scalar>& b);
-    template <typename Scalar> Dual<Scalar> operator/(const Dual<Scalar>& a, const Dual<Scalar>& b);
+    Dual<double> operator-(const Dual<double>& a, const Dual<double>& b);
+    Dual<double> operator+(const Dual<double>& a, const Dual<double>& b);
+    Dual<double> operator*(const Dual<double>& a, const Dual<double>& b);
+    Dual<double> operator/(const Dual<double>& a, const Dual<double>& b);
 
     // math operators
-    template <typename Scalar> Dual<Scalar> acos(const Dual<Scalar>& z);
-    template <typename Scalar> Dual<Scalar> asin(const Dual<Scalar>& z);
-    template <typename Scalar> Dual<Scalar> atan(const Dual<Scalar>& z);
-    template <typename Scalar> Dual<Scalar> atan2(const Dual<Scalar>& y, const Dual<Scalar>& x);
-    template <typename Scalar> Dual<Scalar> cos(const Dual<Scalar>& z);
-    template <typename Scalar> Dual<Scalar> cosh(const Dual<Scalar>& z);
-    template <typename Scalar> Dual<Scalar> exp(const Dual<Scalar>& z);
-    template <typename Scalar> Dual<Scalar> log(const Dual<Scalar>& z);
-    template <typename Scalar> Dual<Scalar> log10(const Dual<Scalar>& z);
-    template <typename Scalar> Dual<Scalar> pow(const Dual<Scalar>& x, const Dual<Scalar>& y);
-    template <typename Scalar> Dual<Scalar> sin(const Dual<Scalar>& z);
-    template <typename Scalar> Dual<Scalar> sinh(const Dual<Scalar>& z);
-    template <typename Scalar> Dual<Scalar> sqrt(const Dual<Scalar>& z);
-    template <typename Scalar> Dual<Scalar> tan(const Dual<Scalar>& z);
-    template <typename Scalar> Dual<Scalar> tanh(const Dual<Scalar>& z);
+    Dual<double> acos(const Dual<double>& z);
+    Dual<double> asin(const Dual<double>& z);
+    Dual<double> atan(const Dual<double>& z);
+    Dual<double> atan2(const Dual<double>& y, const Dual<double>& x);
+    Dual<double> cos(const Dual<double>& z);
+    Dual<double> cosh(const Dual<double>& z);
+    Dual<double> exp(const Dual<double>& z);
+    Dual<double> log(const Dual<double>& z);
+    Dual<double> log10(const Dual<double>& z);
+    Dual<double> pow(const Dual<double>& x, const Dual<double>& y);
+    Dual<double> sin(const Dual<double>& z);
+    Dual<double> sinh(const Dual<double>& z);
+    Dual<double> sqrt(const Dual<double>& z);
+    Dual<double> tan(const Dual<double>& z);
+    Dual<double> tanh(const Dual<double>& z);
     
 #endif
