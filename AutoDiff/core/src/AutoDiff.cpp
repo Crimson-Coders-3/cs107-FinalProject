@@ -113,38 +113,53 @@ AutoDiff operator - (double lhs, const AutoDiff &rhs) {
     return -rhs + lhs;
 }
 
-/*
 /////////////////////// *
 // overload AutoDiff *= AutoDiff
 AutoDiff AutoDiff::operator *= ( const AutoDiff &obj) {
-
-  double val = val * obj.getVal();
-  double der = der * obj.getVal() + val * obj.getDer();
-  val = val;
-  der = der;
+  
+  if(_num_vars!=obj.countVar()) throw std::out_of_range("Index out of range!");
+  std::vector<double> grad;
+  for(int i=0;i<obj.countVar();i++){
+    _grad[i] = _grad[i] * obj.val() + obj.gradient()[i] * _val;
+  }
+  _val *= obj.val();
 
   return *this;
 };
 
 // overload AutoDiff *= double
 AutoDiff AutoDiff::operator *= ( double obj ) {
-  val *= obj;
-  der *= obj;
+  _val *= obj;
+  for(int i=0;i<_num_vars;i++){
+    _grad[i] *= obj;
+  }
   return *this;
 };
 
 // overload AutoDiff * AutoDiff
 AutoDiff operator * ( const AutoDiff &lhs, const AutoDiff &rhs ) {
+  // (x+3y+z)*(2x+4y-z)
+  // 2x^2 + 4xy-xz + 6xy + 2xz
+  // dval with respect to x:4x+4y-z+6y+2z
+  // dval with respect to x:(2x+4y-z) + 2(x+3y+z)
+  double val = lhs.val() * rhs.val();
+  if(lhs.countVar()!=rhs.countVar()) throw std::out_of_range("Index out of range!");
+  std::vector<double> grad;
+  for(int i=0;i<lhs.countVar();i++){
+    grad.push_back(lhs.gradient()[i] * rhs.val() + rhs.gradient()[i] * lhs.val());
+  }
 
-  double val = lhs.getVal() * rhs.getVal();
-  double der = lhs.getDer() * rhs.getVal() + lhs.getVal() * rhs.getDer();
-
-  return AutoDiff(val, der);
+  return AutoDiff(val, grad);
 };
 
 // overload AutoDiff * double
 AutoDiff operator * (const AutoDiff &lhs, double rhs ) {
-  return AutoDiff(lhs.getVal()*rhs,lhs.getDer()*rhs);
+  double val = lhs.val() * rhs;
+  std::vector<double> grad;
+  for(int i=0;i<lhs.countVar();i++){
+    grad.push_back(lhs.gradient()[i] * rhs);
+  }
+  return AutoDiff(lhs.val()*rhs,grad);
 };
 
 // overload double * AutoDiff
@@ -152,7 +167,7 @@ AutoDiff operator * (double lhs, const AutoDiff &rhs) {
     return rhs * lhs;
 }
 
-
+/*
 /////////////////////// /
 
 // overload AutoDiff /= AutoDiff
