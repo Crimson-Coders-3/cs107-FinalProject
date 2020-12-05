@@ -271,3 +271,12 @@ TEST(MATH,TANH){
 	EXPECT_NEAR(tanhx.getVal(),tanh(-0.5),DTOL);
 	EXPECT_NEAR(tanhx.getDer(),(1/pow(cosh(-0.5), 2)) * 4.0, DTOL);
 }
+
+/////////////////////////////////////////// Nested Operation TESTS
+
+TEST(MATH,NESTED){
+	AutoDiff x(-0.5,4.0);
+	AutoDiff res = cos(pow(sin(x),AutoDiff(2.0)));
+	EXPECT_NEAR(res.getVal(),cos(pow(sin(-0.5),2.0)),DTOL);
+	EXPECT_NEAR(res.getDer(),-sin(pow(sin(-0.5),2.0))*2*sin(-0.5)*cos(-0.5), DTOL);
+}

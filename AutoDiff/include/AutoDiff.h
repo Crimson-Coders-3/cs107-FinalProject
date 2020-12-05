@@ -9,6 +9,7 @@ class AutoDiff {
    private:
       double val;
       double der;
+      bool multivar;
 
    // public
    public:
@@ -80,6 +81,4 @@ AutoDiff sinh(const AutoDiff &obj);
 AutoDiff cosh(const AutoDiff &obj);
 AutoDiff tanh(const AutoDiff &obj);
 
-// overload AutoDiffToy * float
-//AutoDiff operator * (float lhs, AutoDiff rhs);
 #endif

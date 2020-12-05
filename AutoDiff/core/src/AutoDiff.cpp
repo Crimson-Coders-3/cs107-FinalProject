@@ -172,7 +172,7 @@ AutoDiff pow ( const AutoDiff &lhs, const AutoDiff &rhs ) {
 };
 
 // AutoDiff ^ double
-AutoDiff pow ( AutoDiff &obj, double a ) {
+AutoDiff pow ( const AutoDiff &obj, double a ) {
 
   double val = std::pow(obj.getVal(), a);
   double der = a * std::pow(obj.getVal(), a - 1) * obj.getDer();
@@ -197,8 +197,19 @@ AutoDiff exp ( AutoDiff &a ) {
 };
 
 
+/////////////////////////////////////////// SET VAL / DER VARS
 
-/////////////////////////////////////////// VIEW PUBLIC VAL / DER VARS
+// set val
+void AutoDiff::setVal(double obj) const {
+  val = obj;
+}
+
+// set der
+void AutoDiff::setDer(double obj) const {
+  der = obj;
+}
+
+/////////////////////////////////////////// VIEW  VAL / DER VARS
 
 // get val
 double AutoDiff::getVal() const {
@@ -209,7 +220,6 @@ double AutoDiff::getVal() const {
 double AutoDiff::getDer() const {
   return der;
 }
-
 
 
 /////////////////////////////////////////// PRINT VAL AND DER
