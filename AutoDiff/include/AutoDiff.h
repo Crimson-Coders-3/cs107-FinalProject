@@ -1,21 +1,25 @@
 #ifndef AD_H
 #define AD_H
 
+#include <vector>
+
 ///////////////////////////////////////////////////////////////// CUSTOM AUTODIFF CLASS
 class AutoDiff {
 
    /////////////////////////////////////////// CLASS DEF
    // private
    private:
-      double val;
-      double der;
-      bool multivar;
+      double _val;
+      std::vector<double> _grad;
+      int _num_vars;
 
    // public
    public:
       // constructor
-      // seed is 1.0 (scales dvalueivative)
-      AutoDiff(double a, double b = 1.0);
+      // seed vector example: for x in f(x,y), seed = [1, 0]
+      //                      for y in f(x,y), seed = [0, 1]
+      // seed vector does not need to be unit vector
+      AutoDiff(double val, std::vector<double> seed);
 
 
    /////////////////////////////////////////// OVERLOAD OPERATORS
@@ -43,10 +47,26 @@ class AutoDiff {
    // overload autodiff / double
    AutoDiff operator /= ( double obj );
 
-   double getVal() const;
-   double getDer() const;
-   void setVal(double obj);
-   void setDer(double obj);
+   // get value
+   double val() const;
+
+   // get dval with respect to a variable
+   double dval_wrt(int index) const;
+
+   // get gradient (all the variables)
+   std::vector<double> gradient() const;
+
+   // get total number of variables
+   int countVar() const;
+
+   // set value
+   void setVal(double val);
+
+   // set dval with respect to a variable
+   void set_dval_wrt(int index, double dval);
+
+   // set dvals of all the variables
+   void set_dval(std::vector<double> dvals);
 
    /////////////////////////////////////////// PRINT value AND dvalue
    void print();

@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string>
+#include <iostream>
+#include <vector>
 #include <math.h>
 
 /* googletest header files */
@@ -19,47 +21,150 @@ void ADLibrary_testcheck(){
 using namespace std;
 
 TEST(CONSTRUCTOR,SINGLE){
-    AutoDiff x(2.0);
+	std::vector<double> seed_x;
+	seed_x.push_back(1.0);
+    AutoDiff x(2.0,seed_x);
 
     /* test getters */
-    EXPECT_NEAR(x.getVal(),2.0,DTOL);
-    EXPECT_NEAR(x.getDer(),1.0,DTOL);
+    EXPECT_NEAR(x.val(),2.0,DTOL);
+    EXPECT_NEAR(x.dval_wrt(0),1.0,DTOL);
+    EXPECT_EQ(x.gradient().size(),1);
+    EXPECT_EQ(x.countVar(),1);
+    EXPECT_NEAR(x.gradient().at(0),seed_x.at(0),DTOL);
+}
+
+TEST(CONSTRUCTOR,SETTER){
+	std::vector<double> seed_x;
+	seed_x.push_back(1.0);
+    AutoDiff x(2.0,seed_x);
+
+    /* test setters */
+    x.setVal(-2.0);
+    EXPECT_NEAR(x.val(),-2.0,DTOL);
+    x.set_dval_wrt(0,1.99);
+    EXPECT_NEAR(x.dval_wrt(0),1.99,DTOL);
+    seed_x[0] = 1.89;
+    x.set_dval(seed_x);
+    EXPECT_NEAR(x.gradient().at(0),seed_x.at(0),DTOL);
+
+    std::vector<double> seed_copy = x.gradient();
+    seed_copy[0] = -.1;
+    EXPECT_NEAR(x.gradient().at(0),seed_x.at(0),DTOL);
+
+    /* test error msg */
+    try {
+        x.set_dval_wrt(1,3.0);
+        FAIL() << "Expected std::out_of_range";
+    }
+    catch(std::out_of_range const & err) {
+        EXPECT_EQ(err.what(),std::string("Index out of range!"));
+    }
+    try {x.dval_wrt(1);x.set_dval_wrt(1,3.0);
+        FAIL() << "Expected std::out_of_range";
+    }
+    catch(std::out_of_range const & err) {
+        EXPECT_EQ(err.what(),std::string("Index out of range!"));
+    }
 }
 
 /////////////////////////////////////////// ADD TESTS
-// autodiff + autodiff
+// AutoDiff += double
+TEST(OPERATOR,ADDEQUAL){
+	std::vector<double> seed_x;
+	seed_x.push_back(3.0);
+	AutoDiff x(2.0,seed_x);
+
+	x += 3.0;
+	EXPECT_NEAR(x.val(),5.0,DTOL);
+    EXPECT_NEAR(x.dval_wrt(0),3.0,DTOL);
+    EXPECT_EQ(x.gradient().size(),1);
+    EXPECT_EQ(x.countVar(),1);
+    EXPECT_NEAR(x.gradient().at(0),seed_x.at(0),DTOL);
+
+    std::vector<double> seed_x1;
+    seed_x1.push_back(1.0);
+    seed_x1.push_back(0.0);
+    std::vector<double> seed_x2;
+    seed_x2.push_back(0.0);
+    seed_x2.push_back(1.3);
+    AutoDiff x1(2.0,seed_x1);
+    AutoDiff x2(3.0,seed_x2);
+    x1 += x2;
+
+    // x1 should be changed
+    EXPECT_NEAR(x1.val(),5.0,DTOL);
+    EXPECT_NEAR(x1.dval_wrt(0),1.0,DTOL);
+    EXPECT_NEAR(x1.dval_wrt(1),1.3,DTOL);
+    EXPECT_EQ(x1.gradient().size(),2);
+    EXPECT_EQ(x1.countVar(),2);
+    EXPECT_NEAR(x1.gradient().at(0),seed_x1.at(0),DTOL);
+    EXPECT_NEAR(x1.gradient().at(1),seed_x2.at(1),DTOL);
+
+    // x2 should be unchanged
+    EXPECT_NEAR(x2.val(),3.0,DTOL);
+    EXPECT_NEAR(x2.dval_wrt(0),0.0,DTOL);
+    EXPECT_NEAR(x2.dval_wrt(1),1.3,DTOL);
+    EXPECT_EQ(x2.gradient().size(),2);
+    EXPECT_EQ(x2.countVar(),2);
+    EXPECT_NEAR(x2.gradient().at(0),seed_x2.at(0),DTOL);
+    EXPECT_NEAR(x2.gradient().at(1),seed_x2.at(1),DTOL);
+}
+
+// AutoDiff + AutoDiff
 TEST(OPERATOR,ADD){
-	AutoDiff x(-0.5,4.0);
-	AutoDiff y(0.5,4.3);
-	AutoDiff sum = x + y;
-	
-	EXPECT_NEAR(sum.getVal(),0.0,DTOL);
-    EXPECT_NEAR(sum.getDer(),8.3,DTOL);
+	std::vector<double> seed_x1;
+    seed_x1.push_back(1.0);
+    seed_x1.push_back(0.0);
+    std::vector<double> seed_x2;
+    seed_x2.push_back(0.0);
+    seed_x2.push_back(1.3);
+    AutoDiff x1(2.0,seed_x1);
+    AutoDiff x2(3.0,seed_x2);
+    AutoDiff sum = x1 + x2;
+
+	// x2 should be unchanged
+    EXPECT_NEAR(sum.val(),5.0,DTOL);
+    EXPECT_NEAR(sum.dval_wrt(0),1.0,DTOL);
+    EXPECT_NEAR(sum.dval_wrt(1),1.3,DTOL);
+    EXPECT_EQ(sum.gradient().size(),2);
+    EXPECT_EQ(sum.countVar(),2);
+    EXPECT_NEAR(sum.gradient().at(0),1.0,DTOL);
+    EXPECT_NEAR(sum.gradient().at(1),1.3,DTOL);
 }
 
-// autodiff + double
+// AutoDiff + double
 TEST(OPERATOR,ADDAFTER){
-	AutoDiff x(-0.5,4.0);
-	double y = 9.0;
-	AutoDiff sum = x + y;
+	std::vector<double> seed_x;
+	seed_x.push_back(3.0);
+	AutoDiff x(2.0,seed_x);
+
+	AutoDiff sum = x + 3.3;
 	
-	EXPECT_NEAR(sum.getVal(),8.5,DTOL);
-    EXPECT_NEAR(sum.getDer(),4.0,DTOL);
+	EXPECT_NEAR(sum.val(),5.3,DTOL);
+    EXPECT_NEAR(sum.dval_wrt(0),3.0,DTOL);
+    EXPECT_EQ(sum.gradient().size(),1);
+    EXPECT_EQ(sum.countVar(),1);
+    EXPECT_NEAR(sum.gradient().at(0),3.0,DTOL);
 }
 
-// double + autodiff
+// double + AutoDiff
 TEST(OPERATOR,ADDBEFORE){
-	double x = 9.0;
-	AutoDiff y(-0.5,4.0);
-	AutoDiff sum = x + y;
+	std::vector<double> seed_x;
+	seed_x.push_back(3.0);
+	AutoDiff x(2.0,seed_x);
+
+	AutoDiff sum = 3.3 + x;
 	
-	EXPECT_NEAR(sum.getVal(),8.5,DTOL);
-    EXPECT_NEAR(sum.getDer(),4.0,DTOL);
+	EXPECT_NEAR(sum.val(),5.3,DTOL);
+    EXPECT_NEAR(sum.dval_wrt(0),3.0,DTOL);
+    EXPECT_EQ(sum.gradient().size(),1);
+    EXPECT_EQ(sum.countVar(),1);
+    EXPECT_NEAR(sum.gradient().at(0),3.0,DTOL);
 }
 
-
+/*
 /////////////////////////////////////////// SUB TESTS
-// autodiff - autodiff
+// AutoDiff - AutoDiff
 TEST(OPERATOR,SUB){
 	AutoDiff x(-0.5,4.0);
 	AutoDiff y(0.5,4.3);
@@ -69,7 +174,7 @@ TEST(OPERATOR,SUB){
     EXPECT_NEAR(sum.getDer(),-0.3,DTOL);
 }
 
-// autodiff - double
+// AutoDiff - double
 TEST(OPERATOR,SUBAFTER){
 	AutoDiff x(-0.5,4.0);
 	double y = 9.0;
@@ -79,7 +184,7 @@ TEST(OPERATOR,SUBAFTER){
     EXPECT_NEAR(sum.getDer(),4.0,DTOL);
 }
 
-// double - autodiff
+// double - AutoDiff
 TEST(OPERATOR,SUBBEFORE){
 	double x = 9.0;
 	AutoDiff y(-0.5,4.0);
@@ -91,7 +196,7 @@ TEST(OPERATOR,SUBBEFORE){
 
 
 /////////////////////////////////////////// TIMES TESTS
-// autodiff * autodiff
+// AutoDiff * AutoDiff
 TEST(OPERATOR,TIMES){
 	AutoDiff x(2.0,4.0);
 	AutoDiff y(5.0,3.0);
@@ -101,7 +206,7 @@ TEST(OPERATOR,TIMES){
     EXPECT_NEAR(prod.getDer(),26.0,DTOL);
 }
 
-// autodiff * double
+// AutoDiff * double
 TEST(OPERATOR,TIMESAFTER){
 	AutoDiff x(5.0,3.0);
 	double y = 2.0;
@@ -111,7 +216,7 @@ TEST(OPERATOR,TIMESAFTER){
     EXPECT_NEAR(prod.getDer(),6.0,DTOL);
 }
 
-// double * autodiff
+// double * AutoDiff
 TEST(OPERATOR,TIMESBEFORE){
 	double x = 2.0;
 	AutoDiff y(5.0,3.0);
@@ -123,7 +228,7 @@ TEST(OPERATOR,TIMESBEFORE){
 
 
 /////////////////////////////////////////// DIVIDE TESTS
-// autodiff / autodiff
+// AutoDiff / AutoDiff
 TEST(OPERATOR,QUO){
 	AutoDiff x(20.0,5.0);
 	AutoDiff y(10.0,5.0);
@@ -133,7 +238,7 @@ TEST(OPERATOR,QUO){
     EXPECT_NEAR(quo.getDer(),-0.5,DTOL);
 }
 
-// autodiff / double
+// AutoDiff / double
 TEST(OPERATOR,QUOAFTER){
 	AutoDiff x(10.0,5.0);
 	double y = 5.0;
@@ -143,7 +248,7 @@ TEST(OPERATOR,QUOAFTER){
     EXPECT_NEAR(quo.getDer(),1.0,DTOL);
 }
 
-// double * autodiff
+// double * AutoDiff
 TEST(OPERATOR,QUOBEFORE){
 	double x = 10.0;
 	AutoDiff y(5.0,5.0);
@@ -173,7 +278,7 @@ TEST(MATH,LOG){
 
 
 /////////////////////////////////////////// POW TESTS
-// autodiff ^ double (e.g. x^2)
+// AutoDiff ^ double (e.g. x^2)
 TEST(MATH,LEFTPOW){
 	AutoDiff x(-0.5,4.0);
 	AutoDiff powx = pow(x, 2.0);
@@ -181,7 +286,7 @@ TEST(MATH,LEFTPOW){
 	EXPECT_NEAR(powx.getDer(),4.0*2.0*pow(-0.5, 1.0), DTOL);
 }
 
-// autodiff & autodiff (e.g. x^y)
+// AutoDiff & AutoDiff (e.g. x^y)
 TEST(MATH,POW_TWOVAR){
 	AutoDiff x(0.5,4.0);
 	AutoDiff y(2.0,3.0);
@@ -190,7 +295,7 @@ TEST(MATH,POW_TWOVAR){
 	EXPECT_NEAR(powxy.getDer(),pow(0.5, 2.0) * 3.0 * log(0.5) + pow(0.5, 2.0 - 1.0) * 2.0 * 4.0, DTOL);
 }
 
-// double ^ autodiff (e.g. 2^x)
+// double ^ AutoDiff (e.g. 2^x)
 TEST(MATH,RIGHTPOW){
 	AutoDiff x(-0.5,4.0);
 	AutoDiff powx = pow(2.0, x);
@@ -200,7 +305,7 @@ TEST(MATH,RIGHTPOW){
 
 
 /////////////////////////////////////////// TRIG FUNCTION TESTS
-// sin autodiff
+// sin AutoDiff
 TEST(MATH,SIN){
 	AutoDiff x(-0.5,4.0);
 	AutoDiff sinx = sin(x);
@@ -208,7 +313,7 @@ TEST(MATH,SIN){
 	EXPECT_NEAR(sinx.getDer(),cos(-0.5)*4.0,DTOL);
 }
 
-// cos autodiff
+// cos AutoDiff
 TEST(MATH,COS){
 	AutoDiff x(-0.5,4.0);
 	AutoDiff cosx = cos(x);
@@ -216,7 +321,7 @@ TEST(MATH,COS){
 	EXPECT_NEAR(cosx.getDer(),-sin(-0.5)*4.0,DTOL);
 }
 
-// tan autodiff
+// tan AutoDiff
 TEST(MATH,TAN){
 	AutoDiff x(-0.5,4.0);
 	AutoDiff tanx = tan(x);
@@ -224,7 +329,7 @@ TEST(MATH,TAN){
 	EXPECT_NEAR(tanx.getDer(), (1/pow(cos(-0.5), 2)) * 4.0,DTOL);
 }
 
-// arcsin autodiff
+// arcsin AutoDiff
 TEST(MATH,ARCSIN){
 	AutoDiff x(-0.5,4.0);
 	AutoDiff arcsinx = asin(x);
@@ -232,7 +337,7 @@ TEST(MATH,ARCSIN){
 	EXPECT_NEAR(arcsinx.getDer(),(1/sqrt(1-pow(-0.5, 2)))*4.0,DTOL);
 }
 
-// arccos autodiff
+// arccos AutoDiff
 TEST(MATH,ARCCOS){
 	AutoDiff x(-0.5,4.0);
 	AutoDiff arcsinx = acos(x);
@@ -240,7 +345,7 @@ TEST(MATH,ARCCOS){
 	EXPECT_NEAR(arcsinx.getDer(), -(1/sqrt(1 - pow(-0.5, 2))) * 4.0,DTOL);
 }
 
-// arctan autodiff
+// arctan AutoDiff
 TEST(MATH,ARCTAN){
 	AutoDiff x(-0.5,4.0);
 	AutoDiff arctanx = atan(x);
@@ -248,7 +353,7 @@ TEST(MATH,ARCTAN){
 	EXPECT_NEAR(arctanx.getDer(), (1/(1+pow(-0.5, 2))) * 4.0,DTOL);
 }
 
-// sinh autodiff
+// sinh AutoDiff
 TEST(MATH,SINH){
 	AutoDiff x(-0.5,4.0);
 	AutoDiff sinhx = sinh(x);
@@ -256,7 +361,7 @@ TEST(MATH,SINH){
 	EXPECT_NEAR(sinhx.getDer(),cosh(-0.5) * 4.0, DTOL);
 }
 
-// cosh autodiff
+// cosh AutoDiff
 TEST(MATH,COSH){
 	AutoDiff x(-0.5,4.0);
 	AutoDiff coshx = cosh(x);
@@ -264,7 +369,7 @@ TEST(MATH,COSH){
 	EXPECT_NEAR(coshx.getDer(),sinh(-0.5) * 4.0, DTOL);
 }
 
-// tanh autodiff
+// tanh AutoDiff
 TEST(MATH,TANH){
 	AutoDiff x(-0.5,4.0);
 	AutoDiff tanhx = tanh(x);
@@ -280,3 +385,4 @@ TEST(MATH,NESTED){
 	EXPECT_NEAR(res.getVal(),cos(pow(sin(-0.5),2.0)),DTOL);
 	EXPECT_NEAR(res.getDer(),-sin(pow(sin(-0.5),2.0))*2*sin(-0.5)*cos(-0.5), DTOL);
 }
+*/

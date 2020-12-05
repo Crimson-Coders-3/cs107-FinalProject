@@ -1,20 +1,18 @@
 #include "AutoDiff.h"
 #include <math.h>
+#include <vector>
 #include <typeinfo>
+#include <iterator>
+#include <bits/stdc++.h> 
 #include <iostream>
 #include <string>
 #include <cmath>
 
 /////////////////////////////////////////// CONSTRUCTOR
-AutoDiff::AutoDiff(double a, double b) {
-
-  //std::cout << "constructor called and value set" << std::endl;
-  //std::cout << a << std::endl;
-
-  //std::cout << "constructor called and value set" << std::endl;
-  //std::cout << b << std::endl;
-  val = a;
-  der = b;
+AutoDiff::AutoDiff(double val, std::vector<double> seed) {
+  _val = val;
+  _grad = seed;
+  _num_vars = seed.size();
 }
 
 /////////////////////////////////////////// OVERLOAD OPERATORS
@@ -22,34 +20,47 @@ AutoDiff::AutoDiff(double a, double b) {
 /////////////////////// +
 // overload AutoDiff += AutoDiff
 AutoDiff AutoDiff::operator += (const AutoDiff &obj) {
-  val += obj.getVal();
-  der += obj.getDer();
+  _val += obj.val();
+  
+  if( obj.countVar()!= _num_vars ){
+    throw std::string("Seed vector dimension not matched! One is ")\
+            + std::to_string(obj.countVar()) + std::string(", another is ")\
+            + std::to_string(_num_vars);
+  }
+  for(int i=0; i<_num_vars;i++){
+    _grad[i] += obj.gradient().at(i);
+  }
   return *this;
 };
 
 // overload AutoDiff += double
 AutoDiff AutoDiff::operator += ( double obj ) {
-  val += obj;
+  _val += obj;
   return *this;
 };
 
 // overload double + AutoDiff
 AutoDiff operator + (double lhs, const AutoDiff &rhs) {
-    return AutoDiff(lhs+rhs.getVal(),rhs.getDer());
+    return AutoDiff(lhs+rhs.val(),rhs.gradient());
 }
 
 // overload AutoDiff + AutoDiff
 AutoDiff operator + ( const AutoDiff &a, const AutoDiff &b )
-{
-    return AutoDiff(a.getVal()+b.getVal(),a.getDer()+b.getDer());
+{   
+    if(a.countVar()!=b.countVar()) throw std::out_of_range("Index out of range!");
+    std::vector<double> grad;
+    for(int i=0;i<a.countVar();i++){
+      grad.push_back(a.dval_wrt(i)+b.dval_wrt(i));
+    }
+    return AutoDiff(a.val()+b.val(),grad);
 }
 
 // overload AutoDiff + double
 AutoDiff operator + ( const AutoDiff &lhs, double rhs )
 {
-    return AutoDiff(lhs.getVal()+rhs, lhs.getDer());
+    return AutoDiff(lhs.val()+rhs, lhs.gradient());
 }
-
+/*
 /////////////////////// NEGATION
 // overload unary negation (- AutoDiff)
 AutoDiff operator -(const AutoDiff &obj) {
@@ -194,34 +205,52 @@ AutoDiff pow (double lhs, const AutoDiff &rhs) {
 // e ^ AutoDiff
 AutoDiff exp ( AutoDiff &a ) {
   return AutoDiff(  exp(a.getVal()),exp(a.getVal()) * a.getDer() );
-};
+};*/
 
 
 /////////////////////////////////////////// SET VAL / DER VARS
 
 // set val
-void AutoDiff::setVal(double obj) const {
-  val = obj;
+void AutoDiff::setVal(double obj) {
+  _val = obj;
 }
 
-// set der
-void AutoDiff::setDer(double obj) const {
-  der = obj;
+// set dval with respect to a variable
+void AutoDiff::set_dval_wrt(int index, double dval) {
+  if(index>=_num_vars) throw std::out_of_range("Index out of range!");
+  _grad[index] = dval;
 }
 
-/////////////////////////////////////////// VIEW  VAL / DER VARS
+// set dvals with all the variables
+void AutoDiff::set_dval(std::vector<double> dvals){
+  _grad = dvals; 
+}
+
+/////////////////////////////////////////// VIEW  VAL / DVAL VARS
+
+// get total number of variables
+int AutoDiff::countVar() const{
+  return _num_vars;
+}
 
 // get val
-double AutoDiff::getVal() const {
-  return val;
+double AutoDiff::val() const {
+  return _val;
 }
 
-// get der
-double AutoDiff::getDer() const {
-  return der;
+// get dval with respect to a variable
+double AutoDiff::dval_wrt(int index) const {
+  if(index>=_num_vars) throw std::out_of_range("Index out of range!");
+  return _grad[index];
 }
 
+// get gradient (all the variables)
+std::vector<double> AutoDiff::gradient() const {
+  std::vector<double> grad_copy = _grad;
+  return grad_copy;
+}
 
+/*
 /////////////////////////////////////////// PRINT VAL AND DER
 
 void AutoDiff::print() { 
@@ -306,4 +335,4 @@ AutoDiff tanh(const AutoDiff &input)
     double val = tanh(input.getVal());
     double dv = (1/pow(cosh(input.getVal()), 2)) * input.getDer();
     return AutoDiff(val,dv);
-}
+}*/
