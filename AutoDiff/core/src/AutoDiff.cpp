@@ -15,6 +15,8 @@ AutoDiff::AutoDiff(double val, std::vector<double> seed) {
   _num_vars = seed.size();
 }
 
+
+
 /////////////////////////////////////////// OVERLOAD OPERATORS
 
 /////////////////////// +
@@ -23,7 +25,7 @@ AutoDiff AutoDiff::operator += (const AutoDiff &obj) {
   _val += obj.val();
   
   if( obj.countVar()!= _num_vars ){
-    throw std::out_of_range("Seed vectors dimension not matched!");
+    throw std::invalid_argument("Seed vectors dimension not matched!");
   }
   for(int i = 0; i < _num_vars; i++){
     _grad[i] += obj.gradient().at(i);
@@ -46,7 +48,7 @@ AutoDiff operator + (double lhs, const AutoDiff &rhs) {
 AutoDiff operator + ( const AutoDiff &lhs, const AutoDiff &rhs )
 {   
     if(lhs.countVar()!=rhs.countVar()) {
-      throw std::out_of_range("Seed vectors dimension not matched!");
+      throw std::invalid_argument("Seed vectors dimension not matched!");
     }
     std::vector<double> grad;
     for(int i = 0; i < lhs.countVar(); i++){
@@ -82,7 +84,7 @@ AutoDiff AutoDiff::operator -= (const AutoDiff &obj) {
   _val -= obj.val();
   
   if( obj.countVar()!= _num_vars ){
-    throw std::out_of_range("Seed vectors dimension not matched!");
+    throw std::invalid_argument("Seed vectors dimension not matched!");
   }
   for(int i = 0; i < _num_vars; i++){
     _grad[i] -= obj.gradient().at(i);
@@ -94,7 +96,7 @@ AutoDiff AutoDiff::operator -= (const AutoDiff &obj) {
 // overload AutoDiff - AutoDiff
 AutoDiff operator - ( const AutoDiff &lhs, const AutoDiff &rhs ) {
   if(lhs.countVar()!=rhs.countVar()){
-    throw std::out_of_range("Seed vectors dimension not matched!");
+    throw std::invalid_argument("Seed vectors dimension not matched!");
   }
     
     std::vector<double> grad;
@@ -119,7 +121,7 @@ AutoDiff operator - (double lhs, const AutoDiff &rhs) {
 AutoDiff AutoDiff::operator *= ( const AutoDiff &obj) {
   
   if(_num_vars!=obj.countVar()){
-    throw std::out_of_range("Seed vectors dimension not matched!");
+    throw std::invalid_argument("Seed vectors dimension not matched!");
   }
   std::vector<double> grad;
   for(int i = 0;i < obj.countVar(); i++){
@@ -147,7 +149,7 @@ AutoDiff operator * ( const AutoDiff &lhs, const AutoDiff &rhs ) {
   // dval with respect to x:(2x+4y-z) + 2(x+3y+z)
   double val = lhs.val() * rhs.val();
   if(lhs.countVar()!=rhs.countVar()){
-    throw std::out_of_range("Seed vectors dimension not matched!");
+    throw std::invalid_argument("Seed vectors dimension not matched!");
   }
   std::vector<double> grad;
   for(int i = 0; i < lhs.countVar(); i++){
@@ -179,7 +181,7 @@ AutoDiff operator * (double lhs, const AutoDiff &rhs) {
 AutoDiff AutoDiff::operator /= ( const AutoDiff &obj) {
 
   if(_num_vars!=obj.countVar()){
-    throw std::out_of_range("Seed vectors dimension not matched!");
+    throw std::invalid_argument("Seed vectors dimension not matched!");
   }
   
   for(int i = 0;i < obj.countVar(); i++){
@@ -204,7 +206,7 @@ AutoDiff AutoDiff::operator /= ( double obj ) {
 AutoDiff operator / ( const AutoDiff &lhs, const AutoDiff &rhs) {
   double val = lhs.val()/rhs.val();
   if(lhs.countVar()!=rhs.countVar()){
-    throw std::out_of_range("Seed vectors dimension not matched!");
+    throw std::invalid_argument("Seed vectors dimension not matched!");
   }
   std::vector<double> grad;
   for(int i = 0; i < lhs.countVar(); i++){
@@ -236,13 +238,17 @@ AutoDiff operator / (double lhs, const AutoDiff &rhs) {
 // AutoDiff ^ AutoDiff
 AutoDiff pow ( const AutoDiff &lhs, const AutoDiff &rhs ) {
   if(lhs.countVar()!=rhs.countVar()){
-    throw std::out_of_range("Seed vectors dimension not matched!");
+    throw std::invalid_argument("Seed vectors dimension not matched!");
   }
   double val = std::pow(lhs.val(), rhs.val());
   std::vector<double> grad;
   for (int i = 0; i < rhs.countVar(); ++i) {
+    // log(lhs.val()) so lhs.val() must > 0
     if(lhs.val()<0){
-      std::cout << i << " th (index from 0) variable value < 0, dval = NaN occus! \n";
+      throw std::domain_error("Value less than 0! NaN occurs!");
+    }
+    if(lhs.val()==0){
+      throw std::range_error("Value equals 0!");
     }
     grad.push_back( std::pow(lhs.val(), rhs.val()) * rhs.gradient()[i] * log(lhs.val())\
                   +std::pow(lhs.val(), rhs.val() - 1) * rhs.val() * lhs.gradient()[i]);
@@ -269,6 +275,13 @@ AutoDiff pow (double lhs, const AutoDiff &rhs) {
   double val = std::pow(lhs, rhs.val());
   std::vector<double> grad;
   for(int i = 0; i < rhs.countVar(); i++){
+    // log(lhs) so lhs must > 0
+    if(lhs<0){
+      throw std::domain_error("Value less than 0! NaN occurs!");
+    }
+    if(lhs==0){
+      throw std::range_error("Value equals 0!");
+    }
     grad.push_back( log(lhs) * std::pow(lhs,rhs.val()) * rhs.gradient()[i] );
   }
 
@@ -290,10 +303,10 @@ AutoDiff exp ( AutoDiff &obj ) {
 AutoDiff log(const AutoDiff &obj)
 { 
     if(obj.val()<0){
-      throw std::domain_error("Value less than 0! NaN occurs!\n");
+      throw std::domain_error("Value less than 0! NaN occurs!");
     }
     if(obj.val()==0){
-      throw std::range_error("Value equals 0!\n");
+      throw std::range_error("Value equals 0!");
     }
     double val = log(obj.val());
     std::vector<double> grad;
@@ -308,10 +321,10 @@ AutoDiff log10(const AutoDiff &obj)
 {
     
     if(obj.val()<0){
-      throw std::domain_error("Value less than 0! NaN occurs!\n");
+      throw std::domain_error("Value less than 0! NaN occurs!");
     }
     if(obj.val()==0){
-      throw std::range_error("Value equals 0! NaN occurs!\n");
+      throw std::range_error("Value equals 0! NaN occurs!");
     }
     double val = log(obj.val())/log(10);
     std::vector<double> grad;
@@ -365,16 +378,16 @@ std::vector<double> AutoDiff::gradient() const {
 
 /////////////////////////////////////////// PRINT VAL AND DER
 
-void AutoDiff::print() { 
-  std::cout << "Information of AutoDiff object: \n";
-  std::cout << "Value at " << _val << std::endl;
-  std::cout << _num_vars << " variables in total.";
+std::ostream& operator<<(std::ostream& os, const AutoDiff& obj){
+    os << "Information of AutoDiff object: \n";
+    os << "Value at " << obj.val() << ". ";
+    os << obj.countVar() << " variable(s) in total.\n";
 
-  for(int i = 0; i < _num_vars ; i++){
-    std::cout << "   " << i << "th variable: dval = " << _grad[i] << std::endl;
-  } 
-} 
-
+    for(int i = 0; i < obj.countVar() ; i++){
+      os << "   " << i << "th variable: dval = " << obj.gradient()[i] << std::endl;
+    } 
+    return os;
+}
 /*
 AutoDiff sin(const AutoDiff &input)
 {

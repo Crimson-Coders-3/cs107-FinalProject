@@ -2,6 +2,7 @@
 #define AD_H
 
 #include <vector>
+#include <iostream>
 
 ///////////////////////////////////////////////////////////////// CUSTOM AUTODIFF CLASS
 class AutoDiff {
@@ -68,10 +69,10 @@ class AutoDiff {
    // set dvals of all the variables
    void set_dval(std::vector<double> dvals);
 
-   /////////////////////////////////////////// PRINT value AND dvalue
-   void print();
 }; // close AutoDiff class
 
+/////////////////////////////////////////// PRINT value AND dvalue
+std::ostream& operator<<(std::ostream& os, const AutoDiff& obj);
 
 AutoDiff operator + ( const AutoDiff &lhs, const AutoDiff &rhs );
 AutoDiff operator + ( const AutoDiff &lhs, double rhs );

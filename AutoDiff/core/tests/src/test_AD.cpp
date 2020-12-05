@@ -59,7 +59,8 @@ TEST(CONSTRUCTOR,SETTER){
     catch(std::out_of_range const & err) {
         EXPECT_EQ(err.what(),std::string("Index out of range!"));
     }
-    try {x.dval_wrt(1);x.set_dval_wrt(1,3.0);
+    try {
+    	x.dval_wrt(1);
         FAIL() << "Expected std::out_of_range";
     }
     catch(std::out_of_range const & err) {
@@ -115,9 +116,9 @@ TEST(OPERATOR,ADDEQUAL){
 	    seed_x3.push_back(1.3);
 	    AutoDiff x3(3.9,seed_x3);
     	x2 += x3;
-        FAIL() << "Expected std::out_of_range";
+        FAIL() << "Expected std::invalid_argument";
     }
-    catch(std::out_of_range const & err) {
+    catch(std::invalid_argument const & err) {
         EXPECT_EQ(err.what(),std::string("Seed vectors dimension not matched!"));
     }
 }
@@ -149,9 +150,9 @@ TEST(OPERATOR,ADD){
 	    seed_x3.push_back(1.3);
 	    AutoDiff x3(3.9,seed_x3);
     	AutoDiff sum = x2 + x3;
-        FAIL() << "Expected std::out_of_range";
+        FAIL() << "Expected std::invalid_argument";
     }
-    catch(std::out_of_range const & err) {
+    catch(std::invalid_argument const & err) {
         EXPECT_EQ(err.what(),std::string("Seed vectors dimension not matched!"));
     }
 }
@@ -235,9 +236,9 @@ TEST(OPERATOR,MINUSEQUAL){
 	    seed_x3.push_back(1.3);
 	    AutoDiff x3(3.9,seed_x3);
     	x2 -= x3;
-        FAIL() << "Expected std::out_of_range";
+        FAIL() << "Expected std::invalid_argument";
     }
-    catch(std::out_of_range const & err) {
+    catch(std::invalid_argument const & err) {
         EXPECT_EQ(err.what(),std::string("Seed vectors dimension not matched!"));
     }
 }
@@ -302,9 +303,9 @@ TEST(OPERATOR,MINUS){
 	    seed_x3.push_back(1.3);
 	    AutoDiff x3(3.9,seed_x3);
     	AutoDiff diff = x3 - x2;
-        FAIL() << "Expected std::out_of_range";
+        FAIL() << "Expected std::invalid_argument";
     }
-    catch(std::out_of_range const & err) {
+    catch(std::invalid_argument const & err) {
         EXPECT_EQ(err.what(),std::string("Seed vectors dimension not matched!"));
     }
 }
@@ -381,14 +382,15 @@ TEST(OPERATOR,TIMESEQUAL){
     EXPECT_NEAR(x2.gradient().at(0),seed_x2.at(0),DTOL);
     EXPECT_NEAR(x2.gradient().at(1),seed_x2.at(1),DTOL);
 
+    // test error msg
     try {
     	std::vector<double> seed_x3;
 	    seed_x3.push_back(1.3);
 	    AutoDiff x3(3.9,seed_x3);
     	x3 *= x2;
-        FAIL() << "Expected std::out_of_range";
+        FAIL() << "Expected std::invalid_argument";
     }
-    catch(std::out_of_range const & err) {
+    catch(std::invalid_argument const & err) {
         EXPECT_EQ(err.what(),std::string("Seed vectors dimension not matched!"));
     }
 }
@@ -414,14 +416,15 @@ TEST(OPERATOR,TIMES){
     EXPECT_NEAR(prod.gradient().at(0),-3.0,DTOL);
     EXPECT_NEAR(prod.gradient().at(1),-2.6,DTOL);
 
+    // test error msg
     try {
     	std::vector<double> seed_x3;
 	    seed_x3.push_back(1.3);
 	    AutoDiff x3(3.9,seed_x3);
     	AutoDiff prod = x3 * x2;
-        FAIL() << "Expected std::out_of_range";
+        FAIL() << "Expected std::invalid_argument";
     }
-    catch(std::out_of_range const & err) {
+    catch(std::invalid_argument const & err) {
         EXPECT_EQ(err.what(),std::string("Seed vectors dimension not matched!"));
     }
 }
@@ -501,14 +504,15 @@ TEST(OPERATOR,QUOEQUAL){
     EXPECT_NEAR(x2.gradient().at(0),0.0,DTOL);
     EXPECT_NEAR(x2.gradient().at(1),5.0,DTOL);
 
+    // test error msg
     try {
     	std::vector<double> seed_x3;
 	    seed_x3.push_back(1.3);
 	    AutoDiff x3(3.9,seed_x3);
     	x3 /= x2;
-        FAIL() << "Expected std::out_of_range";
+        FAIL() << "Expected std::invalid_argument";
     }
-    catch(std::out_of_range const & err) {
+    catch(std::invalid_argument const & err) {
         EXPECT_EQ(err.what(),std::string("Seed vectors dimension not matched!"));
     }
 
@@ -534,14 +538,15 @@ TEST(OPERATOR,QUO){
     EXPECT_NEAR(quo.gradient().at(0),1.0/9,DTOL);
     EXPECT_NEAR(quo.gradient().at(1),-10.0/81,DTOL);
 
+    // test error msg
     try {
     	std::vector<double> seed_x3;
 	    seed_x3.push_back(1.3);
 	    AutoDiff x3(3.9,seed_x3);
     	AutoDiff quo = x3 / x2;
-        FAIL() << "Expected std::out_of_range";
+        FAIL() << "Expected std::invalid_argument";
     }
-    catch(std::out_of_range const & err) {
+    catch(std::invalid_argument const & err) {
         EXPECT_EQ(err.what(),std::string("Seed vectors dimension not matched!"));
     }
 }
@@ -619,6 +624,57 @@ TEST(MATH,POW_TWOVAR){
     EXPECT_EQ(powz.countVar(),2);
 	EXPECT_NEAR(powz.gradient().at(0),2.0*(0.5)*4+(0.25)*2.3*log(0.5), DTOL);
 	EXPECT_NEAR(powz.gradient().at(1),2.0*0.5+(0.25)*3*log(0.5), DTOL);
+
+	// test error msg
+	try {
+    	std::vector<double> seed_x1;
+	    seed_x1.push_back(1.3);
+	    seed_x1.push_back(1.3);
+	    AutoDiff x1(3.9,seed_x1);
+	    std::vector<double> seed_x2;
+	    seed_x2.push_back(1.0);
+	    AutoDiff x2(1.8,seed_x2);
+    	
+    	AutoDiff powx = pow(x1, x2);
+        FAIL() << "Expected std::invalid_argument";
+    }
+    catch(std::invalid_argument const & err) {
+        EXPECT_EQ(err.what(),std::string("Seed vectors dimension not matched!"));
+    }
+    
+    try {
+    	std::vector<double> seed_y1;
+	    seed_y1.push_back(1.3);
+	    seed_y1.push_back(1.3);
+	    AutoDiff y1(-3.9,seed_y1);
+	    std::vector<double> seed_y2;
+	    seed_y2.push_back(1.0);
+	    seed_y2.push_back(1.0);
+	    AutoDiff y2(1.8,seed_y2);
+    	
+    	AutoDiff powy = pow(y1, y2);
+        FAIL() << "Expected std::domain_error";
+    }
+    catch(std::domain_error const & err) {
+        EXPECT_EQ(err.what(),std::string("Value less than 0! NaN occurs!"));
+    }
+    
+    try {
+    	std::vector<double> seed_w1;
+	    seed_w1.push_back(1.3);
+	    seed_w1.push_back(1.3);
+	    AutoDiff w1(0,seed_w1);
+	    std::vector<double> seed_w2;
+	    seed_w2.push_back(1.0);
+	    seed_w2.push_back(1.0);
+	    AutoDiff w2(1.8,seed_w2);
+    	
+    	AutoDiff poww = pow(w1, w2);
+        FAIL() << "Expected std::range_error";
+    }
+    catch(std::range_error const & err) {
+        EXPECT_EQ(err.what(),std::string("Value equals 0!"));
+    }
 }
 
 // double ^ AutoDiff (e.g. 2^x)
@@ -633,6 +689,33 @@ TEST(MATH,RIGHTPOW){
 	EXPECT_EQ(powx.gradient().size(),1);
     EXPECT_EQ(powx.countVar(),1);
     EXPECT_NEAR(powx.gradient().at(0),pow(2.0, 0.5)*4.0*log(2.0), DTOL);
+
+    // test error msg
+    try {
+    	std::vector<double> seed_y1;
+	    seed_y1.push_back(1.3);
+	    seed_y1.push_back(1.3);
+	    AutoDiff y1(3.9,seed_y1);
+    	
+    	AutoDiff powy = pow(-0.2, y1);
+        FAIL() << "Expected std::domain_error";
+    }
+    catch(std::domain_error const & err) {
+        EXPECT_EQ(err.what(),std::string("Value less than 0! NaN occurs!"));
+    }
+    
+    try {
+    	std::vector<double> seed_w1;
+	    seed_w1.push_back(1.3);
+	    seed_w1.push_back(1.3);
+	    AutoDiff w1(3.8,seed_w1);
+    	
+    	AutoDiff poww = pow(0, w1);
+        FAIL() << "Expected std::range_error";
+    }
+    catch(std::range_error const & err) {
+        EXPECT_EQ(err.what(),std::string("Value equals 0!"));
+    }
 }
 
 /////////////////////////////////////////// EXP TESTS
@@ -661,11 +744,94 @@ TEST(MATH,LOG){
     EXPECT_EQ(logx.countVar(),1);
 	EXPECT_NEAR(logx.dval_wrt(0), (1/(0.5)) * 4.0, DTOL);
 	EXPECT_NEAR(logx.gradient().at(0), (1/(0.5)) * 4.0, DTOL);
+
+	// test error msg
+	try {
+    	std::vector<double> seed_x1;
+	    seed_x1.push_back(1.3);
+	    AutoDiff x1(-1.0,seed_x1);
+    	AutoDiff logx1 = log(x1);
+        FAIL() << "Expected std::domain_error";
+    }
+    catch(std::domain_error const & err) {
+        EXPECT_EQ(err.what(),std::string("Value less than 0! NaN occurs!"));
+    }
+
+    try {
+    	std::vector<double> seed_w1;
+	    seed_w1.push_back(1.3);
+	    seed_w1.push_back(1.3);
+	    AutoDiff w1(0,seed_w1);
+    	
+    	AutoDiff logw1 = log(w1);
+        FAIL() << "Expected std::range_error";
+    }
+    catch(std::range_error const & err) {
+        EXPECT_EQ(err.what(),std::string("Value equals 0!"));
+    }
+}
+
+TEST(MATH,LOG10){
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	AutoDiff x(0.5,seed_x);
+	AutoDiff logx = log10(x);
+	EXPECT_NEAR(logx.val(),log10(0.5),DTOL);
+	EXPECT_EQ(logx.gradient().size(),1);
+    EXPECT_EQ(logx.countVar(),1);
+	EXPECT_NEAR(logx.dval_wrt(0), (1/(0.5)) * 4.0/log(10), DTOL);
+	EXPECT_NEAR(logx.gradient().at(0), (1/(0.5)) * 4.0/log(10), DTOL);
+
+	// test error msg
+	try {
+    	std::vector<double> seed_x1;
+	    seed_x1.push_back(1.3);
+	    AutoDiff x1(-1.0,seed_x1);
+    	AutoDiff logx1 = log(x1);
+        FAIL() << "Expected std::domain_error";
+    }
+    catch(std::domain_error const & err) {
+        EXPECT_EQ(err.what(),std::string("Value less than 0! NaN occurs!"));
+    }
+}
+
+/////////////////////////////////////////// PRINT
+
+TEST(IOSTREAM, PRINT){
+	// single variable
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	AutoDiff x(0.5,seed_x);
+	testing::internal::CaptureStdout();
+	std::cout << x;
+	string output_x = testing::internal::GetCapturedStdout();
+	string expected_x = "Information of AutoDiff object: \nValue at 0.5. \
+1 variable(s) in total.\n   0th variable: dval = 4\n";
+	// std::cout << output_x;
+	// std::cout << expected_x;
+	EXPECT_TRUE(output_x.compare(expected_x)==0);
+
+	// three variables
+	std::vector<double> seed_y;
+	seed_y.push_back(4.0);
+	seed_y.push_back(5.0);
+	seed_y.push_back(6.0);
+	AutoDiff y(0.5,seed_y);
+	testing::internal::CaptureStdout();
+	std::cout << y;
+	string output_y = testing::internal::GetCapturedStdout();
+	string expected_y = "Information of AutoDiff object: \nValue at 0.5. \
+3 variable(s) in total.\n   0th variable: dval = 4\n   1th variable: dval = 5\n   2th variable: dval = 6\n";
+	// std::cout << output_y;
+	// std::cout << expected_y;
+	EXPECT_TRUE(output_y.compare(expected_y)==0);
+
+	// three variables with names
 }
 
 /*
 /////////////////////////////////////////// TRIG FUNCTION TESTS
-// sin AutoDiff
+// sin AutoDiff 
 TEST(MATH,SIN){
 	AutoDiff x(-0.5,4.0);
 	AutoDiff sinx = sin(x);
@@ -687,8 +853,8 @@ TEST(MATH,TAN){
 	AutoDiff tanx = tan(x);
 	EXPECT_NEAR(tanx.getVal(),tan(-0.5),DTOL);
 	EXPECT_NEAR(tanx.getDer(), (1/pow(cos(-0.5), 2)) * 4.0,DTOL);
-}
-
+}*/
+/*
 // arcsin AutoDiff
 TEST(MATH,ARCSIN){
 	AutoDiff x(-0.5,4.0);
