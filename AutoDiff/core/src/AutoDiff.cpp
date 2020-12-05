@@ -45,14 +45,14 @@ AutoDiff operator + (double lhs, const AutoDiff &rhs) {
 }
 
 // overload AutoDiff + AutoDiff
-AutoDiff operator + ( const AutoDiff &a, const AutoDiff &b )
+AutoDiff operator + ( const AutoDiff &lhs, const AutoDiff &rhs )
 {   
-    if(a.countVar()!=b.countVar()) throw std::out_of_range("Index out of range!");
+    if(lhs.countVar()!=rhs.countVar()) throw std::out_of_range("Index out of range!");
     std::vector<double> grad;
-    for(int i=0;i<a.countVar();i++){
-      grad.push_back(a.dval_wrt(i)+b.dval_wrt(i));
+    for(int i=0;i<lhs.countVar();i++){
+      grad.push_back(lhs.dval_wrt(i)+rhs.dval_wrt(i));
     }
-    return AutoDiff(a.val()+b.val(),grad);
+    return AutoDiff(lhs.val()+rhs.val(),grad);
 }
 
 // overload AutoDiff + double
@@ -60,43 +60,60 @@ AutoDiff operator + ( const AutoDiff &lhs, double rhs )
 {
     return AutoDiff(lhs.val()+rhs, lhs.gradient());
 }
-/*
+
 /////////////////////// NEGATION
 // overload unary negation (- AutoDiff)
 AutoDiff operator -(const AutoDiff &obj) {
-  return AutoDiff(-obj.getVal(),-obj.getDer());
+  std::vector<double> grad;
+  for(int i=0; i<obj.countVar();i++){
+    grad.push_back(-obj.gradient()[i]);
+  }
+  return AutoDiff(-obj.val(),grad);
 };
 
 // overload AutoDiff -= double
 AutoDiff AutoDiff::operator -= ( double obj ) {
-  val -= obj;
+  _val -= obj;
   return *this;
 };
 
 // overload AutoDiff -= AutoDiff
 AutoDiff AutoDiff::operator -= (const AutoDiff &obj) {
-  val -= obj.getVal();
-  der -= obj.getDer();
-    return *this;
+  _val -= obj.val();
+  
+  if( obj.countVar()!= _num_vars ){
+    throw std::string("Seed vector dimension not matched! One is ")\
+            + std::to_string(obj.countVar()) + std::string(", another is ")\
+            + std::to_string(_num_vars);
+  }
+  for(int i=0; i<_num_vars;i++){
+    _grad[i] -= obj.gradient().at(i);
+  }
+  return *this;
 }
 
 /////////////////////// -
 // overload AutoDiff - AutoDiff
 AutoDiff operator - ( const AutoDiff &lhs, const AutoDiff &rhs ) {
-  return AutoDiff(lhs.getVal()-rhs.getVal(),lhs.getDer()-rhs.getDer());
+  if(lhs.countVar()!=rhs.countVar()) throw std::out_of_range("Index out of range!");
+    std::vector<double> grad;
+    for(int i=0;i<lhs.countVar();i++){
+      grad.push_back(lhs.dval_wrt(i)-rhs.dval_wrt(i));
+    }
+    return AutoDiff(lhs.val()-rhs.val(),grad);
 };
 
 // overload AutoDiff - double
 AutoDiff operator - ( const AutoDiff &lhs, double rhs ) {
-  return AutoDiff(lhs.getVal()-rhs,lhs.getDer());
+  return AutoDiff(lhs.val()-rhs,lhs.gradient());
 };
 
 // overload double - AutoDiff
 AutoDiff operator - (double lhs, const AutoDiff &rhs) {
-    return - rhs + lhs;
+    return -rhs + lhs;
 }
 
-
+/*
 /////////////////////// *
 // overload AutoDiff *= AutoDiff
 AutoDiff AutoDiff::operator *= ( const AutoDiff &obj) {
