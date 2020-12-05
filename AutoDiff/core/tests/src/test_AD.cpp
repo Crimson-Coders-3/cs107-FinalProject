@@ -576,52 +576,94 @@ TEST(OPERATOR,QUOBEFORE){
     EXPECT_NEAR(quo.gradient().at(0),-9.0/4,DTOL);
 }
 
-/*
+/////////////////////////////////////////// POW TESTS
+// AutoDiff ^ double (e.g. x^2)
+TEST(MATH,LEFTPOW){
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	AutoDiff x(-0.5,seed_x);
+
+	AutoDiff powx = pow(x, 2.0);
+	EXPECT_NEAR(powx.val(),pow(-0.5, 2.0),DTOL);
+	EXPECT_NEAR(powx.dval_wrt(0),4.0*2.0*pow(-0.5,1.0), DTOL);
+	EXPECT_EQ(powx.gradient().size(),1);
+    EXPECT_EQ(powx.countVar(),1);
+	EXPECT_NEAR(powx.gradient().at(0),4.0*2.0*pow(-0.5, 1.0), DTOL);
+}
+
+// AutoDiff & AutoDiff (e.g. x^y)
+TEST(MATH,POW_TWOVAR){
+	std::vector<double> seed_z1;
+	seed_z1.push_back(4.0);
+	seed_z1.push_back(1.0);
+	
+	std::vector<double> seed_z2;
+	seed_z2.push_back(2.3);
+	seed_z2.push_back(3.0);
+
+	AutoDiff z1(0.5,seed_z1);
+	AutoDiff z2(2.0, seed_z2);
+
+	// powxy = (4x+y)^(2.3x+3y)
+	// dval with repect to x: (2.3x+3y)*(4x+y)^(2.3x+3y-1)*4+(4x+y)^(2.3x+3y)*2.3*log(0.5)
+	//                        ~~~~~~~~~~                      ~~~~     
+	//                            2.0                          0.5    
+	//                                2.0*(0.5)*4+(0.25)*2.3*log(0.5)  
+	// dval with repect to y: (2.3x+3y)*(4x+y)^(2.3x+3y-1)+(4x+y)^(2.3x+3y)*3*log(0.5)
+	//                                2.0*0.5+(0.25)*3*log(0.5)
+	AutoDiff powz = pow(z1, z2);
+	EXPECT_NEAR(powz.val(),pow(0.5, 2.0),DTOL);
+	EXPECT_NEAR(powz.dval_wrt(0),2.0*(0.5)*4+(0.25)*2.3*log(0.5), DTOL);
+	EXPECT_NEAR(powz.dval_wrt(1),2.0*0.5+(0.25)*3*log(0.5), DTOL);
+	EXPECT_EQ(powz.gradient().size(),2);
+    EXPECT_EQ(powz.countVar(),2);
+	EXPECT_NEAR(powz.gradient().at(0),2.0*(0.5)*4+(0.25)*2.3*log(0.5), DTOL);
+	EXPECT_NEAR(powz.gradient().at(1),2.0*0.5+(0.25)*3*log(0.5), DTOL);
+}
+
+// double ^ AutoDiff (e.g. 2^x)
+TEST(MATH,RIGHTPOW){
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	AutoDiff x(0.5,seed_x);
+
+	AutoDiff powx = pow(2.0, x);
+	EXPECT_NEAR(powx.val(),pow(2.0, 0.5),DTOL);
+	EXPECT_NEAR(powx.dval_wrt(0),pow(2.0, 0.5)*4.0*log(2.0), DTOL);
+	EXPECT_EQ(powx.gradient().size(),1);
+    EXPECT_EQ(powx.countVar(),1);
+    EXPECT_NEAR(powx.gradient().at(0),pow(2.0, 0.5)*4.0*log(2.0), DTOL);
+}
+
 /////////////////////////////////////////// EXP TESTS
 TEST(MATH,EXP){
-	AutoDiff x(-0.5,4.0);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	AutoDiff x(0.5,seed_x);
+
 	AutoDiff expx = exp(x);
-	EXPECT_NEAR(expx.getVal(),exp(-0.5),DTOL);
-	EXPECT_NEAR(expx.getDer(),exp(-0.5) * 4.0, DTOL);
+	EXPECT_NEAR(expx.val(),exp(0.5),DTOL);
+	EXPECT_EQ(expx.gradient().size(),1);
+    EXPECT_EQ(expx.countVar(),1);
+	EXPECT_NEAR(expx.dval_wrt(0), exp(0.5) * 4.0, DTOL);
+	EXPECT_NEAR(expx.gradient().at(0), exp(0.5) * 4.0, DTOL);
 }
 
 
 /////////////////////////////////////////// LOG TESTS
 TEST(MATH,LOG){
-	AutoDiff x(0.5,4.0);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	AutoDiff x(0.5,seed_x);
 	AutoDiff logx = log(x);
-	EXPECT_NEAR(logx.getVal(),log(0.5),DTOL);
-	EXPECT_NEAR(logx.getDer(),(1/(0.5)) * 4.0, DTOL);
+	EXPECT_NEAR(logx.val(),log(0.5),DTOL);
+	EXPECT_EQ(logx.gradient().size(),1);
+    EXPECT_EQ(logx.countVar(),1);
+	EXPECT_NEAR(logx.dval_wrt(0), (1/(0.5)) * 4.0, DTOL);
+	EXPECT_NEAR(logx.gradient().at(0), (1/(0.5)) * 4.0, DTOL);
 }
 
-
-/////////////////////////////////////////// POW TESTS
-// AutoDiff ^ double (e.g. x^2)
-TEST(MATH,LEFTPOW){
-	AutoDiff x(-0.5,4.0);
-	AutoDiff powx = pow(x, 2.0);
-	EXPECT_NEAR(powx.getVal(),pow(-0.5, 2.0),DTOL);
-	EXPECT_NEAR(powx.getDer(),4.0*2.0*pow(-0.5, 1.0), DTOL);
-}
-
-// AutoDiff & AutoDiff (e.g. x^y)
-TEST(MATH,POW_TWOVAR){
-	AutoDiff x(0.5,4.0);
-	AutoDiff y(2.0,3.0);
-	AutoDiff powxy = pow(x, y);
-	EXPECT_NEAR(powxy.getVal(),pow(0.5, 2.0),DTOL);
-	EXPECT_NEAR(powxy.getDer(),pow(0.5, 2.0) * 3.0 * log(0.5) + pow(0.5, 2.0 - 1.0) * 2.0 * 4.0, DTOL);
-}
-
-// double ^ AutoDiff (e.g. 2^x)
-TEST(MATH,RIGHTPOW){
-	AutoDiff x(-0.5,4.0);
-	AutoDiff powx = pow(2.0, x);
-	EXPECT_NEAR(powx.getVal(),pow(2.0, -0.5),DTOL);
-	EXPECT_NEAR(powx.getDer(),log(2.0) * 4.0 * pow(2, -0.5), DTOL);
-}
-
-
+/*
 /////////////////////////////////////////// TRIG FUNCTION TESTS
 // sin AutoDiff
 TEST(MATH,SIN){
