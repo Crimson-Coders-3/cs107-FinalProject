@@ -72,6 +72,7 @@ class AutoDiff {
    void print();
 }; // close AutoDiff class
 
+
 AutoDiff operator + ( const AutoDiff &lhs, const AutoDiff &rhs );
 AutoDiff operator + ( const AutoDiff &lhs, double rhs );
 AutoDiff operator + ( double lhs, const AutoDiff &rhs);
