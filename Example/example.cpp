@@ -1,4 +1,4 @@
-#include "include/AutoDiff.h"
+#include "../AutoDiff/include/AutoDiff.h"
 #include <math.h>
 #include <typeinfo>
 #include <iostream>
