@@ -9,7 +9,6 @@
 
 using namespace std;
 
-template <typename double>
 class Dual{
 
     public:
@@ -18,23 +17,23 @@ class Dual{
         Dual();
         Dual(double real);
         Dual(double real, double dual);
-        Dual(const Dual<double>& rhs);
+        Dual(const Dual& rhs);
         
         /* getters */
         double real() const;
         double dual() const;
   
-        Dual<double>& operator=(double rhs);
-        Dual<double>& operator+=(double rhs); 
-        Dual<double>& operator-=(double rhs);  
-        Dual<double>& operator*=(double rhs); 
-        Dual<double>& operator/=(double rhs);
+        Dual& operator=(double rhs);
+        Dual& operator+=(double rhs); 
+        Dual& operator-=(double rhs);  
+        Dual& operator*=(double rhs); 
+        Dual& operator/=(double rhs);
         
-        Dual<double>& operator=(const Dual<double>& rhs);
-        Dual<double>& operator+=(const Dual<double>& rhs);
-        Dual<double>& operator-=(const Dual<double>& rhs); 
-        Dual<double>& operator*=(const Dual<double>& rhs);
-        Dual<double>& operator/=(const Dual<double>& rhs);
+        Dual& operator=(const Dual& rhs);
+        Dual& operator+=(const Dual& rhs);
+        Dual& operator-=(const Dual& rhs); 
+        Dual& operator*=(const Dual& rhs);
+        Dual& operator/=(const Dual& rhs);
 
     private:
         double adReal;
@@ -42,67 +41,67 @@ class Dual{
     };
 
     
-    ostream& operator<<(ostream& os, const Dual<double>& rhs);
+    ostream& operator<<(ostream& os, const Dual& rhs);
     
-    bool operator==(const Dual<double>& a, double b);
-    bool operator==(double a, const Dual<double>& b);
-    bool operator==(const Dual<double>& a, const Dual<double>& b);
+    bool operator==(const Dual& a, double b);
+    bool operator==(double a, const Dual& b);
+    bool operator==(const Dual& a, const Dual& b);
 
-    bool operator!=(const Dual<double>& a, double b);
-    bool operator!=(double a, const Dual<double>& b);
-    bool operator!=(const Dual<double>& a, const Dual<double>& b);
+    bool operator!=(const Dual& a, double b);
+    bool operator!=(double a, const Dual& b);
+    bool operator!=(const Dual& a, const Dual& b);
   
-    bool operator<(const Dual<double>& a, double b);
-    bool operator<(double a, const Dual<double>& b);
-    bool operator<(const Dual<double>& a, const Dual<double>& b);
+    bool operator<(const Dual& a, double b);
+    bool operator<(double a, const Dual& b);
+    bool operator<(const Dual& a, const Dual& b);
 
-    bool operator<=(const Dual<double>& a, double b);
-    bool operator<=(double a, const Dual<double>& b);
-    bool operator<=(const Dual<double>& a, const Dual<double>& b);
+    bool operator<=(const Dual& a, double b);
+    bool operator<=(double a, const Dual& b);
+    bool operator<=(const Dual& a, const Dual& b);
 
-    bool operator>(const Dual<double>& a, double b);
-    bool operator>(double a, const Dual<double>& b);
-    bool operator>(const Dual<double>& a, const Dual<double>& b);
+    bool operator>(const Dual& a, double b);
+    bool operator>(double a, const Dual& b);
+    bool operator>(const Dual& a, const Dual& b);
 
-    bool operator>=(const Dual<double>& a, double b);
-    bool operator>=(double a, const Dual<double>& b);
-    bool operator>=(const Dual<double>& a, const Dual<double>& b);
+    bool operator>=(const Dual& a, double b);
+    bool operator>=(double a, const Dual& b);
+    bool operator>=(const Dual& a, const Dual& b);
   
     // negate sign
-    Dual<double> operator-(const Dual<double>& rhs);
+    Dual operator-(const Dual& rhs);
     
-    Dual<double> operator+(const Dual<double>& lhs, double rhs);
-    Dual<double> operator-(const Dual<double>& lhs, double rhs);
-    Dual<double> operator*(const Dual<double>& lhs, double rhs);
-    Dual<double> operator/(const Dual<double>& lhs, double rhs);
+    Dual operator+(const Dual& lhs, double rhs);
+    Dual operator-(const Dual& lhs, double rhs);
+    Dual operator*(const Dual& lhs, double rhs);
+    Dual operator/(const Dual& lhs, double rhs);
 
-    Dual<double> operator-(double lhs, const Dual<double>& rhs);
-    Dual<double> operator+(double lhs, const Dual<double>& rhs);
-    Dual<double> operator*(double lhs, const Dual<double>& rhs);
-    Dual<double> operator/(double lhs, const Dual<double>& rhs);
+    Dual operator-(double lhs, const Dual& rhs);
+    Dual operator+(double lhs, const Dual& rhs);
+    Dual operator*(double lhs, const Dual& rhs);
+    Dual operator/(double lhs, const Dual& rhs);
 
-    // can only allow Dual<int> + Dual<int>, Dual<float> + Dual<float>, Dual<double> + Dual<double>
-    // to do: Dual<int> + Dual<double> ...
-    Dual<double> operator-(const Dual<double>& a, const Dual<double>& b);
-    Dual<double> operator+(const Dual<double>& a, const Dual<double>& b);
-    Dual<double> operator*(const Dual<double>& a, const Dual<double>& b);
-    Dual<double> operator/(const Dual<double>& a, const Dual<double>& b);
+    // can only allow Dual<int> + Dual<int>, Dual<float> + Dual<float>, Dual + Dual
+    // to do: Dual<int> + Dual ...
+    Dual operator-(const Dual& a, const Dual& b);
+    Dual operator+(const Dual& a, const Dual& b);
+    Dual operator*(const Dual& a, const Dual& b);
+    Dual operator/(const Dual& a, const Dual& b);
 
     // math operators
-    Dual<double> acos(const Dual<double>& z);
-    Dual<double> asin(const Dual<double>& z);
-    Dual<double> atan(const Dual<double>& z);
-    Dual<double> atan2(const Dual<double>& y, const Dual<double>& x);
-    Dual<double> cos(const Dual<double>& z);
-    Dual<double> cosh(const Dual<double>& z);
-    Dual<double> exp(const Dual<double>& z);
-    Dual<double> log(const Dual<double>& z);
-    Dual<double> log10(const Dual<double>& z);
-    Dual<double> pow(const Dual<double>& x, const Dual<double>& y);
-    Dual<double> sin(const Dual<double>& z);
-    Dual<double> sinh(const Dual<double>& z);
-    Dual<double> sqrt(const Dual<double>& z);
-    Dual<double> tan(const Dual<double>& z);
-    Dual<double> tanh(const Dual<double>& z);
+    Dual acos(const Dual& z);
+    Dual asin(const Dual& z);
+    Dual atan(const Dual& z);
+    Dual atan2(const Dual& y, const Dual& x);
+    Dual cos(const Dual& z);
+    Dual cosh(const Dual& z);
+    Dual exp(const Dual& z);
+    Dual log(const Dual& z);
+    Dual log10(const Dual& z);
+    Dual pow(const Dual& x, const Dual& y);
+    Dual sin(const Dual& z);
+    Dual sinh(const Dual& z);
+    Dual sqrt(const Dual& z);
+    Dual tan(const Dual& z);
+    Dual tanh(const Dual& z);
     
 #endif

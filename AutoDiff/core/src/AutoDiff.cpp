@@ -20,16 +20,16 @@ AutoDiff::AutoDiff(double a, double b) {
 /////////////////////////////////////////// OVERLOAD OPERATORS
 
 /////////////////////// +
-// overload autodiff + autodiff
+// overload AutoDiff += AutoDiff
 AutoDiff AutoDiff::operator += (const AutoDiff &obj) {
   val += obj.getVal();
   der += obj.getDer();
   return *this;
 };
 
-// overload autodiff + double
-AutoDiff AutoDiff::operator += ( double a ) {
-  val += a;
+// overload AutoDiff += double
+AutoDiff AutoDiff::operator += ( double obj ) {
+  val += obj;
   return *this;
 };
 
@@ -38,38 +38,46 @@ AutoDiff operator + (double lhs, const AutoDiff &rhs) {
     return AutoDiff(lhs+rhs.getVal(),rhs.getDer());
 }
 
+// overload AutoDiff + AutoDiff
+AutoDiff operator + ( const AutoDiff &a, const AutoDiff &b )
+{
+    return AutoDiff(a.getVal()+b.getVal(),a.getDer()+b.getDer());
+}
+
+// overload AutoDiff + double
+AutoDiff operator + ( const AutoDiff &lhs, double rhs )
+{
+    return AutoDiff(lhs.getVal()+rhs, lhs.getDer());
+}
 
 /////////////////////// NEGATION
-// overload unary negation (- autodiff)
-AutoDiff AutoDiff::operator - () {
-  AutoDiff a = AutoDiff(0.0);
-
-  a.val = -val;
-  a.der = -der;
-
-  return a;
+// overload unary negation (- AutoDiff)
+AutoDiff operator -(const AutoDiff &obj) {
+  return AutoDiff(-obj.getVal(),-obj.getDer());
 };
 
+// overload AutoDiff -= double
+AutoDiff AutoDiff::operator -= ( double obj ) {
+  val -= obj;
+  return *this;
+};
+
+// overload AutoDiff -= AutoDiff
+AutoDiff AutoDiff::operator -= (const AutoDiff &obj) {
+  val -= obj.getVal();
+  der -= obj.getDer();
+    return *this;
+}
 
 /////////////////////// -
-// overload autodiff - autodiff
-AutoDiff AutoDiff::operator - ( const AutoDiff &obj) {
-  AutoDiff c = AutoDiff(0.0);
-
-  c.val = val - obj.getVal();
-  c.der = der - obj.getDer();
-
-  return c;
+// overload AutoDiff - AutoDiff
+AutoDiff operator - ( const AutoDiff &lhs, const AutoDiff &rhs ) {
+  return AutoDiff(lhs.getVal()-rhs.getVal(),lhs.getDer()-rhs.getDer());
 };
 
-// overload autodiff - double
-AutoDiff AutoDiff::operator - ( double a ) {
-  AutoDiff c = AutoDiff(0.0);
-
-  c.val = val - a;
-  c.der = der;
-
-  return c;
+// overload AutoDiff - double
+AutoDiff operator - ( const AutoDiff &lhs, double rhs ) {
+  return AutoDiff(lhs.getVal()-rhs,lhs.getDer());
 };
 
 // overload double - AutoDiff
@@ -79,24 +87,36 @@ AutoDiff operator - (double lhs, const AutoDiff &rhs) {
 
 
 /////////////////////// *
-// overload autodiff * autodiff
-AutoDiff AutoDiff::operator * ( const AutoDiff &obj) {
-  AutoDiff c = AutoDiff(0.0);
+// overload AutoDiff *= AutoDiff
+AutoDiff AutoDiff::operator *= ( const AutoDiff &obj) {
 
-  c.val = val * obj.val;
-  c.der = der * obj.val + val * obj.der;
+  double val = val * obj.getVal();
+  double der = der * obj.getVal() + val * obj.getDer();
+  val = val;
+  der = der;
 
-  return c;
+  return *this;
 };
 
-// overload autodiff * double
-AutoDiff AutoDiff::operator * ( double a ) {
-  AutoDiff c = AutoDiff(0.0);
+// overload AutoDiff *= double
+AutoDiff AutoDiff::operator *= ( double obj ) {
+  val *= obj;
+  der *= obj;
+  return *this;
+};
 
-  c.val = val * a;
-  c.der = der * a;
+// overload AutoDiff * AutoDiff
+AutoDiff operator * ( const AutoDiff &lhs, const AutoDiff &rhs ) {
 
-  return c;
+  double val = lhs.getVal() * rhs.getVal();
+  double der = lhs.getDer() * rhs.getVal() + lhs.getVal() * rhs.getDer();
+
+  return AutoDiff(val, der);
+};
+
+// overload AutoDiff * double
+AutoDiff operator * (const AutoDiff &lhs, double rhs ) {
+  return AutoDiff(lhs.getVal()*rhs,lhs.getDer()*rhs);
 };
 
 // overload double * AutoDiff
@@ -106,73 +126,74 @@ AutoDiff operator * (double lhs, const AutoDiff &rhs) {
 
 
 /////////////////////// /
-// overload autodiff / autodiff
-AutoDiff AutoDiff::operator / ( const AutoDiff &obj) {
-  AutoDiff c = AutoDiff(0.0);
 
-  c.val = val / obj.val;
-  c.der = (der * obj.val - val * obj.der) / std::pow(obj.val, 2.0);
+// overload AutoDiff /= AutoDiff
+AutoDiff AutoDiff::operator /= ( const AutoDiff &obj) {
 
-  return c;
+  val = val / obj.getVal();
+  der = (der * obj.getVal() - val * obj.getDer()) / (val*val);
+
+  return *this;
 };
 
-// overload autodiff / double
-AutoDiff AutoDiff::operator / ( double a ) {
-  AutoDiff c = AutoDiff(0.0);
+// overload AutoDiff /= double
+AutoDiff AutoDiff::operator /= ( double obj ) {
+  val = val / obj;
 
-  c.val = val / a;
-  c.der = der / a;
+  return *this;
+};
 
-  return c;
+// overload AutoDiff / AutoDiff
+AutoDiff operator / ( const AutoDiff &lhs, const AutoDiff &rhs) {
+  return AutoDiff(lhs.getVal()/rhs.getVal(), (lhs.getDer()*rhs.getVal()-\
+    lhs.getVal()*rhs.getDer())/(rhs.getVal()*rhs.getVal()) );
+};
+
+// overload AutoDiff / double
+AutoDiff operator / ( const AutoDiff &lhs, double rhs ) {
+  return AutoDiff(lhs.getVal()/rhs, lhs.getDer()/rhs);
 };
 
 // overload double / AutoDiff
 AutoDiff operator / (double lhs, const AutoDiff &rhs) {
-    return pow(rhs, -1.0) * lhs;
+    return AutoDiff(lhs/rhs.getVal(), (-1)*(1/(rhs.getVal()*rhs.getVal()))*lhs*rhs.getDer());
 }
 
 
 /////////////////////// pow
-// autodiff ^ autodiff
-AutoDiff pow ( AutoDiff &a, const AutoDiff &b ) {
-  AutoDiff c = AutoDiff(0.0);
+// AutoDiff ^ AutoDiff
+AutoDiff pow ( const AutoDiff &lhs, const AutoDiff &rhs ) {
 
-  c.val = std::pow(a.val, b.val);
-  c.der = std::pow(a.val, b.val) * b.der * log(a.val) + std::pow(a.val, b.val - 1) * b.val * a.der;
+  double val = std::pow(lhs.getVal(), rhs.getVal());
+  double der = std::pow(lhs.getVal(), rhs.getVal()) * rhs.getDer() * log(lhs.getVal())\
+    + std::pow(lhs.getVal(), rhs.getVal() - 1) * rhs.getVal() * lhs.getDer();
 
-  return c;
+  return AutoDiff(val,der);
 };
 
-// autodiff ^ double
+// AutoDiff ^ double
 AutoDiff pow ( AutoDiff &obj, double a ) {
-  AutoDiff c = AutoDiff(0.0);
 
-  c.val = std::pow(obj.val, a);
-  c.der = a * std::pow(obj.val, a - 1) * obj.der;
+  double val = std::pow(obj.getVal(), a);
+  double der = a * std::pow(obj.getVal(), a - 1) * obj.getDer();
 
-  return c;
+  return AutoDiff(val,der);
 };
 
-// double ^ autodiff
+// double ^ AutoDiff
 AutoDiff pow (double lhs, const AutoDiff &rhs) {
-  AutoDiff c = AutoDiff(0.0);
+  
+  double val = std::pow(2, rhs.getVal());
+  double der = log(lhs) * rhs.getDer() * std::pow(2, rhs.getVal());
 
-  c.val = std::pow(2, rhs.val);
-  c.der = log(lhs) * rhs.der * std::pow(2, rhs.val);
-
-  return c;
+  return AutoDiff(val,der);
 };
 
 
 /////////////////////// exp
-// e ^ autodiff
+// e ^ AutoDiff
 AutoDiff exp ( AutoDiff &a ) {
-  AutoDiff c = AutoDiff(0.0);
-
-  c.val = exp(a.val);
-  c.der = exp(a.val) * a.der;
-
-  return c;
+  return AutoDiff(  exp(a.getVal()),exp(a.getVal()) * a.getDer() );
 };
 
 
