@@ -807,8 +807,6 @@ TEST(IOSTREAM, PRINT){
 	string output_x = testing::internal::GetCapturedStdout();
 	string expected_x = "Information of AutoDiff object: \nValue at 0.5. \
 1 variable(s) in total.\n   0th variable: dval = 4\n";
-	// std::cout << output_x;
-	// std::cout << expected_x;
 	EXPECT_TRUE(output_x.compare(expected_x)==0);
 
 	// three variables
@@ -822,39 +820,53 @@ TEST(IOSTREAM, PRINT){
 	string output_y = testing::internal::GetCapturedStdout();
 	string expected_y = "Information of AutoDiff object: \nValue at 0.5. \
 3 variable(s) in total.\n   0th variable: dval = 4\n   1th variable: dval = 5\n   2th variable: dval = 6\n";
-	// std::cout << output_y;
-	// std::cout << expected_y;
 	EXPECT_TRUE(output_y.compare(expected_y)==0);
-
-	// three variables with names
 }
 
-/*
+
 /////////////////////////////////////////// TRIG FUNCTION TESTS
 // sin AutoDiff 
 TEST(MATH,SIN){
-	AutoDiff x(-0.5,4.0);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	AutoDiff x(0.5,seed_x);
+
 	AutoDiff sinx = sin(x);
-	EXPECT_NEAR(sinx.getVal(),sin(-0.5),DTOL);
-	EXPECT_NEAR(sinx.getDer(),cos(-0.5)*4.0,DTOL);
+	EXPECT_NEAR(sinx.val(),sin(0.5),DTOL);
+	EXPECT_EQ(sinx.gradient().size(),1);
+    EXPECT_EQ(sinx.countVar(),1);
+	EXPECT_NEAR(sinx.dval_wrt(0), cos(0.5)*4.0, DTOL);
+	EXPECT_NEAR(sinx.gradient().at(0), cos(0.5)*4.0, DTOL);
 }
 
 // cos AutoDiff
 TEST(MATH,COS){
-	AutoDiff x(-0.5,4.0);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	AutoDiff x(0.5,seed_x);
+
 	AutoDiff cosx = cos(x);
-	EXPECT_NEAR(cosx.getVal(),cos(-0.5),DTOL);
-	EXPECT_NEAR(cosx.getDer(),-sin(-0.5)*4.0,DTOL);
+	EXPECT_NEAR(cosx.val(),cos(0.5),DTOL);
+	EXPECT_EQ(cosx.gradient().size(),1);
+    EXPECT_EQ(cosx.countVar(),1);
+	EXPECT_NEAR(cosx.dval_wrt(0), -sin(0.5)*4.0, DTOL);
+	EXPECT_NEAR(cosx.gradient().at(0), -sin(0.5)*4.0, DTOL);
 }
 
 // tan AutoDiff
 TEST(MATH,TAN){
-	AutoDiff x(-0.5,4.0);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	AutoDiff x(0.5,seed_x);
+
 	AutoDiff tanx = tan(x);
-	EXPECT_NEAR(tanx.getVal(),tan(-0.5),DTOL);
-	EXPECT_NEAR(tanx.getDer(), (1/pow(cos(-0.5), 2)) * 4.0,DTOL);
-}*/
-/*
+	EXPECT_NEAR(tanx.val(),tan(0.5),DTOL);
+	EXPECT_EQ(tanx.gradient().size(),1);
+    EXPECT_EQ(tanx.countVar(),1);
+	EXPECT_NEAR(tanx.dval_wrt(0), 4.0/(cos(0.5)*cos(0.5)), DTOL);
+	EXPECT_NEAR(tanx.gradient().at(0), 4.0/(cos(0.5)*cos(0.5)), DTOL);
+}
+
 // arcsin AutoDiff
 TEST(MATH,ARCSIN){
 	AutoDiff x(-0.5,4.0);
@@ -878,7 +890,7 @@ TEST(MATH,ARCTAN){
 	EXPECT_NEAR(arctanx.getVal(),atan(-0.5),DTOL);
 	EXPECT_NEAR(arctanx.getDer(), (1/(1+pow(-0.5, 2))) * 4.0,DTOL);
 }
-
+/*
 // sinh AutoDiff
 TEST(MATH,SINH){
 	AutoDiff x(-0.5,4.0);

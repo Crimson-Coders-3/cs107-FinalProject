@@ -13,9 +13,16 @@ AutoDiff::AutoDiff(double val, std::vector<double> seed) {
   _val = val;
   _grad = seed;
   _num_vars = seed.size();
+  _hasName = false;
 }
 
-
+AutoDiff::AutoDiff(double val, std::vector<double> seed, std::vector<std::string> var_names) {
+  _val = val;
+  _grad = seed;
+  _num_vars = seed.size();
+  _names = var_names;
+  _hasName = true;
+}
 
 /////////////////////////////////////////// OVERLOAD OPERATORS
 
@@ -388,31 +395,40 @@ std::ostream& operator<<(std::ostream& os, const AutoDiff& obj){
     } 
     return os;
 }
-/*
-AutoDiff sin(const AutoDiff &input)
+
+AutoDiff sin(const AutoDiff &obj)
 {
 
-    double val = sin( (input.getVal()));
-    double dv = cos(input.getVal()) * input.getDer();
-    return AutoDiff(val,dv);
+    double val = sin( obj.val() );
+    std::vector<double> grad;
+    for(int i = 0; i < obj.countVar(); i++){
+      grad.push_back( cos(obj.val()) * obj.gradient()[i] );
+    }
+    return AutoDiff(val,grad);
 }
 
-AutoDiff cos(const AutoDiff &input)
+AutoDiff cos(const AutoDiff &obj)
 {   
     
-    double val = cos(input.getVal());
-    double dv = -sin(input.getVal()) * input.getDer();
-    return AutoDiff(val,dv);
+    double val = cos( obj.val() );
+    std::vector<double> grad;
+    for(int i = 0; i < obj.countVar(); i++){
+      grad.push_back( -sin(obj.val()) * obj.gradient()[i] );
+    }
+    return AutoDiff(val,grad);
 }
 
-AutoDiff tan(const AutoDiff &input)
+AutoDiff tan(const AutoDiff &obj)
 {
     
-    double val = tan(input.getVal());
-    double dv = (1/pow(cos(input.getVal()), 2)) * input.getDer();
-    return AutoDiff(val,dv);
+    double val = tan( obj.val() );
+    std::vector<double> grad;
+    for(int i = 0; i < obj.countVar(); i++){
+      grad.push_back( 1/pow(cos(obj.val()),2) * obj.gradient()[i] );
+    }
+    return AutoDiff(val,grad);
 }
-
+/*
 AutoDiff asin(const AutoDiff &input)
 {
     

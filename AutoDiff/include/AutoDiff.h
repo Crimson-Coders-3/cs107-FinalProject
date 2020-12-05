@@ -12,7 +12,10 @@ class AutoDiff {
    private:
       double _val;
       std::vector<double> _grad;
+      std::vector<std::string> _names;
+      bool _hasName;
       int _num_vars;
+
 
    // public
    public:
@@ -21,6 +24,11 @@ class AutoDiff {
       //                      for y in f(x,y), seed = [0, 1]
       // seed vector does not need to be unit vector
       AutoDiff(double val, std::vector<double> seed);
+      // constructor
+      // seed vector example: for x in f(x,y), seed = [1, 0], var_names = ["x","y"]
+      //                      for y in f(x,y), seed = [0, 1], var_names = ["x","y"]
+      // in var_names, every name must be unique
+      AutoDiff(double val, std::vector<double> seed, std::vector<std::string> var_names);
 
 
    /////////////////////////////////////////// OVERLOAD OPERATORS
