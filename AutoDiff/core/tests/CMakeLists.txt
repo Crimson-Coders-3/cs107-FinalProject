@@ -29,7 +29,7 @@ add_test(NAME ${TEST_EXE}
 
 add_custom_command(
    TARGET ${TEST_EXE}
-   COMMENT "Run AutoDiff Unit Tests"
+   COMMENT "Run AutoDiff Tests"
    POST_BUILD
    COMMAND ${TEST_EXE}
 )

@@ -56,6 +56,7 @@ class AutoDiff {
    // overload autodiff / double
    AutoDiff operator /= ( double obj );
 
+   /////////////////////////////////////////// GETTER
    // get value
    double val() const;
 
@@ -68,6 +69,11 @@ class AutoDiff {
    // get total number of variables
    int countVar() const;
 
+   // get if variables have names, 
+   // e.g. represented by std::vector<std::string> {"x", "y","z"}
+   bool hasName() const;
+
+   /////////////////////////////////////////// SETTER
    // set value
    void setVal(double val);
 
@@ -77,11 +83,18 @@ class AutoDiff {
    // set dvals of all the variables
    void set_dval(std::vector<double> dvals);
 
+   // set name of a variable
+   void set_name(int index, std::string name);
+
+   // set name of all the variables
+   void set_name(std::vector<std::string> names);
+
 }; // close AutoDiff class
 
 /////////////////////////////////////////// PRINT value AND dvalue
 std::ostream& operator<<(std::ostream& os, const AutoDiff& obj);
 
+/////////////////////////////////////////// OVERLOAD MATH OPERATORS: + - * /
 AutoDiff operator + ( const AutoDiff &lhs, const AutoDiff &rhs );
 AutoDiff operator + ( const AutoDiff &lhs, double rhs );
 AutoDiff operator + ( double lhs, const AutoDiff &rhs);
@@ -96,6 +109,7 @@ AutoDiff operator / ( const AutoDiff &lhs, const AutoDiff &rhs );
 AutoDiff operator / ( const AutoDiff &lhs, double rhs );
 AutoDiff operator / ( double lhs, const AutoDiff &rhs);
 
+/////////////////////////////////////////// OVERLOAD MATH OPERATORS
 AutoDiff pow ( const AutoDiff &lhs, const AutoDiff &rhs );
 AutoDiff pow ( const AutoDiff &lhs, double rhs );
 AutoDiff pow ( double lhs, const AutoDiff &rhs);

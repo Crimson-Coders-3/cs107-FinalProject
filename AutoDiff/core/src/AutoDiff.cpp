@@ -383,6 +383,12 @@ std::vector<double> AutoDiff::gradient() const {
   return grad_copy;
 }
 
+// get if variables have names, 
+// e.g. represented by std::vector<std::string> {"x", "y","z"}
+bool AutoDiff::hasName() const {
+  return _hasName;
+}
+
 /////////////////////////////////////////// PRINT VAL AND DER
 
 std::ostream& operator<<(std::ostream& os, const AutoDiff& obj){

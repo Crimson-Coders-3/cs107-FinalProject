@@ -7,7 +7,8 @@ link_directories(${gtest_dir}/lib)
 file(GLOB TEST_H *.h *.hpp)
 
 set(TEST_SRC
-    test_AD.cpp
+    test_AD_unit.cpp 
+    test_AD_names.cpp
 )
 
 add_library(ADTest SHARED ${TEST_SRC} ${TEST_H})
