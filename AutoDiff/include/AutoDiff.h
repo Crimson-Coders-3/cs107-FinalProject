@@ -80,6 +80,9 @@ class AutoDiff {
    // e.g. represented by std::vector<std::string> {"x", "y","z"}
    bool hasName() const;
 
+   // get names of all variables
+   std::vector<std::string> getNames() const;
+
    /////////////////////////////////////////// SETTER
    // set value
    void setVal(double val);

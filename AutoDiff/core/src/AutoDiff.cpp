@@ -24,9 +24,21 @@ AutoDiff::AutoDiff(double val, std::vector<double> seed, std::vector<std::string
   _hasName = true;
 }
 
-/////////////////////////////////////////// OVERLOAD OPERATORS
+AutoDiff AutoDiff::operator =(const AutoDiff &obj) {
+  _val = obj.val();
+  _grad = obj.gradient();
+  _num_vars = obj.countVar();
+  if(obj.hasName()){
+    _names = obj.getNames();
+    _hasName = true;
+  } else {
+    _hasName = false;
+  }
+  return *this;
+}
 
-/////////////////////// +
+/////////////////////////////////////////// + OPERATORS
+
 // overload AutoDiff += AutoDiff
 AutoDiff AutoDiff::operator += (const AutoDiff &obj) {
   _val += obj.val();
@@ -52,8 +64,7 @@ AutoDiff operator + (double lhs, const AutoDiff &rhs) {
 }
 
 // overload AutoDiff + AutoDiff
-AutoDiff operator + ( const AutoDiff &lhs, const AutoDiff &rhs )
-{   
+AutoDiff operator + ( const AutoDiff &lhs, const AutoDiff &rhs ){   
     if(lhs.countVar()!=rhs.countVar()) {
       throw std::invalid_argument("Seed vectors dimension not matched!");
     }
@@ -65,12 +76,12 @@ AutoDiff operator + ( const AutoDiff &lhs, const AutoDiff &rhs )
 }
 
 // overload AutoDiff + double
-AutoDiff operator + ( const AutoDiff &lhs, double rhs )
-{
+AutoDiff operator + ( const AutoDiff &lhs, double rhs ){
     return AutoDiff(lhs.val()+rhs, lhs.gradient());
 }
 
-/////////////////////// NEGATION
+/////////////////////////////////////////// - OPERATORS
+
 // overload unary negation (- AutoDiff)
 AutoDiff operator -(const AutoDiff &obj) {
   std::vector<double> grad;
@@ -99,7 +110,6 @@ AutoDiff AutoDiff::operator -= (const AutoDiff &obj) {
   return *this;
 }
 
-/////////////////////// -
 // overload AutoDiff - AutoDiff
 AutoDiff operator - ( const AutoDiff &lhs, const AutoDiff &rhs ) {
   if(lhs.countVar()!=rhs.countVar()){
@@ -123,7 +133,8 @@ AutoDiff operator - (double lhs, const AutoDiff &rhs) {
     return -rhs + lhs;
 }
 
-/////////////////////// *
+/////////////////////////////////////////// * OPERATORS
+
 // overload AutoDiff *= AutoDiff
 AutoDiff AutoDiff::operator *= ( const AutoDiff &obj) {
   
@@ -182,7 +193,7 @@ AutoDiff operator * (double lhs, const AutoDiff &rhs) {
 }
 
 
-/////////////////////// /
+/////////////////////////////////////////// '/' OPERATORS
 
 // overload AutoDiff /= AutoDiff
 AutoDiff AutoDiff::operator /= ( const AutoDiff &obj) {
@@ -241,7 +252,8 @@ AutoDiff operator / (double lhs, const AutoDiff &rhs) {
 }
 
 
-/////////////////////// pow
+/////////////////////////////////////////// EXPONENT OPERATORS
+
 // AutoDiff ^ AutoDiff
 AutoDiff pow ( const AutoDiff &lhs, const AutoDiff &rhs ) {
   if(lhs.countVar()!=rhs.countVar()){
@@ -295,7 +307,6 @@ AutoDiff pow (double lhs, const AutoDiff &rhs) {
   return AutoDiff(val,grad);
 };
 
-/////////////////////// exp
 // e ^ AutoDiff
 AutoDiff exp ( AutoDiff &obj ) {
   
@@ -306,9 +317,9 @@ AutoDiff exp ( AutoDiff &obj ) {
   return AutoDiff(  exp(obj.val()), grad );
 };
 
-/////////////////////// log
-AutoDiff log(const AutoDiff &obj)
-{ 
+/////////////////////////////////////////// LOG OPERATORS
+
+AutoDiff log(const AutoDiff &obj){ 
     if(obj.val()<0){
       throw std::domain_error("Value less than 0! NaN occurs!");
     }
@@ -323,9 +334,7 @@ AutoDiff log(const AutoDiff &obj)
     return AutoDiff(val,grad);
 }
 
-/////////////////////// log
-AutoDiff log10(const AutoDiff &obj)
-{
+AutoDiff log10(const AutoDiff &obj) {
     
     if(obj.val()<0){
       throw std::domain_error("Value less than 0! NaN occurs!");
@@ -341,7 +350,7 @@ AutoDiff log10(const AutoDiff &obj)
     return AutoDiff(val,grad);
 }
 
-/////////////////////////////////////////// SET VAL / DER VARS
+/////////////////////////////////////////// SETTERS
 
 // set val
 void AutoDiff::setVal(double obj) {
@@ -359,7 +368,7 @@ void AutoDiff::set_dval(std::vector<double> dvals){
   _grad = dvals; 
 }
 
-/////////////////////////////////////////// VIEW  VAL / DVAL VARS
+/////////////////////////////////////////// GETTERS
 
 // get total number of variables
 int AutoDiff::countVar() const{
@@ -389,6 +398,12 @@ bool AutoDiff::hasName() const {
   return _hasName;
 }
 
+// get names of all variables
+std::vector<std::string> AutoDiff::getNames() const {
+  std::vector<std::string> names = _names;
+  return names;
+}
+
 /////////////////////////////////////////// PRINT VAL AND DER
 
 std::ostream& operator<<(std::ostream& os, const AutoDiff& obj){
@@ -402,8 +417,9 @@ std::ostream& operator<<(std::ostream& os, const AutoDiff& obj){
     return os;
 }
 
-AutoDiff sin(const AutoDiff &obj)
-{
+/////////////////////////////////////////// TRIGONOMETRIC FUNCTIONS
+
+AutoDiff sin(const AutoDiff &obj){
 
     double val = sin( obj.val() );
     std::vector<double> grad;
@@ -413,8 +429,7 @@ AutoDiff sin(const AutoDiff &obj)
     return AutoDiff(val,grad);
 }
 
-AutoDiff cos(const AutoDiff &obj)
-{   
+AutoDiff cos(const AutoDiff &obj){   
     
     double val = cos( obj.val() );
     std::vector<double> grad;
@@ -424,8 +439,7 @@ AutoDiff cos(const AutoDiff &obj)
     return AutoDiff(val,grad);
 }
 
-AutoDiff tan(const AutoDiff &obj)
-{
+AutoDiff tan(const AutoDiff &obj){
     
     double val = tan( obj.val() );
     std::vector<double> grad;
@@ -435,8 +449,7 @@ AutoDiff tan(const AutoDiff &obj)
     return AutoDiff(val,grad);
 }
 
-AutoDiff asin(const AutoDiff &obj)
-{
+AutoDiff asin(const AutoDiff &obj){
     
     double val = asin(obj.val());
     std::vector<double> grad;
@@ -446,8 +459,7 @@ AutoDiff asin(const AutoDiff &obj)
     return AutoDiff(val,grad);
 }
 
-AutoDiff acos(const AutoDiff &obj)
-{
+AutoDiff acos(const AutoDiff &obj){
     
     double val = acos(obj.val());
     std::vector<double> grad;
@@ -457,8 +469,7 @@ AutoDiff acos(const AutoDiff &obj)
     return AutoDiff(val,grad);
 }
 
-AutoDiff atan(const AutoDiff &obj)
-{
+AutoDiff atan(const AutoDiff &obj){
     
     double val = atan(obj.val());
     std::vector<double> grad;
@@ -468,8 +479,33 @@ AutoDiff atan(const AutoDiff &obj)
     return AutoDiff(val,grad);
 }
 
-AutoDiff sinh(const AutoDiff &obj)
-{
+AutoDiff atan2(const AutoDiff &obj){
+    
+    double val = atan(obj.val());
+    std::vector<double> grad;
+    for(int i = 0; i < obj.countVar(); i++){
+      grad.push_back( 1/(1 + pow(obj.val(), 2)) * obj.gradient()[i] );
+    }
+    return AutoDiff(val,grad);
+}
+
+// atan2(x,y) = atan(x/y)
+AutoDiff atan2(const AutoDiff &lhs, const AutoDiff &rhs){
+  return atan(lhs/rhs);
+}
+
+AutoDiff atan2(double lhs, const AutoDiff &rhs){
+  return atan(lhs/rhs);
+}
+
+AutoDiff atan2(const AutoDiff &lhs, double rhs){
+  return atan(lhs/rhs);
+
+}
+
+/////////////////////////////////////////// HYPERBOLIC FUNCTIONS
+
+AutoDiff sinh(const AutoDiff &obj){
     
     double val = sinh(obj.val());
     std::vector<double> grad;
@@ -479,8 +515,7 @@ AutoDiff sinh(const AutoDiff &obj)
     return AutoDiff(val,grad);
 }
 
-AutoDiff cosh(const AutoDiff &obj)
-{
+AutoDiff cosh(const AutoDiff &obj){
     
     double val = cosh(obj.val());
     std::vector<double> grad;
@@ -490,8 +525,7 @@ AutoDiff cosh(const AutoDiff &obj)
     return AutoDiff(val,grad);
 }
 
-AutoDiff tanh(const AutoDiff &obj)
-{
+AutoDiff tanh(const AutoDiff &obj){
     
     double val = tanh(obj.val());
     std::vector<double> grad;
@@ -499,4 +533,49 @@ AutoDiff tanh(const AutoDiff &obj)
       grad.push_back( (1/pow(cosh(obj.val()), 2)) * obj.gradient()[i] );
     }
     return AutoDiff(val,grad);
+}
+
+AutoDiff asinh(const AutoDiff &obj){
+  double val = asinh(obj.val());
+  std::vector<double> grad;
+
+  if (obj.val()*obj.val()+1 < 0) {
+    throw std::domain_error("Sqrt of value less than 0! NaN occurs!");
+  }
+  if (obj.val()*obj.val()+1 == 0) {
+    throw std::range_error("Denominator equals 0!");
+  }
+  for(int i = 0; i < obj.countVar(); i++){
+    grad.push_back( 1/sqrt(obj.val()*obj.val()+1) * obj.gradient()[i] );
+  }
+  return AutoDiff(val,grad);
+}
+
+AutoDiff acosh(const AutoDiff &obj){
+  double val = acosh(obj.val());
+  std::vector<double> grad;
+
+  if (obj.val()*obj.val()-1 < 0) {
+    throw std::domain_error("Sqrt of value less than 0! NaN occurs!");
+  }
+  if (obj.val()*obj.val()-1 == 0) {
+    throw std::range_error("Denominator equals 0!");
+  }
+  for(int i = 0; i < obj.countVar(); i++){
+    grad.push_back( 1/sqrt(obj.val()*obj.val()-1) * obj.gradient()[i] );
+  }
+  return AutoDiff(val,grad);
+}
+
+AutoDiff atanh(const AutoDiff &obj){
+  double val = atanh(obj.val());
+  std::vector<double> grad;
+  
+  if (1-obj.val()*obj.val() == 0) {
+    throw std::range_error("Denominator equals 0!");
+  }
+  for(int i = 0; i < obj.countVar(); i++){
+    grad.push_back( 1/(1-obj.val()*obj.val()) * obj.gradient()[i] );
+  }
+  return AutoDiff(val,grad);
 }
