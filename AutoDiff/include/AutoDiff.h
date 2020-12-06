@@ -36,8 +36,9 @@ class AutoDiff {
       // in var_names, every name must be unique
       AutoDiff(double val, std::vector<double> seed, std::vector<std::string> var_names);
 
+   /////////////////////////////////////////// ASSIGNMENT & COMPOUND ASSIGNMENT OPERATORS
+   AutoDiff operator = ( const AutoDiff &obj );
 
-   /////////////////////////////////////////// OVERLOAD OPERATORS
    // overload autodiff + autodiff
    AutoDiff operator += ( const AutoDiff &obj );
 
@@ -97,11 +98,11 @@ class AutoDiff {
 
 }; // close AutoDiff class
 
-/////////////////////////////////////////// PRINT value AND dvalue
+/////////////////////////////////////////// PRINT
 std::ostream& operator<<(std::ostream& os, const AutoDiff& obj);
 
-/////////////////////////////////////////// OVERLOAD MATH OPERATORS: + - * /
-AutoDiff operator + ( const AutoDiff &lhs, const AutoDiff &rhs );
+/////////////////////////////////////////// ARITHMETIC OPERATORS
+AutoDiff operator + ( const AutoDiff &lhs, const AutoDiff &rhs );  // to do
 AutoDiff operator + ( const AutoDiff &lhs, double rhs );
 AutoDiff operator + ( double lhs, const AutoDiff &rhs);
 AutoDiff operator - ( const AutoDiff &obj);
@@ -115,21 +116,91 @@ AutoDiff operator / ( const AutoDiff &lhs, const AutoDiff &rhs );
 AutoDiff operator / ( const AutoDiff &lhs, double rhs );
 AutoDiff operator / ( double lhs, const AutoDiff &rhs);
 
-/////////////////////////////////////////// OVERLOAD MATH OPERATORS
+
+/////////////////////////////////////////// RELATIONAL OPERATORS
+bool operator==(const AutoDiff& a, double b);
+bool operator==(double a, const AutoDiff& b);
+bool operator==(const AutoDiff& a, const AutoDiff& b);
+
+bool operator!=(const AutoDiff& a, double b);
+bool operator!=(double a, const AutoDiff& b);
+bool operator!=(const AutoDiff& a, const AutoDiff& b);
+
+bool operator<(const AutoDiff& a, double b);
+bool operator<(double a, const AutoDiff& b);
+bool operator<(const AutoDiff& a, const AutoDiff& b);
+
+bool operator<=(const AutoDiff& a, double b);
+bool operator<=(double a, const AutoDiff& b);
+bool operator<=(const AutoDiff& a, const AutoDiff& b);
+
+bool operator>(const AutoDiff& a, double b);
+bool operator>(double a, const AutoDiff& b);
+bool operator>(const AutoDiff& a, const AutoDiff& b);
+
+bool operator>=(const AutoDiff& a, double b);
+bool operator>=(double a, const AutoDiff& b);
+bool operator>=(const AutoDiff& a, const AutoDiff& b);
+
+/////////////////////////////////////////// MATH LIB FUNCTIONS
 AutoDiff pow ( const AutoDiff &lhs, const AutoDiff &rhs );
 AutoDiff pow ( const AutoDiff &lhs, double rhs );
 AutoDiff pow ( double lhs, const AutoDiff &rhs);
+AutoDiff pow ( const AutoDiff &obj); // to do
+AutoDiff cbrt ( const AutoDiff &obj); // to do
+AutoDiff hypot ( const AutoDiff &obj); // to do
 AutoDiff log(const AutoDiff &obj);
 AutoDiff log10(const AutoDiff &obj);
+AutoDiff log2(const AutoDiff &obj);  // to do
+AutoDiff log1p(const AutoDiff &obj); // to do
 AutoDiff exp ( const AutoDiff &obj );
+AutoDiff exp2 ( const AutoDiff &obj ); // to do
+AutoDiff expm1 ( const AutoDiff &obj ); // to do
 AutoDiff sin(const AutoDiff &obj);
 AutoDiff cos(const AutoDiff &obj);
 AutoDiff tan(const AutoDiff &obj);
 AutoDiff asin(const AutoDiff &obj);
 AutoDiff acos(const AutoDiff &obj);
 AutoDiff atan(const AutoDiff &obj);
+AutoDiff atan2(const AutoDiff &lhs, const AutoDiff &rhs);
+AutoDiff atan2(double lhs, const AutoDiff &rhs);
+AutoDiff atan2(const AutoDiff &lhs, double rhs);
 AutoDiff sinh(const AutoDiff &obj);
 AutoDiff cosh(const AutoDiff &obj);
 AutoDiff tanh(const AutoDiff &obj);
+AutoDiff asinh(const AutoDiff &obj);
+AutoDiff acosh(const AutoDiff &obj);
+AutoDiff atanh(const AutoDiff &obj);
+
+
+///////////////////////////////////////////////////////////////////
+/////   Operators NOT Supported in AutoDiff Class      ////////////
+/////                                                  ////////////
+///// Arithmetic: %                                    ////////////
+///// Increment & Decrement: ++, --                    ////////////
+///// Compound Assignment: %=, >>=, <<=, &=, ^=, |=    ////////////
+///// Logical: !, &&, ||                               ////////////
+///// Conditional ternary: ?                           ////////////
+/////                                                  ////////////
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
+/////      Math Library Function NOT Supported         ////////////
+/////                                                  ////////////
+///// Exponential & Logarithmic: frexp, ldexp, modf,   //////////// 
+/////                            ilogb, logb, scalbn,  //////////// 
+/////                            scalbln               ////////////
+///// Error & Gamma functions: erf, erfc, tgamma,      ////////////
+/////                          lgamma                  ////////////
+///// Rounding & Remainder: ceil, floor, fmod, trunc,  ////////////
+/////                      round, lround,llround,rint, ////////////
+/////                      lrint, nearbyint, remainder ////////////
+/////                      llrint, remquo              ////////////
+///// Floating-point manipulation: copysign, nan,      ////////////
+/////                           nextafter, nexttoward  ////////////
+///// Min, Max, Difference: fdim, fmax, fmin           ////////////
+///// Others: fabs, abs, fma                           ////////////
+/////                                                  ////////////
+///////////////////////////////////////////////////////////////////
 
 #endif
