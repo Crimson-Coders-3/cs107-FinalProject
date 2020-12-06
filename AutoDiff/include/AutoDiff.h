@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <iostream>
+#include <unordered_map>
 
 ///////////////////////////////////////////////////////////////// CUSTOM AUTODIFF CLASS
 class AutoDiff {
@@ -15,13 +16,15 @@ class AutoDiff {
       double _val;
       // _grad: function gradient, (2y,2x+2y) = (2,6)
       std::vector<double> _grad;
-      // _name: variable names, ("x","y")
-      std::vector<std::string> _names;
+      // _name_vec: variables names, ("x", "y")
+      std::vector<std::string> _name_vec;
+      // _name: map name (string) to index (int) int _name_vec
+      //        e.g ("x","y") -> {"x":0, "y":1}
+      std::unordered_map<std::string,int> _name_map;
       // _hasName equals true is variables'names are set
       bool _hasName;
       // _num_vars: number of variables, 2
       int _num_vars;
-
 
    // public
    public:
@@ -70,6 +73,9 @@ class AutoDiff {
    // get dval with respect to a variable
    double dval_wrt(int index) const;
 
+   // get dval with respect to a variable
+   double dval_wrt(std::string name) const;
+
    // get gradient (all the variables)
    std::vector<double> gradient() const;
 
@@ -81,7 +87,10 @@ class AutoDiff {
    bool hasName() const;
 
    // get names of all variables
-   std::vector<std::string> getNames() const;
+   std::vector<std::string> getName() const;
+
+   // get names of a variable at index of name vector
+   std::string getName(int index) const;
 
    /////////////////////////////////////////// SETTER
    // set value
@@ -94,10 +103,16 @@ class AutoDiff {
    void set_dval(std::vector<double> dvals);
 
    // set name of a variable
-   void set_name(int index, std::string name);
+   void setName(int index, std::string name);
 
    // set name of all the variables
-   void set_name(std::vector<std::string> names);
+   void setName(std::vector<std::string> names);
+
+   // turn name mode on
+   void setName();
+
+   // turn name mode off
+   void clearName();
 
 }; // close AutoDiff class
 

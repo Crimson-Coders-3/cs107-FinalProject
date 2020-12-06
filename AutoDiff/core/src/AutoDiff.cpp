@@ -17,11 +17,24 @@ AutoDiff::AutoDiff(double val, std::vector<double> seed) {
 }
 
 AutoDiff::AutoDiff(double val, std::vector<double> seed, std::vector<std::string> var_names) {
+  if(seed.size()!=var_names.size()){
+    throw std::invalid_argument("Dimension of seed vector and name vector not matched!");
+  }
   _val = val;
   _grad = seed;
   _num_vars = seed.size();
-  _names = var_names;
+  _name_vec = var_names;
   _hasName = true;
+
+  std::unordered_map<std::string,int>::const_iterator got;
+
+  for(int i=0;i<_num_vars;i++){
+    got = _name_map.find(var_names[i]);
+    if( got!= _name_map.end() ){
+      throw std::runtime_error("Name must be unique!");
+    }
+    _name_map.insert(std::make_pair<std::string, int>(var_names[i],i));
+  }
 }
 
 AutoDiff AutoDiff::operator =(const AutoDiff &obj) {
@@ -29,10 +42,16 @@ AutoDiff AutoDiff::operator =(const AutoDiff &obj) {
   _grad = obj.gradient();
   _num_vars = obj.countVar();
   if(obj.hasName()){
-    _names = obj.getNames();
+    _name_vec = obj.getName();
     _hasName = true;
+    _name_map.clear();
+    for(int i=0;i<_num_vars;i++){
+      _name_map.insert(std::make_pair<std::string, int>(_name_vec[i],i));
+    }
   } else {
     _hasName = false;
+    _name_map.clear();
+    _name_vec.clear();
   }
   return *this;
 }
@@ -507,6 +526,63 @@ void AutoDiff::set_dval(std::vector<double> dvals){
   _grad = dvals; 
 }
 
+// set name of a variable
+void AutoDiff::setName(int index, std::string name){
+  if(!_hasName) throw std::runtime_error("Name mode not initialized!");
+  if(index>=_num_vars) throw std::out_of_range("Index out of range!");
+
+  for(int i=0;i<_num_vars;i++){
+    if(i!=index && _name_vec[i]==name){
+      throw std::runtime_error("Name must be unique!");
+    }
+  }
+  _name_vec[index] = name;
+
+  std::unordered_map<std::string,int>::const_iterator got = _name_map.find(name);
+
+  if ( got != _name_map.end() )
+     _name_map.erase(name);
+
+  _name_map.insert(std::make_pair<std::string,int>(name,index));
+}
+
+// set name of all the variables
+void AutoDiff::setName(std::vector<std::string> var_names){
+  if(_hasName && _name_vec.size()!=var_names.size()){
+    throw std::range_error("Name vector dimension incompatible!");
+  }
+  // we allow not intialize name mode in this case, just
+  // turn name mode to be ture and assign names to _name_vec and _name_map
+  if(var_names.size()!=_num_vars){
+    throw std::range_error("Name vector dimension incompatible!");
+  }
+  _name_vec = var_names;
+  _hasName = true;
+  _name_map.clear();
+
+  std::unordered_map<std::string,int>::const_iterator got;
+
+  for(int i=0;i<_num_vars;i++){
+    got = _name_map.find(var_names[i]);
+    if( got!= _name_map.end() ){
+      throw std::runtime_error("Name must be unique!");
+    }
+    _name_map.insert(std::make_pair<std::string, int>(var_names[i],i));
+  }
+}
+
+// turn name mode on
+void AutoDiff::setName(){
+  _hasName = true;
+}
+
+// turn name mode off
+void AutoDiff::clearName(){
+  _hasName = false;
+  _name_vec.clear();
+  _name_map.clear();
+}
+
 /////////////////////////////////////////// GETTERS
 
 // get total number of variables
@@ -525,6 +601,15 @@ double AutoDiff::dval_wrt(int index) const {
   return _grad[index];
 }
 
+// get dval with respect to a variable
+double AutoDiff::dval_wrt(std::string name) const {
+  if(!_hasName) throw std::runtime_error("Name mode not initialized!");
+  std::unordered_map<std::string,int>::const_iterator got = _name_map.find(name);
+  if(got == _name_map.end()) throw std::runtime_error("Input variable name not found!");
+
+  return _grad[got->second];
+}
+
 // get gradient (all the variables)
 std::vector<double> AutoDiff::gradient() const {
   std::vector<double> grad_copy = _grad;
@@ -538,9 +623,16 @@ bool AutoDiff::hasName() const {
 }
 
 // get names of all variables
-std::vector<std::string> AutoDiff::getNames() const {
-  std::vector<std::string> names = _names;
+std::vector<std::string> AutoDiff::getName() const {
+  std::vector<std::string> names = _name_vec;
   return names;
+}
+
+// get names of a variable at index of name vector
+std::string AutoDiff::getName(int index) const{
+  if(index>=_num_vars) throw std::out_of_range("Index out of range!");
+  if(!_hasName) throw std::runtime_error("Name mode not initialized!");
+  return _name_vec[index];
 }
 
 /////////////////////////////////////////// PRINT VAL AND DER
