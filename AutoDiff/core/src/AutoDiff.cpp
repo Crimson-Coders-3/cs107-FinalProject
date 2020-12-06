@@ -251,8 +251,79 @@ AutoDiff operator / (double lhs, const AutoDiff &rhs) {
     return AutoDiff(lhs/rhs.val(), grad);
 }
 
+/////////////////////////////////////////// RELATIONAL OPERATORS
+bool operator==(const AutoDiff& lhs, double rhs){
+  return lhs.val() == rhs;
+}
+bool operator==(double lhs, const AutoDiff& rhs){
+  return lhs == rhs.val();
+}
+bool operator==(const AutoDiff& lhs, const AutoDiff& rhs){
+  if(lhs.val()!=rhs.val()){
+    return false;
+  }
+  if(lhs.countVar()!=rhs.countVar()){
+    return false;
+  }
+  for(int i=0;i<lhs.countVar();i++){
+    if(lhs.gradient()[i]!=rhs.gradient()[i]){
+      return false;
+    }
+  }
+  return true;
+}
 
-/////////////////////////////////////////// EXPONENT OPERATORS
+bool operator!=(const AutoDiff& lhs, double rhs){
+  return !(lhs==rhs);
+}
+bool operator!=(double lhs, const AutoDiff& rhs){
+  return !(lhs==rhs);
+}
+bool operator!=(const AutoDiff& lhs, const AutoDiff& rhs){
+  return !(lhs==rhs);
+}
+
+bool operator<(const AutoDiff& lhs, double rhs){
+  return lhs.val()<rhs;
+}
+bool operator<(double lhs, const AutoDiff& rhs){
+  return lhs<rhs.val();
+}
+bool operator<(const AutoDiff& lhs, const AutoDiff& rhs){
+  return lhs.val()<rhs.val();
+}
+
+bool operator<=(const AutoDiff& lhs, double rhs){
+  return lhs.val()<=rhs;
+}
+bool operator<=(double lhs, const AutoDiff& rhs){
+  return lhs<=rhs.val();
+}
+bool operator<=(const AutoDiff& lhs, const AutoDiff& rhs){
+  return lhs.val()<=rhs.val();
+}
+
+bool operator>(const AutoDiff& lhs, double rhs){
+  return lhs.val()>rhs;
+}
+bool operator>(double lhs, const AutoDiff& rhs){
+  return lhs>rhs.val();
+}
+bool operator>(const AutoDiff& lhs, const AutoDiff& rhs){
+  return lhs.val()>rhs.val();
+}
+
+bool operator>=(const AutoDiff& lhs, double rhs){
+  return lhs.val()>rhs;
+}
+bool operator>=(double lhs, const AutoDiff& rhs){
+ return lhs>rhs.val();
+}
+bool operator>=(const AutoDiff& lhs, const AutoDiff& rhs){
+ return lhs.val()>rhs.val();
+}
+
+/////////////////////////////////////////// POWER OPERATORS
 
 // AutoDiff ^ AutoDiff
 AutoDiff pow ( const AutoDiff &lhs, const AutoDiff &rhs ) {
@@ -307,8 +378,10 @@ AutoDiff pow (double lhs, const AutoDiff &rhs) {
   return AutoDiff(val,grad);
 };
 
+/////////////////////////////////////////// EXPONENT OPERATORS
+
 // e ^ AutoDiff
-AutoDiff exp ( AutoDiff &obj ) {
+AutoDiff exp ( const AutoDiff &obj ) {
   
   std::vector<double> grad;
   for(int i = 0; i < obj.countVar(); i++){
@@ -317,14 +390,47 @@ AutoDiff exp ( AutoDiff &obj ) {
   return AutoDiff(  exp(obj.val()), grad );
 };
 
+// 2 ^ AutoDiff
+AutoDiff exp2 ( const AutoDiff &obj ){
+  std::vector<double> grad;
+  for(int i = 0; i < obj.countVar(); i++){
+    grad.push_back( std::pow(2.0, obj.val()) * obj.gradient()[i] * log(2.0) );
+  }
+  return AutoDiff(  pow(2.0,obj.val()), grad );
+}
+
+// e ^ AutoDiff - 1
+AutoDiff expm1 ( const AutoDiff &obj ){
+  return exp(obj) - 1;
+}
+
+// square root
+AutoDiff sqrt ( const AutoDiff &obj){
+  if(obj.val()<0){
+    throw std::domain_error("Value less than 0! NaN occurs!");
+  }
+  return pow(obj,0.5);
+}
+
+// cubic root
+AutoDiff cbrt ( const AutoDiff &obj){
+  return pow(obj,1.0/3);
+}
+
+// the hypotenuse of a right-angled triangle whose legs are lhs and rhs
+AutoDiff hypot ( const AutoDiff &lhs, const AutoDiff &rhs) {
+  return sqrt(pow(lhs,2.0)+pow(rhs,2.0));
+}
+
 /////////////////////////////////////////// LOG OPERATORS
 
+// natural log, log_e(x)
 AutoDiff log(const AutoDiff &obj){ 
     if(obj.val()<0){
       throw std::domain_error("Value less than 0! NaN occurs!");
     }
     if(obj.val()==0){
-      throw std::range_error("Value equals 0!");
+      throw std::range_error("Value equals 0! NaN occurs!");
     }
     double val = log(obj.val());
     std::vector<double> grad;
@@ -334,6 +440,7 @@ AutoDiff log(const AutoDiff &obj){
     return AutoDiff(val,grad);
 }
 
+// log_10(x)
 AutoDiff log10(const AutoDiff &obj) {
     
     if(obj.val()<0){
@@ -346,6 +453,38 @@ AutoDiff log10(const AutoDiff &obj) {
     std::vector<double> grad;
     for(int i = 0; i < obj.countVar(); i++){
       grad.push_back( (1/obj.val()) * obj.gradient()[i] /log(10) );
+    }
+    return AutoDiff(val,grad);
+}
+
+// log_2(x)
+AutoDiff log2(const AutoDiff &obj){
+    if(obj.val()<0){
+      throw std::domain_error("Value less than 0! NaN occurs!");
+    }
+    if(obj.val()==0){
+      throw std::range_error("Value equals 0! NaN occurs!");
+    }
+    double val = log(obj.val())/log(2);
+    std::vector<double> grad;
+    for(int i = 0; i < obj.countVar(); i++){
+      grad.push_back( (1/obj.val()) * obj.gradient()[i] /log(2) );
+    }
+    return AutoDiff(val,grad);
+}
+
+// log_e(1+x)
+AutoDiff log1p(const AutoDiff &obj){
+    if(obj.val()+1<0){
+      throw std::domain_error("Value less than 0! NaN occurs!");
+    }
+    if(obj.val()+1==0){
+      throw std::range_error("Value equals 0! NaN occurs!");
+    }
+    double val = log(obj.val()+1);
+    std::vector<double> grad;
+    for(int i = 0; i < obj.countVar(); i++){
+      grad.push_back( 1/(obj.val()+1) * obj.gradient()[i] );
     }
     return AutoDiff(val,grad);
 }
@@ -479,30 +618,6 @@ AutoDiff atan(const AutoDiff &obj){
     return AutoDiff(val,grad);
 }
 
-AutoDiff atan2(const AutoDiff &obj){
-    
-    double val = atan(obj.val());
-    std::vector<double> grad;
-    for(int i = 0; i < obj.countVar(); i++){
-      grad.push_back( 1/(1 + pow(obj.val(), 2)) * obj.gradient()[i] );
-    }
-    return AutoDiff(val,grad);
-}
-
-// atan2(x,y) = atan(x/y)
-AutoDiff atan2(const AutoDiff &lhs, const AutoDiff &rhs){
-  return atan(lhs/rhs);
-}
-
-AutoDiff atan2(double lhs, const AutoDiff &rhs){
-  return atan(lhs/rhs);
-}
-
-AutoDiff atan2(const AutoDiff &lhs, double rhs){
-  return atan(lhs/rhs);
-
-}
-
 /////////////////////////////////////////// HYPERBOLIC FUNCTIONS
 
 AutoDiff sinh(const AutoDiff &obj){
@@ -539,12 +654,6 @@ AutoDiff asinh(const AutoDiff &obj){
   double val = asinh(obj.val());
   std::vector<double> grad;
 
-  if (obj.val()*obj.val()+1 < 0) {
-    throw std::domain_error("Sqrt of value less than 0! NaN occurs!");
-  }
-  if (obj.val()*obj.val()+1 == 0) {
-    throw std::range_error("Denominator equals 0!");
-  }
   for(int i = 0; i < obj.countVar(); i++){
     grad.push_back( 1/sqrt(obj.val()*obj.val()+1) * obj.gradient()[i] );
   }

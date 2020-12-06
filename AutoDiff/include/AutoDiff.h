@@ -119,7 +119,6 @@ AutoDiff operator / ( const AutoDiff &lhs, const AutoDiff &rhs );
 AutoDiff operator / ( const AutoDiff &lhs, double rhs );
 AutoDiff operator / ( double lhs, const AutoDiff &rhs);
 
-
 /////////////////////////////////////////// RELATIONAL OPERATORS
 bool operator==(const AutoDiff& a, double b);
 bool operator==(double a, const AutoDiff& b);
@@ -149,25 +148,22 @@ bool operator>=(const AutoDiff& a, const AutoDiff& b);
 AutoDiff pow ( const AutoDiff &lhs, const AutoDiff &rhs );
 AutoDiff pow ( const AutoDiff &lhs, double rhs );
 AutoDiff pow ( double lhs, const AutoDiff &rhs);
-AutoDiff pow ( const AutoDiff &obj); // to do
-AutoDiff cbrt ( const AutoDiff &obj); // to do
-AutoDiff hypot ( const AutoDiff &obj); // to do
+AutoDiff sqrt ( const AutoDiff &obj);
+AutoDiff cbrt ( const AutoDiff &obj);
+AutoDiff hypot ( const AutoDiff &obj);
 AutoDiff log(const AutoDiff &obj);
 AutoDiff log10(const AutoDiff &obj);
-AutoDiff log2(const AutoDiff &obj);  // to do
-AutoDiff log1p(const AutoDiff &obj); // to do
+AutoDiff log2(const AutoDiff &obj);  
+AutoDiff log1p(const AutoDiff &obj); 
 AutoDiff exp ( const AutoDiff &obj );
-AutoDiff exp2 ( const AutoDiff &obj ); // to do
-AutoDiff expm1 ( const AutoDiff &obj ); // to do
+AutoDiff exp2 ( const AutoDiff &obj );
+AutoDiff expm1 ( const AutoDiff &obj );
 AutoDiff sin(const AutoDiff &obj);
 AutoDiff cos(const AutoDiff &obj);
 AutoDiff tan(const AutoDiff &obj);
 AutoDiff asin(const AutoDiff &obj);
 AutoDiff acos(const AutoDiff &obj);
 AutoDiff atan(const AutoDiff &obj);
-AutoDiff atan2(const AutoDiff &lhs, const AutoDiff &rhs);
-AutoDiff atan2(double lhs, const AutoDiff &rhs);
-AutoDiff atan2(const AutoDiff &lhs, double rhs);
 AutoDiff sinh(const AutoDiff &obj);
 AutoDiff cosh(const AutoDiff &obj);
 AutoDiff tanh(const AutoDiff &obj);
@@ -193,6 +189,7 @@ AutoDiff atanh(const AutoDiff &obj);
 ///// Exponential & Logarithmic: frexp, ldexp, modf,   //////////// 
 /////                            ilogb, logb, scalbn,  //////////// 
 /////                            scalbln               ////////////
+///// Trigonometric: atan2                             ////////////
 ///// Error & Gamma functions: erf, erfc, tgamma,      ////////////
 /////                          lgamma                  ////////////
 ///// Rounding & Remainder: ceil, floor, fmod, trunc,  ////////////

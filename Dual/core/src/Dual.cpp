@@ -290,15 +290,22 @@ Dual atan(const Dual& z){
 
      
 Dual atan2(const Dual& y, const Dual& x){
-    Dual<Scalar> z = y / x;
-    if(x==0 && y==0){
+
+    if (x > 0) {
+        Dual z = y/x;
+        return Dual(atan(z), z.dual() / (1 + z.real() * z.real()));
+    } else if ((x < 0) && (y >= 0)) {
+        Dual z = y/x;
+        return Dual(atan(z) + PI, z.dual() / (1 + z.real() * z.real()));
+    } else if ((x < 0) && (y < 0)) {
+        Dual z = y/x;
+        return Dual(atan(y/x) - PI, z.dual() / (1 + z.real() * z.real()));
+    } else if ((x == 0) && (y > 0)) {
+        return Dual(PI/2, z.dual() / (1 + z.real() * z.real()));
+    } else if ((x == 0) && (y < 0)) {
+        return Dual(-PI/2, z.dual() / (1 + z.real() * z.real()));
+    } else if ((x == 0) && (y == 0)) {
         throw std::domain_error("Denominator equals 0!");
-    } else if(x==0){
-        Scalar quadrant = y.real()<0 ? -PI/2 : PI/2; 
-        return Dual<Scalar>(atan(z.real()) + quadrant, z.dual() / (1 + z.real() * z.real()));
-    } else {
-        Scalar quadrant = x.real()<0 ? (y.real()<0 ? -PI : PI) : 0; 
-        return Dual<Scalar>(atan(z.real()) + quadrant, z.dual() / (1 + z.real() * z.real()));
     }
 }
 
