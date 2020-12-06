@@ -869,48 +869,84 @@ TEST(MATH,TAN){
 
 // arcsin AutoDiff
 TEST(MATH,ARCSIN){
-	AutoDiff x(-0.5,4.0);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	AutoDiff x(0.5,seed_x);
+
 	AutoDiff arcsinx = asin(x);
-	EXPECT_NEAR(arcsinx.getVal(),asin(-0.5),DTOL);
-	EXPECT_NEAR(arcsinx.getDer(),(1/sqrt(1-pow(-0.5, 2)))*4.0,DTOL);
+	EXPECT_NEAR(arcsinx.val(),asin(0.5),DTOL);
+	EXPECT_EQ(arcsinx.gradient().size(),1);
+    EXPECT_EQ(arcsinx.countVar(),1);
+	EXPECT_NEAR(arcsinx.dval_wrt(0),(1/sqrt(1-pow(0.5, 2)))*4.0,DTOL);
+	EXPECT_NEAR(arcsinx.gradient().at(0),(1/sqrt(1-pow(0.5, 2)))*4.0,DTOL);
 }
 
 // arccos AutoDiff
 TEST(MATH,ARCCOS){
-	AutoDiff x(-0.5,4.0);
-	AutoDiff arcsinx = acos(x);
-	EXPECT_NEAR(arcsinx.getVal(),acos(-0.5),DTOL);
-	EXPECT_NEAR(arcsinx.getDer(), -(1/sqrt(1 - pow(-0.5, 2))) * 4.0,DTOL);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	AutoDiff x(0.5,seed_x);
+
+	AutoDiff arccosx = acos(x);
+	EXPECT_NEAR(arccosx.val(),acos(0.5),DTOL);
+	EXPECT_EQ(arccosx.gradient().size(),1);
+    EXPECT_EQ(arccosx.countVar(),1);
+	EXPECT_NEAR(arccosx.dval_wrt(0), -(1/sqrt(1 - pow(0.5, 2))) * 4.0,DTOL);
+	EXPECT_NEAR(arccosx.gradient().at(0),-(1/sqrt(1-pow(0.5, 2)))*4.0,DTOL);
 }
 
 // arctan AutoDiff
 TEST(MATH,ARCTAN){
-	AutoDiff x(-0.5,4.0);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	AutoDiff x(0.5,seed_x);
+
 	AutoDiff arctanx = atan(x);
-	EXPECT_NEAR(arctanx.getVal(),atan(-0.5),DTOL);
-	EXPECT_NEAR(arctanx.getDer(), (1/(1+pow(-0.5, 2))) * 4.0,DTOL);
+	EXPECT_NEAR(arctanx.val(),atan(0.5),DTOL);
+	EXPECT_EQ(arctanx.gradient().size(),1);
+    EXPECT_EQ(arctanx.countVar(),1);
+	EXPECT_NEAR(arctanx.dval_wrt(0), (1/(1+pow(0.5, 2))) * 4.0,DTOL);
+	EXPECT_NEAR(arctanx.gradient().at(0),(1/(1+pow(0.5, 2))) * 4.0,DTOL);
 }
-/*
+
 // sinh AutoDiff
 TEST(MATH,SINH){
-	AutoDiff x(-0.5,4.0);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	AutoDiff x(-0.5,seed_x);
+
 	AutoDiff sinhx = sinh(x);
-	EXPECT_NEAR(sinhx.getVal(),sinh(-0.5),DTOL);
-	EXPECT_NEAR(sinhx.getDer(),cosh(-0.5) * 4.0, DTOL);
+	EXPECT_NEAR(sinhx.val(),sinh(-0.5),DTOL);
+	EXPECT_EQ(sinhx.gradient().size(),1);
+    EXPECT_EQ(sinhx.countVar(),1);
+	EXPECT_NEAR(sinhx.dval_wrt(0),cosh(-0.5) * 4.0, DTOL);
+	EXPECT_NEAR(sinhx.gradient().at(0),cosh(-0.5) * 4.0, DTOL);
 }
 
 // cosh AutoDiff
 TEST(MATH,COSH){
-	AutoDiff x(-0.5,4.0);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	AutoDiff x(-0.5,seed_x);
+
 	AutoDiff coshx = cosh(x);
-	EXPECT_NEAR(coshx.getVal(),cosh(-0.5),DTOL);
-	EXPECT_NEAR(coshx.getDer(),sinh(-0.5) * 4.0, DTOL);
+	EXPECT_NEAR(coshx.val(),cosh(-0.5),DTOL);
+	EXPECT_EQ(coshx.gradient().size(),1);
+    EXPECT_EQ(coshx.countVar(),1);
+	EXPECT_NEAR(coshx.dval_wrt(0),sinh(-0.5) * 4.0, DTOL);
+	EXPECT_NEAR(coshx.gradient().at(0),sinh(-0.5) * 4.0, DTOL);
 }
 
 // tanh AutoDiff
 TEST(MATH,TANH){
-	AutoDiff x(-0.5,4.0);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	AutoDiff x(-0.5,seed_x);
+
 	AutoDiff tanhx = tanh(x);
-	EXPECT_NEAR(tanhx.getVal(),tanh(-0.5),DTOL);
-	EXPECT_NEAR(tanhx.getDer(),(1/pow(cosh(-0.5), 2)) * 4.0, DTOL);
-}*/
+	EXPECT_NEAR(tanhx.val(),tanh(-0.5),DTOL);
+	EXPECT_EQ(tanhx.gradient().size(),1);
+    EXPECT_EQ(tanhx.countVar(),1);
+	EXPECT_NEAR(tanhx.dval_wrt(0),(1/pow(cosh(-0.5), 2)) * 4.0, DTOL);
+	EXPECT_NEAR(tanhx.gradient().at(0),(1/pow(cosh(-0.5), 2)) * 4.0, DTOL);
+}

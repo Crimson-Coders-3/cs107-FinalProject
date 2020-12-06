@@ -8,11 +8,16 @@
 using namespace std;
 
 int main(){
-        AutoDiff x(2.0,2.0);
-        cout << x.getVal() << endl;
-        cout << x.getDer() << endl;
+	std::vector<double> seed_x;
+	seed_x.push_back(2.0);
+    AutoDiff x(2.0,seed_x);
 
-        AutoDiff y = (x +2.0+x)*3.0 /3.2 *x + 2.0 + x;
-        cout << y.getVal() << endl;
-        cout << y.getDer() << endl;
+    cout << x.val() << endl;
+    cout << x.dval_wrt(0) << endl;
+
+    AutoDiff y = (x +2.0+x)*3.0 /3.2 *x + 2.0 + x;
+    cout << y.val() << endl;
+    cout << y.dval_wrt(0) << endl;
+
+    return 0;
 }

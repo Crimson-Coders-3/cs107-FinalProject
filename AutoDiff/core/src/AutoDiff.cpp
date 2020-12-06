@@ -428,51 +428,69 @@ AutoDiff tan(const AutoDiff &obj)
     }
     return AutoDiff(val,grad);
 }
-/*
-AutoDiff asin(const AutoDiff &input)
+
+AutoDiff asin(const AutoDiff &obj)
 {
     
-    double val = asin(input.getVal());
-    double dv = (1/sqrt(1 - pow(input.getVal(), 2))) * input.getDer();
-    return AutoDiff(val,dv);
+    double val = asin(obj.val());
+    std::vector<double> grad;
+    for(int i = 0; i < obj.countVar(); i++){
+      grad.push_back( 1/sqrt(1 - pow(obj.val(), 2)) * obj.gradient()[i] );
+    }
+    return AutoDiff(val,grad);
 }
 
-AutoDiff acos(const AutoDiff &input)
+AutoDiff acos(const AutoDiff &obj)
 {
     
-    double val = acos(input.getVal());
-    double dv = -(1/sqrt(1 - pow(input.getVal(), 2))) * input.getDer();
-    return AutoDiff(val,dv);
+    double val = acos(obj.val());
+    std::vector<double> grad;
+    for(int i = 0; i < obj.countVar(); i++){
+      grad.push_back( -1/sqrt(1 - pow(obj.val(), 2)) * obj.gradient()[i] );
+    }
+    return AutoDiff(val,grad);
 }
 
-AutoDiff atan(const AutoDiff &input)
+AutoDiff atan(const AutoDiff &obj)
 {
     
-    double val = atan(input.getVal());
-    double dv = (1/(1+pow(input.getVal(), 2))) * input.getDer();
-    return AutoDiff(val,dv);
+    double val = atan(obj.val());
+    std::vector<double> grad;
+    for(int i = 0; i < obj.countVar(); i++){
+      grad.push_back( 1/(1 + pow(obj.val(), 2)) * obj.gradient()[i] );
+    }
+    return AutoDiff(val,grad);
 }
 
-AutoDiff sinh(const AutoDiff &input)
+AutoDiff sinh(const AutoDiff &obj)
 {
     
-    double val = sinh(input.getVal());
-    double dv = cosh(input.getVal()) * input.getDer();
-    return AutoDiff(val,dv);
+    double val = sinh(obj.val());
+    std::vector<double> grad;
+    for(int i = 0; i < obj.countVar(); i++){
+      grad.push_back( cosh(obj.val()) * obj.gradient()[i] );
+    }
+    return AutoDiff(val,grad);
 }
 
-AutoDiff cosh(const AutoDiff &input)
+AutoDiff cosh(const AutoDiff &obj)
 {
     
-    double val = cosh(input.getVal());
-    double dv = sinh(input.getVal()) * input.getDer();
-    return AutoDiff(val,dv);
+    double val = cosh(obj.val());
+    std::vector<double> grad;
+    for(int i = 0; i < obj.countVar(); i++){
+      grad.push_back( sinh(obj.val()) * obj.gradient()[i] );
+    }
+    return AutoDiff(val,grad);
 }
 
-AutoDiff tanh(const AutoDiff &input)
+AutoDiff tanh(const AutoDiff &obj)
 {
     
-    double val = tanh(input.getVal());
-    double dv = (1/pow(cosh(input.getVal()), 2)) * input.getDer();
-    return AutoDiff(val,dv);
-}*/
+    double val = tanh(obj.val());
+    std::vector<double> grad;
+    for(int i = 0; i < obj.countVar(); i++){
+      grad.push_back( (1/pow(cosh(obj.val()), 2)) * obj.gradient()[i] );
+    }
+    return AutoDiff(val,grad);
+}
