@@ -10,10 +10,16 @@ class AutoDiff {
    /////////////////////////////////////////// CLASS DEF
    // private
    private:
+      // function example: f(x,y) = 2xy + y^2 = 5, x=2, y=1
+      // _val: function value, 5
       double _val;
+      // _grad: function gradient, (2y,2x+2y) = (2,6)
       std::vector<double> _grad;
+      // _name: variable names, ("x","y")
       std::vector<std::string> _names;
+      // _hasName equals true is variables'names are set
       bool _hasName;
+      // _num_vars: number of variables, 2
       int _num_vars;
 
 
