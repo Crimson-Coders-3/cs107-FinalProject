@@ -7,7 +7,7 @@ file(GLOB APP_H *.h *.hpp)
 # Create variable called "MATRIX_SRC"
 # =================================== #
 set(APP_SRC
-    MatrixClass.cpp
+    main.cpp
 )
 
 

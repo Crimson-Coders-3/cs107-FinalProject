@@ -1,7 +1,7 @@
 file(GLOB AD_H *.h)
 
 set(AD_SRC
-    AutoDiff.cpp
+    ADFunc.cpp
 )
 
 # ==================== #

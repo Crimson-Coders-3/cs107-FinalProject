@@ -288,28 +288,6 @@ Dual atan(const Dual& z){
     return Dual(atan(z.real()), z.dual() / (1 + z.real() * z.real()));
 }
 
-     
-Dual atan2(const Dual& y, const Dual& x){
-
-    if (x > 0) {
-        Dual z = y/x;
-        return Dual(atan(z), z.dual() / (1 + z.real() * z.real()));
-    } else if ((x < 0) && (y >= 0)) {
-        Dual z = y/x;
-        return Dual(atan(z) + PI, z.dual() / (1 + z.real() * z.real()));
-    } else if ((x < 0) && (y < 0)) {
-        Dual z = y/x;
-        return Dual(atan(y/x) - PI, z.dual() / (1 + z.real() * z.real()));
-    } else if ((x == 0) && (y > 0)) {
-        return Dual(PI/2, z.dual() / (1 + z.real() * z.real()));
-    } else if ((x == 0) && (y < 0)) {
-        return Dual(-PI/2, z.dual() / (1 + z.real() * z.real()));
-    } else if ((x == 0) && (y == 0)) {
-        throw std::domain_error("Denominator equals 0!");
-    }
-}
-
- 
 Dual cos(const Dual& z){
     return Dual(cos(z.real()), -z.dual() * sin(z.real()));
 }

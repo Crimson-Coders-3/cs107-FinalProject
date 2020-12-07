@@ -27,8 +27,8 @@ extern "C" {
 
 
 /** Display testing information */
-void ADLibrary_unittest();
-void ADLibrary_nametest();
+void ADFLibrary_unittest();
+void ADFLibrary_nametest();
 
 #ifdef __cplusplus
 }

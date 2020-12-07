@@ -91,7 +91,6 @@ class Dual{
     Dual acos(const Dual& z);
     Dual asin(const Dual& z);
     Dual atan(const Dual& z);
-    Dual atan2(const Dual& y, const Dual& x);
     Dual cos(const Dual& z);
     Dual cosh(const Dual& z);
     Dual exp(const Dual& z);

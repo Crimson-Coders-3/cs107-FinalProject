@@ -302,11 +302,3 @@ TEST(MATH,ATAN){
 	EXPECT_NEAR(atanx.real(),atan(-0.5),DTOL);
 	EXPECT_NEAR(atanx.dual(),4.0/(1 + 0.25),DTOL);
 }
-
-TEST(MATH,ATAN2){
-	Dual x(-10.0,4.0);
-	Dual y(10.0,2.0);
-	Dual atanx2 = atan2(x,y);
-	EXPECT_NEAR(atanx2.real(),atan2(-10.0,10.0),DTOL);
-	//EXPECT_NEAR(atanx2.dual(),4.0/(1 + 0.25),DTOL);
-}
