@@ -6,7 +6,7 @@
 #include "gtest/gtest.h"
 
 /* header files */
-#include "AutoDiff.h"
+#include "ADFunc.h"
 #include "test_vars.h"
 
 void App_testcheck(){

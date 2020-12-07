@@ -8,7 +8,7 @@
 using namespace std;
 
 int main(){
-	std::vector<double> seed_x;
+	vector<double> seed_x;
 	seed_x.push_back(2.0);
     ADFunc x(2.0,seed_x);
 
