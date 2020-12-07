@@ -65,8 +65,15 @@ ADFunc ADFunc::operator += (const ADFunc &obj) {
   if( obj.countVar()!= _num_vars ){
     throw std::invalid_argument("Seed vectors dimension not matched!");
   }
+  if(obj.hasName() && obj.getName().size()!=_num_vars){
+    throw std::invalid_argument("Name vectors dimension not matched!");
+  }
   for(int i = 0; i < _num_vars; i++){
     _grad[i] += obj.gradient().at(i);
+  }
+
+  if(obj.hasName()&& !_hasName){
+    setName(obj.getName());
   }
   return *this;
 };
@@ -534,23 +541,23 @@ void ADFunc::set_dval(std::vector<double> dvals){
 }
 
 // set name of a variable
-void ADFunc::setName(int index, std::string name){
+void ADFunc::setName(int index, std::string var_name){
   if(!_hasName) throw std::runtime_error("Name mode not initialized!");
   if(index>=_num_vars) throw std::out_of_range("Index out of range!");
 
   for(int i=0;i<_num_vars;i++){
-    if(i!=index && _name_vec[i]==name){
+    if(i!=index && _name_vec[i]==var_name){
       throw std::runtime_error("Name must be unique!");
     }
   }
-  _name_vec[index] = name;
+  _name_vec[index] = var_name;
 
-  std::unordered_map<std::string,int>::const_iterator got = _name_map.find(name);
+  std::unordered_map<std::string,int>::const_iterator got = _name_map.find(var_name);
 
   if ( got != _name_map.end() )
-     _name_map.erase(name);
+     _name_map.erase(var_name);
 
-  _name_map.insert(std::make_pair(name,index));
+  _name_map.insert(std::make_pair(var_name,index));
 }
 
 // set name of all the variables
@@ -609,9 +616,9 @@ double ADFunc::dval_wrt(int index) const {
 }
 
 // get dval with respect to a variable
-double ADFunc::dval_wrt(std::string name) const {
+double ADFunc::dval_wrt(std::string var_name) const {
   if(!_hasName) throw std::runtime_error("Name mode not initialized!");
-  std::unordered_map<std::string,int>::const_iterator got = _name_map.find(name);
+  std::unordered_map<std::string,int>::const_iterator got = _name_map.find(var_name);
   if(got == _name_map.end()) throw std::runtime_error("Input variable name not found!");
 
   return _grad[got->second];

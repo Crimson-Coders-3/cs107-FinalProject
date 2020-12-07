@@ -74,7 +74,7 @@ class ADFunc {
    double dval_wrt(int index) const;
 
    // get dval with respect to a variable
-   double dval_wrt(std::string name) const;
+   double dval_wrt(std::string var_name) const;
 
    // get gradient (all the variables)
    std::vector<double> gradient() const;
@@ -103,7 +103,7 @@ class ADFunc {
    void set_dval(std::vector<double> dvals);
 
    // set name of a variable
-   void setName(int index, std::string name);
+   void setName(int index, std::string var_name);
 
    // set name of all the variables
    void setName(std::vector<std::string> names);

@@ -13,7 +13,7 @@
 #include "ADFunc.h"
 #include "test_vars.h"
 
-void ADFLibrary_nametest(){
+void ADLibrary_nametest(){
     printf("Starting ADFunc Class Names tests, eg. 'x', 'y', 'z' for input variables...\n");
 }
 

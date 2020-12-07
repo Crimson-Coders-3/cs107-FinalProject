@@ -7,8 +7,10 @@ int main(int argc,char **argv){
     ::testing::InitGoogleTest(&argc,argv);
 
     /* this forces the testing library to link */
-    ADFLibrary_unittest();
-    ADFLibrary_nametest();
+    ADLibrary_unittest();
+    ADLibrary_nametest();
+    ADLibrary_nestedtest();
+    ADLibrary_vectortest();
 
     /* Run Tests */
     return RUN_ALL_TESTS();

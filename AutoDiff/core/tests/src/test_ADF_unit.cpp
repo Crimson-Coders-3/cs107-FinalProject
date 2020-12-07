@@ -14,7 +14,7 @@
 #include "ADFunc.cpp"
 #include "test_vars.h"
 
-void ADFLibrary_unittest(){
+void ADLibrary_unittest(){
     printf("Starting ADFunc Class Unit tests...\n");
 }
 
