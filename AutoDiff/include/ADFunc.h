@@ -135,29 +135,29 @@ ADFunc operator / ( const ADFunc &lhs, double rhs );
 ADFunc operator / ( double lhs, const ADFunc &rhs);
 
 /////////////////////////////////////////// RELATIONAL OPERATORS
-bool operator==(const ADFunc& a, double b);
-bool operator==(double a, const ADFunc& b);
-bool operator==(const ADFunc& a, const ADFunc& b);
+bool operator==(const ADFunc& lhs, double rhs);
+bool operator==(double lhs, const ADFunc& rhs);
+bool operator==(const ADFunc& lhs, const ADFunc& rhs);
 
-bool operator!=(const ADFunc& a, double b);
-bool operator!=(double a, const ADFunc& b);
-bool operator!=(const ADFunc& a, const ADFunc& b);
+bool operator!=(const ADFunc& lhs, double rhs);
+bool operator!=(double lhs, const ADFunc& rhs);
+bool operator!=(const ADFunc& lhs, const ADFunc& rhs);
 
-bool operator<(const ADFunc& a, double b);
-bool operator<(double a, const ADFunc& b);
-bool operator<(const ADFunc& a, const ADFunc& b);
+bool operator<(const ADFunc& lhs, double rhs);
+bool operator<(double lhs, const ADFunc& rhs);
+bool operator<(const ADFunc& lhs, const ADFunc& rhs);
 
-bool operator<=(const ADFunc& a, double b);
-bool operator<=(double a, const ADFunc& b);
-bool operator<=(const ADFunc& a, const ADFunc& b);
+bool operator<=(const ADFunc& lhs, double rhs);
+bool operator<=(double lhs, const ADFunc& rhs);
+bool operator<=(const ADFunc& lhs, const ADFunc& rhs);
 
-bool operator>(const ADFunc& a, double b);
-bool operator>(double a, const ADFunc& b);
-bool operator>(const ADFunc& a, const ADFunc& b);
+bool operator>(const ADFunc& lhs, double rhs);
+bool operator>(double lhs, const ADFunc& rhs);
+bool operator>(const ADFunc& lhs, const ADFunc& rhs);
 
-bool operator>=(const ADFunc& a, double b);
-bool operator>=(double a, const ADFunc& b);
-bool operator>=(const ADFunc& a, const ADFunc& b);
+bool operator>=(const ADFunc& lhs, double rhs);
+bool operator>=(double lhs, const ADFunc& rhs);
+bool operator>=(const ADFunc& lhs, const ADFunc& rhs);
 
 /////////////////////////////////////////// MATH LIB FUNCTIONS
 ADFunc pow ( const ADFunc &lhs, const ADFunc &rhs );

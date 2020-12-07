@@ -87,6 +87,7 @@ ADFunc operator + ( const ADFunc &lhs, const ADFunc &rhs ){
     if(lhs.countVar()!=rhs.countVar()) {
       throw std::invalid_argument("Seed vectors dimension not matched!");
     }
+    checkName(lhs,rhs);
     std::vector<double> grad;
     for(int i = 0; i < lhs.countVar(); i++){
       grad.push_back(lhs.dval_wrt(i)+rhs.dval_wrt(i));
@@ -134,7 +135,7 @@ ADFunc operator - ( const ADFunc &lhs, const ADFunc &rhs ) {
   if(lhs.countVar()!=rhs.countVar()){
     throw std::invalid_argument("Seed vectors dimension not matched!");
   }
-    
+    checkName(lhs,rhs);
     std::vector<double> grad;
     for(int i = 0;i < lhs.countVar(); i++){
       grad.push_back(lhs.dval_wrt(i)-rhs.dval_wrt(i));
@@ -188,6 +189,7 @@ ADFunc operator * ( const ADFunc &lhs, const ADFunc &rhs ) {
   if(lhs.countVar()!=rhs.countVar()){
     throw std::invalid_argument("Seed vectors dimension not matched!");
   }
+  checkName(lhs,rhs);
   std::vector<double> grad;
   for(int i = 0; i < lhs.countVar(); i++){
     grad.push_back(lhs.gradient()[i] * rhs.val() + rhs.gradient()[i] * lhs.val());
@@ -245,6 +247,7 @@ ADFunc operator / ( const ADFunc &lhs, const ADFunc &rhs) {
   if(lhs.countVar()!=rhs.countVar()){
     throw std::invalid_argument("Seed vectors dimension not matched!");
   }
+  checkName(lhs,rhs);
   std::vector<double> grad;
   for(int i = 0; i < lhs.countVar(); i++){
     grad.push_back( (lhs.gradient()[i]*rhs.val()-lhs.val()*rhs.gradient()[i])/(rhs.val()*rhs.val()));
@@ -278,6 +281,7 @@ bool operator==(double lhs, const ADFunc& rhs){
   return lhs == rhs.val();
 }
 bool operator==(const ADFunc& lhs, const ADFunc& rhs){
+  checkName(lhs,rhs);
   if(lhs.val()!=rhs.val()){
     return false;
   }
@@ -299,6 +303,7 @@ bool operator!=(double lhs, const ADFunc& rhs){
   return !(lhs==rhs);
 }
 bool operator!=(const ADFunc& lhs, const ADFunc& rhs){
+  checkName(lhs,rhs);
   return !(lhs==rhs);
 }
 
@@ -349,6 +354,7 @@ ADFunc pow ( const ADFunc &lhs, const ADFunc &rhs ) {
   if(lhs.countVar()!=rhs.countVar()){
     throw std::invalid_argument("Seed vectors dimension not matched!");
   }
+  checkName(lhs,rhs);
   double val = std::pow(lhs.val(), rhs.val());
   std::vector<double> grad;
   for (int i = 0; i < rhs.countVar(); ++i) {
@@ -438,6 +444,7 @@ ADFunc cbrt ( const ADFunc &obj){
 
 // the hypotenuse of a right-angled triangle whose legs are lhs and rhs
 ADFunc hypot ( const ADFunc &lhs, const ADFunc &rhs) {
+  checkName(lhs,rhs);
   return sqrt(pow(lhs,2.0)+pow(rhs,2.0));
 }
 
@@ -543,7 +550,7 @@ void ADFunc::setName(int index, std::string name){
   if ( got != _name_map.end() )
      _name_map.erase(name);
 
-  _name_map.insert(std::make_pair<std::string,int>(name,index));
+  _name_map.insert(std::make_pair(name,index));
 }
 
 // set name of all the variables
@@ -567,7 +574,7 @@ void ADFunc::setName(std::vector<std::string> var_names){
     if( got!= _name_map.end() ){
       throw std::runtime_error("Name must be unique!");
     }
-    _name_map.insert(std::make_pair<std::string, int>(var_names[i],i));
+    _name_map.insert(std::make_pair(var_names[i],i));
   }
 }
 
@@ -631,7 +638,8 @@ std::vector<std::string> ADFunc::getName() const {
 // get names of a variable at index of name vector
 std::string ADFunc::getName(int index) const{
   if(index>=_num_vars) throw std::out_of_range("Index out of range!");
-  if(!_hasName) throw std::runtime_error("Name mode not initialized!");
+  if(!_hasName || _name_vec.size()==0) throw std::runtime_error("Name mode not initialized!");
+  if(index>=_name_vec.size()) throw std::out_of_range("Index out of range!");
   return _name_vec[index];
 }
 
@@ -642,9 +650,16 @@ std::ostream& operator<<(std::ostream& os, const ADFunc& obj){
     os << "Value at " << obj.val() << ". ";
     os << obj.countVar() << " variable(s) in total.\n";
 
-    for(int i = 0; i < obj.countVar() ; i++){
-      os << "   " << i << "th variable: dval = " << obj.gradient()[i] << std::endl;
-    } 
+    if(obj.hasName()){
+      for(int i = 0; i < obj.countVar() ; i++){
+        os << "   " << obj.getName(i) << "\'s dval = " << obj.gradient()[i] << std::endl;
+      }
+    } else {
+      for(int i = 0; i < obj.countVar() ; i++){
+        os << "   " << i << "th variable: dval = " << obj.gradient()[i] << std::endl;
+      }
+    }
+     
     return os;
 }
 
@@ -784,6 +799,8 @@ ADFunc atanh(const ADFunc &obj){
 // return true when
 // case 1: lhs and rhs both not in name mode
 // case 2: lhs and rhs both in name mode, and their variables'names are the same
+// raise an error when 
+//         lhs and rhs both in name mode, but have different names for some variables
 bool checkName(const ADFunc &lhs, const ADFunc & rhs){
   std::string error_msg = "LHS and RHS objects'names not comptabile! Are you sure to use them together?";
   if(!lhs.hasName() && !rhs.hasName()) 
@@ -792,14 +809,9 @@ bool checkName(const ADFunc &lhs, const ADFunc & rhs){
     std::cout << error_msg << std::endl;
     return false;
   }
-  if(lhs.countVar()!=rhs.countVar() || lhs.getName().size()!=rhs.getName().size()){
-    std::cout << error_msg << std::endl;
-    return false;
-  }
   for(int i=0;i<lhs.countVar();i++){
     if(lhs.getName().at(i)!=rhs.getName().at(i)){
-      std::cout << error_msg << std::endl;
-      return false;
+      throw std::runtime_error("LHS and RHS objects have different names!");
     }
   }
   return true;
