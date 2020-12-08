@@ -74,7 +74,7 @@ class ADFunc {
    double dval_wrt(int index) const;
 
    // get dval with respect to a variable
-   double dval_wrt(std::string name) const;
+   double dval_wrt(std::string var_name) const;
 
    // get gradient (all the variables)
    std::vector<double> gradient() const;
@@ -97,13 +97,13 @@ class ADFunc {
    void setVal(double val);
 
    // set dval with respect to a variable
-   void set_dval_wrt(int index, double dval);
+   void set_seed_wrt(int index, double dval);
 
    // set dvals of all the variables
-   void set_dval(std::vector<double> dvals);
+   void set_seed(std::vector<double> dvals);
 
    // set name of a variable
-   void setName(int index, std::string name);
+   void setName(int index, std::string var_name);
 
    // set name of all the variables
    void setName(std::vector<std::string> names);
@@ -135,29 +135,29 @@ ADFunc operator / ( const ADFunc &lhs, double rhs );
 ADFunc operator / ( double lhs, const ADFunc &rhs);
 
 /////////////////////////////////////////// RELATIONAL OPERATORS
-bool operator==(const ADFunc& a, double b);
-bool operator==(double a, const ADFunc& b);
-bool operator==(const ADFunc& a, const ADFunc& b);
+bool operator==(const ADFunc& lhs, double rhs);
+bool operator==(double lhs, const ADFunc& rhs);
+bool operator==(const ADFunc& lhs, const ADFunc& rhs);
 
-bool operator!=(const ADFunc& a, double b);
-bool operator!=(double a, const ADFunc& b);
-bool operator!=(const ADFunc& a, const ADFunc& b);
+bool operator!=(const ADFunc& lhs, double rhs);
+bool operator!=(double lhs, const ADFunc& rhs);
+bool operator!=(const ADFunc& lhs, const ADFunc& rhs);
 
-bool operator<(const ADFunc& a, double b);
-bool operator<(double a, const ADFunc& b);
-bool operator<(const ADFunc& a, const ADFunc& b);
+bool operator<(const ADFunc& lhs, double rhs);
+bool operator<(double lhs, const ADFunc& rhs);
+bool operator<(const ADFunc& lhs, const ADFunc& rhs);
 
-bool operator<=(const ADFunc& a, double b);
-bool operator<=(double a, const ADFunc& b);
-bool operator<=(const ADFunc& a, const ADFunc& b);
+bool operator<=(const ADFunc& lhs, double rhs);
+bool operator<=(double lhs, const ADFunc& rhs);
+bool operator<=(const ADFunc& lhs, const ADFunc& rhs);
 
-bool operator>(const ADFunc& a, double b);
-bool operator>(double a, const ADFunc& b);
-bool operator>(const ADFunc& a, const ADFunc& b);
+bool operator>(const ADFunc& lhs, double rhs);
+bool operator>(double lhs, const ADFunc& rhs);
+bool operator>(const ADFunc& lhs, const ADFunc& rhs);
 
-bool operator>=(const ADFunc& a, double b);
-bool operator>=(double a, const ADFunc& b);
-bool operator>=(const ADFunc& a, const ADFunc& b);
+bool operator>=(const ADFunc& lhs, double rhs);
+bool operator>=(double lhs, const ADFunc& rhs);
+bool operator>=(const ADFunc& lhs, const ADFunc& rhs);
 
 /////////////////////////////////////////// MATH LIB FUNCTIONS
 ADFunc pow ( const ADFunc &lhs, const ADFunc &rhs );
@@ -189,6 +189,13 @@ ADFunc atanh(const ADFunc &obj);
 
 /////////////////////////////////////////// NAME MODE
 bool checkName(const ADFunc &lhs, const ADFunc & rhs);
+
+////////////////////////////////////////// VECTOR INPUT
+
+// Create multiple functions/variables and intilaize seed vectors as unit vectors
+// automatically for you
+std::vector<ADFunc> multiVar(std::vector<double> values);
+
 
 ///////////////////////////////////////////////////////////////////
 /////   Operators NOT Supported in ADFunc Class      ////////////

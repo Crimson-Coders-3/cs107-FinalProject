@@ -2,6 +2,7 @@ file(GLOB AD_H *.h)
 
 set(AD_SRC
     ADFunc.cpp
+    ADFuncVector.cpp
 )
 
 # ==================== #
