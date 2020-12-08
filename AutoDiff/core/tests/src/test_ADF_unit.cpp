@@ -11,7 +11,6 @@
 
 /* header files */
 #include "ADFunc.h"
-#include "ADFunc.cpp"
 #include "test_vars.h"
 
 void ADLibrary_unittest(){
@@ -251,7 +250,7 @@ TEST(ADD, EQUAL_ERROR){
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
-        EXPECT_EQ(err.what(),std::string("Seed vectors dimension not matched!"));
+        EXPECT_EQ(err.what(),std::string("Input seed vector's dimension not matched!"));
     }
 }
 
@@ -293,7 +292,7 @@ TEST(ADD, ADFunc_ADFunc_ERROR){
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
-        EXPECT_EQ(err.what(),std::string("Seed vectors dimension not matched!"));
+        EXPECT_EQ(err.what(),std::string("LHS and RHS seed vectors' dimension not matched!"));
     }
 }
 
@@ -390,7 +389,7 @@ TEST(MINUS, EQUAL_ADFunc_ERROR){
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
-        EXPECT_EQ(err.what(),std::string("Seed vectors dimension not matched!"));
+        EXPECT_EQ(err.what(),std::string("Input seed vector's dimension not matched!"));
     }
 }
 
@@ -466,7 +465,7 @@ TEST(MINUS, ADFunc_ADFunc_ERROR){
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
-        EXPECT_EQ(err.what(),std::string("Seed vectors dimension not matched!"));
+        EXPECT_EQ(err.what(),std::string("Input seed vectors' dimension not matched!"));
     }
 }
 
@@ -563,7 +562,7 @@ TEST(TIMES, EQUAL_ADFunc_ERROR){
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
-        EXPECT_EQ(err.what(),std::string("Seed vectors dimension not matched!"));
+        EXPECT_EQ(err.what(),std::string("Input seed vector's dimension not matched!"));
     }
 }
 
@@ -609,7 +608,7 @@ TEST(TIMES,ADFunc_ADFunc_ERROR){
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
-        EXPECT_EQ(err.what(),std::string("Seed vectors dimension not matched!"));
+        EXPECT_EQ(err.what(),std::string("LHS and RHS seed vectors' dimension not matched!"));
     }
 }
 
@@ -710,7 +709,7 @@ TEST(QUO, EQUAL_ADFunc_ERROR){
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
-        EXPECT_EQ(err.what(),std::string("Seed vectors dimension not matched!"));
+        EXPECT_EQ(err.what(),std::string("Input seed vector's dimension not matched!"));
     }
 
 }
@@ -752,7 +751,7 @@ TEST(QUO, ADFunc_ADFunc_ERROR){
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
-        EXPECT_EQ(err.what(),std::string("Seed vectors dimension not matched!"));
+        EXPECT_EQ(err.what(),std::string("LHS and RHS seed vectors' dimension not matched!"));
     }
 }
 
@@ -920,7 +919,7 @@ TEST(POW,POW_TWOVAR){
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
-        EXPECT_EQ(err.what(),std::string("Seed vectors dimension not matched!"));
+        EXPECT_EQ(err.what(),std::string("LHS and RHS seed vectors' dimension not matched!"));
     }
     
     try {
