@@ -18,8 +18,6 @@ void ADLibrary_unittest(){
     printf("Starting ADFunc Class Unit tests...\n");
 }
 
-using namespace std;
-
 /////////////////////////////////////////// CONSTRUCTOR TESTS
 TEST(CONSTRUCTOR,SINGLE){
 	std::vector<double> seed_x;
@@ -1061,6 +1059,15 @@ TEST(POW,HYPOT){
     EXPECT_EQ(hypotx.countVar(),2);
     EXPECT_NEAR(hypotx.gradient().at(0),4.0, DTOL);
     EXPECT_NEAR(hypotx.gradient().at(1),6.4, DTOL);
+
+    try {
+        x.setName();
+        hypotx = hypot(x,y);
+        FAIL() << "Expected std::invalid_argument";
+    }
+    catch(std::invalid_argument const & err) {
+        EXPECT_EQ(err.what(),std::string("One of LHS and RHS is in name mode, the other is not!"));
+    }
 }
 
 /////////////////////////////////////////// EXPONENT TESTS
@@ -1250,8 +1257,8 @@ TEST(IOSTREAM, PRINT){
 	ADFunc x(0.5,seed_x);
 	testing::internal::CaptureStdout();
 	std::cout << x;
-	string output_x = testing::internal::GetCapturedStdout();
-	string expected_x = "Information of ADFunc object: \nValue at 0.5. \
+	std::string output_x = testing::internal::GetCapturedStdout();
+	std::string expected_x = "Information of ADFunc object: \nValue at 0.5. \
 1 variable(s) in total.\n   0th variable: dval = 4\n";
 	EXPECT_TRUE(output_x.compare(expected_x)==0);
 
@@ -1263,8 +1270,8 @@ TEST(IOSTREAM, PRINT){
 	ADFunc y(0.5,seed_y);
 	testing::internal::CaptureStdout();
 	std::cout << y;
-	string output_y = testing::internal::GetCapturedStdout();
-	string expected_y = "Information of ADFunc object: \nValue at 0.5. \
+	std::string output_y = testing::internal::GetCapturedStdout();
+	std::string expected_y = "Information of ADFunc object: \nValue at 0.5. \
 3 variable(s) in total.\n   0th variable: dval = 4\n   1th variable: dval = 5\n   2th variable: dval = 6\n";
 	EXPECT_TRUE(output_y.compare(expected_y)==0);
 }

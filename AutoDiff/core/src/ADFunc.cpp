@@ -979,3 +979,36 @@ bool checkName(const ADFunc &lhs, const ADFunc & rhs){
   }
   return true;
 }
+
+// Create multiple functions/variables and intilaize seed vectors as unit vectors
+// automatically for you
+std::vector<ADFunc> multiVar(std::vector<double> values){
+  std::vector<ADFunc> multi_vars;
+  std::vector<double> seed_vec(values.size(),0.0);
+  
+  for(int i=0;i<values.size();i++){
+    if(i!=0){
+      seed_vec[i-1] = 0.0;
+    }
+    seed_vec[i] = 1.0;
+    std::vector<double> seed_copy = seed_vec;
+    //ADFunc* new_var = new ADFunc(values[i],seed_copy);
+    ///(*multi_vars).push_back( new_var);
+    multi_vars.push_back( ADFunc(values[i],seed_copy) );
+  }
+  return multi_vars;
+  /*
+  std::vector<ADFunc*>* multi_vars = new std::vector<ADFunc*>;
+  std::vector<double> seed_vec(values.size(),0.0);
+  
+  for(int i=0;i<values.size();i++){
+    if(i!=0){
+      seed_vec[i-1] = 0.0;
+    }
+    seed_vec[i] = 1.0;
+    std::vector<double> seed_copy = seed_vec;
+    ADFunc* new_var = new ADFunc(values[i],seed_copy);
+    (*multi_vars).push_back( new_var);
+  }
+  return multi_vars;*/
+}

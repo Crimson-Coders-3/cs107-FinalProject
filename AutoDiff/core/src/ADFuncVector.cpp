@@ -125,3 +125,8 @@ std::vector<std::vector<double> > ADFuncVector::dval_wrt(std::vector<std::vector
 	}
 	return result;
 }
+
+ADFunc* ADFuncVector::index(int i){
+	if(i>_size) throw std::out_of_range("Index out of range!");
+	return &(_funcVec[i]);
+}

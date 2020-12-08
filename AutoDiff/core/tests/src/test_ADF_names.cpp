@@ -10,14 +10,11 @@
 
 /* header files */
 #include "ADFunc.h"
-#include "ADFunc.cpp"
 #include "test_vars.h"
 
 void ADLibrary_nametest(){
     printf("Starting ADFunc Class Names tests, eg. 'x', 'y', 'z' for input variables...\n");
 }
-
-using namespace std;
 
 /////////////////////////////////////////// CONSTRUCTOR
 
@@ -429,8 +426,8 @@ TEST(IOSTREAM, NAMEPRINT){
 
     testing::internal::CaptureStdout();
     std::cout << x;
-    string output_x = testing::internal::GetCapturedStdout();
-    string expected_x = "Information of ADFunc object: \nValue at 0.5. \
+    std::string output_x = testing::internal::GetCapturedStdout();
+    std::string expected_x = "Information of ADFunc object: \nValue at 0.5. \
 3 variable(s) in total.\n   x's dval = 1\n   y's dval = 9\n   z's dval = 13\n";
     EXPECT_TRUE(output_x.compare(expected_x)==0);
 }
@@ -450,8 +447,8 @@ TEST(TRANSFER,EQUAL){
 
     testing::internal::CaptureStdout();
     y += x;
-    string output = testing::internal::GetCapturedStdout();
-    string expected = "RHS is in name mode, LHS is not.\nTransfering RHS's names to LHS ...\n";
+    std::string output = testing::internal::GetCapturedStdout();
+    std::string expected = "RHS is in name mode, LHS is not.\nTransfering RHS's names to LHS ...\n";
     EXPECT_TRUE(output.compare(expected)==0);
 
     EXPECT_TRUE(y.hasName());
@@ -765,15 +762,6 @@ TEST(TRANSFER,ERROR){
     }
     try {
         ADFunc res = pow(x,y);
-        FAIL() << "Expected std::invalid_argument";
-    }
-    catch(std::invalid_argument const & err) {
-        EXPECT_EQ(err.what(),std::string("One of LHS and RHS is in name mode, the other is not!"));
-    }
-    try {
-        y = ADFunc(2.0,seed_x);
-        x = ADFunc(2.0,seed_x);
-        ADFunc res = hypot(x,y);
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
