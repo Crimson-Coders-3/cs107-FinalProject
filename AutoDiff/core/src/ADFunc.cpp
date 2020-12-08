@@ -65,15 +65,20 @@ ADFunc ADFunc::operator += (const ADFunc &obj) {
   if( obj.countVar()!= _num_vars ){
     throw std::invalid_argument("Seed vectors dimension not matched!");
   }
+  if(!checkName(lhs,rhs)){
+    if(obj.hasName()){
+      std::cout << "RHS is in name mode, LHS is not.\n";
+      std::cout << "Transfering RHS's names to LHS ...\n";
+      setName(obj.getName());
+    } else {
+      std::cout << "WARNING: RHS is in name mode, LHS is not.\n";
+    }
+  }
   if(obj.hasName() && obj.getName().size()!=_num_vars){
     throw std::invalid_argument("Name vectors dimension not matched!");
   }
   for(int i = 0; i < _num_vars; i++){
     _grad[i] += obj.gradient().at(i);
-  }
-
-  if(obj.hasName()&& !_hasName){
-    setName(obj.getName());
   }
   return *this;
 };
@@ -86,7 +91,8 @@ ADFunc ADFunc::operator += ( double obj ) {
 
 // overload double + ADFunc
 ADFunc operator + (double lhs, const ADFunc &rhs) {
-    return ADFunc(lhs+rhs.val(),rhs.gradient());
+  if(rhs.hasName()) return ADFunc(lhs+rhs.val(),rhs.gradient(),rhs.getName());
+  return ADFunc(lhs+rhs.val(),rhs.gradient());
 }
 
 // overload ADFunc + ADFunc
@@ -94,17 +100,25 @@ ADFunc operator + ( const ADFunc &lhs, const ADFunc &rhs ){
     if(lhs.countVar()!=rhs.countVar()) {
       throw std::invalid_argument("Seed vectors dimension not matched!");
     }
-    checkName(lhs,rhs);
+    if(!checkName(lhs,rhs)){
+      throw std::invalid_argument("One of LHS and RHS is in name mode, the other is not!");
+    }
     std::vector<double> grad;
     for(int i = 0; i < lhs.countVar(); i++){
       grad.push_back(lhs.dval_wrt(i)+rhs.dval_wrt(i));
+    }
+    if(lhs.hasName()){
+      return ADFunc(lhs.val()+rhs.val(),grad,lhs.getName());
     }
     return ADFunc(lhs.val()+rhs.val(),grad);
 }
 
 // overload ADFunc + double
 ADFunc operator + ( const ADFunc &lhs, double rhs ){
-    return ADFunc(lhs.val()+rhs, lhs.gradient());
+  if(lhs.hasName()){
+    return ADFunc(lhs.val()+rhs, lhs.gradient(),lhs.getName());
+  }
+  return ADFunc(lhs.val()+rhs, lhs.gradient());
 }
 
 /////////////////////////////////////////// - OPERATORS
@@ -114,6 +128,9 @@ ADFunc operator -(const ADFunc &obj) {
   std::vector<double> grad;
   for(int i = 0; i < obj.countVar(); i++){
     grad.push_back(-obj.gradient()[i]);
+  }
+  if(obj.hasName()){
+    return ADFunc(-obj.val(),grad,obj.getName());
   }
   return ADFunc(-obj.val(),grad);
 };
@@ -131,6 +148,18 @@ ADFunc ADFunc::operator -= (const ADFunc &obj) {
   if( obj.countVar()!= _num_vars ){
     throw std::invalid_argument("Seed vectors dimension not matched!");
   }
+  if(!checkName(lhs,rhs)){
+    if(obj.hasName()){
+      std::cout << "RHS is in name mode, LHS is not.\n";
+      std::cout << "Transfering RHS's names to LHS ...\n";
+      setName(obj.getName());
+    } else {
+      std::cout << "WARNING: RHS is in name mode, LHS is not.\n";
+    }
+  }
+  if(obj.hasName() && obj.getName().size()!=_num_vars){
+    throw std::invalid_argument("Name vectors dimension not matched!");
+  }
   for(int i = 0; i < _num_vars; i++){
     _grad[i] -= obj.gradient().at(i);
   }
@@ -142,16 +171,22 @@ ADFunc operator - ( const ADFunc &lhs, const ADFunc &rhs ) {
   if(lhs.countVar()!=rhs.countVar()){
     throw std::invalid_argument("Seed vectors dimension not matched!");
   }
-    checkName(lhs,rhs);
-    std::vector<double> grad;
-    for(int i = 0;i < lhs.countVar(); i++){
-      grad.push_back(lhs.dval_wrt(i)-rhs.dval_wrt(i));
-    }
-    return ADFunc(lhs.val()-rhs.val(),grad);
+  if(!checkName(lhs,rhs)){
+    throw std::invalid_argument("One of LHS and RHS is in name mode, the other is not!");
+  }
+  std::vector<double> grad;
+  for(int i = 0;i < lhs.countVar(); i++){
+    grad.push_back(lhs.dval_wrt(i)-rhs.dval_wrt(i));
+  }
+  if(lhs.hasName()){
+    return ADFunc(lhs.val()-rhs.val(),grad,lhs.getName());
+  }
+  return ADFunc(lhs.val()-rhs.val(),grad);
 };
 
 // overload ADFunc - double
 ADFunc operator - ( const ADFunc &lhs, double rhs ) {
+  if(lhs.hasName()) return ADFunc(lhs.val()-rhs,lhs.gradient(),lhs.getName());
   return ADFunc(lhs.val()-rhs,lhs.gradient());
 };
 
@@ -167,6 +202,18 @@ ADFunc ADFunc::operator *= ( const ADFunc &obj) {
   
   if(_num_vars!=obj.countVar()){
     throw std::invalid_argument("Seed vectors dimension not matched!");
+  }
+  if(!checkName(lhs,rhs)){
+    if(obj.hasName()){
+      std::cout << "RHS is in name mode, LHS is not.\n";
+      std::cout << "Transfering RHS's names to LHS ...\n";
+      setName(obj.getName());
+    } else {
+      std::cout << "WARNING: RHS is in name mode, LHS is not.\n";
+    }
+  }
+  if(obj.hasName() && obj.getName().size()!=_num_vars){
+    throw std::invalid_argument("Name vectors dimension not matched!");
   }
   std::vector<double> grad;
   for(int i = 0;i < obj.countVar(); i++){
@@ -196,12 +243,16 @@ ADFunc operator * ( const ADFunc &lhs, const ADFunc &rhs ) {
   if(lhs.countVar()!=rhs.countVar()){
     throw std::invalid_argument("Seed vectors dimension not matched!");
   }
-  checkName(lhs,rhs);
+  if(!checkName(lhs,rhs)){
+    throw std::invalid_argument("One of LHS and RHS is in name mode, the other is not!");
+  }
   std::vector<double> grad;
   for(int i = 0; i < lhs.countVar(); i++){
     grad.push_back(lhs.gradient()[i] * rhs.val() + rhs.gradient()[i] * lhs.val());
   }
-
+  if(lhs.hasName()) {
+    return ADFunc(val,grad,lhs.getName());
+  }
   return ADFunc(val, grad);
 };
 
@@ -212,12 +263,15 @@ ADFunc operator * (const ADFunc &lhs, double rhs ) {
   for(int i = 0; i < lhs.countVar(); i++){
     grad.push_back(lhs.gradient()[i] * rhs);
   }
+  if(lhs.hasName()){
+    return ADFunc(lhs.val()*rhs,grad,lhs.getName());
+  }
   return ADFunc(lhs.val()*rhs,grad);
 };
 
 // overload double * ADFunc
 ADFunc operator * (double lhs, const ADFunc &rhs) {
-    return rhs * lhs;
+  return rhs * lhs;
 }
 
 
@@ -228,6 +282,18 @@ ADFunc ADFunc::operator /= ( const ADFunc &obj) {
 
   if(_num_vars!=obj.countVar()){
     throw std::invalid_argument("Seed vectors dimension not matched!");
+  }
+  if(!checkName(lhs,rhs)){
+    if(obj.hasName()){
+      std::cout << "RHS is in name mode, LHS is not.\n";
+      std::cout << "Transfering RHS's names to LHS ...\n";
+      setName(obj.getName());
+    } else {
+      std::cout << "WARNING: RHS is in name mode, LHS is not.\n";
+    }
+  }
+  if(obj.hasName() && obj.getName().size()!=_num_vars){
+    throw std::invalid_argument("Name vectors dimension not matched!");
   }
   
   for(int i = 0;i < obj.countVar(); i++){
@@ -254,10 +320,15 @@ ADFunc operator / ( const ADFunc &lhs, const ADFunc &rhs) {
   if(lhs.countVar()!=rhs.countVar()){
     throw std::invalid_argument("Seed vectors dimension not matched!");
   }
-  checkName(lhs,rhs);
+  if(!checkName(lhs,rhs)){
+    throw std::invalid_argument("One of LHS and RHS is in name mode, the other is not!");
+  }
   std::vector<double> grad;
   for(int i = 0; i < lhs.countVar(); i++){
     grad.push_back( (lhs.gradient()[i]*rhs.val()-lhs.val()*rhs.gradient()[i])/(rhs.val()*rhs.val()));
+  }
+  if(lhs.hasName()){
+    return ADFunc(val,grad,lhs.getName());
   }
   return ADFunc(val, grad);
 };
@@ -268,6 +339,9 @@ ADFunc operator / ( const ADFunc &lhs, double rhs ) {
   for(int i = 0;i < lhs.countVar(); i++){
     grad.push_back(lhs.gradient()[i]/rhs);
   }
+  if(lhs.hasName()){
+    return ADFunc(lhs.val()/rhs, grad, lhs.getName());
+  }
   return ADFunc(lhs.val()/rhs, grad);
 };
 
@@ -276,6 +350,9 @@ ADFunc operator / (double lhs, const ADFunc &rhs) {
     std::vector<double> grad;
     for(int i = 0; i < rhs.countVar(); i++){
       grad.push_back( (-rhs.gradient()[i])/(rhs.val()*rhs.val())*lhs );
+    }
+    if(rhs.getName()){
+      ADFunc(lhs/rhs.val(), grad, rhs.getName());
     }
     return ADFunc(lhs/rhs.val(), grad);
 }
@@ -288,7 +365,9 @@ bool operator==(double lhs, const ADFunc& rhs){
   return lhs == rhs.val();
 }
 bool operator==(const ADFunc& lhs, const ADFunc& rhs){
-  checkName(lhs,rhs);
+  if(!checkName(lhs,rhs)){
+    std::cout << "One of LHS and RHS is in name mode, the other is not!";
+  }
   if(lhs.val()!=rhs.val()){
     return false;
   }
@@ -310,7 +389,9 @@ bool operator!=(double lhs, const ADFunc& rhs){
   return !(lhs==rhs);
 }
 bool operator!=(const ADFunc& lhs, const ADFunc& rhs){
-  checkName(lhs,rhs);
+  if(!checkName(lhs,rhs)){
+    std::cout << "One of LHS and RHS is in name mode, the other is not!";
+  }
   return !(lhs==rhs);
 }
 
@@ -331,6 +412,9 @@ bool operator<=(double lhs, const ADFunc& rhs){
   return lhs<=rhs.val();
 }
 bool operator<=(const ADFunc& lhs, const ADFunc& rhs){
+  if(!checkName(lhs,rhs)){
+    std::cout << "One of LHS and RHS is in name mode, the other is not!";
+  }
   return lhs.val()<=rhs.val();
 }
 
@@ -351,7 +435,10 @@ bool operator>=(double lhs, const ADFunc& rhs){
  return lhs>rhs.val();
 }
 bool operator>=(const ADFunc& lhs, const ADFunc& rhs){
- return lhs.val()>rhs.val();
+ if(!checkName(lhs,rhs)){
+    std::cout << "One of LHS and RHS is in name mode, the other is not!";
+  }
+  return lhs.val()>rhs.val();
 }
 
 /////////////////////////////////////////// POWER OPERATORS
@@ -361,7 +448,9 @@ ADFunc pow ( const ADFunc &lhs, const ADFunc &rhs ) {
   if(lhs.countVar()!=rhs.countVar()){
     throw std::invalid_argument("Seed vectors dimension not matched!");
   }
-  checkName(lhs,rhs);
+  if(!checkName(lhs,rhs)){
+    throw std::invalid_argument("One of LHS and RHS is in name mode, the other is not!");
+  }
   double val = std::pow(lhs.val(), rhs.val());
   std::vector<double> grad;
   for (int i = 0; i < rhs.countVar(); ++i) {
@@ -375,7 +464,7 @@ ADFunc pow ( const ADFunc &lhs, const ADFunc &rhs ) {
     grad.push_back( std::pow(lhs.val(), rhs.val()) * rhs.gradient()[i] * log(lhs.val())\
                   +std::pow(lhs.val(), rhs.val() - 1) * rhs.val() * lhs.gradient()[i]);
   }
-
+  if(lhs.hasName()) return ADFunc(val, grad, lhs.getName());
   return ADFunc(val,grad);
 };
 
@@ -387,7 +476,9 @@ ADFunc pow ( const ADFunc &lhs, double rhs) {
   for(int i = 0; i < lhs.countVar(); i++){
     grad.push_back(rhs * std::pow(lhs.val(),rhs-1) * lhs.gradient()[i]);
   }
-
+  if(lhs.hasName()){
+    return ADFunc(val,grad,lhs.getName());
+  }
   return ADFunc(val,grad);
 };
 
@@ -406,7 +497,9 @@ ADFunc pow (double lhs, const ADFunc &rhs) {
     }
     grad.push_back( log(lhs) * std::pow(lhs,rhs.val()) * rhs.gradient()[i] );
   }
-
+  if(rhs.hasName()){
+    return ADFunc(val,grad,rhs.getName());
+  }
   return ADFunc(val,grad);
 };
 
@@ -419,6 +512,10 @@ ADFunc exp ( const ADFunc &obj ) {
   for(int i = 0; i < obj.countVar(); i++){
     grad.push_back( exp(obj.val()) * obj.gradient()[i] );
   }
+
+  if(obj.hasName()){
+    return ADFunc(  exp(obj.val()), grad, obj.getName() );
+  }
   return ADFunc(  exp(obj.val()), grad );
 };
 
@@ -427,6 +524,9 @@ ADFunc exp2 ( const ADFunc &obj ){
   std::vector<double> grad;
   for(int i = 0; i < obj.countVar(); i++){
     grad.push_back( std::pow(2.0, obj.val()) * obj.gradient()[i] * log(2.0) );
+  }
+  if(obj.hasName()){
+    return ADFunc(  pow(2.0,obj.val()), grad, obj.getName() );
   }
   return ADFunc(  pow(2.0,obj.val()), grad );
 }
@@ -470,6 +570,10 @@ ADFunc log(const ADFunc &obj){
     for(int i = 0; i < obj.countVar(); i++){
       grad.push_back( (1/obj.val()) * obj.gradient()[i] );
     }
+
+    if(obj.hasName()){
+      return ADFunc(val,grad,obj.getName());
+    }
     return ADFunc(val,grad);
 }
 
@@ -487,6 +591,10 @@ ADFunc log10(const ADFunc &obj) {
     for(int i = 0; i < obj.countVar(); i++){
       grad.push_back( (1/obj.val()) * obj.gradient()[i] /log(10) );
     }
+
+    if(obj.hasName()){
+      return ADFunc(val,grad,obj.getName());
+    }
     return ADFunc(val,grad);
 }
 
@@ -503,6 +611,10 @@ ADFunc log2(const ADFunc &obj){
     for(int i = 0; i < obj.countVar(); i++){
       grad.push_back( (1/obj.val()) * obj.gradient()[i] /log(2) );
     }
+
+    if(obj.hasName()){
+      return ADFunc(val,grad,obj.getName());
+    }
     return ADFunc(val,grad);
 }
 
@@ -518,6 +630,10 @@ ADFunc log1p(const ADFunc &obj){
     std::vector<double> grad;
     for(int i = 0; i < obj.countVar(); i++){
       grad.push_back( 1/(obj.val()+1) * obj.gradient()[i] );
+    }
+
+    if(obj.hasName()){
+      return ADFunc(val,grad,obj.getName());
     }
     return ADFunc(val,grad);
 }
@@ -679,6 +795,9 @@ ADFunc sin(const ADFunc &obj){
     for(int i = 0; i < obj.countVar(); i++){
       grad.push_back( cos(obj.val()) * obj.gradient()[i] );
     }
+    if(obj.hasName()){
+      return ADFunc(val,grad,obj.getName());
+    }
     return ADFunc(val,grad);
 }
 
@@ -688,6 +807,9 @@ ADFunc cos(const ADFunc &obj){
     std::vector<double> grad;
     for(int i = 0; i < obj.countVar(); i++){
       grad.push_back( -sin(obj.val()) * obj.gradient()[i] );
+    }
+    if(obj.hasName()){
+      return ADFunc(val,grad,obj.getName());
     }
     return ADFunc(val,grad);
 }
@@ -699,6 +821,9 @@ ADFunc tan(const ADFunc &obj){
     for(int i = 0; i < obj.countVar(); i++){
       grad.push_back( 1/pow(cos(obj.val()),2) * obj.gradient()[i] );
     }
+    if(obj.hasName()){
+      return ADFunc(val,grad,obj.getName());
+    }
     return ADFunc(val,grad);
 }
 
@@ -708,6 +833,9 @@ ADFunc asin(const ADFunc &obj){
     std::vector<double> grad;
     for(int i = 0; i < obj.countVar(); i++){
       grad.push_back( 1/sqrt(1 - pow(obj.val(), 2)) * obj.gradient()[i] );
+    }
+    if(obj.hasName()){
+      return ADFunc(val,grad,obj.getName());
     }
     return ADFunc(val,grad);
 }
@@ -719,6 +847,9 @@ ADFunc acos(const ADFunc &obj){
     for(int i = 0; i < obj.countVar(); i++){
       grad.push_back( -1/sqrt(1 - pow(obj.val(), 2)) * obj.gradient()[i] );
     }
+    if(obj.hasName()){
+      return ADFunc(val,grad,obj.getName());
+    }
     return ADFunc(val,grad);
 }
 
@@ -728,6 +859,9 @@ ADFunc atan(const ADFunc &obj){
     std::vector<double> grad;
     for(int i = 0; i < obj.countVar(); i++){
       grad.push_back( 1/(1 + pow(obj.val(), 2)) * obj.gradient()[i] );
+    }
+    if(obj.hasName()){
+      return ADFunc(val,grad,obj.getName());
     }
     return ADFunc(val,grad);
 }
@@ -741,6 +875,9 @@ ADFunc sinh(const ADFunc &obj){
     for(int i = 0; i < obj.countVar(); i++){
       grad.push_back( cosh(obj.val()) * obj.gradient()[i] );
     }
+    if(obj.hasName()){
+      return ADFunc(val,grad,obj.getName());
+    }
     return ADFunc(val,grad);
 }
 
@@ -750,6 +887,9 @@ ADFunc cosh(const ADFunc &obj){
     std::vector<double> grad;
     for(int i = 0; i < obj.countVar(); i++){
       grad.push_back( sinh(obj.val()) * obj.gradient()[i] );
+    }
+    if(obj.hasName()){
+      return ADFunc(val,grad,obj.getName());
     }
     return ADFunc(val,grad);
 }
@@ -761,6 +901,9 @@ ADFunc tanh(const ADFunc &obj){
     for(int i = 0; i < obj.countVar(); i++){
       grad.push_back( (1/pow(cosh(obj.val()), 2)) * obj.gradient()[i] );
     }
+    if(obj.hasName()){
+      return ADFunc(val,grad,obj.getName());
+    }
     return ADFunc(val,grad);
 }
 
@@ -770,6 +913,9 @@ ADFunc asinh(const ADFunc &obj){
 
   for(int i = 0; i < obj.countVar(); i++){
     grad.push_back( 1/sqrt(obj.val()*obj.val()+1) * obj.gradient()[i] );
+  }
+  if(obj.hasName()){
+    return ADFunc(val,grad,obj.getName());
   }
   return ADFunc(val,grad);
 }
@@ -787,6 +933,9 @@ ADFunc acosh(const ADFunc &obj){
   for(int i = 0; i < obj.countVar(); i++){
     grad.push_back( 1/sqrt(obj.val()*obj.val()-1) * obj.gradient()[i] );
   }
+  if(obj.hasName()){
+    return ADFunc(val,grad,obj.getName());
+  }
   return ADFunc(val,grad);
 }
 
@@ -800,6 +949,9 @@ ADFunc atanh(const ADFunc &obj){
   for(int i = 0; i < obj.countVar(); i++){
     grad.push_back( 1/(1-obj.val()*obj.val()) * obj.gradient()[i] );
   }
+  if(obj.hasName()){
+    return ADFunc(val,grad,obj.getName());
+  }
   return ADFunc(val,grad);
 }
 
@@ -809,11 +961,9 @@ ADFunc atanh(const ADFunc &obj){
 // raise an error when 
 //         lhs and rhs both in name mode, but have different names for some variables
 bool checkName(const ADFunc &lhs, const ADFunc & rhs){
-  std::string error_msg = "LHS and RHS objects'names not comptabile! Are you sure to use them together?";
   if(!lhs.hasName() && !rhs.hasName()) 
     return true;
   if(!lhs.hasName() || !rhs.hasName()) {
-    std::cout << error_msg << std::endl;
     return false;
   }
   for(int i=0;i<lhs.countVar();i++){
