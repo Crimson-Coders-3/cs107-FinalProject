@@ -3,35 +3,52 @@
 
 /////////////////////////////////////////// CONSTRUCTOR
 
+ADFuncVector::ADFuncVector(){
+	_size = 0;
+}
+
 ADFuncVector::ADFuncVector(int size){
 	_size = size;
 }
 
-ADFuncVector::ADFuncVector(int size, std::vector<ADFunc> funcVec){
-	_size = size;
+ADFuncVector::ADFuncVector(std::vector<ADFunc> funcVec){
+	_size = funcVec.size();
 	_funcVec = funcVec;
 }
 
 /////////////////////////////////////////// SETTER
 
 void ADFuncVector::setSize(int size){
+	if(_funcVec.size()!=0 && _funcVec.size()!=size){
+		throw std::runtime_error("Input size mismatches with previously defined funcVector! Please use clear() before set size.");
+	}
 	_size = size;
 }
 
 void ADFuncVector::setFuncVec(std::vector<ADFunc> funcVec){
-	if(!checkValid()){
-		throw std::runtime_error("Dimension Not Matched!");
+	//case 1: _size set, _funcVec not _set
+	//        throw error if _size!=funcVec.size()
+	if(_funcVec.size()==0 && funcVec.size()!=_size && _size!=0){
+		throw std::runtime_error("Input funcVector mismatches with previously defined size! Please use clear() before set a new funcVector.");
 	}
+	//case 2: _size set, _funcVec set
+	//        _size and _funcVec changed
+	//case 3: _size not set, _funcVec not set
+	//        _size and _funcVec changed
 	_funcVec = funcVec;
-}
-void ADFuncVector::set(int size, std::vector<ADFunc> funcVec){
-	if(size!=funcVec.size()){
-		throw std::runtime_error("Dimension Not Matched!");
-	}
-	_size = size;
-	_funcVec = funcVec;
+	_size = funcVec.size();
 }
 
+void ADFuncVector::clear(){
+	_size = 0;
+	_funcVec.clear();
+}
+
+// append a new func to the end
+void ADFuncVector::push_back(ADFunc func){
+	_funcVec.push_back(func);
+	_size = _funcVec.size();
+}
 /////////////////////////////////////////// GETTER
 
 // get size of ADFunc Vector
@@ -45,6 +62,11 @@ int ADFuncVector::size(){
 // check if _funcVec.size() matches with _size
 bool ADFuncVector::checkValid(){
 	return _size == _funcVec.size();
+}
+
+// check if _funVec is empty
+bool ADFuncVector::empty(){
+	return _size == 0;
 }
 
 // get partial derivative of ADFunc Vector with respect to a variable 

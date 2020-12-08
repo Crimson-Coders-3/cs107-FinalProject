@@ -18,8 +18,9 @@ class ADFuncVector {
    // public
    public:
       // constructor
+      ADFuncVector();
       ADFuncVector(int size);
-      ADFuncVector(int size, std::vector<ADFunc> funcVec);
+      ADFuncVector(std::vector<ADFunc> funcVec);
 
    /////////////////////////////////////////// GETTER
 
@@ -28,6 +29,9 @@ class ADFuncVector {
 
    // check if _funcVec.size() matches with _size
    bool checkValid();
+
+   // check if _funVec is empty
+   bool empty();
 
    // get partial derivative of ADFunc Vector with respect to a variable 
    // given its variable index in seed vector
@@ -68,7 +72,10 @@ class ADFuncVector {
 
    void setFuncVec(std::vector<ADFunc> funcVec);
 
-   void set(int size, std::vector<ADFunc> funcVec);
+   void clear();
+
+   // append a new func to the end
+   void push_back(ADFunc func);
 };
 
 #endif
