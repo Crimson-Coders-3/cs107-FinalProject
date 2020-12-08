@@ -76,36 +76,7 @@ TEST(NESTED,MULTI){
 }
 
 
-TEST(NESTED,VECTORINPUT){/*
-    std::vector<double> init_values = {1.0,2.0,3.9};
-    std::vector<ADFunc*>* multi_vars = multiVar(init_values);
-    ADFunc* x = (*multi_vars)[0];
-    ADFunc* y = (*multi_vars)[1];
-    ADFunc* z = (*multi_vars)[2];
-
-    EXPECT_NEAR(x->val(),1.0,DTOL);
-    EXPECT_NEAR(y->val(),2.0,DTOL);
-    EXPECT_NEAR(z->val(),3.9,DTOL);
-
-    EXPECT_NEAR(x->dval_wrt(0),1.0,DTOL);
-    EXPECT_NEAR(x->dval_wrt(1),0.0,DTOL);
-    EXPECT_NEAR(x->dval_wrt(2),0.0,DTOL);
-    EXPECT_NEAR(y->dval_wrt(0),0.0,DTOL);
-    EXPECT_NEAR(y->dval_wrt(1),1.0,DTOL);
-    EXPECT_NEAR(y->dval_wrt(2),0.0,DTOL);
-    EXPECT_NEAR(z->dval_wrt(0),0.0,DTOL);
-    EXPECT_NEAR(z->dval_wrt(1),0.0,DTOL);
-    EXPECT_NEAR(z->dval_wrt(2),1.0,DTOL);
-
-    //modify
-    x->setVal(100.0);
-    EXPECT_NEAR( (*multi_vars)[0]->val(),100.0,DTOL);
-    EXPECT_NEAR(x->val(),100.0,DTOL);
-    
-    delete x; 
-    delete y;
-    delete z;
-    delete multi_vars;*/
+TEST(NESTED,VECTORINPUT){
     std::vector<double> init_values = {1.0,2.0,3.9};
     std::vector<ADFunc> multi_vars = multiVar(init_values);
     ADFunc* x = &(multi_vars[0]);
