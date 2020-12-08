@@ -136,10 +136,10 @@ TEST(SETTER, SINGLE){
 
     x.setVal(-2.0);
     EXPECT_NEAR(x.val(),-2.0,DTOL);
-    x.set_dval_wrt(0,1.99);
+    x.set_seed_wrt(0,1.99);
     EXPECT_NEAR(x.dval_wrt(0),1.99,DTOL);
     seed_x[0] = 1.89;
-    x.set_dval(seed_x);
+    x.set_seed(seed_x);
     EXPECT_NEAR(x.gradient().at(0),seed_x.at(0),DTOL);
 }
 
@@ -153,14 +153,14 @@ TEST(SETTER, MULTI){
     /* test setters */
     x.setVal(-2.0);
     EXPECT_NEAR(x.val(),-2.0,DTOL);
-    x.set_dval_wrt(0,1.99);
+    x.set_seed_wrt(0,1.99);
     EXPECT_NEAR(x.dval_wrt(0),1.99,DTOL);
-    x.set_dval_wrt(1,1.99);
+    x.set_seed_wrt(1,1.99);
     EXPECT_NEAR(x.dval_wrt(1),1.99,DTOL);
     EXPECT_NEAR(x.gradient().at(1),1.99,DTOL);
     seed_x[0] = 1.89;
     seed_x[2] = 1.89;
-    x.set_dval(seed_x);
+    x.set_seed(seed_x);
     EXPECT_NEAR(x.gradient().at(0),seed_x.at(0),DTOL);
     EXPECT_NEAR(x.gradient().at(2),seed_x.at(2),DTOL);
 
@@ -175,7 +175,7 @@ TEST(SETTER, ERROR){
 
     /* test error msg */
     try {
-        x.set_dval_wrt(1,3.0);
+        x.set_seed_wrt(1,3.0);
         FAIL() << "Expected std::out_of_range";
     }
     catch(std::out_of_range const & err) {
@@ -414,7 +414,7 @@ TEST(MINUS,NEGATE){
     EXPECT_NEAR(x2.gradient().at(1),-seed_x.at(1),DTOL);
     EXPECT_NEAR(x2.gradient().at(2),-seed_x.at(2),DTOL);
 
-    x1.set_dval_wrt(0,4.2);
+    x1.set_seed_wrt(0,4.2);
     // check nothing changed to x
     EXPECT_NEAR(x2.val(),-2.0,DTOL);
     EXPECT_EQ(x2.gradient().size(),3);
@@ -888,7 +888,7 @@ TEST(POW,POW_TWOVAR){
 	seed_z2.push_back(3.0);
 
 	ADFunc z1(0.5,seed_z1);
-	ADFunc z2(2.0, seed_z2);
+	ADFunc z2(2.0,seed_z2);
 
 	// powxy = (4x+y)^(2.3x+3y)
 	// dval with repect to x: (2.3x+3y)*(4x+y)^(2.3x+3y-1)*4+(4x+y)^(2.3x+3y)*2.3*log(0.5)

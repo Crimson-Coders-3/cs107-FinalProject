@@ -97,10 +97,10 @@ class ADFunc {
    void setVal(double val);
 
    // set dval with respect to a variable
-   void set_dval_wrt(int index, double dval);
+   void set_seed_wrt(int index, double dval);
 
    // set dvals of all the variables
-   void set_dval(std::vector<double> dvals);
+   void set_seed(std::vector<double> dvals);
 
    // set name of a variable
    void setName(int index, std::string var_name);

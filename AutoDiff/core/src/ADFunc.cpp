@@ -65,7 +65,7 @@ ADFunc ADFunc::operator += (const ADFunc &obj) {
   if( obj.countVar()!= _num_vars ){
     throw std::invalid_argument("Seed vectors dimension not matched!");
   }
-  if(!checkName(lhs,rhs)){
+  if(!checkName(obj,*this)){
     if(obj.hasName()){
       std::cout << "RHS is in name mode, LHS is not.\n";
       std::cout << "Transfering RHS's names to LHS ...\n";
@@ -148,7 +148,7 @@ ADFunc ADFunc::operator -= (const ADFunc &obj) {
   if( obj.countVar()!= _num_vars ){
     throw std::invalid_argument("Seed vectors dimension not matched!");
   }
-  if(!checkName(lhs,rhs)){
+  if(!checkName(obj,*this)){
     if(obj.hasName()){
       std::cout << "RHS is in name mode, LHS is not.\n";
       std::cout << "Transfering RHS's names to LHS ...\n";
@@ -203,7 +203,7 @@ ADFunc ADFunc::operator *= ( const ADFunc &obj) {
   if(_num_vars!=obj.countVar()){
     throw std::invalid_argument("Seed vectors dimension not matched!");
   }
-  if(!checkName(lhs,rhs)){
+  if(!checkName(obj,*this)){
     if(obj.hasName()){
       std::cout << "RHS is in name mode, LHS is not.\n";
       std::cout << "Transfering RHS's names to LHS ...\n";
@@ -283,7 +283,7 @@ ADFunc ADFunc::operator /= ( const ADFunc &obj) {
   if(_num_vars!=obj.countVar()){
     throw std::invalid_argument("Seed vectors dimension not matched!");
   }
-  if(!checkName(lhs,rhs)){
+  if(!checkName(obj,*this)){
     if(obj.hasName()){
       std::cout << "RHS is in name mode, LHS is not.\n";
       std::cout << "Transfering RHS's names to LHS ...\n";
@@ -351,7 +351,7 @@ ADFunc operator / (double lhs, const ADFunc &rhs) {
     for(int i = 0; i < rhs.countVar(); i++){
       grad.push_back( (-rhs.gradient()[i])/(rhs.val()*rhs.val())*lhs );
     }
-    if(rhs.getName()){
+    if(rhs.hasName()){
       ADFunc(lhs/rhs.val(), grad, rhs.getName());
     }
     return ADFunc(lhs/rhs.val(), grad);
@@ -646,13 +646,13 @@ void ADFunc::setVal(double obj) {
 }
 
 // set dval with respect to a variable
-void ADFunc::set_dval_wrt(int index, double dval) {
+void ADFunc::set_seed_wrt(int index, double dval) {
   if(index>=_num_vars) throw std::out_of_range("Index out of range!");
   _grad[index] = dval;
 }
 
 // set dvals with all the variables
-void ADFunc::set_dval(std::vector<double> dvals){
+void ADFunc::set_seed(std::vector<double> dvals){
   _grad = dvals; 
 }
 
