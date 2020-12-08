@@ -11,6 +11,7 @@
 
 /* header files */
 #include "ADFunc.h"
+#include "ADFunc.cpp"
 #include "test_vars.h"
 
 void ADLibrary_unittest(){
