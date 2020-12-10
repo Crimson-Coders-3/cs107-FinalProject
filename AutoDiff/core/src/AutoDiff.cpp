@@ -23,7 +23,7 @@ AutoDiff::AutoDiff(double a, double b) {
 
 /////////////////////// +
 // overload autodiff + autodiff
-AutoDiff AutoDiff::operator + ( AutoDiff &obj ) {
+AutoDiff AutoDiff::operator + ( AutoDiff obj ) {
   AutoDiff c = AutoDiff(0.0);
 
   c.val = val + obj.val;
@@ -43,7 +43,7 @@ AutoDiff AutoDiff::operator + ( double a ) {
 };
 
 // overload double + AutoDiff
-AutoDiff operator + (double lhs, AutoDiff &rhs) {
+AutoDiff operator + (double lhs, AutoDiff rhs) {
     return rhs + lhs;
 }
 
@@ -62,7 +62,7 @@ AutoDiff AutoDiff::operator - () {
 
 /////////////////////// -
 // overload autodiff - autodiff
-AutoDiff AutoDiff::operator - ( AutoDiff &obj ) {
+AutoDiff AutoDiff::operator - ( AutoDiff obj ) {
   AutoDiff c = AutoDiff(0.0);
 
   c.val = val - obj.val;
@@ -82,14 +82,14 @@ AutoDiff AutoDiff::operator - ( double a ) {
 };
 
 // overload double - AutoDiff
-AutoDiff operator - (double lhs, AutoDiff &rhs) {
+AutoDiff operator - (double lhs, AutoDiff rhs) {
     return - rhs + lhs;
 }
 
 
 /////////////////////// *
 // overload autodiff * autodiff
-AutoDiff AutoDiff::operator * ( AutoDiff &obj ) {
+AutoDiff AutoDiff::operator * ( AutoDiff obj ) {
   AutoDiff c = AutoDiff(0.0);
 
   c.val = val * obj.val;
@@ -109,14 +109,14 @@ AutoDiff AutoDiff::operator * ( double a ) {
 };
 
 // overload double * AutoDiff
-AutoDiff operator * (double lhs, AutoDiff &rhs) {
+AutoDiff operator * (double lhs, AutoDiff rhs) {
     return rhs * lhs;
 }
 
 
 /////////////////////// /
 // overload autodiff / autodiff
-AutoDiff AutoDiff::operator / ( AutoDiff &obj ) {
+AutoDiff AutoDiff::operator / ( AutoDiff obj ) {
   AutoDiff c = AutoDiff(0.0);
 
   c.val = val / obj.val;
@@ -136,14 +136,14 @@ AutoDiff AutoDiff::operator / ( double a ) {
 };
 
 // overload double / AutoDiff
-AutoDiff operator / (double lhs, AutoDiff &rhs) {
+AutoDiff operator / (double lhs, AutoDiff rhs) {
     return pow(rhs, -1.0) * lhs;
 }
 
 
 /////////////////////// pow
 // autodiff ^ autodiff
-AutoDiff pow ( AutoDiff &a, AutoDiff &b ) {
+AutoDiff pow ( AutoDiff a, AutoDiff b ) {
   AutoDiff c = AutoDiff(0.0);
 
   c.val = std::pow(a.val, b.val);
@@ -153,7 +153,7 @@ AutoDiff pow ( AutoDiff &a, AutoDiff &b ) {
 };
 
 // autodiff ^ double
-AutoDiff pow ( AutoDiff &obj, double a ) {
+AutoDiff pow ( AutoDiff obj, double a ) {
   AutoDiff c = AutoDiff(0.0);
 
   c.val = std::pow(obj.val, a);
@@ -163,7 +163,7 @@ AutoDiff pow ( AutoDiff &obj, double a ) {
 };
 
 // double ^ autodiff
-AutoDiff pow (double lhs, AutoDiff &rhs) {
+AutoDiff pow (double lhs, AutoDiff rhs) {
   AutoDiff c = AutoDiff(0.0);
 
   c.val = std::pow(2, rhs.val);
@@ -175,7 +175,7 @@ AutoDiff pow (double lhs, AutoDiff &rhs) {
 
 /////////////////////// exp
 // e ^ autodiff
-AutoDiff exp ( AutoDiff &a ) {
+AutoDiff exp ( AutoDiff a ) {
   AutoDiff c = AutoDiff(0.0);
 
   c.val = exp(a.val);
@@ -206,7 +206,7 @@ void AutoDiff::print() {
   std::cout << "print function called --- val: " << val << " " << "der: " << der << std::endl; 
 } 
 
-AutoDiff sin(AutoDiff &input)
+AutoDiff sin(AutoDiff input)
 {
 
     double val = sin( (input.getVal()));
@@ -214,7 +214,7 @@ AutoDiff sin(AutoDiff &input)
     return AutoDiff(val,dv);
 }
 
-AutoDiff cos(AutoDiff &input)
+AutoDiff cos(AutoDiff input)
 {   
     
     double val = cos(input.getVal());
@@ -222,7 +222,7 @@ AutoDiff cos(AutoDiff &input)
     return AutoDiff(val,dv);
 }
 
-AutoDiff tan(AutoDiff &input)
+AutoDiff tan(AutoDiff input)
 {
     
     double val = tan(input.getVal());
@@ -230,7 +230,7 @@ AutoDiff tan(AutoDiff &input)
     return AutoDiff(val,dv);
 }
 
-AutoDiff asin(AutoDiff &input)
+AutoDiff asin(AutoDiff input)
 {
     
     double val = asin(input.getVal());
@@ -238,7 +238,7 @@ AutoDiff asin(AutoDiff &input)
     return AutoDiff(val,dv);
 }
 
-AutoDiff acos(AutoDiff &input)
+AutoDiff acos(AutoDiff input)
 {
     
     double val = acos(input.getVal());
@@ -246,7 +246,7 @@ AutoDiff acos(AutoDiff &input)
     return AutoDiff(val,dv);
 }
 
-AutoDiff atan(AutoDiff &input)
+AutoDiff atan(AutoDiff input)
 {
     
     double val = atan(input.getVal());
@@ -254,7 +254,7 @@ AutoDiff atan(AutoDiff &input)
     return AutoDiff(val,dv);
 }
 
-AutoDiff log(AutoDiff &input)
+AutoDiff log(AutoDiff input)
 {
     
     double val = log(input.getVal());
@@ -262,7 +262,7 @@ AutoDiff log(AutoDiff &input)
     return AutoDiff(val,dv);
 }
 
-AutoDiff sinh(AutoDiff &input)
+AutoDiff sinh(AutoDiff input)
 {
     
     double val = sinh(input.getVal());
@@ -270,7 +270,7 @@ AutoDiff sinh(AutoDiff &input)
     return AutoDiff(val,dv);
 }
 
-AutoDiff cosh(AutoDiff &input)
+AutoDiff cosh(AutoDiff input)
 {
     
     double val = cosh(input.getVal());
@@ -278,7 +278,7 @@ AutoDiff cosh(AutoDiff &input)
     return AutoDiff(val,dv);
 }
 
-AutoDiff tanh(AutoDiff &input)
+AutoDiff tanh(AutoDiff input)
 {
     
     double val = tanh(input.getVal());
