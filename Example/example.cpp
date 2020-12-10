@@ -8,14 +8,6 @@
 #include <functional>
 using namespace std;
 
-AutoDiff choose_order(int order, double val = 0){
-    AutoDiff w = AutoDiff(val);
-    for(int r=0; r<order-1; r++){
-        w = AutoDiff(w);
-    }
-    return w;
-}
-
 vector<double> der(function<vector<AutoDiff> (vector<AutoDiff>)> func, vector<AutoDiff> &vars, int wrt=0){
     vars[wrt].der = 1;
     vector<AutoDiff> F = func(vars);
@@ -42,8 +34,5 @@ int main(){
     vector<double> dF = der(myFunction, vars, wrt = 0);
     cout << "Derivative of f1: " << dF[0] << endl;
     cout << "Derivative of f2: " << dF[1] << endl;
-
-    AutoDiff w = choose_order(2);
-    cout << w.val << endl;
     return 0;
 }
