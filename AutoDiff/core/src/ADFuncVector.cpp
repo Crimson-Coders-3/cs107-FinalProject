@@ -74,9 +74,34 @@ bool ADFuncVector::empty(){
 	return _size == 0;
 }
 
+// get partial derivative of a particular function with respect to a variable 
+// given function index and variable index in seed vector
+// 1 single double returned
+double ADFuncVector::dval_wrt(int func_index, int var_index){
+	if(func_index>=_size){
+		throw std::out_of_range("Function index out of range!");
+	}
+	return result;
+}
+
+// get partial derivative of ADFunc Vector with respect to a variable 
+// given its variable name
+// 1-d dval vector returned
+double ADFuncVector::dval_wrt(int func_index, std::string var_name){
+	if(func_index>=_size){
+		throw std::out_of_range("Function index out of range!");
+	}
+	std::vector<double> result;
+	for(ADFunc func: _funcVec){
+		result.push_back(func.dval_wrt(var_name));
+	}
+	return result;
+}
+
 // get partial derivative of ADFunc Vector with respect to a variable 
 // given its variable index in seed vector
 // 1-d dval vector returned
+// out of index is handled by ADFunc class
 std::vector<double> ADFuncVector::dval_wrt(int index){
 	std::vector<double> result;
 	for(ADFunc func: _funcVec){
@@ -102,6 +127,9 @@ std::vector<double> ADFuncVector::dval_wrt(std::string var_name){
 std::vector<double> ADFuncVector::dval_wrt(std::vector<std::pair<int, int> > fun_var){
 	std::vector<double> result;
 	for(std::pair<int,int> fv_pair: fun_var){
+		if(fv_pair.first>=_size){
+			throw std::out_of_range("Function index out of range!");
+		}
 		result.push_back( (_funcVec[fv_pair.first]).dval_wrt(fv_pair.second) );
 	}
 	return result;
@@ -113,6 +141,9 @@ std::vector<double> ADFuncVector::dval_wrt(std::vector<std::pair<int, int> > fun
 std::vector<double> ADFuncVector::dval_wrt(std::vector<std::pair<int, std::string> > fun_var){
 	std::vector<double> result;
 	for(std::pair<int,std::string> fv_pair: fun_var){
+		if(fv_pair.first>=_size){
+			throw std::out_of_range("Function index out of range!");
+		}
 		result.push_back( (_funcVec[fv_pair.first]).dval_wrt(fv_pair.second) );
 	}
 	return result;
@@ -128,6 +159,9 @@ std::vector<std::vector<double> > ADFuncVector::dval_wrt(std::vector<std::vector
 
 		row_result.clear();
 		for(std::pair<int,int> fv_pair: row){
+			if(fv_pair.first>=_size){
+				throw std::out_of_range("Function index out of range!");
+			}
 			row_result.push_back( (_funcVec[fv_pair.first]).dval_wrt(fv_pair.second) );
 		}
 		std::vector<double> row_copy(row_result);
@@ -145,6 +179,9 @@ std::vector<std::vector<double> > ADFuncVector::dval_wrt(std::vector<std::vector
 	for(std::vector<std::pair<int,std::string> > row: fun_var){
 		row_result.clear();
 		for(std::pair<int,std::string> fv_pair: row){
+			if(fv_pair.first>=_size){
+				throw std::out_of_range("Function index out of range!");
+			} 
 			row_result.push_back( (_funcVec[fv_pair.first]).dval_wrt(fv_pair.second) );
 		}
 		std::vector<double> row_copy(row_result);
@@ -153,7 +190,7 @@ std::vector<std::vector<double> > ADFuncVector::dval_wrt(std::vector<std::vector
 	return result;
 }
 
-ADFunc* ADFuncVector::index(int i){
+ADFunc* ADFuncVector::at(int i){
 	if(i>_size) throw std::out_of_range("Index out of range!");
 	return &(_funcVec[i]);
 }

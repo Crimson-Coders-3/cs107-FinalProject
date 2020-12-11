@@ -46,6 +46,16 @@ class ADFuncVector {
    // 1-d dval vector returned
    std::vector<double> dval_wrt(std::string var_name);
 
+   // get partial derivative of a particular function with respect to a variable 
+   // given function index and variable index in seed vector
+   // 1 single double returned
+   double dval_wrt(int func_index, int var_index);
+
+   // get partial derivative of a particular function with respect to a variable 
+   // given function index and variable name
+   // 1 single double returned
+   double dval_wrt(int func_index, std::string var_name);
+
    // Given function index and corresponding variable index,
    // get partial derivative of ADFunc Vector with respect to more than one variables 
    // 1-d dval vector returned
@@ -67,7 +77,7 @@ class ADFuncVector {
    std::vector<std::vector<double> > dval_wrt(std::vector<std::vector<std::pair<int, std::string> > > fun_var);
 
    // get ith ADFunc from ADFuncVector. Return a pointer that enables user to modify ADFunc
-   ADFunc* index(int i);
+   ADFunc* at(int i);
 
    /////////////////////////////////////////// SETTER
 
