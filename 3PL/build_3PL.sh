@@ -242,5 +242,43 @@ if [ ${BUILD_GTEST} -eq 1 ]; then
 fi
 # =================================================================== #
 
+# =================================================================== #
+COMPILE_FAIL=0
+INSTALL_LCOV_DIRECTORY=${INSTALL_3PL_DIRECTORY}/lcov
+if [ ${BUILD_GTEST} -eq 1 ]; then
+  echo " "
+  echo -e "${mC} ==== Building LCOV ==== ${eC}"
+  echo " Compiling Options:"
+  echo "        Build Type: ${BUILD_TYPE}"
+  echo "  Install Location: ${INSTALL_LCOV_DIRECTORY}"
+  echo " "
+  echo "                CC: ${CC}"
+  echo "               CXX: ${CXX}"
+  echo -e "${mC} ========================= ${eC}"
+  echo " "
+
+  if [ ! -d "${INSTALL_LCOV_DIRECTORY}" ]; then
+    echo "Warning:"
+    echo "${INSTALL_LCOV_DIRECTORY} does not exist."
+    COMPILE_FAIL=1
+  fi
+
+  if [ ${COMPILE_FAIL} == 0 ]; then
+    echo " "
+    echo         "==============================="
+    echo -e "${gC} LCOV build successful! ${eC}"
+    echo         "==============================="
+    echo " "
+  else
+    echo " "
+    echo         "==========================="
+    echo -e "${rC} LCOV Test build FAILED! ${eC}"
+    echo         "==========================="
+    echo " "
+    exit 1
+  fi
+fi
+# =================================================================== #
+
 echo -e "${gC}Build Script Completed Successfully!${eC}"
 exit 0

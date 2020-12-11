@@ -745,6 +745,30 @@ double ADFunc::dval_wrt(std::string var_name) const {
   return _grad[got->second];
 }
 
+// get dval with respect to more than one variables
+std::vector<double> ADFunc::dval_wrt(std::vector<int> indexs) const {
+  std::vector<double> dvals;
+  for(int index: indexs){
+    if(index>=_num_vars) throw std::out_of_range("Index out of range!");
+    dvals.push_back(_grad[index]);
+  }
+  return dvals;
+}
+
+// get dval with respect to more than one variables
+std::vector<double> ADFunc::dval_wrt(std::vector<std::string> names) const {
+  if(!_hasName) throw std::runtime_error("Name mode not initialized!");
+  std::vector<double> dvals;
+  std::unordered_map<std::string,int>::const_iterator got;
+  
+  for(std::string name: names){
+    got = _name_map.find(var_name);
+    if(got == _name_map.end()) throw std::runtime_error("Input variable name not found!");
+    dvals.push_back(_grad[got->second]);
+  }
+  return dvals;
+}
+
 // get gradient (all the variables)
 std::vector<double> ADFunc::gradient() const {
   std::vector<double> grad_copy = _grad;
