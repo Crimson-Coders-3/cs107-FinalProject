@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <iostream>
-//#include <ADFunc.h>
+#include <ADFunc.h>
 
 ///////////////////////////////////////////////////////////////// CUSTOM ADFuncVector CLASS
 class ADFuncVector {

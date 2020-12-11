@@ -3,8 +3,12 @@
 ## In the directory at the same level of this Makefile, type command in the terminal: make
 ## Now run ./example
 
+AD_INCLUDE = ${CURDIR}/../AutoDiff/install/include
+AD_LIB_PATH = ${CURDIR}/../AutoDiff/install/lib
+AD_LIB_NAME = AutoDiff
+
 all: example.cpp
-	g++ -Wall -o example -L../AutoDiff/build/lib -I../AutoDiff/build/include example.cpp -Wl,-rpath=${CURDIR}/../AutoDiff/build/lib -lAutoDiff
+	g++ -Wall -o example -I${AD_INCLUDE} -L${AD_LIB_PATH} example.cpp -Wl,-rpath=${AD_LIB_PATH} -l${AD_LIB_NAME}
 
 clean:
 	rm *.o
