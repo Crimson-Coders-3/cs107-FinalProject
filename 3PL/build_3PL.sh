@@ -38,6 +38,7 @@ SOURCES_3PL_DIRECTORY=${PROJECT_ROOT}/3PL
 BUILD_EIGEN=1 #by default, build Eigen 3PL (3rd party lin alg library)
 BUILD_GTEST=0
 BUILD_CLEAN=0
+BUILD_LCOV=1
 
 # ================= #
 # compiler defaults
@@ -285,9 +286,9 @@ if [ ${BUILD_EIGEN} -eq 1 ]; then
 fi
 
 # =================================================================== #
-COMPILE_FAIL=0
+COMPILE_FAIL_LCOV=0
 INSTALL_LCOV_DIRECTORY=${INSTALL_3PL_DIRECTORY}/lcov
-if [ ${BUILD_GTEST} -eq 1 ]; then
+if [ ${BUILD_LCOV} -eq 1 ]; then
   echo " "
   echo -e "${mC} ==== Building LCOV ==== ${eC}"
   echo " Compiling Options:"
@@ -298,14 +299,20 @@ if [ ${BUILD_GTEST} -eq 1 ]; then
   echo "               CXX: ${CXX}"
   echo -e "${mC} ========================= ${eC}"
   echo " "
+  
+  cd ${SOURCES_3PL_DIRECTORY}/lcov
+  mkdir ${INSTALL_LCOV_DIRECTORY}
+  make install DESTDIR=${INSTALL_LCOV_DIRECTORY}
+
+  cd ${CURRENT_PATH}
 
   if [ ! -d "${INSTALL_LCOV_DIRECTORY}" ]; then
     echo "Warning:"
     echo "${INSTALL_LCOV_DIRECTORY} does not exist."
-    COMPILE_FAIL=1
+    COMPILE_FAIL_LCOV=1
   fi
 
-  if [ ${COMPILE_FAIL} == 0 ]; then
+  if [ ${COMPILE_FAIL_LCOV} == 0 ]; then
     echo " "
     echo         "==============================="
     echo -e "${gC} LCOV build successful! ${eC}"
