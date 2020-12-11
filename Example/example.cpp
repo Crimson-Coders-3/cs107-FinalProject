@@ -62,7 +62,7 @@ int main(){
     // Example 3: x is a scalar input with a vector function
     // x is a single number, F(x) is a vector of functions [f1(x), f2(x), ..., fm(x)]
     // F.dval is s a vector with m elements [df1/dx, df2/dx, ..., dfm/dx]
-    vector<ADFunc> F = {2*pow(x2,2), 5*sin(y2)*x2};
+    vector<ADFunc> F = {2*pow(x2,2), 5*sin(x2)*x2};
     ADFuncVector Fvec(F);
     std::vector<std::pair<int, int> > fun_var_indexs = { {0,0}, {1,0} };
     vector<double> dvals = Fvec.dval_wrt(fun_var_indexs);
@@ -73,26 +73,14 @@ int main(){
     // Example 4: x is a vector [x1, x2, ..., xn], 
     // F(x) is a vector of functions [f1(x), f2(x), ..., fm(x)]
     // f.der is a matrix
-    F = {2*pow(x2,2), 5*sin(y2)*x2, 9*sinh(exp(x2*y2))};
+    init_values.push_back(0.3);
+    multi_vars = multiVar(init_values);
+    ADFunc x4 = multi_vars[0];
+    ADFunc y4 = multi_vars[1];
+    ADFunc z4 = multi_vars[2];
+    F = {2*pow(x4,2), 5*sin(y4)*x4+z4/sin(y4), 9*sinh(z4)-exp(x4*y4)};
     Fvec = ADFuncVector(F);
     vector<vector<std::pair<int, int> > > fun_var_index_m = { {{0,0},{0,1},{0,2}},{{1,0},{1,1},{1,2}},{{2,0},{2,1},{2,2}}};
-    /*vector<std::pair<int, int> > row1;
-    row1.push_back(make_pair (0,0));
-    row1.push_back(make_pair (0,1));
-    row1.push_back(make_pair (0,2));
-    fun_var_index_m.push_back(row1);
-    
-    vector<std::pair<int, int> > row2;
-    row2.push_back(make_pair (1,0));
-    row2.push_back(make_pair (1,1));
-    row2.push_back(make_pair (1,2));
-    fun_var_indexs.push_back(row2);
-    
-    vector<std::pair<int, int> > row3;
-    row3.push_back(make_pair (2,0));
-    row3.push_back(make_pair (2,1));
-    row3.push_back(make_pair (2,2));
-    fun_var_indexs.push_back(row3);*/
 
     vector<vector<double> > dval_m = Fvec.dval_wrt(fun_var_index_m);
     cout << "df1/dx1: " << dval_m[0][0] << endl;
