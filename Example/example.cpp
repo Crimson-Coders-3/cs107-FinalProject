@@ -40,7 +40,7 @@ int main(){
     cout << "df1/dx: " << dvals[0] << endl; // 20.0
     cout << "df2/dx: " << dvals[1] << endl; // 2.29693
     cout << "val for f1: " << Fvec.val(0) << endl; // 50.0
-    cout << "val for f2: " << Fvec.val(1) << "\n" <<endl; // -23.97
+    cout << "val for f2: " << Fvec.val(1) << "\n" <<endl; // -23.9731
 
     // Example 4: x is a vector [x1, x2, ..., xn], 
     // F(x) is a vector of functions [f1(x), f2(x), ..., fm(x)]
@@ -55,15 +55,15 @@ int main(){
     vector<vector<std::pair<int, int> > > fun_var_index_m = { {{0,0},{2,1},{0,2}},{{1,0},{1,1},{2,2}}};
 
     vector<vector<double> > dval_m = Fvec.dval_wrt(fun_var_index_m);
-    cout << "df1/dx1: " << dval_m[0][0] << endl; //
-    cout << "df1/dx2: " << dval_m[0][1] << endl; //
-    cout << "df1/dx3: " << dval_m[0][2] << endl; //
-    cout << "df2/dx1: " << dval_m[1][0] << endl;
-    cout << "df2/dx2: " << dval_m[1][1] << endl;
-    cout << "df2/dx3: " << dval_m[1][2] << endl;
-    cout << "val for f1 in F: " << Fvec.val(0) << endl; //
-    cout << "val for f2 in F: " << Fvec.val(1) << endl; //
-    cout << "val for f3 in F: " << Fvec.val(2) << endl; //
+    cout << "df1/dx1: " << dval_m[0][0] << endl; // 0.0648263
+    cout << "df1/dx2: " << dval_m[0][1] << endl; // -1.63450869e+07
+    cout << "df1/dx3: " << dval_m[0][2] << endl; // 1.7389
+    cout << "df2/dx1: " << dval_m[1][0] << endl; // 0.7056
+    cout << "df2/dx2: " << dval_m[1][1] << endl; // 146.053
+    cout << "df2/dx3: " << dval_m[1][2] << endl; // 9.40805
+    cout << "val for f1 in F: " << Fvec.val(0) << endl; // 1.08
+    cout << "val for f2 in F: " << Fvec.val(1) << endl; // 24.8245
+    cout << "val for f3 in F: " << Fvec.val(2) << endl; // -3269014.63
 
     return 0;
 }
