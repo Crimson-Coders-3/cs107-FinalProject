@@ -36,7 +36,7 @@ int main(){
     int wrt = 0;
 
     function<vector<AutoDiff>(vector<AutoDiff>)> myFunction = F;
-    vector<double> dF = der(myFunction, vars, wrt = 0);
+    vector<double> dF = der(myFunction, vars, wrt = 1);
     cout << "Derivative of f1: " << dF[0] << endl;
     cout << "Derivative of f2: " << dF[1] << endl;
     cout << "Derivative of f3: " << dF[2] << endl;
@@ -47,6 +47,19 @@ int main(){
     function<vector<AutoDiff>(vector<AutoDiff>)> myFunction2 = F2;
     vector<double> dF2 = der(myFunction2, vars2, wrt=0);
     cout << "Derivative of f1: " << dF2[0] << endl;
+
+    AutoDiff z(2);
+    AutoDiff test = pow(z, 3, 3);
+    cout << test.val << endl;
+    cout << test.der << endl;
     
+    AutoDiff test2 = sin(z, 3); //3rd derivative
+    cout << test2.val << endl;
+    cout << test2.der << endl;
+
+    cout << "test 3 -----" <<endl;
+    AutoDiff test3 = cos(pow(z,3), 2); //2nd derivative of sin (x^3)
+    cout << test3.val << endl;
+    cout << test3.der << endl;
     return 0;
 }

@@ -153,13 +153,16 @@ AutoDiff pow ( AutoDiff a, AutoDiff b ) {
 };
 
 // autodiff ^ double
-AutoDiff pow ( AutoDiff obj, double a ) {
-  AutoDiff c = AutoDiff(0.0);
-
-  c.val = std::pow(obj.val, a);
-  c.der = a * std::pow(obj.val, a - 1) * obj.der;
-
-  return c;
+AutoDiff pow ( AutoDiff obj, double a, int order) {
+  if(order==1) {
+    AutoDiff c = AutoDiff(0.0);
+    c.val = std::pow(obj.val, a);
+    c.der = a * std::pow(obj.val, a-1) * obj.der;
+    return c;
+  }
+  else{
+    return a * pow(obj, a-1, order-1) * obj.der;
+  }
 };
 
 // double ^ autodiff
@@ -206,20 +209,28 @@ void AutoDiff::print() {
   std::cout << "print function called --- val: " << val << " " << "der: " << der << std::endl; 
 } 
 
-AutoDiff sin(AutoDiff input)
+AutoDiff sin(AutoDiff input, int order)
 {
-
-    double val = sin( (input.getVal()));
-    double dv = cos(input.getVal()) * input.getDer();
-    return AutoDiff(val,dv);
+    if(order==1){
+        double val = sin(input.val);
+        double dv = cos(input.val) * input.der;
+        return AutoDiff(val, dv);
+    }
+    else{
+        return cos(input, order-1) * input.der;
+    }
 }
 
-AutoDiff cos(AutoDiff input)
+AutoDiff cos(AutoDiff input, int order)
 {   
-    
-    double val = cos(input.getVal());
-    double dv = -sin(input.getVal()) * input.getDer();
-    return AutoDiff(val,dv);
+    if(order==1){
+        double val = cos(input.val);
+        double dv = -sin(input.val) * input.der;
+        return AutoDiff(val,dv);
+    }
+    else{
+        return -sin(input, order-1) * input.der;
+    }
 }
 
 AutoDiff tan(AutoDiff input)
