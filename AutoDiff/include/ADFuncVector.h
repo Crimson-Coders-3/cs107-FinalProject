@@ -13,6 +13,7 @@ class ADFuncVector {
    private:
       // private variable
       int _size;
+      int _num_vars;
       std::vector<ADFunc> _funcVec;
 
    // public
@@ -78,6 +79,8 @@ class ADFuncVector {
 
    // get ith ADFunc from ADFuncVector. Return a pointer that enables user to modify ADFunc
    ADFunc* at(int i);
+
+   int countVar();
 
    /////////////////////////////////////////// SETTER
 

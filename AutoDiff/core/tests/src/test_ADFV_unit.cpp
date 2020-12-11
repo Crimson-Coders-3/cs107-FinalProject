@@ -48,14 +48,14 @@ TEST(VECTOR,INDEX){
     std::vector<ADFunc> F = {f1,f2,f3};
     ADFuncVector Fvec(F);
 
-    EXPECT_NEAR(Fvec.index(0)->val(),8.2515279087505959,DTOL);
-    Fvec.index(0)->setVal(2.0);
-    EXPECT_NEAR(Fvec.index(0)->val(),2.0,DTOL);
+    EXPECT_NEAR(Fvec.at(0)->val(),8.2515279087505959,DTOL);
+    Fvec.at(0)->setVal(2.0);
+    EXPECT_NEAR(Fvec.at(0)->val(),2.0,DTOL);
 
     std::vector<double> newseed = {1.0,0.0,0.0};
-    EXPECT_NEAR(Fvec.index(0)->dval_wrt(0),2.63506,0.0001);
-    Fvec.index(0)->set_seed(newseed);
-    EXPECT_NEAR(Fvec.index(0)->dval_wrt(0),1.0,DTOL);
+    EXPECT_NEAR(Fvec.at(0)->dval_wrt(0),2.63506,0.0001);
+    Fvec.at(0)->set_seed(newseed);
+    EXPECT_NEAR(Fvec.at(0)->dval_wrt(0),1.0,DTOL);
 }
 
 TEST(VECTOR,SETTER){

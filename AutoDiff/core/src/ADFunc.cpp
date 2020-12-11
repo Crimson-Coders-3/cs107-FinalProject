@@ -16,11 +16,7 @@ ADFunc::ADFunc(double val, std::vector<double> seed) {
 }
 
 ADFunc::ADFunc(double val, std::string name, std::vector<std::string> var_names) {
-  if(seed.size()!=var_names.size()){
-    throw std::invalid_argument("Dimension of seed vector and name vector not matched!");
-  }
   _val = val;
-  _grad = seed;
   _num_vars = var_names.size();
   _name_vec = var_names;
   _hasName = true;
