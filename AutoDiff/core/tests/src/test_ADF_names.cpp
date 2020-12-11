@@ -19,12 +19,10 @@ void ADLibrary_nametest(){
 /////////////////////////////////////////// CONSTRUCTOR
 
 TEST(NAME_CONSTRUCTOR,SINGLE){
-	std::vector<double> seed_x;
-	seed_x.push_back(1.0);
     std::vector<std::string> name_x;
     name_x.push_back("x");
 
-    ADFunc x(2.0,seed_x,name_x);
+    ADFunc x(2.0,"x",name_x);
 
     /* test getters */
     EXPECT_TRUE(x.hasName());
@@ -33,14 +31,11 @@ TEST(NAME_CONSTRUCTOR,SINGLE){
 }
 
 TEST(NAME_CONSTRUCTOR,MULTI){
-    std::vector<double> seed_x;
-    seed_x.push_back(1.0);
-    seed_x.push_back(9.0);
     std::vector<std::string> name_x;
     name_x.push_back("x");
     name_x.push_back("y");
 
-    ADFunc x(2.0,seed_x,name_x);
+    ADFunc x(2.0,"x",name_x);
 
     /* test getters */
     EXPECT_TRUE(x.hasName());

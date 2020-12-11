@@ -15,6 +15,35 @@ ADFunc::ADFunc(double val, std::vector<double> seed) {
   _hasName = false;
 }
 
+ADFunc::ADFunc(double val, std::string name, std::vector<std::string> var_names) {
+  if(seed.size()!=var_names.size()){
+    throw std::invalid_argument("Dimension of seed vector and name vector not matched!");
+  }
+  _val = val;
+  _grad = seed;
+  _num_vars = var_names.size();
+  _name_vec = var_names;
+  _hasName = true;
+
+  std::unordered_map<std::string,int>::const_iterator got;
+
+  for(int i=0;i<_num_vars;i++){
+    got = _name_map.find(var_names[i]);
+    if( got!= _name_map.end() ){
+      throw std::runtime_error("Name must be unique!");
+    }
+    _name_map.insert(std::make_pair(var_names[i],i));
+  }
+
+  for(int i=0;i<_num_vars;i++){
+    if(var_names[i]==name){
+      _grad.push_back(1.0);
+    } else {
+      _grad.push_back(0.0);
+    }
+  }
+}
+
 ADFunc::ADFunc(double val, std::vector<double> seed, std::vector<std::string> var_names) {
   if(seed.size()!=var_names.size()){
     throw std::invalid_argument("Dimension of seed vector and name vector not matched!");

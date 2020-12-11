@@ -37,6 +37,7 @@ class ADFunc {
       // seed vector example: for x in f(x,y), seed = [1, 0], var_names = ["x","y"]
       //                      for y in f(x,y), seed = [0, 1], var_names = ["x","y"]
       // in var_names, every name must be unique
+      ADFunc(double val, std::string name, std::vector<std::string> var_names);
       ADFunc(double val, std::vector<double> seed, std::vector<std::string> var_names);
 
    /////////////////////////////////////////// ASSIGNMENT & COMPOUND ASSIGNMENT OPERATORS
