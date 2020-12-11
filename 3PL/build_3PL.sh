@@ -35,8 +35,10 @@ SOURCES_3PL_DIRECTORY=${PROJECT_ROOT}/3PL
 # ================== #
 # compiling defaults
 # ================== #
+BUILD_EIGEN=1 #by default, build Eigen 3PL (3rd party lin alg library)
 BUILD_GTEST=0
 BUILD_CLEAN=0
+BUILD_LCOV=1
 
 # ================= #
 # compiler defaults
@@ -235,6 +237,91 @@ if [ ${BUILD_GTEST} -eq 1 ]; then
     echo " "
     echo         "==========================="
     echo -e "${rC} Google Test build FAILED! ${eC}"
+    echo         "==========================="
+    echo " "
+    exit 1
+  fi
+fi
+# =================================================================== #
+COMPILE_FAIL_EIGEN=0
+INSTALL_EIGEN_DIRECTORY=${INSTALL_3PL_DIRECTORY}/eigen
+if [ ${BUILD_EIGEN} -eq 1 ]; then
+  echo " "
+  echo -e "${mC} ==== Building Eigen ==== ${eC}"
+  echo " Compiling Options:"
+  echo "  Install Location: ${INSTALL_EIGEN_DIRECTORY}"
+  echo -e "${mC} ========================= ${eC}"
+  echo " "
+
+  cd ${SOURCES_3PL_DIRECTORY}/eigen-3.3.9
+  rm -rf _build
+  mkdir _build
+  cd _build
+  cmake .. -D CMAKE_INSTALL_PREFIX:PATH=${INSTALL_EIGEN_DIRECTORY} \
+
+  ${MAKE_CMD}
+  cd ..
+  cd ${CURRENT_PATH}
+
+  if [ ! -d "${INSTALL_EIGEN_DIRECTORY}" ]; then
+    echo "Warning:"
+    echo "${INSTALL_EIGEN_DIRECTORY} does not exist."
+    COMPILE_FAIL_EIGEN=1
+  fi
+
+  if [ ${COMPILE_FAIL_EIGEN} == 0 ]; then
+    echo " "
+    echo         "==============================="
+    echo -e "${gC} Eigen build successful! ${eC}"
+    echo         "==============================="
+    echo " "
+  else
+    echo " "
+    echo         "==========================="
+    echo -e "${rC} Eigen build FAILED! ${eC}"
+    echo         "==========================="
+    echo " "
+    exit 1
+  fi
+fi
+
+# =================================================================== #
+COMPILE_FAIL_LCOV=0
+INSTALL_LCOV_DIRECTORY=${INSTALL_3PL_DIRECTORY}/lcov
+if [ ${BUILD_LCOV} -eq 1 ]; then
+  echo " "
+  echo -e "${mC} ==== Building LCOV ==== ${eC}"
+  echo " Compiling Options:"
+  echo "        Build Type: ${BUILD_TYPE}"
+  echo "  Install Location: ${INSTALL_LCOV_DIRECTORY}"
+  echo " "
+  echo "                CC: ${CC}"
+  echo "               CXX: ${CXX}"
+  echo -e "${mC} ========================= ${eC}"
+  echo " "
+  
+  cd ${SOURCES_3PL_DIRECTORY}/lcov
+  mkdir ${INSTALL_LCOV_DIRECTORY}
+  make install DESTDIR=${INSTALL_LCOV_DIRECTORY}
+
+  cd ${CURRENT_PATH}
+
+  if [ ! -d "${INSTALL_LCOV_DIRECTORY}" ]; then
+    echo "Warning:"
+    echo "${INSTALL_LCOV_DIRECTORY} does not exist."
+    COMPILE_FAIL_LCOV=1
+  fi
+
+  if [ ${COMPILE_FAIL_LCOV} == 0 ]; then
+    echo " "
+    echo         "==============================="
+    echo -e "${gC} LCOV build successful! ${eC}"
+    echo         "==============================="
+    echo " "
+  else
+    echo " "
+    echo         "==========================="
+    echo -e "${rC} LCOV Test build FAILED! ${eC}"
     echo         "==========================="
     echo " "
     exit 1

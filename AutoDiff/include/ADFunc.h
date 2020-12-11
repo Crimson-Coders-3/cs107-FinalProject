@@ -76,6 +76,12 @@ class ADFunc {
    // get dval with respect to a variable
    double dval_wrt(std::string var_name) const;
 
+   // get dvals with respect to more than one variables
+   std::vector<double> dval_wrt(std::vector<int> indexs) const;
+
+   // get dvals with respect to more than one variables
+   std::vector<double> dval_wrt(std::vector<std::string> names) const;
+
    // get gradient (all the variables)
    std::vector<double> gradient() const;
 
