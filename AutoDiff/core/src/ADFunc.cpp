@@ -1047,3 +1047,21 @@ std::vector<ADFunc> multiVar(std::vector<double> values){
   }
   return multi_vars;
 }
+
+// set all the seeds of vectorized input back to unit vectors
+void setSeedDefault(std::vector<ADFunc> vars){
+  if(vars.size()==0){
+    return;
+  }
+  std::vector<double> seed_vec(vars.at(0).countVar(),0.0);
+  
+  for(int i=0;i<vars.size();i++){
+    if(i!=0){
+      seed_vec[i-1] = 0.0;
+    }
+    seed_vec[i] = 1.0;
+    std::vector<double> seed_copy = seed_vec;
+
+    vars.at(i).set_seed(seed_copy);
+  }
+}

@@ -202,7 +202,8 @@ bool checkName(const ADFunc &lhs, const ADFunc & rhs);
 // Create multiple functions/variables and intilaize seed vectors as unit vectors
 // automatically for you
 std::vector<ADFunc> multiVar(std::vector<double> values);
-void setAll(std::vector<ADFunc> vars, std::vector<double> values);
+
+// set all the seeds of vectorized input back to unit vectors
 void setSeedDefault(std::vector<ADFunc> vars);
 
 ///////////////////////////////////////////////////////////////////
