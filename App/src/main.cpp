@@ -1,14 +1,24 @@
-# include "ADFunc.h"
+#include "ADFunc.h"
 #include <math.h>
 #include <typeinfo>
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <Eigen/Dense>
 
+using Eigen::MatrixXd;
 using namespace std;
 
 int main(){
-	vector<double> seed_x;
+    cout << "testing......." << endl;
+	//MatrixXd m(2,2);
+    //m(0,0) = 3;
+    //m(1,0) = 2.5;
+    //m(0,1) = -1;
+    //m(1,1) = m(1,0) + m(0,1);
+    //cout << m << endl;
+
+    vector<double> seed_x;
 	seed_x.push_back(2.0);
     ADFunc x(2.0,seed_x);
 

@@ -22,12 +22,14 @@ endif()
 set(gtest_dir   "" CACHE PATH "GTest install directory location")
 set(autodiff_dir "" CACHE PATH "AutoDiff path e.g. <autodiff_dir>/<autodiff_so>")
 set(autodiff_so AutoDiff CACHE STRING "AutoDiff shared object name")
+set(EIGEN_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/../install/3PL/eigen/include/eigen3)
 # ======================================= #
 
 # ======================================= #
 # Library header files to be included
 include_directories(${autodiff_dir}/include
-                    ./include)
+                    ./include
+                    ${EIGEN_INCLUDE_DIR})
 
 # Libraries to be linked
 find_library(autodiff_lb NAMES ${autodiff_so} PATHS ${autodiff_dir}/lib)
