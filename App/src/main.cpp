@@ -71,7 +71,7 @@ VectorXd getRoots(function<vector<ADFunc> (VectorXd)> customFunct, VectorXd gues
 vector<ADFunc> customFunct(VectorXd vals){
     ADFunc x = ADFunc(vals[0], {1,0});
     ADFunc y = ADFunc(vals[1], {0,1});
-    return {2*pow(x,2), 5*sin(y)*x};
+    return {5*pow(x,2)+2*y, 3+y};
 }
 
 int main(){
@@ -89,7 +89,7 @@ int main(){
     function<vector<ADFunc>(VectorXd)> Func = customFunct;
     VectorXd initial_guess(2);
     initial_guess << 1, 1;
-    VectorXd roots = getRoots(customFunct, initial_guess, 0.000001);
+    VectorXd roots = getRoots(customFunct, initial_guess, 1e-20);
     cout << "------------ROOT:-----------" << endl;
     cout << roots << endl;
     return 0;
