@@ -24,6 +24,9 @@ class ADFuncVector {
 
    /////////////////////////////////////////// GETTER
 
+   // get val of a function
+   double val(int index);
+
    // get size of ADFunc Vector
    int size();
 

@@ -51,6 +51,11 @@ void ADFuncVector::push_back(ADFunc func){
 }
 /////////////////////////////////////////// GETTER
 
+// get val of a function
+double ADFuncVector::val(int index){
+	return _funcVec.at(index).val();
+}
+
 // get size of ADFunc Vector
 int ADFuncVector::size(){
 	if(!checkValid()){

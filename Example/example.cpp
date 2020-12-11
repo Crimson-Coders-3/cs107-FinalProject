@@ -40,7 +40,7 @@ int main(){
 
     // Example 1: x is a single number, f(x) is a single function
     // f.dval is a single number representing df/dx
-    ADFunc x1(5.0, {1.0});
+    ADFunc x1(5.0, vector<double> {1.0});
     ADFunc f1 = pow(x1,2) + 5*exp(x1);
     cout << "df/dx: " << f1.dval_wrt(0) << endl;
     cout << "value: " << f1.val() << endl;
@@ -62,25 +62,25 @@ int main(){
     // Example 3: x is a scalar input with a vector function
     // x is a single number, F(x) is a vector of functions [f1(x), f2(x), ..., fm(x)]
     // F.dval is s a vector with m elements [df1/dx, df2/dx, ..., dfm/dx]
-    vector<ADFunc> F = {2*pow(x,2), 5*sin(y)*x};
+    vector<ADFunc> F = {2*pow(x2,2), 5*sin(y2)*x2};
     ADFuncVector Fvec(F);
     std::vector<std::pair<int, int> > fun_var_indexs = { {0,0}, {1,0} };
     vector<double> dvals = Fvec.dval_wrt(fun_var_indexs);
     cout << "df1/dx: " << dvals[0] << endl;
     cout << "df2/dx: " << dvals[1] << endl;
-    cout << "val for F: " << Fvec.val() << endl;
+    cout << "val for F: " << Fvec.val(0) << endl;
 
     // Example 4: x is a vector [x1, x2, ..., xn], 
     // F(x) is a vector of functions [f1(x), f2(x), ..., fm(x)]
     // f.der is a matrix
-    F = {2*pow(x,2), 5*sin(y)*x, 9*sinh(exp(x*y))};
-    Fvec(F);
-    vector<vector<std::pair<int, int> > > fun_var_indexs;
-    vector<std::pair<int, int> > row1;
+    F = {2*pow(x2,2), 5*sin(y2)*x2, 9*sinh(exp(x2*y2))};
+    Fvec = ADFuncVector(F);
+    vector<vector<std::pair<int, int> > > fun_var_index_m = { {{0,0},{0,1},{0,2}},{{1,0},{1,1},{1,2}},{{2,0},{2,1},{2,2}}};
+    /*vector<std::pair<int, int> > row1;
     row1.push_back(make_pair (0,0));
     row1.push_back(make_pair (0,1));
     row1.push_back(make_pair (0,2));
-    fun_var_indexs.push_back(row1);
+    fun_var_index_m.push_back(row1);
     
     vector<std::pair<int, int> > row2;
     row2.push_back(make_pair (1,0));
@@ -92,19 +92,21 @@ int main(){
     row3.push_back(make_pair (2,0));
     row3.push_back(make_pair (2,1));
     row3.push_back(make_pair (2,2));
-    fun_var_indexs.push_back(row3);
+    fun_var_indexs.push_back(row3);*/
 
-    vector<vector<double> > dvals = Fvec.dval_wrt(fun_var_indexs);
-    cout << "df1/dx1: " << dvals[0][0] << endl;
-    cout << "df1/dx2: " << dvals[0][1] << endl;
-    cout << "df1/dx3: " << dvals[0][2] << endl;
-    cout << "df2/dx1: " << dvals[1][0] << endl;
-    cout << "df2/dx2: " << dvals[1][1] << endl;
-    cout << "df2/dx3: " << dvals[1][2] << endl;
-    cout << "df3/dx1: " << dvals[2][0] << endl;
-    cout << "df3/dx2: " << dvals[2][1] << endl;
-    cout << "df3/dx3: " << dvals[2][2] << endl;
-    cout << "val for F: " << Fvec.val() << endl;
+    vector<vector<double> > dval_m = Fvec.dval_wrt(fun_var_index_m);
+    cout << "df1/dx1: " << dval_m[0][0] << endl;
+    cout << "df1/dx2: " << dval_m[0][1] << endl;
+    cout << "df1/dx3: " << dval_m[0][2] << endl;
+    cout << "df2/dx1: " << dval_m[1][0] << endl;
+    cout << "df2/dx2: " << dval_m[1][1] << endl;
+    cout << "df2/dx3: " << dval_m[1][2] << endl;
+    cout << "df3/dx1: " << dval_m[2][0] << endl;
+    cout << "df3/dx2: " << dval_m[2][1] << endl;
+    cout << "df3/dx3: " << dval_m[2][2] << endl;
+    cout << "val for f1 in F: " << Fvec.val(0) << endl;
+    cout << "val for f2 in F: " << Fvec.val(1) << endl;
+    cout << "val for f3 in F: " << Fvec.val(2) << endl;
 
     return 0;
 }

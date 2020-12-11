@@ -762,7 +762,7 @@ std::vector<double> ADFunc::dval_wrt(std::vector<std::string> names) const {
   std::unordered_map<std::string,int>::const_iterator got;
   
   for(std::string name: names){
-    got = _name_map.find(var_name);
+    got = _name_map.find(name);
     if(got == _name_map.end()) throw std::runtime_error("Input variable name not found!");
     dvals.push_back(_grad[got->second]);
   }
