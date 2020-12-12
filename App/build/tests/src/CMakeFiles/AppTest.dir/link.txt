@@ -1,1 +1,0 @@
-/usr/bin/g++ -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -dynamiclib -Wl,-headerpad_max_install_names -o ../../lib/libAppTest.dylib -install_name @rpath/libAppTest.dylib CMakeFiles/AppTest.dir/test_app.cpp.o   -L/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/install/3PL/googletest/lib/gtest 
