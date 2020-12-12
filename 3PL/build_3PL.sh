@@ -244,7 +244,7 @@ if [ ${BUILD_GTEST} -eq 1 ]; then
 fi
 # =================================================================== #
 COMPILE_FAIL_EIGEN=0
-INSTALL_EIGEN_DIRECTORY=${INSTALL_3PL_DIRECTORY}/eigen-3.3.9
+INSTALL_EIGEN_DIRECTORY=${INSTALL_3PL_DIRECTORY}/eigen
 if [ ${BUILD_EIGEN} -eq 1 ]; then
   echo " "
   echo -e "${mC} ==== Building Eigen ==== ${eC}"
