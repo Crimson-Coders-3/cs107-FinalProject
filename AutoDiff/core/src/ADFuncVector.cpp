@@ -103,7 +103,7 @@ bool ADFuncVector::checkValid(){
 			throw std::runtime_error("Input function have different number of varibales!");
 		}
 	}
-	if(_size != _funcVec.size()){
+	if(_size!=0 && _size != _funcVec.size()){
 		throw std::runtime_error("Internal size not matched with internal std::vector<ADFunc>! Please use setFuncVec() or setSize() to fix it!");
 	}
 	return true;
