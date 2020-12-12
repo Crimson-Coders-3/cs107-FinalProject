@@ -302,3 +302,81 @@ TEST(MATH,ATAN){
 	EXPECT_NEAR(atanx.real(),atan(-0.5),DTOL);
 	EXPECT_NEAR(atanx.dual(),4.0/(1 + 0.25),DTOL);
 }
+
+TEST(MATH,COS){
+	Dual x(-0.5,4.0);
+	Dual cosx = cos(x);
+	EXPECT_NEAR(cosx.real(),cos(-0.5),DTOL);
+	EXPECT_NEAR(cosx.dual(),sin(-0.5)*-4,DTOL);
+}
+
+TEST(MATH,COSH){
+	Dual x(-0.5,4.0);
+	Dual coshx = cosh(x);
+	EXPECT_NEAR(coshx.real(),cosh(-0.5),DTOL);
+	EXPECT_NEAR(coshx.dual(),sinh(-0.5)*4,DTOL);
+}
+
+TEST(MATH,EXP){
+	Dual x(-0.5,4.0);
+	Dual expx = exp(x);
+	EXPECT_NEAR(expx.real(),exp(-0.5),DTOL);
+	EXPECT_NEAR(expx.dual(),4*exp(-0.5),DTOL);
+}
+
+TEST(MATH,LOG){
+	Dual x(0.5,4.0);
+	Dual logx = log(x);
+	EXPECT_NEAR(logx.real(),log(0.5),DTOL);
+	EXPECT_NEAR(logx.dual(),4/0.5,DTOL);
+}
+
+TEST(MATH,LOG10){
+	Dual x(0.5,4.0);
+	Dual logx = log(x);
+	EXPECT_NEAR(logx.real(),log(0.5),DTOL);
+	EXPECT_NEAR(logx.dual(),4/0.5,DTOL);
+}
+
+TEST(MATH,POW){
+	Dual x(0.5,4.0);
+	Dual y(1.5,4.5);
+	Dual powx = pow(x, y);
+	EXPECT_NEAR(powx.real(),pow(0.5,1.5),DTOL);
+	EXPECT_NEAR(powx.dual(),1.5*4.5*pow(0.5,1.5-1)*4.0,DTOL);
+}
+
+TEST(MATH,SIN){
+	Dual x(-0.5,4.0);
+	Dual sinx = sin(x);
+	EXPECT_NEAR(sinx.real(),sin(-0.5),DTOL);
+	EXPECT_NEAR(sinx.dual(),4.0*cos(-0.5),DTOL);
+}
+
+TEST(MATH,SINH){
+	Dual x(0.5,4.0);
+	Dual sinhx = sinh(x);
+	EXPECT_NEAR(sinhx.real(),sinh(0.5),DTOL);
+	EXPECT_NEAR(sinhx.dual(),4.0*cosh(0.5),DTOL);
+}
+
+TEST(MATH,SQRT){
+	Dual x(0.5,4.0);
+	Dual sqrtx = sqrt(x);
+	EXPECT_NEAR(sqrtx.real(),sqrt(0.5),DTOL);
+	EXPECT_NEAR(sqrtx.dual(),4.0 /(2 * sqrt(0.5)),DTOL);
+}
+
+TEST(MATH,TANH){
+	Dual x(0.5,4.0);
+	Dual tanhx = tanh(x);
+	EXPECT_NEAR(tanhx.real(),tanh(0.5),DTOL);
+	EXPECT_NEAR(tanhx.dual(),4.0*(1 - tanh(0.5) * tanh(0.5)),DTOL);
+}
+
+TEST(MATH,TAN){
+	Dual x(0.5,4.0);
+	Dual tanx = tan(x);
+	EXPECT_NEAR(tanx.real(),tan(0.5),DTOL);
+	EXPECT_NEAR(tanx.dual(),4.0 / cos(0.5 * cos(0.5)),DTOL);
+}

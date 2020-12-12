@@ -309,11 +309,6 @@ Dual log(const Dual& z){
 }
 
     
-Dual log10(const Dual& z){
-    return log(z) / log(10);
-}
-
-    
 Dual pow(const Dual& x, const Dual& y){
     return Dual(pow(x.real(),y.real()), y.real()*y.dual()*pow(x.real(),y.real()-1)*x.dual());
 }
