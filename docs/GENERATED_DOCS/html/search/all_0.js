@@ -5,5 +5,5 @@ var searchData=
   ['adfuncvector_2',['ADFuncVector',['../classADFuncVector.html',1,'ADFuncVector'],['../classADFuncVector.html#aad26fbf119b87e74e751318f35f1d105',1,'ADFuncVector::ADFuncVector(int size)'],['../classADFuncVector.html#a75a9fde024ff8da9ecda85e5ef8e54c3',1,'ADFuncVector::ADFuncVector(std::vector&lt; ADFunc &gt; funcVec)']]],
   ['adfuncvector_2eh_3',['ADFuncVector.h',['../ADFuncVector_8h.html',1,'']]],
   ['at_4',['at',['../classADFuncVector.html#aae2b51ac265896d944defc2ecadf0b96',1,'ADFuncVector']]],
-  ['adfunc_5',['ADFunc',['../group__AutoDiff__group.html',1,'']]]
+  ['autodiff_5',['AutoDiff',['../group__AutoDiff__group.html',1,'']]]
 ];
