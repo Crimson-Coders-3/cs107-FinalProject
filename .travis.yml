@@ -28,4 +28,3 @@ after_success:
 - cd ..
 - cd Roots
 - bash <(curl -s https://codecov.io/bash) -f ./coverage/ROOTS_COV.info || echo "Codecov did not collect coverage reports -- ROOTS"
-- cd ..
