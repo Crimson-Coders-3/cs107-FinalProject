@@ -1,8 +1,6 @@
 /**
-* \defgroup AutoDiff_group AutoDiff
-* The AutoDiff module contains ADFunc class and ADFuncVector class with its 
-* aim to make differentiating a function happens automatically
-*/
+ * \ingroup AutoDiff_group AutoDiff
+ */
 
 /**
 * \file ADFuncVector.h
