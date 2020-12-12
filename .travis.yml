@@ -21,3 +21,7 @@ after_success:
 # Uploading to CodeCov
 - bash <(curl -s https://codecov.io/bash) -f ./coverage/AD_COV.info || echo "Codecov did not collect coverage reports"
 - cd ..
+- cd Dual
+- bash coverage.sh
+- bash <(curl -s https://codecov.io/bash) -f ./coverage/DUAL_COV.info || echo "Codecov did not collect coverage reports -- DUAL"
+- cd ..
