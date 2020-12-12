@@ -36,3 +36,4 @@ void ADLibrary_vectortest();
 }
 #endif
 #endif /* TEST_VARS_H */
+

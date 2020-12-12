@@ -20,8 +20,8 @@ void ADLibrary_unittest(){
 
 /////////////////////////////////////////// CONSTRUCTOR TESTS
 TEST(CONSTRUCTOR,SINGLE){
-    std::vector<double> seed_x;
-    seed_x.push_back(1.0);
+	std::vector<double> seed_x;
+	seed_x.push_back(1.0);
     ADFunc x(2.0,seed_x);
 
     /* test getters */
@@ -180,7 +180,7 @@ TEST(SETTER, ERROR){
         EXPECT_EQ(err.what(),std::string("Index out of range!"));
     }
     try {
-        x.dval_wrt(1);
+    	x.dval_wrt(1);
         FAIL() << "Expected std::out_of_range";
     }
     catch(std::out_of_range const & err) {
@@ -191,12 +191,12 @@ TEST(SETTER, ERROR){
 /////////////////////////////////////////// ADD TESTS
 // ADFunc += double
 TEST(ADD, EQUAL_SCALAR){
-    std::vector<double> seed_x;
-    seed_x.push_back(3.0);
-    ADFunc x(2.0,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(3.0);
+	ADFunc x(2.0,seed_x);
 
-    x += 3.0;
-    EXPECT_NEAR(x.val(),5.0,DTOL);
+	x += 3.0;
+	EXPECT_NEAR(x.val(),5.0,DTOL);
     EXPECT_NEAR(x.dval_wrt(0),3.0,DTOL);
     EXPECT_EQ(x.gradient().size(),1);
     EXPECT_EQ(x.countVar(),1);
@@ -242,10 +242,10 @@ TEST(ADD, EQUAL_ERROR){
     ADFunc x2(3.0,seed_x2);
 
     try {
-        std::vector<double> seed_x3;
-        seed_x3.push_back(1.3);
-        ADFunc x3(3.9,seed_x3);
-        x2 += x3;
+    	std::vector<double> seed_x3;
+	    seed_x3.push_back(1.3);
+	    ADFunc x3(3.9,seed_x3);
+    	x2 += x3;
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
@@ -255,7 +255,7 @@ TEST(ADD, EQUAL_ERROR){
 
 // ADFunc + ADFunc
 TEST(ADD, ADFunc_ADFunc){
-    std::vector<double> seed_x1;
+	std::vector<double> seed_x1;
     seed_x1.push_back(1.0);
     seed_x1.push_back(0.0);
     std::vector<double> seed_x2;
@@ -265,7 +265,7 @@ TEST(ADD, ADFunc_ADFunc){
     ADFunc x2(3.0,seed_x2);
     ADFunc sum = x1 + x2;
 
-    // x2 should be unchanged
+	// x2 should be unchanged
     EXPECT_NEAR(sum.val(),5.0,DTOL);
     EXPECT_NEAR(sum.dval_wrt(0),1.0,DTOL);
     EXPECT_NEAR(sum.dval_wrt(1),1.3,DTOL);
@@ -284,10 +284,10 @@ TEST(ADD, ADFunc_ADFunc_ERROR){
 
     // error message
     try {
-        std::vector<double> seed_x3;
-        seed_x3.push_back(1.3);
-        ADFunc x3(3.9,seed_x3);
-        ADFunc sum = x2 + x3;
+    	std::vector<double> seed_x3;
+	    seed_x3.push_back(1.3);
+	    ADFunc x3(3.9,seed_x3);
+    	ADFunc sum = x2 + x3;
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
@@ -297,13 +297,13 @@ TEST(ADD, ADFunc_ADFunc_ERROR){
 
 // ADFunc + double
 TEST(ADD, ADFunc_SCALAR){
-    std::vector<double> seed_x;
-    seed_x.push_back(3.0);
-    ADFunc x(2.0,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(3.0);
+	ADFunc x(2.0,seed_x);
 
-    ADFunc sum = x + 3.3;
-    
-    EXPECT_NEAR(sum.val(),5.3,DTOL);
+	ADFunc sum = x + 3.3;
+	
+	EXPECT_NEAR(sum.val(),5.3,DTOL);
     EXPECT_NEAR(sum.dval_wrt(0),3.0,DTOL);
     EXPECT_EQ(sum.gradient().size(),1);
     EXPECT_EQ(sum.countVar(),1);
@@ -312,13 +312,13 @@ TEST(ADD, ADFunc_SCALAR){
 
 // double + ADFunc
 TEST(ADD, SCALAR_ADFunc){
-    std::vector<double> seed_x;
-    seed_x.push_back(3.0);
-    ADFunc x(2.0,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(3.0);
+	ADFunc x(2.0,seed_x);
 
-    ADFunc sum = 3.3 + x;
-    
-    EXPECT_NEAR(sum.val(),5.3,DTOL);
+	ADFunc sum = 3.3 + x;
+	
+	EXPECT_NEAR(sum.val(),5.3,DTOL);
     EXPECT_NEAR(sum.dval_wrt(0),3.0,DTOL);
     EXPECT_EQ(sum.gradient().size(),1);
     EXPECT_EQ(sum.countVar(),1);
@@ -329,12 +329,12 @@ TEST(ADD, SCALAR_ADFunc){
 /////////////////////////////////////////// MINUS TESTS
 // ADFunc -= double
 TEST(MINUS,EQUAL_SCALAR){
-    std::vector<double> seed_x;
-    seed_x.push_back(3.0);
-    ADFunc x(2.0,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(3.0);
+	ADFunc x(2.0,seed_x);
 
-    x -= -3.0;
-    EXPECT_NEAR(x.val(),5.0,DTOL);
+	x -= -3.0;
+	EXPECT_NEAR(x.val(),5.0,DTOL);
     EXPECT_NEAR(x.dval_wrt(0),3.0,DTOL);
     EXPECT_EQ(x.gradient().size(),1);
     EXPECT_EQ(x.countVar(),1);
@@ -381,10 +381,10 @@ TEST(MINUS, EQUAL_ADFunc_ERROR){
 
     // error message
     try {
-        std::vector<double> seed_x3;
-        seed_x3.push_back(1.3);
-        ADFunc x3(3.9,seed_x3);
-        x2 -= x3;
+    	std::vector<double> seed_x3;
+	    seed_x3.push_back(1.3);
+	    ADFunc x3(3.9,seed_x3);
+    	x2 -= x3;
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
@@ -394,7 +394,7 @@ TEST(MINUS, EQUAL_ADFunc_ERROR){
 
 // ADFunc = -ADFunc
 TEST(MINUS,NEGATE){
-    std::vector<double> seed_x;
+	std::vector<double> seed_x;
     seed_x.push_back(1.0);
     seed_x.push_back(0.7);
     seed_x.push_back(1.91);
@@ -428,7 +428,7 @@ TEST(MINUS,NEGATE){
 
 // ADFunc - ADFunc
 TEST(MINUS, ADFunc_ADFunc){
-    std::vector<double> seed_x1;
+	std::vector<double> seed_x1;
     seed_x1.push_back(1.0);
     seed_x1.push_back(0.0);
     std::vector<double> seed_x2;
@@ -438,7 +438,7 @@ TEST(MINUS, ADFunc_ADFunc){
     ADFunc x2(-3.0,seed_x2);
     ADFunc diff = x1 - x2;
 
-    // x2 should be unchanged
+	// x2 should be unchanged
     EXPECT_NEAR(diff.val(),5.0,DTOL);
     EXPECT_NEAR(diff.dval_wrt(0),1.0,DTOL);
     EXPECT_NEAR(diff.dval_wrt(1),1.3,DTOL);
@@ -457,10 +457,10 @@ TEST(MINUS, ADFunc_ADFunc_ERROR){
 
     // error message
     try {
-        std::vector<double> seed_x3;
-        seed_x3.push_back(1.3);
-        ADFunc x3(3.9,seed_x3);
-        ADFunc diff = x3 - x2;
+    	std::vector<double> seed_x3;
+	    seed_x3.push_back(1.3);
+	    ADFunc x3(3.9,seed_x3);
+    	ADFunc diff = x3 - x2;
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
@@ -470,13 +470,13 @@ TEST(MINUS, ADFunc_ADFunc_ERROR){
 
 // ADFunc - double
 TEST(MINUS, ADFunc_SCALAR){
-    std::vector<double> seed_x;
-    seed_x.push_back(3.0);
-    ADFunc x(2.0,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(3.0);
+	ADFunc x(2.0,seed_x);
 
-    ADFunc sum = x - 3.3;
-    
-    EXPECT_NEAR(sum.val(),-1.3,DTOL);
+	ADFunc sum = x - 3.3;
+	
+	EXPECT_NEAR(sum.val(),-1.3,DTOL);
     EXPECT_NEAR(sum.dval_wrt(0),3.0,DTOL);
     EXPECT_EQ(sum.gradient().size(),1);
     EXPECT_EQ(sum.countVar(),1);
@@ -485,13 +485,13 @@ TEST(MINUS, ADFunc_SCALAR){
 
 // double - ADFunc
 TEST(MINUS, SCALAR_ADFunc){
-    std::vector<double> seed_x;
-    seed_x.push_back(3.0);
-    ADFunc x(2.0,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(3.0);
+	ADFunc x(2.0,seed_x);
 
-    ADFunc sum = 3.3 - x;
-    
-    EXPECT_NEAR(sum.val(),1.3,DTOL);
+	ADFunc sum = 3.3 - x;
+	
+	EXPECT_NEAR(sum.val(),1.3,DTOL);
     EXPECT_NEAR(sum.dval_wrt(0),-3.0,DTOL);
     EXPECT_EQ(sum.gradient().size(),1);
     EXPECT_EQ(sum.countVar(),1);
@@ -501,12 +501,12 @@ TEST(MINUS, SCALAR_ADFunc){
 /////////////////////////////////////////// TIMES TESTS
 // ADFunc *= double
 TEST(TIMES, EQUAL_SCALAR){
-    std::vector<double> seed_x;
-    seed_x.push_back(3.0);
-    ADFunc x(2.0,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(3.0);
+	ADFunc x(2.0,seed_x);
 
-    x *= 3.0;
-    EXPECT_NEAR(x.val(),6.0,DTOL);
+	x *= 3.0;
+	EXPECT_NEAR(x.val(),6.0,DTOL);
     EXPECT_NEAR(x.dval_wrt(0),9.0,DTOL);
     EXPECT_EQ(x.gradient().size(),1);
     EXPECT_EQ(x.countVar(),1);
@@ -554,10 +554,10 @@ TEST(TIMES, EQUAL_ADFunc_ERROR){
 
     // test error msg
     try {
-        std::vector<double> seed_x3;
-        seed_x3.push_back(1.3);
-        ADFunc x3(3.9,seed_x3);
-        x3 *= x2;
+    	std::vector<double> seed_x3;
+	    seed_x3.push_back(1.3);
+	    ADFunc x3(3.9,seed_x3);
+    	x3 *= x2;
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
@@ -571,7 +571,7 @@ TEST(TIMES,ADFunc_ADFunc){
     // x = 2, (-1.3y)=-3
     // partial derivative wrt x: -1.3y
     // partial derivative wrt y: -1.3x
-    std::vector<double> seed_x1;
+	std::vector<double> seed_x1;
     seed_x1.push_back(1.0);
     seed_x1.push_back(0.0);
     std::vector<double> seed_x2;
@@ -600,10 +600,10 @@ TEST(TIMES,ADFunc_ADFunc_ERROR){
 
     // test error msg
     try {
-        std::vector<double> seed_x3;
-        seed_x3.push_back(1.3);
-        ADFunc x3(3.9,seed_x3);
-        ADFunc prod = x3 * x2;
+    	std::vector<double> seed_x3;
+	    seed_x3.push_back(1.3);
+	    ADFunc x3(3.9,seed_x3);
+    	ADFunc prod = x3 * x2;
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
@@ -613,13 +613,13 @@ TEST(TIMES,ADFunc_ADFunc_ERROR){
 
 // ADFunc * double
 TEST(TIMES, ADFunc_SCALAR){
-    std::vector<double> seed_x;
-    seed_x.push_back(3.0);
-    ADFunc x(2.0,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(3.0);
+	ADFunc x(2.0,seed_x);
 
-    ADFunc prod = x * 3.3;
-    
-    EXPECT_NEAR(prod.val(),6.6,DTOL);
+	ADFunc prod = x * 3.3;
+	
+	EXPECT_NEAR(prod.val(),6.6,DTOL);
     EXPECT_NEAR(prod.dval_wrt(0),9.9,DTOL);
     EXPECT_EQ(prod.gradient().size(),1);
     EXPECT_EQ(prod.countVar(),1);
@@ -628,13 +628,13 @@ TEST(TIMES, ADFunc_SCALAR){
 
 // double * ADFunc
 TEST(TIMES, SCALAR_ADFunc){
-    std::vector<double> seed_x;
-    seed_x.push_back(3.0);
-    ADFunc x(2.0,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(3.0);
+	ADFunc x(2.0,seed_x);
 
-    ADFunc prod = 3.3 * x;
-    
-    EXPECT_NEAR(prod.val(),6.6,DTOL);
+	ADFunc prod = 3.3 * x;
+	
+	EXPECT_NEAR(prod.val(),6.6,DTOL);
     EXPECT_NEAR(prod.dval_wrt(0),9.9,DTOL);
     EXPECT_EQ(prod.gradient().size(),1);
     EXPECT_EQ(prod.countVar(),1);
@@ -644,13 +644,13 @@ TEST(TIMES, SCALAR_ADFunc){
 /////////////////////////////////////////// DIVIDE TESTS
 // ADFunc /= double
 TEST(QUO,EQUAL_SCALAR){
-    std::vector<double> seed_x;
-    seed_x.push_back(3.0);
-    ADFunc x(2.0,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(3.0);
+	ADFunc x(2.0,seed_x);
 
-    x /= 3;
-    
-    EXPECT_NEAR(x.val(),2.0/3,DTOL);
+	x /= 3;
+	
+	EXPECT_NEAR(x.val(),2.0/3,DTOL);
     EXPECT_NEAR(x.dval_wrt(0),1.0,DTOL);
     EXPECT_EQ(x.gradient().size(),1);
     EXPECT_EQ(x.countVar(),1);
@@ -662,18 +662,18 @@ TEST(QUO, EQUAL_ADFunc){
     // x1 = x = 2, x2 = 5y = 9
     // x1 = x1/x2 = x/(5y)
     std::vector<double> seed_x1;
-    seed_x1.push_back(1.0);
-    seed_x1.push_back(0.0);
-    ADFunc x1(2.0,seed_x1);
-    std::vector<double> seed_x2;
-    seed_x2.push_back(0.0);
-    seed_x2.push_back(5.0);
-    ADFunc x2(9.0,seed_x2);
-    x1 /= x2;
+	seed_x1.push_back(1.0);
+	seed_x1.push_back(0.0);
+	ADFunc x1(2.0,seed_x1);
+	std::vector<double> seed_x2;
+	seed_x2.push_back(0.0);
+	seed_x2.push_back(5.0);
+	ADFunc x2(9.0,seed_x2);
+	x1 /= x2;
 
-    // x1 should be changed
-    // x1.dval_wrt("x"), 1/(5y) = 1/ 9, or [(1.0*9.0)-(0.0) ] / 81
-    // x1.dval_wrt("y"), 0-x*5/(25y^2)= -10/81, [(0.0-2.0*5.0)]/81 
+	// x1 should be changed
+	// x1.dval_wrt("x"), 1/(5y) = 1/ 9, or [(1.0*9.0)-(0.0) ] / 81
+	// x1.dval_wrt("y"), 0-x*5/(25y^2)= -10/81, [(0.0-2.0*5.0)]/81 
     EXPECT_NEAR(x1.val(),2.0/9,DTOL);
     EXPECT_NEAR(x1.dval_wrt(0),1.0/9,DTOL);
     EXPECT_NEAR(x1.dval_wrt(1),-10.0/81,DTOL);
@@ -701,10 +701,10 @@ TEST(QUO, EQUAL_ADFunc_ERROR){
 
     // test error msg
     try {
-        std::vector<double> seed_x3;
-        seed_x3.push_back(1.3);
-        ADFunc x3(3.9,seed_x3);
-        x3 /= x2;
+    	std::vector<double> seed_x3;
+	    seed_x3.push_back(1.3);
+	    ADFunc x3(3.9,seed_x3);
+    	x3 /= x2;
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
@@ -715,15 +715,15 @@ TEST(QUO, EQUAL_ADFunc_ERROR){
 
 // ADFunc / ADFunc
 TEST(QUO, ADFunc_ADFunc){
-    std::vector<double> seed_x1;
-    seed_x1.push_back(1.0);
-    seed_x1.push_back(0.0);
-    ADFunc x1(2.0,seed_x1);
-    std::vector<double> seed_x2;
-    seed_x2.push_back(0.0);
-    seed_x2.push_back(5.0);
-    ADFunc x2(9.0,seed_x2);
-    ADFunc quo = x1 / x2;
+	std::vector<double> seed_x1;
+	seed_x1.push_back(1.0);
+	seed_x1.push_back(0.0);
+	ADFunc x1(2.0,seed_x1);
+	std::vector<double> seed_x2;
+	seed_x2.push_back(0.0);
+	seed_x2.push_back(5.0);
+	ADFunc x2(9.0,seed_x2);
+	ADFunc quo = x1 / x2;
 
     EXPECT_NEAR(quo.val(),2.0/9,DTOL);
     EXPECT_NEAR(quo.dval_wrt(0),1.0/9,DTOL);
@@ -743,10 +743,10 @@ TEST(QUO, ADFunc_ADFunc_ERROR){
 
     // test error msg
     try {
-        std::vector<double> seed_x3;
-        seed_x3.push_back(1.3);
-        ADFunc x3(3.9,seed_x3);
-        ADFunc quo = x3 / x2;
+    	std::vector<double> seed_x3;
+	    seed_x3.push_back(1.3);
+	    ADFunc x3(3.9,seed_x3);
+    	ADFunc quo = x3 / x2;
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
@@ -756,13 +756,13 @@ TEST(QUO, ADFunc_ADFunc_ERROR){
 
 // ADFunc / double
 TEST(QUO, ADFunc_SCALAR){
-    std::vector<double> seed_x;
-    seed_x.push_back(3.0);
-    ADFunc x(2.0,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(3.0);
+	ADFunc x(2.0,seed_x);
 
-    ADFunc quo = x / 3;
-    
-    EXPECT_NEAR(quo.val(),2.0/3,DTOL);
+	ADFunc quo = x / 3;
+	
+	EXPECT_NEAR(quo.val(),2.0/3,DTOL);
     EXPECT_NEAR(quo.dval_wrt(0),1.0,DTOL);
     EXPECT_EQ(quo.gradient().size(),1);
     EXPECT_EQ(quo.countVar(),1);
@@ -771,13 +771,13 @@ TEST(QUO, ADFunc_SCALAR){
 
 // double / ADFunc
 TEST(QUO, SCALAR_ADFunc){
-    std::vector<double> seed_x;
-    seed_x.push_back(3.0);
-    ADFunc x(2.0,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(3.0);
+	ADFunc x(2.0,seed_x);
 
-    ADFunc quo = 3 / x;
-    
-    EXPECT_NEAR(quo.val(),1.5,DTOL);
+	ADFunc quo = 3 / x;
+	
+	EXPECT_NEAR(quo.val(),1.5,DTOL);
     EXPECT_NEAR(quo.dval_wrt(0),-9.0/4,DTOL);
     EXPECT_EQ(quo.gradient().size(),1);
     EXPECT_EQ(quo.countVar(),1);
@@ -863,58 +863,58 @@ TEST(LOGIC, SMALLEREQUAL){
 /////////////////////////////////////////// POW TESTS
 // ADFunc ^ double (e.g. x^2)
 TEST(POW,LEFTPOW){
-    std::vector<double> seed_x;
-    seed_x.push_back(4.0);
-    ADFunc x(-0.5,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	ADFunc x(-0.5,seed_x);
 
-    ADFunc powx = pow(x, 2.0);
-    EXPECT_NEAR(powx.val(),pow(-0.5, 2.0),DTOL);
-    EXPECT_NEAR(powx.dval_wrt(0),4.0*2.0*pow(-0.5,1.0), DTOL);
-    EXPECT_EQ(powx.gradient().size(),1);
+	ADFunc powx = pow(x, 2.0);
+	EXPECT_NEAR(powx.val(),pow(-0.5, 2.0),DTOL);
+	EXPECT_NEAR(powx.dval_wrt(0),4.0*2.0*pow(-0.5,1.0), DTOL);
+	EXPECT_EQ(powx.gradient().size(),1);
     EXPECT_EQ(powx.countVar(),1);
-    EXPECT_NEAR(powx.gradient().at(0),4.0*2.0*pow(-0.5, 1.0), DTOL);
+	EXPECT_NEAR(powx.gradient().at(0),4.0*2.0*pow(-0.5, 1.0), DTOL);
 }
 
 // ADFunc & ADFunc (e.g. x^y)
 TEST(POW,POW_TWOVAR){
-    std::vector<double> seed_z1;
-    seed_z1.push_back(4.0);
-    seed_z1.push_back(1.0);
-    
-    std::vector<double> seed_z2;
-    seed_z2.push_back(2.3);
-    seed_z2.push_back(3.0);
+	std::vector<double> seed_z1;
+	seed_z1.push_back(4.0);
+	seed_z1.push_back(1.0);
+	
+	std::vector<double> seed_z2;
+	seed_z2.push_back(2.3);
+	seed_z2.push_back(3.0);
 
-    ADFunc z1(0.5,seed_z1);
-    ADFunc z2(2.0,seed_z2);
+	ADFunc z1(0.5,seed_z1);
+	ADFunc z2(2.0,seed_z2);
 
-    // powxy = (4x+y)^(2.3x+3y)
-    // dval with repect to x: (2.3x+3y)*(4x+y)^(2.3x+3y-1)*4+(4x+y)^(2.3x+3y)*2.3*log(0.5)
-    //                        ~~~~~~~~~~                      ~~~~     
-    //                            2.0                          0.5    
-    //                                2.0*(0.5)*4+(0.25)*2.3*log(0.5)  
-    // dval with repect to y: (2.3x+3y)*(4x+y)^(2.3x+3y-1)+(4x+y)^(2.3x+3y)*3*log(0.5)
-    //                                2.0*0.5+(0.25)*3*log(0.5)
-    ADFunc powz = pow(z1, z2);
-    EXPECT_NEAR(powz.val(),pow(0.5, 2.0),DTOL);
-    EXPECT_NEAR(powz.dval_wrt(0),2.0*(0.5)*4+(0.25)*2.3*log(0.5), DTOL);
-    EXPECT_NEAR(powz.dval_wrt(1),2.0*0.5+(0.25)*3*log(0.5), DTOL);
-    EXPECT_EQ(powz.gradient().size(),2);
+	// powxy = (4x+y)^(2.3x+3y)
+	// dval with repect to x: (2.3x+3y)*(4x+y)^(2.3x+3y-1)*4+(4x+y)^(2.3x+3y)*2.3*log(0.5)
+	//                        ~~~~~~~~~~                      ~~~~     
+	//                            2.0                          0.5    
+	//                                2.0*(0.5)*4+(0.25)*2.3*log(0.5)  
+	// dval with repect to y: (2.3x+3y)*(4x+y)^(2.3x+3y-1)+(4x+y)^(2.3x+3y)*3*log(0.5)
+	//                                2.0*0.5+(0.25)*3*log(0.5)
+	ADFunc powz = pow(z1, z2);
+	EXPECT_NEAR(powz.val(),pow(0.5, 2.0),DTOL);
+	EXPECT_NEAR(powz.dval_wrt(0),2.0*(0.5)*4+(0.25)*2.3*log(0.5), DTOL);
+	EXPECT_NEAR(powz.dval_wrt(1),2.0*0.5+(0.25)*3*log(0.5), DTOL);
+	EXPECT_EQ(powz.gradient().size(),2);
     EXPECT_EQ(powz.countVar(),2);
-    EXPECT_NEAR(powz.gradient().at(0),2.0*(0.5)*4+(0.25)*2.3*log(0.5), DTOL);
-    EXPECT_NEAR(powz.gradient().at(1),2.0*0.5+(0.25)*3*log(0.5), DTOL);
+	EXPECT_NEAR(powz.gradient().at(0),2.0*(0.5)*4+(0.25)*2.3*log(0.5), DTOL);
+	EXPECT_NEAR(powz.gradient().at(1),2.0*0.5+(0.25)*3*log(0.5), DTOL);
 
-    // test error msg
-    try {
-        std::vector<double> seed_x1;
-        seed_x1.push_back(1.3);
-        seed_x1.push_back(1.3);
-        ADFunc x1(3.9,seed_x1);
-        std::vector<double> seed_x2;
-        seed_x2.push_back(1.0);
-        ADFunc x2(1.8,seed_x2);
-        
-        ADFunc powx = pow(x1, x2);
+	// test error msg
+	try {
+    	std::vector<double> seed_x1;
+	    seed_x1.push_back(1.3);
+	    seed_x1.push_back(1.3);
+	    ADFunc x1(3.9,seed_x1);
+	    std::vector<double> seed_x2;
+	    seed_x2.push_back(1.0);
+	    ADFunc x2(1.8,seed_x2);
+    	
+    	ADFunc powx = pow(x1, x2);
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
@@ -922,16 +922,16 @@ TEST(POW,POW_TWOVAR){
     }
     
     try {
-        std::vector<double> seed_y1;
-        seed_y1.push_back(1.3);
-        seed_y1.push_back(1.3);
-        ADFunc y1(-3.9,seed_y1);
-        std::vector<double> seed_y2;
-        seed_y2.push_back(1.0);
-        seed_y2.push_back(1.0);
-        ADFunc y2(1.8,seed_y2);
-        
-        ADFunc powy = pow(y1, y2);
+    	std::vector<double> seed_y1;
+	    seed_y1.push_back(1.3);
+	    seed_y1.push_back(1.3);
+	    ADFunc y1(-3.9,seed_y1);
+	    std::vector<double> seed_y2;
+	    seed_y2.push_back(1.0);
+	    seed_y2.push_back(1.0);
+	    ADFunc y2(1.8,seed_y2);
+    	
+    	ADFunc powy = pow(y1, y2);
         FAIL() << "Expected std::domain_error";
     }
     catch(std::domain_error const & err) {
@@ -939,16 +939,16 @@ TEST(POW,POW_TWOVAR){
     }
     
     try {
-        std::vector<double> seed_w1;
-        seed_w1.push_back(1.3);
-        seed_w1.push_back(1.3);
-        ADFunc w1(0,seed_w1);
-        std::vector<double> seed_w2;
-        seed_w2.push_back(1.0);
-        seed_w2.push_back(1.0);
-        ADFunc w2(1.8,seed_w2);
-        
-        ADFunc poww = pow(w1, w2);
+    	std::vector<double> seed_w1;
+	    seed_w1.push_back(1.3);
+	    seed_w1.push_back(1.3);
+	    ADFunc w1(0,seed_w1);
+	    std::vector<double> seed_w2;
+	    seed_w2.push_back(1.0);
+	    seed_w2.push_back(1.0);
+	    ADFunc w2(1.8,seed_w2);
+    	
+    	ADFunc poww = pow(w1, w2);
         FAIL() << "Expected std::range_error";
     }
     catch(std::range_error const & err) {
@@ -958,25 +958,25 @@ TEST(POW,POW_TWOVAR){
 
 // double ^ ADFunc (e.g. 2^x)
 TEST(POW,RIGHTPOW){
-    std::vector<double> seed_x;
-    seed_x.push_back(4.0);
-    ADFunc x(0.5,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	ADFunc x(0.5,seed_x);
 
-    ADFunc powx = pow(2.0, x);
-    EXPECT_NEAR(powx.val(),pow(2.0, 0.5),DTOL);
-    EXPECT_NEAR(powx.dval_wrt(0),pow(2.0, 0.5)*4.0*log(2.0), DTOL);
-    EXPECT_EQ(powx.gradient().size(),1);
+	ADFunc powx = pow(2.0, x);
+	EXPECT_NEAR(powx.val(),pow(2.0, 0.5),DTOL);
+	EXPECT_NEAR(powx.dval_wrt(0),pow(2.0, 0.5)*4.0*log(2.0), DTOL);
+	EXPECT_EQ(powx.gradient().size(),1);
     EXPECT_EQ(powx.countVar(),1);
     EXPECT_NEAR(powx.gradient().at(0),pow(2.0, 0.5)*4.0*log(2.0), DTOL);
 
     // test error msg
     try {
-        std::vector<double> seed_y1;
-        seed_y1.push_back(1.3);
-        seed_y1.push_back(1.3);
-        ADFunc y1(3.9,seed_y1);
-        
-        ADFunc powy = pow(-0.2, y1);
+    	std::vector<double> seed_y1;
+	    seed_y1.push_back(1.3);
+	    seed_y1.push_back(1.3);
+	    ADFunc y1(3.9,seed_y1);
+    	
+    	ADFunc powy = pow(-0.2, y1);
         FAIL() << "Expected std::domain_error";
     }
     catch(std::domain_error const & err) {
@@ -984,12 +984,12 @@ TEST(POW,RIGHTPOW){
     }
     
     try {
-        std::vector<double> seed_w1;
-        seed_w1.push_back(1.3);
-        seed_w1.push_back(1.3);
-        ADFunc w1(3.8,seed_w1);
-        
-        ADFunc poww = pow(0, w1);
+    	std::vector<double> seed_w1;
+	    seed_w1.push_back(1.3);
+	    seed_w1.push_back(1.3);
+	    ADFunc w1(3.8,seed_w1);
+    	
+    	ADFunc poww = pow(0, w1);
         FAIL() << "Expected std::range_error";
     }
     catch(std::range_error const & err) {
@@ -1074,16 +1074,16 @@ TEST(POW,HYPOT){
 
 // e ^ ADFunc
 TEST(EXP,EXP){
-    std::vector<double> seed_x;
-    seed_x.push_back(4.0);
-    ADFunc x(0.5,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	ADFunc x(0.5,seed_x);
 
-    ADFunc expx = exp(x);
-    EXPECT_NEAR(expx.val(),exp(0.5),DTOL);
-    EXPECT_EQ(expx.gradient().size(),1);
+	ADFunc expx = exp(x);
+	EXPECT_NEAR(expx.val(),exp(0.5),DTOL);
+	EXPECT_EQ(expx.gradient().size(),1);
     EXPECT_EQ(expx.countVar(),1);
-    EXPECT_NEAR(expx.dval_wrt(0), exp(0.5) * 4.0, DTOL);
-    EXPECT_NEAR(expx.gradient().at(0), exp(0.5) * 4.0, DTOL);
+	EXPECT_NEAR(expx.dval_wrt(0), exp(0.5) * 4.0, DTOL);
+	EXPECT_NEAR(expx.gradient().at(0), exp(0.5) * 4.0, DTOL);
 }
 
 // 2 ^ ADFunc
@@ -1119,22 +1119,22 @@ TEST(EXP,EXP_MINUS1){
 
 // natural log, log_e(x)
 TEST(LOG,LOGE){
-    std::vector<double> seed_x;
-    seed_x.push_back(4.0);
-    ADFunc x(0.5,seed_x);
-    ADFunc logx = log(x);
-    EXPECT_NEAR(logx.val(),log(0.5),DTOL);
-    EXPECT_EQ(logx.gradient().size(),1);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	ADFunc x(0.5,seed_x);
+	ADFunc logx = log(x);
+	EXPECT_NEAR(logx.val(),log(0.5),DTOL);
+	EXPECT_EQ(logx.gradient().size(),1);
     EXPECT_EQ(logx.countVar(),1);
-    EXPECT_NEAR(logx.dval_wrt(0), (1/(0.5)) * 4.0, DTOL);
-    EXPECT_NEAR(logx.gradient().at(0), (1/(0.5)) * 4.0, DTOL);
+	EXPECT_NEAR(logx.dval_wrt(0), (1/(0.5)) * 4.0, DTOL);
+	EXPECT_NEAR(logx.gradient().at(0), (1/(0.5)) * 4.0, DTOL);
 
-    // test error msg
-    try {
-        std::vector<double> seed_x1;
-        seed_x1.push_back(1.3);
-        ADFunc x1(-1.0,seed_x1);
-        ADFunc logx1 = log(x1);
+	// test error msg
+	try {
+    	std::vector<double> seed_x1;
+	    seed_x1.push_back(1.3);
+	    ADFunc x1(-1.0,seed_x1);
+    	ADFunc logx1 = log(x1);
         FAIL() << "Expected std::domain_error";
     }
     catch(std::domain_error const & err) {
@@ -1142,12 +1142,12 @@ TEST(LOG,LOGE){
     }
 
     try {
-        std::vector<double> seed_w1;
-        seed_w1.push_back(1.3);
-        seed_w1.push_back(1.3);
-        ADFunc w1(0,seed_w1);
-        
-        ADFunc logw1 = log(w1);
+    	std::vector<double> seed_w1;
+	    seed_w1.push_back(1.3);
+	    seed_w1.push_back(1.3);
+	    ADFunc w1(0,seed_w1);
+    	
+    	ADFunc logw1 = log(w1);
         FAIL() << "Expected std::range_error";
     }
     catch(std::range_error const & err) {
@@ -1157,20 +1157,20 @@ TEST(LOG,LOGE){
 
 // log_10(x)
 TEST(LOG,LOG10){
-    std::vector<double> seed_x;
-    seed_x.push_back(4.0);
-    ADFunc x(0.5,seed_x);
-    ADFunc logx = log10(x);
-    EXPECT_NEAR(logx.val(),log10(0.5),DTOL);
-    EXPECT_EQ(logx.gradient().size(),1);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	ADFunc x(0.5,seed_x);
+	ADFunc logx = log10(x);
+	EXPECT_NEAR(logx.val(),log10(0.5),DTOL);
+	EXPECT_EQ(logx.gradient().size(),1);
     EXPECT_EQ(logx.countVar(),1);
-    EXPECT_NEAR(logx.dval_wrt(0), (1/(0.5)) * 4.0/log(10), DTOL);
-    EXPECT_NEAR(logx.gradient().at(0), (1/(0.5)) * 4.0/log(10), DTOL);
+	EXPECT_NEAR(logx.dval_wrt(0), (1/(0.5)) * 4.0/log(10), DTOL);
+	EXPECT_NEAR(logx.gradient().at(0), (1/(0.5)) * 4.0/log(10), DTOL);
 
-    // test error msg
-    try {
-        x.setVal(-1.0);
-        logx = log10(x);
+	// test error msg
+	try {
+    	x.setVal(-1.0);
+    	logx = log10(x);
         FAIL() << "Expected std::domain_error";
     }
     catch(std::domain_error const & err) {
@@ -1251,159 +1251,159 @@ TEST(LOG,LOGPLUS1){
 /////////////////////////////////////////// PRINT
 
 TEST(IOSTREAM, PRINT){
-    // single variable
-    std::vector<double> seed_x;
-    seed_x.push_back(4.0);
-    ADFunc x(0.5,seed_x);
-    testing::internal::CaptureStdout();
-    std::cout << x;
-    std::string output_x = testing::internal::GetCapturedStdout();
-    std::string expected_x = "Information of ADFunc object: \nValue at 0.5. \
+	// single variable
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	ADFunc x(0.5,seed_x);
+	testing::internal::CaptureStdout();
+	std::cout << x;
+	std::string output_x = testing::internal::GetCapturedStdout();
+	std::string expected_x = "Information of ADFunc object: \nValue at 0.5. \
 1 variable(s) in total.\n   0th variable: dval = 4\n";
-    EXPECT_TRUE(output_x.compare(expected_x)==0);
+	EXPECT_TRUE(output_x.compare(expected_x)==0);
 
-    // three variables
-    std::vector<double> seed_y;
-    seed_y.push_back(4.0);
-    seed_y.push_back(5.0);
-    seed_y.push_back(6.0);
-    ADFunc y(0.5,seed_y);
-    testing::internal::CaptureStdout();
-    std::cout << y;
-    std::string output_y = testing::internal::GetCapturedStdout();
-    std::string expected_y = "Information of ADFunc object: \nValue at 0.5. \
+	// three variables
+	std::vector<double> seed_y;
+	seed_y.push_back(4.0);
+	seed_y.push_back(5.0);
+	seed_y.push_back(6.0);
+	ADFunc y(0.5,seed_y);
+	testing::internal::CaptureStdout();
+	std::cout << y;
+	std::string output_y = testing::internal::GetCapturedStdout();
+	std::string expected_y = "Information of ADFunc object: \nValue at 0.5. \
 3 variable(s) in total.\n   0th variable: dval = 4\n   1th variable: dval = 5\n   2th variable: dval = 6\n";
-    EXPECT_TRUE(output_y.compare(expected_y)==0);
+	EXPECT_TRUE(output_y.compare(expected_y)==0);
 }
 
 
 /////////////////////////////////////////// TRIG FUNCTION TESTS
 // sin ADFunc 
 TEST(TRIG,SIN){
-    std::vector<double> seed_x;
-    seed_x.push_back(4.0);
-    ADFunc x(0.5,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	ADFunc x(0.5,seed_x);
 
-    ADFunc sinx = sin(x);
-    EXPECT_NEAR(sinx.val(),sin(0.5),DTOL);
-    EXPECT_EQ(sinx.gradient().size(),1);
+	ADFunc sinx = sin(x);
+	EXPECT_NEAR(sinx.val(),sin(0.5),DTOL);
+	EXPECT_EQ(sinx.gradient().size(),1);
     EXPECT_EQ(sinx.countVar(),1);
-    EXPECT_NEAR(sinx.dval_wrt(0), cos(0.5)*4.0, DTOL);
-    EXPECT_NEAR(sinx.gradient().at(0), cos(0.5)*4.0, DTOL);
+	EXPECT_NEAR(sinx.dval_wrt(0), cos(0.5)*4.0, DTOL);
+	EXPECT_NEAR(sinx.gradient().at(0), cos(0.5)*4.0, DTOL);
 }
 
 // cos ADFunc
 TEST(TRIG,COS){
-    std::vector<double> seed_x;
-    seed_x.push_back(4.0);
-    ADFunc x(0.5,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	ADFunc x(0.5,seed_x);
 
-    ADFunc cosx = cos(x);
-    EXPECT_NEAR(cosx.val(),cos(0.5),DTOL);
-    EXPECT_EQ(cosx.gradient().size(),1);
+	ADFunc cosx = cos(x);
+	EXPECT_NEAR(cosx.val(),cos(0.5),DTOL);
+	EXPECT_EQ(cosx.gradient().size(),1);
     EXPECT_EQ(cosx.countVar(),1);
-    EXPECT_NEAR(cosx.dval_wrt(0), -sin(0.5)*4.0, DTOL);
-    EXPECT_NEAR(cosx.gradient().at(0), -sin(0.5)*4.0, DTOL);
+	EXPECT_NEAR(cosx.dval_wrt(0), -sin(0.5)*4.0, DTOL);
+	EXPECT_NEAR(cosx.gradient().at(0), -sin(0.5)*4.0, DTOL);
 }
 
 // tan ADFunc
 TEST(TRIG,TAN){
-    std::vector<double> seed_x;
-    seed_x.push_back(4.0);
-    ADFunc x(0.5,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	ADFunc x(0.5,seed_x);
 
-    ADFunc tanx = tan(x);
-    EXPECT_NEAR(tanx.val(),tan(0.5),DTOL);
-    EXPECT_EQ(tanx.gradient().size(),1);
+	ADFunc tanx = tan(x);
+	EXPECT_NEAR(tanx.val(),tan(0.5),DTOL);
+	EXPECT_EQ(tanx.gradient().size(),1);
     EXPECT_EQ(tanx.countVar(),1);
-    EXPECT_NEAR(tanx.dval_wrt(0), 4.0/(cos(0.5)*cos(0.5)), DTOL);
-    EXPECT_NEAR(tanx.gradient().at(0), 4.0/(cos(0.5)*cos(0.5)), DTOL);
+	EXPECT_NEAR(tanx.dval_wrt(0), 4.0/(cos(0.5)*cos(0.5)), DTOL);
+	EXPECT_NEAR(tanx.gradient().at(0), 4.0/(cos(0.5)*cos(0.5)), DTOL);
 }
 
 // arcsin ADFunc
 TEST(TRIG,ARCSIN){
-    std::vector<double> seed_x;
-    seed_x.push_back(4.0);
-    ADFunc x(0.5,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	ADFunc x(0.5,seed_x);
 
-    ADFunc arcsinx = asin(x);
-    EXPECT_NEAR(arcsinx.val(),asin(0.5),DTOL);
-    EXPECT_EQ(arcsinx.gradient().size(),1);
+	ADFunc arcsinx = asin(x);
+	EXPECT_NEAR(arcsinx.val(),asin(0.5),DTOL);
+	EXPECT_EQ(arcsinx.gradient().size(),1);
     EXPECT_EQ(arcsinx.countVar(),1);
-    EXPECT_NEAR(arcsinx.dval_wrt(0),(1/sqrt(1-pow(0.5, 2)))*4.0,DTOL);
-    EXPECT_NEAR(arcsinx.gradient().at(0),(1/sqrt(1-pow(0.5, 2)))*4.0,DTOL);
+	EXPECT_NEAR(arcsinx.dval_wrt(0),(1/sqrt(1-pow(0.5, 2)))*4.0,DTOL);
+	EXPECT_NEAR(arcsinx.gradient().at(0),(1/sqrt(1-pow(0.5, 2)))*4.0,DTOL);
 }
 
 // arccos ADFunc
 TEST(TRIG,ARCCOS){
-    std::vector<double> seed_x;
-    seed_x.push_back(4.0);
-    ADFunc x(0.5,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	ADFunc x(0.5,seed_x);
 
-    ADFunc arccosx = acos(x);
-    EXPECT_NEAR(arccosx.val(),acos(0.5),DTOL);
-    EXPECT_EQ(arccosx.gradient().size(),1);
+	ADFunc arccosx = acos(x);
+	EXPECT_NEAR(arccosx.val(),acos(0.5),DTOL);
+	EXPECT_EQ(arccosx.gradient().size(),1);
     EXPECT_EQ(arccosx.countVar(),1);
-    EXPECT_NEAR(arccosx.dval_wrt(0), -(1/sqrt(1 - pow(0.5, 2))) * 4.0,DTOL);
-    EXPECT_NEAR(arccosx.gradient().at(0),-(1/sqrt(1-pow(0.5, 2)))*4.0,DTOL);
+	EXPECT_NEAR(arccosx.dval_wrt(0), -(1/sqrt(1 - pow(0.5, 2))) * 4.0,DTOL);
+	EXPECT_NEAR(arccosx.gradient().at(0),-(1/sqrt(1-pow(0.5, 2)))*4.0,DTOL);
 }
 
 // arctan ADFunc
 TEST(TRIG,ARCTAN){
-    std::vector<double> seed_x;
-    seed_x.push_back(4.0);
-    ADFunc x(0.5,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	ADFunc x(0.5,seed_x);
 
-    ADFunc arctanx = atan(x);
-    EXPECT_NEAR(arctanx.val(),atan(0.5),DTOL);
-    EXPECT_EQ(arctanx.gradient().size(),1);
+	ADFunc arctanx = atan(x);
+	EXPECT_NEAR(arctanx.val(),atan(0.5),DTOL);
+	EXPECT_EQ(arctanx.gradient().size(),1);
     EXPECT_EQ(arctanx.countVar(),1);
-    EXPECT_NEAR(arctanx.dval_wrt(0), (1/(1+pow(0.5, 2))) * 4.0,DTOL);
-    EXPECT_NEAR(arctanx.gradient().at(0),(1/(1+pow(0.5, 2))) * 4.0,DTOL);
+	EXPECT_NEAR(arctanx.dval_wrt(0), (1/(1+pow(0.5, 2))) * 4.0,DTOL);
+	EXPECT_NEAR(arctanx.gradient().at(0),(1/(1+pow(0.5, 2))) * 4.0,DTOL);
 }
 
 /////////////////////////////////////////// HYPERBOLIC FUNCTIONS
 
 // sinh ADFunc
 TEST(TRIG,SINH){
-    std::vector<double> seed_x;
-    seed_x.push_back(4.0);
-    ADFunc x(-0.5,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	ADFunc x(-0.5,seed_x);
 
-    ADFunc sinhx = sinh(x);
-    EXPECT_NEAR(sinhx.val(),sinh(-0.5),DTOL);
-    EXPECT_EQ(sinhx.gradient().size(),1);
+	ADFunc sinhx = sinh(x);
+	EXPECT_NEAR(sinhx.val(),sinh(-0.5),DTOL);
+	EXPECT_EQ(sinhx.gradient().size(),1);
     EXPECT_EQ(sinhx.countVar(),1);
-    EXPECT_NEAR(sinhx.dval_wrt(0),cosh(-0.5) * 4.0, DTOL);
-    EXPECT_NEAR(sinhx.gradient().at(0),cosh(-0.5) * 4.0, DTOL);
+	EXPECT_NEAR(sinhx.dval_wrt(0),cosh(-0.5) * 4.0, DTOL);
+	EXPECT_NEAR(sinhx.gradient().at(0),cosh(-0.5) * 4.0, DTOL);
 }
 
 // cosh ADFunc
 TEST(TRIG,COSH){
-    std::vector<double> seed_x;
-    seed_x.push_back(4.0);
-    ADFunc x(-0.5,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	ADFunc x(-0.5,seed_x);
 
-    ADFunc coshx = cosh(x);
-    EXPECT_NEAR(coshx.val(),cosh(-0.5),DTOL);
-    EXPECT_EQ(coshx.gradient().size(),1);
+	ADFunc coshx = cosh(x);
+	EXPECT_NEAR(coshx.val(),cosh(-0.5),DTOL);
+	EXPECT_EQ(coshx.gradient().size(),1);
     EXPECT_EQ(coshx.countVar(),1);
-    EXPECT_NEAR(coshx.dval_wrt(0),sinh(-0.5) * 4.0, DTOL);
-    EXPECT_NEAR(coshx.gradient().at(0),sinh(-0.5) * 4.0, DTOL);
+	EXPECT_NEAR(coshx.dval_wrt(0),sinh(-0.5) * 4.0, DTOL);
+	EXPECT_NEAR(coshx.gradient().at(0),sinh(-0.5) * 4.0, DTOL);
 }
 
 // tanh ADFunc
 TEST(TRIG,TANH){
-    std::vector<double> seed_x;
-    seed_x.push_back(4.0);
-    ADFunc x(-0.5,seed_x);
+	std::vector<double> seed_x;
+	seed_x.push_back(4.0);
+	ADFunc x(-0.5,seed_x);
 
-    ADFunc tanhx = tanh(x);
-    EXPECT_NEAR(tanhx.val(),tanh(-0.5),DTOL);
-    EXPECT_EQ(tanhx.gradient().size(),1);
+	ADFunc tanhx = tanh(x);
+	EXPECT_NEAR(tanhx.val(),tanh(-0.5),DTOL);
+	EXPECT_EQ(tanhx.gradient().size(),1);
     EXPECT_EQ(tanhx.countVar(),1);
-    EXPECT_NEAR(tanhx.dval_wrt(0),(1/pow(cosh(-0.5), 2)) * 4.0, DTOL);
-    EXPECT_NEAR(tanhx.gradient().at(0),(1/pow(cosh(-0.5), 2)) * 4.0, DTOL);
+	EXPECT_NEAR(tanhx.dval_wrt(0),(1/pow(cosh(-0.5), 2)) * 4.0, DTOL);
+	EXPECT_NEAR(tanhx.gradient().at(0),(1/pow(cosh(-0.5), 2)) * 4.0, DTOL);
 }
 
 // asinh ADFunc
@@ -1475,47 +1475,4 @@ TEST(TRIG,ATANH){
         EXPECT_EQ(err.what(),std::string("Denominator equals 0!"));
     }
 }
-
-TEST(SEED,SETSEEDDEFAULT){
-    std::vector<double> seed_x;
-    seed_x.push_back(4.0);
-    ADFunc x(-0.5,seed_x);
-    
-    std::vector<double> seed_y;
-    seed_y.push_back(4.0);
-    ADFunc y(-0.5,seed_y);
-    
-    std::vector<double> seed_z;
-    seed_z.push_back(4.0);
-    ADFunc z(-0.5,seed_z);
-    
-    std::vector<ADFunc> F = {x,y,z};
-    
-    setSeedDefault(F);
-    
-    EXPECT_NEAR(F.at(0).val(), -0.5, 0.0001);
-}
-
-TEST(SEED,SETSEEDDEFAULT_ZERO){
-    std::vector<ADFunc> F = {};
-    setSeedDefault(F);
-}
-
-TEST(ADFUNC, DVAL_WRT_INTVEC){
-    std::vector<double> seed_x;
-    seed_x.push_back(4.0);
-    ADFunc x(-0.5,seed_x);
-    
-    std::vector<int> indexes = {0};
-    
-    EXPECT_NEAR(x.dval_wrt(indexes).at(0), 4.0, 0.0001);
-}
-
-TEST(ADFUNC, DVAL_WRT_VECTOR){
-    std::vector<double> seed {1.0, 2.0};
-    ADFunc x = ADFunc(0.2, seed);
-    std::vector<std::string> names {"x","y"};
-    x.setName(names);
-    
-    EXPECT_NEAR(x.dval_wrt(names).at(0), 1.0, 0.0001);
-}
+     
