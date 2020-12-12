@@ -1,5 +1,5 @@
 /**
-* \defgroup ADFunc_group ADFunc
+* \defgroup AutoDiff_group ADFunc
 * The ADFunc module makes differentiating a function happens automatically
 */
 
@@ -12,7 +12,6 @@
 #ifndef ADFUNC_H
 #define ADFUNC_H
 
-/* system header files */
 #include <vector>
 #include <iostream>
 #include <unordered_map>
@@ -24,7 +23,7 @@
 * A ADFunc object represents a multivariable function and enables you to evaluate 
 * the function value and gradient at any time. A gradient is a vector of 
 * all the first-order partial derivatives of the function, which means you can also
-* get partial derivative of the function with respect to a particular variable easily. 
+* get partial derivative of the function with respect to(wrt) a particular variable easily. 
 * To get started, you need to firstly declare variables as ADFunc objects, and then
 * uses these variables to compose the function (also a ADFunc object) you want to study.
 */
@@ -52,12 +51,12 @@ class ADFunc {
    public:
       //! A constructor.
       /*!
-         Initialize a variable with its initial value and its seed vector.
+         Initializes a ADFunc object with its initial value and its seed vector.
          A seed vector should have its size equal to the TOTAL number of variables
          that will be used in your program. A common way of creating a seed vector
          for a first-time created variable is to initialize a vecotr at size of total 
          number of variables and fill it with 0.00 except where this 
-         variable locates with respect to the seed vector. Usually, we use a unit vector for a seed
+         variable locates with respect to(wrt) the seed vector. Usually, we use a unit vector for a seed
          vector of a first-time used variable. For example, for a multivariable function f(x,y,z):
 
          std::vector<double> seed_x = {0.0, 0.1, 0.0};
@@ -75,7 +74,7 @@ class ADFunc {
       
       //! A constructor.
       /*!
-         Initialize a variable with its initial value, its seed vector, and a vector of all
+         Initializes a ADFunc object with its initial value, its seed vector, and a vector of all
          the variables names to be used. Each variables should all have a name and its name
          must be unique.
 
@@ -96,7 +95,7 @@ class ADFunc {
          that will be used in your program. A common way of creating a seed vector
          for a first-time created variable is to initialize a vecotr at size of total 
          number of variables and fill it with 0.00. except where this 
-         variable should be with respect to the seed vector. Usually, we use a unit vector for a seed
+         variable should be with respect to(wrt) the seed vector. Usually, we use a unit vector for a seed
          vector of a first-time used variable. The reason why it is also 1.0 is that d/dx (x) = 1.0. 
          
          \param val initial value
@@ -107,7 +106,7 @@ class ADFunc {
 
       //! A constructor.
       /*!
-         Initialize a variable with its initial value, its own variable name, and a vector of all
+         Initializes a ADFunc object with its initial value, its own variable name, and a vector of all
          the variables names to be used. Each variables should all have a name and its name
          must be unique.
 
@@ -120,7 +119,7 @@ class ADFunc {
          ADFunc x(5.0,"x", var_names);
 
          When using this constructor, the variable's seed vector is set default to be a unit vector 
-         (the derivative with respect to itself is 1.0). You can change the seed vector afterwards 
+         (the derivative with respect to(wrt) itself is 1.0). You can change the seed vector afterwards 
          
          \sa set_seed(), set_seed_wrt()
 
@@ -234,7 +233,7 @@ class ADFunc {
    //! Get function value
    double val() const;
 
-   //! Get dval (partial derivative) with respect to a variable
+   //! Get dval (partial derivative) with respect to(wrt) a variable
    /*!
       It will throw a std::out_of_range error if index is out of range of the predefined seed vector.
 
@@ -242,7 +241,7 @@ class ADFunc {
    */ 
    double dval_wrt(int index) const;
 
-   //! Get dval (partial derivative) with respect to a variable
+   //! Get dval (partial derivative) with respect to(wrt) a variable
    /*!
       It will throw std::runtime_error if the input variable name not found.
 
@@ -252,7 +251,7 @@ class ADFunc {
    */
    double dval_wrt(std::string var_name) const;
 
-   //! Get dvals with respect to more than one variables
+   //! Get dvals with respect to(wrt) more than one variables
    /*!
       It will throw a std::out_of_range error if one index is out of range of the predefined seed vector.
 
@@ -260,7 +259,7 @@ class ADFunc {
    */
    std::vector<double> dval_wrt(std::vector<int> indexs) const;
 
-   //! Get dvals with respect to more than one variables
+   //! Get dvals with respect to(wrt) more than one variables
    /*!
       It will throw std::runtime_error if one input variable name not found.
 
@@ -302,7 +301,7 @@ class ADFunc {
    //! Set function value
    void setVal(double val);
 
-   //! Set dval with respect to a variable
+   //! Set dval with respect to(wrt) a variable
    /*!
       It will throw a std::out_of_range error if index is out of range of the predefined seed vector.
 
