@@ -11,9 +11,9 @@ addons:
 #    - libeigen3-dev
 
 script:
-- cd 3PL
-- bash build_3PL.sh
-- cd ..
+#- cd 3PL
+#- bash build_3PL.sh
+# - cd ..
 #- cd AutoDiff
 - bash config.sh
 #- cd ..
