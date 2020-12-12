@@ -1,0 +1,3 @@
+/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/AutoDiff/install/lib/libAutoDiff.dylib
+/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/AutoDiff/install/include/ADFuncVector.h
+/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/AutoDiff/install/include/ADFunc.h

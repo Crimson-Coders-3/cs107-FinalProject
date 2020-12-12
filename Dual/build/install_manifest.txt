@@ -1,0 +1,2 @@
+/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/Dual/install/lib/libDual.dylib
+/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/Dual/install/include/Dual.h

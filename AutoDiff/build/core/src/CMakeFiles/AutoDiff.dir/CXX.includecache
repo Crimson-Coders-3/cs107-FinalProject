@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/ADFunc.h
+vector
+-
+iostream
+-
+unordered_map
+-
+
+../include/ADFuncVector.h
+vector
+-
+iostream
+-
+ADFunc.h
+-
+
+/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/AutoDiff/core/src/ADFunc.cpp
+ADFunc.h
+/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/AutoDiff/core/src/ADFunc.h
+math.h
+-
+vector
+-
+typeinfo
+-
+iterator
+-
+iostream
+-
+string
+-
+cmath
+-
+
+/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/AutoDiff/core/src/ADFuncVector.cpp
+ADFuncVector.h
+/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/AutoDiff/core/src/ADFuncVector.h
+
