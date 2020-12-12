@@ -279,9 +279,6 @@ SVNCOMMAND:FILEPATH=SVNCOMMAND-NOTFOUND
 //build unit tests
 UNIT_TEST:BOOL=ON
 
-//AutoDiff path e.g. <autodiff_dir>/<autodiff_so>
-autodiff_dir:PATH=
-
 //Path to a library.
 autodiff_lb:FILEPATH=autodiff_lb-NOTFOUND
 

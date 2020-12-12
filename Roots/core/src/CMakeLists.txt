@@ -9,6 +9,10 @@ set(ROOTS_SRC
 # ==================== #
 add_library(Roots SHARED ${ROOTS_SRC} ${ROOTS_H})
 
+#####
+#include_directories(${PROJECT_SOURCE_DIR}/../AutoDiff/)
+#####
+
 # Install targets into specific directories
 install(TARGETS Roots
     RUNTIME DESTINATION bin/

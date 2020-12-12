@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/g++
 CXX_DEFINES = -DRoots_EXPORTS
 
-CXX_INCLUDES = -I/include -I/home/morrisreeves/Documents/coding/cs107/cs107-FinalProject/Roots/./include -I/home/morrisreeves/Documents/coding/cs107/cs107-FinalProject/Roots/../install/3PL/eigen/include/eigen3
+CXX_INCLUDES = -I/home/morrisreeves/Documents/coding/cs107/cs107-FinalProject/Roots/../AutoDiff/include -I/home/morrisreeves/Documents/coding/cs107/cs107-FinalProject/Roots/./include -I/home/morrisreeves/Documents/coding/cs107/cs107-FinalProject/Roots/../install/3PL/eigen/include/eigen3
 
 CXX_FLAGS = -O3 -DNDEBUG -fPIC
 

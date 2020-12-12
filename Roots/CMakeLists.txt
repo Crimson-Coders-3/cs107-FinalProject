@@ -15,8 +15,9 @@ else()
   set(CMAKE_MACOSX_RPATH ON)
 endif()
 
-set(autodiff_dir "" CACHE PATH "AutoDiff path e.g. <autodiff_dir>/<autodiff_so>")
+#set(autodiff_dir "" CACHE PATH "AutoDiff path e.g. <autodiff_dir>/<autodiff_so>")
 set(autodiff_so AutoDiff CACHE STRING "AutoDiff shared object name")
+set(autodiff_dir ${PROJECT_SOURCE_DIR}/../AutoDiff/)
 set(EIGEN_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/../install/3PL/eigen/include/eigen3)
 
 # Enable coverage profiling
