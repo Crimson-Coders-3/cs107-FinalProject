@@ -6,5 +6,5 @@ CXX_DEFINES = -DDual_EXPORTS
 
 CXX_INCLUDES = -I/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/Dual/include
 
-CXX_FLAGS = -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -fPIC
+CXX_FLAGS = -g -O0 --coverage -fprofile-arcs -ftest-coverage --coverage -fno-inline -fno-inline-small-functions -fno-default-inline -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -fPIC
 

@@ -19,8 +19,8 @@ cd ${CURRENT_PATH}
 INSTALL_PATH=${PROJECT_ROOT}/install
 INSTALL_GTEST=${INSTALL_PATH}/googletest/include/gtest
 
-SRCPATH=${CURRENT_PATH}/build/core/src/CMakeFiles/AutoDiff.dir
-TESTPATH=${CURRENT_PATH}/build/core/tests/src/CMakeFiles/ADTest.dir
+SRCPATH=${CURRENT_PATH}/build/core/src/CMakeFiles/Dual.dir
+TESTPATH=${CURRENT_PATH}/build/core/tests/src/CMakeFiles/DUALTest.dir
 COVERAGE_DIRECTORY=${CURRENT_PATH}/coverage
 
 TEST_SRC_PATH=${CURRENT_PATH}/core/tests
@@ -47,17 +47,17 @@ cd ${COVERAGE_DIRECTORY}
 
 # gather coverage info
 if [ -d "${TESTPATH}" ]; then
-    lcov --capture -d ${SRCPATH} -d ${TESTPATH} -o AD_COV.info
+    lcov --capture -d ${SRCPATH} -d ${TESTPATH} -o DUAL_COV.info
 else
     echo -e "${rC}ERROR:${eC} Need to compile GTEST to get code coverage!"
     exit 1
 fi
 
 # remove usr and gtest info
-lcov --remove AD_COV.info "/usr/*" "${INSTALL_PATH}/*" "${TEST_SRC_PATH}/*" -o AD_COV.info
+lcov --remove DUAL_COV.info "/usr/*" "${INSTALL_PATH}/*" "${TEST_SRC_PATH}/*" -o DUAL_COV.info
 
 # generate html version of coverage
-genhtml AD_COV.info -o CODE_COVERAGE
+genhtml DUAL_COV.info -o CODE_COVERAGE
 cd ..
 
 echo 

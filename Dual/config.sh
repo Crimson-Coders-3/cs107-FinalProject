@@ -9,7 +9,7 @@
 #   config.sh*         # executable file
 #   coverage.sh*       # executable file that generate test coverage
 #   CMakeLists.txt
-#   core             # location of source code
+#     core             # location of source code
 
 set -euo pipefail
 
@@ -25,17 +25,17 @@ cd ${CURRENT_PATH}
 # =============== 
 # library sources
 # =============== 
-AD_DIRECTORY=${PROJECT_ROOT}/AutoDiff
-AD_SO_NAME=AutoDiff
+DUAL_DIRECTORY=${PROJECT_ROOT}/Dual
+DUAL_SO_NAME=Dual
 
 # ====================== 
 # folder directory paths
 # ====================== 
-INSTALL_DIRECTORY=${AD_DIRECTORY}/install
-INSTALL_AD_DIRECTORY=${INSTALL_DIRECTORY}
+INSTALL_DIRECTORY=${DUAL_DIRECTORY}/install
+INSTALL_DUAL_DIRECTORY=${INSTALL_DIRECTORY}
 
-BUILD_DIRECTORY=${AD_DIRECTORY}/build
-BUILD_AD_DIRECTORY=${BUILD_DIRECTORY}
+BUILD_DIRECTORY=${DUAL_DIRECTORY}/build
+BUILD_DUAL_DIRECTORY=${BUILD_DIRECTORY}
 
 # ========================= 
 # third party library paths
@@ -48,7 +48,7 @@ GTEST_DIRECTORY=${INSTALL_3RD_PARTY_PATH}/googletest
 # ================== 
 # compiling defaults
 # ================== 
-BUILD_AD=1
+BUILD_DUAL=1
 BUILD_CLEAN=0
 BUILD_TEST=1
 
@@ -60,7 +60,7 @@ CC=gcc
 CXX=g++
 
 C_FLAGS=
-CXX_FLAGS=-std=c++17
+CXX_FLAGS=
 FC_FLAGS=
 
 # =========================
@@ -140,7 +140,7 @@ do
   elif [ "$var" == "--clean" -o "$var" == "-clean" -o "$var" == "-c" ]; then
     echo ${opt_str} "Clean and rebuild"
     BUILD_CLEAN=1
-    BUILD_AD=0
+    BUILD_DUAL=0
 
   elif [ "$var" == "--release" -o "$var" == "-release" -o "$var" == "-opt" ]; then
     echo ${opt_str} "Compiling in optimized mode"
@@ -225,8 +225,8 @@ echo "$0 $@"
 # ====================================== 
 # install/build location compiled source
 # ====================================== 
-COMPILE_INSTALL_AD_DIRECTORY="${INSTALL_AD_DIRECTORY}"
-COMPILE_BUILD_AD_DIRECTORY="${BUILD_AD_DIRECTORY}"
+COMPILE_INSTALL_DUAL_DIRECTORY="${INSTALL_DUAL_DIRECTORY}"
+COMPILE_BUILD_DUAL_DIRECTORY="${BUILD_DUAL_DIRECTORY}"
 
 # ============== 
 # compiler paths
@@ -237,10 +237,10 @@ CXX_PATH="`which $CXX`"
 # ====================== 
 # check source directory
 # ====================== 
-if [ ! -d "${AD_DIRECTORY}" ]; then
+if [ ! -d "${DUAL_DIRECTORY}" ]; then
   echo " "
   echo "Error:"
-  echo "${AD_DIRECTORY} does not exist."
+  echo "${DUAL_DIRECTORY} does not exist."
   exit 1
 fi
 
@@ -284,24 +284,24 @@ fi
 # =================================================================== 
 if [ $BUILD_CLEAN == 1 ]; then
   echo " "
-  echo "Clean: removing ${COMPILE_BUILD_AD_DIRECTORY}"
-  echo "Clean: removing ${COMPILE_INSTALL_AD_DIRECTORY}"
+  echo "Clean: removing ${COMPILE_BUILD_DUAL_DIRECTORY}"
+  echo "Clean: removing ${COMPILE_INSTALL_DUAL_DIRECTORY}"
   echo "Clean: removing coverage"
   echo " "
-  rm -rf $COMPILE_BUILD_AD_DIRECTORY
-  rm -rf $COMPILE_INSTALL_AD_DIRECTORY
+  rm -rf $COMPILE_BUILD_DUAL_DIRECTORY
+  rm -rf $COMPILE_INSTALL_DUAL_DIRECTORY
   rm -rf coverage
 fi
 
 # =================================================================== 
 COMPILE_FAIL=0
-if [ $BUILD_AD == 1 ]; then
+if [ $BUILD_DUAL == 1 ]; then
   echo " "
-  echo -e "${mC} ========== Building AutoDiff ========= ${eC}"
+  echo -e "${mC} ========== Building AutoDiff Dual ========= ${eC}"
   echo "   Compiling Options:"
   echo "          Build Type: ${BUILD_TYPE}"
-  echo "    Install Location: ${COMPILE_INSTALL_AD_DIRECTORY}"
-  echo " Executable Location: ${COMPILE_BUILD_AD_DIRECTORY}/bin"
+  echo "    Install Location: ${COMPILE_INSTALL_DUAL_DIRECTORY}"
+  echo " Executable Location: ${COMPILE_BUILD_DUAL_DIRECTORY}/bin"
   echo " "
   echo "                  CC: ${CC}"
   echo "                 CXX: ${CXX}"
@@ -314,40 +314,40 @@ if [ $BUILD_AD == 1 ]; then
   # move to the build directory
   cd $BUILD_DIRECTORY
 
-  if [ ! -d $COMPILE_BUILD_AD_DIRECTORY ]; then
-    mkdir $COMPILE_BUILD_AD_DIRECTORY
+  if [ ! -d $COMPILE_BUILD_DUAL_DIRECTORY ]; then
+    mkdir $COMPILE_BUILD_DUAL_DIRECTORY
   fi
-  cd $COMPILE_BUILD_AD_DIRECTORY
+  cd $COMPILE_BUILD_DUAL_DIRECTORY
 
   cmake -D CMAKE_C_COMPILER=${CC_PATH}                              \
         -D CMAKE_CXX_COMPILER=${CXX_PATH}                           \
         -D CMAKE_C_FLAGS=${C_FLAGS}                                 \
         -D CMAKE_CXX_FLAGS=${CXX_FLAGS}                             \
-        -D CMAKE_INSTALL_PREFIX=${COMPILE_INSTALL_AD_DIRECTORY}    \
+        -D CMAKE_INSTALL_PREFIX=${COMPILE_INSTALL_DUAL_DIRECTORY}    \
         -D CMAKE_BUILD_TYPE=${BUILD_TYPE}                           \
         -D gtest_dir=${GTEST_DIRECTORY}                             \
         -D UNIT_TEST=${UNIT_TEST}                                   \
         -D COVERAGE=${COVERAGE}                                     \
-        -G "Unix Makefiles" ${AD_DIRECTORY} | tee cmake_config.out
+        -G "Unix Makefiles" ${DUAL_DIRECTORY} | tee cmake_config.out
 
   ${MAKE_CMD}
   cd ${CURRENT_PATH}
 
-  if [ ! -d "${COMPILE_INSTALL_AD_DIRECTORY}" ]; then
+  if [ ! -d "${COMPILE_INSTALL_DUAL_DIRECTORY}" ]; then
     echo "ERROR:"
-    echo "${COMPILE_INSTALL_AD_DIRECTORY} does not exist."
+    echo "${COMPILE_INSTALL_DUAL_DIRECTORY} does not exist."
     COMPILE_FAIL=1
   fi
 
   if [ ${COMPILE_FAIL} == 0 ]; then
     echo " "
     echo " ============================================================ "
-    echo -e " ${gC} AutoDiff AD build successful! ${eC}"
+    echo -e " ${gC} AutoDiff Dual build successful! ${eC}"
     echo    "   Compiling Options:"
     echo    "          Build Type: ${BUILD_TYPE}"
-    echo    "      Build Location: ${COMPILE_BUILD_AD_DIRECTORY}"
+    echo    "      Build Location: ${COMPILE_BUILD_DUAL_DIRECTORY}"
     echo -e "                    : ${GC}make clean; make -j install${eC} in this directory"
-    echo    "    Install Location: ${COMPILE_INSTALL_AD_DIRECTORY}"
+    echo    "    Install Location: ${COMPILE_INSTALL_DUAL_DIRECTORY}"
     echo    " "
     echo    "                  CC: ${CC}"
     echo    "                 CXX: ${CXX}"
@@ -359,7 +359,7 @@ if [ $BUILD_AD == 1 ]; then
   else
     echo " "
     echo         "================================"
-    echo -e "${rC} AutoDiff AD build FAILED! ${eC}"
+    echo -e "${rC} AutoDiff Dual build FAILED! ${eC}"
     echo         "================================"
     echo " "
     exit 1
@@ -368,7 +368,6 @@ fi
 
 if [ ${COVERAGE} == "ON" ]; then
     echo "Building code coverage..."
-    chmod +x coverage.sh
     ./coverage.sh
 fi
 # =================================================================== 
