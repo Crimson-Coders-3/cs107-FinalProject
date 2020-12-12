@@ -114,7 +114,8 @@ TEST(ROOT_FIND, FROM_EQUATION){
     Eigen::VectorXd F_at_roots = getF(F);
     double l2_norm = F_at_roots.squaredNorm();
     EXPECT_NEAR(0.0, l2_norm, tol);
-    std::cout << l2_norm << std::endl;
+    std::cout << "L2 norm: " << l2_norm << std::endl;
+    std::cout << "Roots found: " << roots << std::endl;
 }
 
 TEST(PRINT_EQ, PRINT){

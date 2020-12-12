@@ -20,8 +20,12 @@ endif()
 # ======================================= #
 # Library paths
 set(gtest_dir   "" CACHE PATH "GTest install directory location")
-set(autodiff_dir "" CACHE PATH "AutoDiff path e.g. <autodiff_dir>/<autodiff_so>")
-set(autodiff_so AutoDiff CACHE STRING "AutoDiff shared object name")
+#set(autodiff_dir "" CACHE PATH "AutoDiff path e.g. <autodiff_dir>/<autodiff_so>")
+set(autodiff_dir ${PROJECT_SOURCE_DIR}/../AutoDiff/)
+#set(autodiff_so AutoDiff CACHE STRING "AutoDiff shared object name")
+set(autodiff_so AutoDiff)
+set(rootfinder_dir ${PROJECT_SOURCE_DIR}/../Roots/)
+set(rootfinder_so Roots) #CACHE STRING "Roots shared object name")
 set(EIGEN_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/../install/3PL/eigen/include/eigen3)
 # ======================================= #
 
@@ -29,10 +33,12 @@ set(EIGEN_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/../install/3PL/eigen/include/eigen3)
 # Library header files to be included
 include_directories(${autodiff_dir}/include
                     ./include
+                    ${rootfinder_dir}/include
                     ${EIGEN_INCLUDE_DIR})
 
 # Libraries to be linked
-find_library(autodiff_lb NAMES ${autodiff_so} PATHS ${autodiff_dir}/lib)
+find_library(autodiff_lb NAMES ${autodiff_so} PATHS ${autodiff_dir}/install/lib)
+find_library(roots_lb NAMES ${rootfinder_so} PATHS ${rootfinder_dir}/install/lib)
 # ======================================= #
 
 # ======================================= #
