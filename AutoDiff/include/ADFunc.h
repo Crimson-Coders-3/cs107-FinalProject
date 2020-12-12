@@ -1,43 +1,96 @@
+/**
+* \defgroup ADFunc_group ADFunc
+* \brief The ADFunc module makes differentiating a function happens automatically
+*/
+
+/**
+* \file ADFunc.h
+* \author team 3
+*
+*/
+
 #ifndef ADFUNC_H
 #define ADFUNC_H
 
+/* system header files */
 #include <vector>
 #include <iostream>
 #include <unordered_map>
 
-///////////////////////////////////////////////////////////////// CUSTOM ADFunc CLASS
+/**
+* \class ADFunc
+* \brief 
+* ADFunc represents a function that has automatic differentiation property. 
+* A ADFunc object represents a multivariable function and enables you to evaluate 
+* the function value and gradient at any time. A gradient is a vector of 
+* all the first-order partial derivatives of the function, which means you can also
+* get partial derivative of the function with respect to a particular variable easily. 
+* To get started, you need to firstly declare variables as ADFunc objects, and then
+* uses these variables to compose the function (also a ADFunc object) you want to study.
+*/
+
 class ADFunc {
 
-   /////////////////////////////////////////// CLASS DEF
-   // private
    private:
+
       // function example: f(x,y) = 2xy + y^2 = 5, x=2, y=1
+
       // _val: function value, 5
-      double _val;
+      double _val; 
       // _grad: function gradient, (2y,2x+2y) = (2,6)
-      std::vector<double> _grad;
-      // _name_vec: variables names, ("x", "y")
-      std::vector<std::string> _name_vec;
-      // _name: map name (string) to index (int) int _name_vec
-      //        e.g ("x","y") -> {"x":0, "y":1}
+      std::vector<double> _grad; 
+      // _name_vec: a vector of variables' names, ("x", "y")
+      std::vector<std::string> _name_vec; 
+      // _name_map: map name (string) to index (int) in _name_vec
+      //            _name_vec ("x","y") -> _name_map {"x":0, "y":1}
       std::unordered_map<std::string,int> _name_map;
-      // _hasName equals true is variables'names are set
+      // _hasName: when it equals true, variables'names are set
       bool _hasName;
       // _num_vars: number of variables, 2
       int _num_vars;
 
-   // public
    public:
-      // constructor
-      // seed vector example: for x in f(x,y), seed = [1, 0]
-      //                      for y in f(x,y), seed = [0, 1]
-      // seed vector does not need to be unit vector
+      //! A constructor.
+      /*!
+         Initialize a variable with its initial value and its seed vector.
+         A seed vector should have its size equal to the TOTAL number of variables
+         that will be used in your program. A common way of creating a seed vector
+         for a first-time created variable is to initialize a vecotr at size of total 
+         number of variables and fill it with 0.00. except where this 
+         variable should be with respect to the seed vector. Usually, we use a unit vector for a seed
+         vector of a first-time used variable
+
+         x = {1.0,0.0,0.0}
+         y = {0.0,1.0,0.0},
+         z = {0.0, 0.0, 1.0} 
+
+         if the multivariable function f(x,y,z) is consists of x, y, z. 
+         However, a seed vector does not have to be a unit vector. You can set it whatever
+         you want. The reason why it is also 1.0 is that d/dx (x) = 1.0. 
+         \param seed
+         \param val
+      */
       ADFunc(double val, std::vector<double> seed);
-      // constructor
-      // seed vector example: for x in f(x,y), seed = [1, 0], var_names = ["x","y"]
-      //                      for y in f(x,y), seed = [0, 1], var_names = ["x","y"]
+      
       // in var_names, every name must be unique
       ADFunc(double val, std::string name, std::vector<std::string> var_names);
+      //! A constructor.
+      /*!
+         Initialize a variable with its initial value, its seed vector, and a vector of all
+         the variables names to be used. Example of var_names
+         A seed vector should have its size equal to the TOTAL number of variables
+         that will be used in your program. A common way of creating a seed vector
+         for a first-time created variable is to initialize a vecotr at size of total 
+         number of variables and fill it with 0.00. except where this 
+         variable should be with respect to the seed vector. Usually, we use a unit vector for a seed
+         vector of a first-time used variable, like seed vector of x = {1.0,0.0,0.0}, y = {0.0,1.0,0.0},
+         z = {0.0, 0.0, 1.0} if the multivariable function f(x,y,z) is consists of x, y, z. 
+         However, a seed vector does not have to be a unit vector. You can set it whatever
+         you want. The reason why it is also 1.0 is that d/dx (x) = 1.0. 
+         \param val
+         \param seed
+         \param var
+      */
       ADFunc(double val, std::vector<double> seed, std::vector<std::string> var_names);
 
    /////////////////////////////////////////// ASSIGNMENT & COMPOUND ASSIGNMENT OPERATORS
