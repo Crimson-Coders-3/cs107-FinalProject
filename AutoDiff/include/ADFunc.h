@@ -1,9 +1,10 @@
 /** \defgroup AutoDiff_group AutoDiff
-* The AutoDiff module contains ADFunc class and ADFuncVector class with its 
+* \brief The AutoDiff module contains ADFunc class and ADFuncVector class with its 
 * aim to make differentiating a function happens automatically
 */
 
 /**
+* \ingroup AutoDiff_group AutoDiff
 * \file ADFunc.h
 * \author team 3
 *
@@ -17,6 +18,7 @@
 #include <unordered_map>
 
 /**
+* \ingroup AutoDiff_group AutoDiff
 * \class ADFunc
 * \brief 
 * ADFunc represents a function that has automatic differentiation property. 
@@ -269,13 +271,13 @@ class ADFunc {
    */
    std::vector<double> dval_wrt(std::vector<std::string> names) const;
 
-   //! Get gradient (all the variables)
+   //! Get gradient (dvals of all the variables)
    std::vector<double> gradient() const;
 
    //! Get total number of variables
    int countVar() const;
 
-   //! Get true/false if variables have names, 
+   //! Get true/false if variables have names
    bool hasName() const;
 
    //! Get names of all variables

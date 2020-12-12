@@ -1,8 +1,5 @@
 /**
- * \ingroup AutoDiff_group AutoDiff
- */
-
-/**
+* \ingroup AutoDiff_group AutoDiff
 * \file ADFuncVector.h
 * \author team 3
 *
@@ -16,6 +13,7 @@
 #include <ADFunc.h>
 
 /**
+* \ingroup AutoDiff_group AutoDiff
 * \class ADFuncVector
 * \brief 
 * ADFuncVector represents a vector of functions and performs automatic differentiation on this 
