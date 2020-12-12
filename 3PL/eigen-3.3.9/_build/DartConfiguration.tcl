@@ -62,7 +62,7 @@ UpdateOptions:
 UpdateType: 
 
 # Compiler info
-Compiler: /Library/Developer/CommandLineTools/usr/bin/c++
+Compiler: /usr/bin/g++
 CompilerVersion: 12.0.0.12000031
 
 # Dynamic analysis (MemCheck)
