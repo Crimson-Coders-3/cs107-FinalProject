@@ -1,6 +1,6 @@
 /**
 * \defgroup ADFunc_group ADFunc
-* \brief The ADFunc module makes differentiating a function happens automatically
+* The ADFunc module makes differentiating a function happens automatically
 */
 
 /**
@@ -56,100 +56,246 @@ class ADFunc {
          A seed vector should have its size equal to the TOTAL number of variables
          that will be used in your program. A common way of creating a seed vector
          for a first-time created variable is to initialize a vecotr at size of total 
-         number of variables and fill it with 0.00. except where this 
-         variable should be with respect to the seed vector. Usually, we use a unit vector for a seed
-         vector of a first-time used variable
+         number of variables and fill it with 0.00 except where this 
+         variable locates with respect to the seed vector. Usually, we use a unit vector for a seed
+         vector of a first-time used variable. For example, for a multivariable function f(x,y,z):
 
-         x = {1.0,0.0,0.0}
-         y = {0.0,1.0,0.0},
-         z = {0.0, 0.0, 1.0} 
+         std::vector<double> seed_x = {0.0, 0.1, 0.0};
+         
+         std::vector<double> seed_y = {0.0, 1.0, 0.0};
+         
+         std::vector<double> seed_z = {0.0, 0.0, 1.0};
 
-         if the multivariable function f(x,y,z) is consists of x, y, z. 
          However, a seed vector does not have to be a unit vector. You can set it whatever
          you want. The reason why it is also 1.0 is that d/dx (x) = 1.0. 
-         \param seed
-         \param val
+         \param seed a seed vector, like {0.0, 0.1, 0.0}
+         \param val initial value
       */
       ADFunc(double val, std::vector<double> seed);
       
-      // in var_names, every name must be unique
-      ADFunc(double val, std::string name, std::vector<std::string> var_names);
       //! A constructor.
       /*!
          Initialize a variable with its initial value, its seed vector, and a vector of all
-         the variables names to be used. Example of var_names
+         the variables names to be used. Each variables should all have a name and its name
+         must be unique.
+
+         For example, for a multivariable function f(x,y,z):
+
+         std::vector<std::string> var_names = {"x", "y", "z"};
+
+         and this var_names vector should be used in all the constructors of x,y,z variables to
+         be consistent.
+         
+         ADFunc x(5.0,seed_x, var_names);
+
+         ADFunc y(2.0,seed_y, var_names);
+
+         ADFunc z(0.9,seed_z, var_names);
+
          A seed vector should have its size equal to the TOTAL number of variables
          that will be used in your program. A common way of creating a seed vector
          for a first-time created variable is to initialize a vecotr at size of total 
          number of variables and fill it with 0.00. except where this 
          variable should be with respect to the seed vector. Usually, we use a unit vector for a seed
-         vector of a first-time used variable, like seed vector of x = {1.0,0.0,0.0}, y = {0.0,1.0,0.0},
-         z = {0.0, 0.0, 1.0} if the multivariable function f(x,y,z) is consists of x, y, z. 
-         However, a seed vector does not have to be a unit vector. You can set it whatever
-         you want. The reason why it is also 1.0 is that d/dx (x) = 1.0. 
-         \param val
-         \param seed
-         \param var
+         vector of a first-time used variable. The reason why it is also 1.0 is that d/dx (x) = 1.0. 
+         
+         \param val initial value
+         \param seed a seed vector, like {0.0, 0.1, 0.0}
+         \param var_names a vector that contains all the variables' names, like {"x", "y", "z"}
       */
       ADFunc(double val, std::vector<double> seed, std::vector<std::string> var_names);
 
-   /////////////////////////////////////////// ASSIGNMENT & COMPOUND ASSIGNMENT OPERATORS
+      //! A constructor.
+      /*!
+         Initialize a variable with its initial value, its own variable name, and a vector of all
+         the variables names to be used. Each variables should all have a name and its name
+         must be unique.
+
+         For example, for a multivariable function f(x,y,z):
+
+         std::vector<std::string> var_names = {"x", "y", "z"};
+
+         and for variable x,
+         
+         ADFunc x(5.0,"x", var_names);
+
+         When using this constructor, the variable's seed vector is set default to be a unit vector 
+         (the derivative with respect to itself is 1.0). You can change the seed vector afterwards 
+         
+         \sa set_seed(), set_seed_wrt()
+
+         \param val initial value
+         \param name variable name, like "x"
+         \param var_names a vector that contains all the variables' names, like {"x", "y", "z"}
+      */
+      ADFunc(double val, std::string name, std::vector<std::string> var_names);
+
+   //! Assignment operator.
+   /*!
+      Assign an ADFunc object to another ADFunc object by using copy by value
+
+      \param obj
+   */
    ADFunc operator = ( const ADFunc &obj );
 
-   // overload ADFunc + ADFunc
+   //! Overload ADFunc += ADFunc
+   /*!
+      It will throw std::invalid_argument error if LHS(left hand side) and RHS(right hand side)
+      have different size of seed vectors.
+
+      It will throw a warning if LHS ADFunc object is in name mode while RHS is not. 
+
+      It will throw std::runtime_error if LHS and RHS have different names vectors.
+
+      It will automatically assign RHS ADFunc object's name to LHS ADFunc object if RHS does not have names.
+   
+      \param obj ADFunc object at RHS
+   */ 
    ADFunc operator += ( const ADFunc &obj );
 
-   // overload ADFunc + double
+   //! Overload ADFunc += a scalar number
+   /*!
+      It will change LHS ADFunc object's value but not its gradient.
+
+      \param obj a scalar number
+   */ 
    ADFunc operator += ( double obj );
 
-   // overload ADFunc - ADFunc
+   //! Overload ADFunc -= ADFunc
+   /*!
+      It will throw std::invalid_argument error if LHS(left hand side) and RHS(right hand side)
+      have different size of seed vectors.
+
+      It will throw a warning if LHS ADFunc object is in name mode while RHS is not. 
+
+      It will throw std::runtime_error if LHS and RHS have different names vectors.
+
+      It will automatically assign RHS ADFunc object's name to LHS ADFunc object if RHS does not have names.
+   
+      \param obj ADFunc object at RHS
+   */ 
    ADFunc operator -= ( const ADFunc &obj );
 
-   // overload ADFunc - double
+   //! Overload ADFunc -= a scalar number
+   /*!
+      It will change LHS ADFunc object's value but not its gradient.
+
+      \param obj a scalar number
+   */ 
    ADFunc operator -= ( double obj );
 
-   // overload ADFunc * ADFunc
+   //! Overload ADFunc -= ADFunc
+   /*!
+      It will throw std::invalid_argument error if LHS(left hand side) and RHS(right hand side)
+      have different size of seed vectors.
+
+      It will throw a warning if LHS ADFunc object is in name mode while RHS is not. 
+
+      It will throw std::runtime_error if LHS and RHS have different names vectors.
+
+      It will automatically assign RHS ADFunc object's name to LHS ADFunc object if RHS does not have names.
+   
+      \param obj ADFunc object at RHS
+   */ 
    ADFunc operator *= ( const ADFunc &obj );
 
-   // overload ADFunc * double
+   //! Overload ADFunc *= a scalar number
+   /*!
+      It will change LHS ADFunc object's value but not its gradient.
+
+      \param obj a scalar number
+   */ 
    ADFunc operator *= ( double obj );
 
-   // overload ADFunc / ADFunc
+   //! Overload ADFunc /= ADFunc
+   /*!
+      It will throw std::invalid_argument error if LHS(left hand side) and RHS(right hand side)
+      have different size of seed vectors.
+
+      It will throw a warning if LHS ADFunc object is in name mode while RHS is not. 
+
+      It will throw std::runtime_error if LHS and RHS have different names vectors.
+
+      It will automatically assign RHS ADFunc object's name to LHS ADFunc object if RHS does not have names.
+   
+      \param obj ADFunc object at RHS
+   */ 
    ADFunc operator /= ( const ADFunc &obj );
 
-   // overload ADFunc / double
+   //! Overload ADFunc /= a scalar number
+   /*!
+      It will change LHS ADFunc object's value but not its gradient.
+
+      \param obj a scalar number
+   */ 
    ADFunc operator /= ( double obj );
 
    /////////////////////////////////////////// GETTER
-   // get value
+   //! Get function value
    double val() const;
 
-   // get dval with respect to a variable
+   //! Get dval (partial derivative) with respect to a variable
+   /*!
+      It will throw a std::out_of_range error if index is out of range of the predefined seed vector.
+
+      \param index index of the variable in the seed vector
+   */ 
    double dval_wrt(int index) const;
 
-   // get dval with respect to a variable
+   //! Get dval (partial derivative) with respect to a variable
+   /*!
+      It will throw std::runtime_error if the input variable name not found.
+
+      It will throw std::runtime_error if name mode is not set.
+
+      \param name variable name, like "x"
+   */
    double dval_wrt(std::string var_name) const;
 
-   // get dvals with respect to more than one variables
+   //! Get dvals with respect to more than one variables
+   /*!
+      It will throw a std::out_of_range error if one index is out of range of the predefined seed vector.
+
+      \param indexs indexs of variables in the seed vector
+   */
    std::vector<double> dval_wrt(std::vector<int> indexs) const;
 
-   // get dvals with respect to more than one variables
+   //! Get dvals with respect to more than one variables
+   /*!
+      It will throw std::runtime_error if one input variable name not found.
+
+      It will throw std::runtime_error if name mode is not set.
+
+      \param names names of variables
+   */
    std::vector<double> dval_wrt(std::vector<std::string> names) const;
 
-   // get gradient (all the variables)
+   //! Get gradient (all the variables)
    std::vector<double> gradient() const;
 
-   // get total number of variables
+   //! Get total number of variables
    int countVar() const;
 
-   // get if variables have names, 
-   // e.g. represented by std::vector<std::string> {"x", "y","z"}
+   //! Get true/false if variables have names, 
    bool hasName() const;
 
-   // get names of all variables
+   //! Get names of all variables
+   /*!
+
+      It will throw std::runtime_error if name mode is not set.
+
+      \param names names of variables
+   */
    std::vector<std::string> getName() const;
 
-   // get names of a variable at index of name vector
+   //! Get a variable name at index of name vector
+   /*!
+      It will throw std::runtime_error if one input variable name not found.
+
+      It will throw a std::out_of_range error if index is out of range of the predefined seed vector.
+
+      \param index index of the variable in the seed vector
+   */
    std::string getName(int index) const;
 
    /////////////////////////////////////////// SETTER
