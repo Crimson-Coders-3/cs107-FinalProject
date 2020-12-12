@@ -19,5 +19,8 @@ after_success:
 - cd AutoDiff 
 - bash coverage.sh
 # Uploading to CodeCov
-- bash <(curl -s https://codecov.io/bash) -f ./coverage/AD_COV.info || echo "Codecov did not collect coverage reports"
+- bash <(curl -s https://codecov.io/bash) -f ./coverage/AD_COV.info || echo "Codecov did not collect coverage reports -- AD"
+- cd ..
+- cd Dual
+- bash <(curl -s https://codecov.io/bash) -f ./coverage/DUAL_COV.info || echo "Codecov did not collect coverage reports -- DUAL"
 - cd ..
