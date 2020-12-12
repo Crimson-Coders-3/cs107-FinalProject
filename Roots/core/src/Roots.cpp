@@ -22,7 +22,7 @@ std::ostream& operator<<(std::ostream& os, const Equation& obj){
 }
 
 
-// Get the matrix F(a)
+// Get the vector F(a)
 Eigen::VectorXd getF(std::vector<ADFunc> Function){
     int num_functions = Function.size();
     Eigen::VectorXd F(num_functions);
