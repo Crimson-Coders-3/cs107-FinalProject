@@ -361,8 +361,8 @@ class ADFunc {
 
 /**
  * \ingroup AutoDiff_group AutoDiff
+ * @{
  */
-/**@{*/
 
 /////////////////////////////////////////// PRINT
 
