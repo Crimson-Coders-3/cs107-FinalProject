@@ -1,20 +1,30 @@
 language: cpp
 os: linux
-compiler: gcc
+compiler: g++
+
+before_install:
+- sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+- sudo apt-get update -qq
+
+install:
+- sudo apt-get install -qq g++-4.8
+- export CXX="g++-4.8"
 
 addons:
   apt:
     packages:
     - lcov
-    - libeigen3-dev
+    - libblas-dev
+    - liblapack-dev
+#    - libeigen3-dev
 
 script:
-- cd 3PL
-- bash build_3PL.sh
-- cd ..
-- cd AutoDiff
+#- cd 3PL
+#- bash build_3PL.sh
+# - cd ..
+#- cd AutoDiff
 - bash config.sh
-- cd ..
+#- cd ..
 
 <<<<<<< HEAD
 after_success:
@@ -28,6 +38,7 @@ after_success:
 - bash <(curl -s https://codecov.io/bash) -f ./coverage/DUAL_COV.info || echo "Codecov did not collect coverage reports -- DUAL"
 - cd ..
 - cd Roots
+- bash coverage.sh
 - bash <(curl -s https://codecov.io/bash) -f ./coverage/ROOTS_COV.info || echo "Codecov did not collect coverage reports -- ROOTS"
 =======
 >>>>>>> master

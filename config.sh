@@ -6,6 +6,7 @@
 BUILD_3PL=0
 BUILD_LIB=0
 BUILD_APP=0
+BUILD_ROOTS=0
 BUILD_TYPE=0
 CLEAN_DIST=0
 CLEAN=0
@@ -178,7 +179,7 @@ fi
 # =================================================================== #
 if [ $BUILD_APP == 0 -a $BUILD_LIB == 0 -a $BUILD_3PL == 0 ]; then
   echo "================================================"
-  echo "Building the GTest, AutoDiff, Dual, and App..."
+  echo "Building the GTest, AutoDiff, Dual, Roots, and App..."
   echo "================================================"
   echo " "
 
@@ -196,10 +197,14 @@ if [ $BUILD_APP == 0 -a $BUILD_LIB == 0 -a $BUILD_3PL == 0 ]; then
   cd Dual
   ./config.sh $cmd_args
 
+  # build App
   cd ..
   cd App
+  ./config.sh $cmd_args
 
-  # build app
+  # build Roots
+  cd ..
+  cd Roots
   ./config.sh $cmd_args
 
   cd ..
@@ -245,6 +250,16 @@ if [ $BUILD_APP == 1 ]; then
   echo "==============="
 
   cd App
+  ./config.sh $cmd_args
+  cd ..
+fi
+
+if [ $BUILD_ROOTS == 1 ]; then
+  echo "==============="
+  echo "Building Roots..."
+  echo "==============="
+
+  cd Roots
   ./config.sh $cmd_args
   cd ..
 fi

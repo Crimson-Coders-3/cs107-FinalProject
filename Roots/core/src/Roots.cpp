@@ -65,7 +65,7 @@ Eigen::VectorXd Equation::getRoots(Eigen::VectorXd guess, double tol){
         F = function(guess);
         Fv = getF(F);
         Fv_norm = Fv.squaredNorm();
-        std::cout << "Iter: " << num_iterations << " L2 norm: " << Fv_norm << std::endl;
+        //std::cout << "Iter: " << num_iterations << " L2 norm: " << Fv_norm << std::endl;
         num_iterations++;
     }
 
