@@ -359,6 +359,11 @@ class ADFunc {
 
 };
 
+/**
+ * \ingroup AutoDiff_group AutoDiff
+ */
+/**@{*/
+
 /////////////////////////////////////////// PRINT
 
 //! Print ADFunc Implementation
@@ -450,6 +455,7 @@ bool operator>=(const ADFunc& lhs, const ADFunc& rhs);
 
 /////////////////////////////////////////// MATH LIB FUNCTIONS
 
+//!
 /* 
 * It wil throw std::invalid_argument error if LHS and RHS seed vectors' dimension not matched!
 * 
@@ -469,6 +475,7 @@ ADFunc pow ( const ADFunc &lhs, const ADFunc &rhs );
 
 ADFunc pow ( const ADFunc &lhs, double rhs );
 
+//!
 /*! 
 * It will throw std::domain_error if rhs value less than 0 because derivative NaN occurs!
 * 
@@ -608,6 +615,7 @@ std::vector<ADFunc> multiVar(std::vector<double> values);
 /* Set all the seeds vectors of input ADFunc back to unit vectors
 */
 void setSeedDefault(std::vector<ADFunc> vars);
+/**@}*/
 
 ///////////////////////////////////////////////////////////////////
 /////   Operators NOT Supported in ADFunc Class      ////////////
