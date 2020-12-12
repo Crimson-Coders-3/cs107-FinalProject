@@ -33,7 +33,7 @@ ADFuncVector::ADFuncVector(std::vector<ADFunc> funcVec){
 
 void ADFuncVector::setSize(int size){
 	if(_funcVec.size()!=0 && _funcVec.size()!=size){
-		throw std::runtime_error("Input size mismatches with previously defined funcVector! Please use clear() before set size.");
+		throw std::runtime_error("Input size mismatches with current funcVector! Please use clear() before set size.");
 	}
 	_size = size;
 }
@@ -42,7 +42,7 @@ void ADFuncVector::setFuncVec(std::vector<ADFunc> funcVec){
 	//case 1: _size set, _funcVec not _set
 	//        throw error if _size!=funcVec.size()
 	if(_funcVec.size()==0 && funcVec.size()!=_size && _size!=0){
-		throw std::runtime_error("Input funcVector mismatches with previously defined size! Please use clear() before set a new funcVector.");
+		throw std::runtime_error("Input funcVector mismatches with current size! Please use clear() before set a new funcVector.");
 	}
 	//case 2: _size set, _funcVec set
 	//        _size and _funcVec changed
@@ -82,6 +82,9 @@ void ADFuncVector::push_back(ADFunc func){
 
 // get val of a function
 double ADFuncVector::val(int index){
+	if(index>=_size){
+		throw std::out_of_range("Index out of range!");
+	}
 	return _funcVec.at(index).val();
 }
 
@@ -100,7 +103,10 @@ bool ADFuncVector::checkValid(){
 			throw std::runtime_error("Input function have different number of varibales!");
 		}
 	}
-	return _size == _funcVec.size();
+	if(_size != _funcVec.size()){
+		throw std::runtime_error("Internal size not matched with internal std::vector<ADFunc>! Please use setFuncVec() or setSize() to fix it!");
+	}
+	return true;
 }
 
 // check if _funVec is empty
@@ -214,6 +220,22 @@ std::vector<std::vector<double> > ADFuncVector::dval_wrt(std::vector<std::vector
 				throw std::out_of_range("Function index out of range!");
 			} 
 			row_result.push_back( (_funcVec[fv_pair.first]).dval_wrt(fv_pair.second) );
+		}
+		std::vector<double> row_copy(row_result);
+		result.push_back(row_copy);
+	}
+	return result;
+}
+
+// return the jacobian of ADFuncVector
+// use _funcVec's order and the order that seed vector provides
+std::vector<std::vector<double> > ADFuncVector::jacobian(){
+	std::vector<std::vector<double> > result;
+	std::vector<double> row_result;
+	for(int i=0;i<_size;i++){
+		row_result.clear();
+		for(int j=0;j<_num_vars;j++){
+			row_result.push_back( (_funcVec[i]).dval_wrt(j) );
 		}
 		std::vector<double> row_copy(row_result);
 		result.push_back(row_copy);

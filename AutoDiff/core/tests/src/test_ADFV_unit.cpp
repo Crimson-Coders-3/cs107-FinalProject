@@ -92,7 +92,7 @@ TEST(VECTOR,SETTER){
 	std::vector<double> new_values = {1.0,2.0};
 	std::vector<ADFunc> new_multi_vars = multiVar(new_values);
 	Fvec.setFuncVec(new_multi_vars);
-    EXPECT_NEAR(Fvec.size(),2.0,DTOL);
+  EXPECT_NEAR(Fvec.size(),2.0,DTOL);
 	
 	try {
         Fvec.setSize(5);

@@ -1,7 +1,7 @@
 # cs107-FinalProject
 
-UNIT_TESTING_AD Test Branch: [![Build Status](https://travis-ci.com/Crimson-Coders-3/cs107-FinalProject.svg?token=b3u4uQsijMxdCtTBnkQy&branch=unit_testing_AD)](https://travis-ci.com/Crimson-Coders-3/cs107-FinalProject)
- | [![codecov](https://codecov.io/gh/Crimson-Coders-3/cs107-FinalProject/branch/unit_testing_AD/graph/badge.svg?token=K3Q5S3JJKG)](https://codecov.io/gh/Crimson-Coders-3/cs107-FinalProject)
+APP-DEV Test Branch: [![Build Status](https://travis-ci.com/Crimson-Coders-3/cs107-FinalProject.svg?token=b3u4uQsijMxdCtTBnkQy&branch=app-dev)](https://travis-ci.com/Crimson-Coders-3/cs107-FinalProject)
+ | [![codecov](https://codecov.io/gh/Crimson-Coders-3/cs107-FinalProject/branch/app-dev/graph/badge.svg?token=K3Q5S3JJKG)](https://codecov.io/gh/Crimson-Coders-3/cs107-FinalProject)
 
 Final Project for CS107 (Fall 2020)
 Group #3
