@@ -24,6 +24,13 @@ vector<ADFunc> customFunct(Eigen::VectorXd vals){
     return {5*pow(x,2)+2*y, 3+y};
 }
 
+vector<ADFunc> customFunct2(Eigen::VectorXd vals){
+    ADFunc x = ADFunc(vals[0], {1,0,0});
+    ADFunc y = ADFunc(vals[1], {0,1,0});
+    ADFunc z = ADFunc(vals[2], {0,0,1});
+    return {5*sin(x)-cos(y)/2, 3*x/y, z+2};
+}
+
 //////////////CONSTRUCTOR TESTS
 TEST(CONSTRUCTOR,EQOPERATOR){    
     function<vector<ADFunc>(Eigen::VectorXd)> Func = customFunct;
@@ -35,6 +42,17 @@ TEST(CONSTRUCTOR,DEFAULT){
     function<vector<ADFunc>(Eigen::VectorXd)> Func = customFunct;
     Equation eq(customFunct, 2);
     EXPECT_EQ(eq.num_vars, 2);
+}
+
+TEST(CONSTRUCTOR, FROMEXISTING){
+    function<vector<ADFunc>(Eigen::VectorXd)> Func = customFunct;
+    Equation eq(customFunct, 2);
+    Equation eq2 = eq;
+    EXPECT_EQ(eq2.num_vars, 2);
+    function<vector<ADFunc>(Eigen::VectorXd)> Func2 = customFunct2;
+    eq = Equation(customFunct2, 3);
+    EXPECT_EQ(eq.num_vars, 3);
+    EXPECT_EQ(eq2.num_vars, 2);
 }
 
 //Test getting the values from the vector of ADFunc objects returned by function(values)
@@ -97,4 +115,14 @@ TEST(ROOT_FIND, FROM_EQUATION){
     double l2_norm = F_at_roots.squaredNorm();
     EXPECT_NEAR(0.0, l2_norm, tol);
     std::cout << l2_norm << std::endl;
+}
+
+TEST(PRINT_EQ, PRINT){
+    function<vector<ADFunc>(Eigen::VectorXd)> Func = customFunct;
+    Equation eq(customFunct, 2);
+    testing::internal::CaptureStdout();
+    std::cout << eq;
+    std::string output_eq = testing::internal::GetCapturedStdout();
+    std::string expected_eq = "Information of Equation object: \nFunction with 2 variables";
+    EXPECT_TRUE(output_eq.compare(expected_eq)==0);
 }
