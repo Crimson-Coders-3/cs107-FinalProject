@@ -28,7 +28,7 @@ vector<ADFunc> customFunct2(Eigen::VectorXd vals){
     ADFunc x = ADFunc(vals[0], {1,0,0});
     ADFunc y = ADFunc(vals[1], {0,1,0});
     ADFunc z = ADFunc(vals[2], {0,0,1});
-    return {5*sin(x)-cos(y)/2, 3*x/y, z+2};
+    return {5*sin(x), 3*y/2, z+2};
 }
 
 //////////////CONSTRUCTOR TESTS
@@ -104,10 +104,10 @@ TEST(GET_JACOBIAN, FROM_AUTOFUNC){
 }
 
 TEST(ROOT_FIND, FROM_EQUATION){
-    function<vector<ADFunc>(Eigen::VectorXd)> Func = customFunct;
-    Equation eq(customFunct, 2);
-    Eigen::VectorXd guess(2);
-    guess << 1, 1;
+    function<vector<ADFunc>(Eigen::VectorXd)> Func = customFunct2;
+    Equation eq(customFunct2, 3);
+    Eigen::VectorXd guess(3);
+    guess << 1, 1, 1;
     double tol = 1e-4;
     Eigen::VectorXd roots = eq.getRoots(guess, tol);
     std::vector<ADFunc> F = eq.function(roots); //check that F(roots) near 0
