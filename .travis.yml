@@ -6,15 +6,15 @@ addons:
   apt:
     packages:
     - lcov
-    - libeigen3-dev
+#    - libeigen3-dev
 
 script:
 - cd 3PL
 - bash build_3PL.sh
 - cd ..
-- cd AutoDiff
+#- cd AutoDiff
 - bash config.sh
-- cd ..
+#- cd ..
 
 after_success:
 - cd AutoDiff 
