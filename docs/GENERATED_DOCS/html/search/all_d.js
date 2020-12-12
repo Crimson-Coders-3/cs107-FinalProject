@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['val_65',['val',['../classADFunc.html#a89e97978ef25fe8019acca624bcbf6bd',1,'ADFunc::val()'],['../classADFuncVector.html#a3013e7a2fdf57725c5db7b19e2d0feae',1,'ADFuncVector::val()']]]
+  ['roots_2eh_58',['Roots.h',['../Roots_8h.html',1,'']]],
+  ['roots_59',['Roots',['../group__Roots__group.html',1,'']]]
 ];

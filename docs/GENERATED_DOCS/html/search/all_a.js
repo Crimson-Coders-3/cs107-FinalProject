@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['pow_50',['pow',['../group__AutoDiff__group.html#ga2a7295eda358d2538e31109a1db48411',1,'ADFunc.h']]],
-  ['push_5fback_51',['push_back',['../classADFuncVector.html#a9670367cfea4725769f6e580b64c1223',1,'ADFuncVector']]]
+  ['num_5fvars_39',['num_vars',['../classEquation.html#a7440fe174d90a1e71c4930a4526f64c8',1,'Equation']]]
 ];

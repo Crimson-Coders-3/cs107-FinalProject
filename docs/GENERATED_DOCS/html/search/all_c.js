@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['tan_63',['tan',['../group__AutoDiff__group.html#gae2dcc74e3dd6c8a2824472b0bc91d127',1,'ADFunc.h']]],
-  ['tanh_64',['tanh',['../group__AutoDiff__group.html#ga716fd9c3690f233dcc88cb966aa3fcc7',1,'ADFunc.h']]]
+  ['pow_56',['pow',['../group__AutoDiff__group.html#ga2a7295eda358d2538e31109a1db48411',1,'ADFunc.h']]],
+  ['push_5fback_57',['push_back',['../classADFuncVector.html#a9670367cfea4725769f6e580b64c1223',1,'ADFuncVector']]]
 ];
