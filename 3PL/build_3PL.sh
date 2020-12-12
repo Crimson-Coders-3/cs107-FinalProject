@@ -255,9 +255,15 @@ if [ ${BUILD_EIGEN} -eq 1 ]; then
 
   cd ${SOURCES_3PL_DIRECTORY}/eigen-3.3.9
   rm -rf _build
+  rm -rf ${INSTALL_EIGEN_DIRECTORY}
   mkdir _build
+
   cd _build
-  cmake .. -D CMAKE_INSTALL_PREFIX:PATH=${INSTALL_EIGEN_DIRECTORY} \
+  cmake -D CMAKE_INSTALL_PREFIX:PATH=${INSTALL_EIGEN_DIRECTORY} \
+        -D SHARED:BOOL=TRUE                                     \
+        -D CMAKE_C_COMPILER=${CC_PATH}                          \
+        -D CMAKE_CXX_COMPILER=${CXX_PATH}                       \
+        -G "Unix Makefiles" ../
 
   ${MAKE_CMD}
   cd ..
