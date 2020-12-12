@@ -301,6 +301,7 @@ if [ ${BUILD_LCOV} -eq 1 ]; then
   echo " "
   
   cd ${SOURCES_3PL_DIRECTORY}/lcov
+  rm -rf ${INSTALL_LCOV_DIRECTORY}
   mkdir ${INSTALL_LCOV_DIRECTORY}
   make install DESTDIR=${INSTALL_LCOV_DIRECTORY}
 

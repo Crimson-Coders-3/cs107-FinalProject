@@ -59,7 +59,23 @@ TEST(VECTOR,INDEX){
 }
 
 TEST(VECTOR,SETTER){
-    
+	std::vector<double> init_values = {1.0,2.0,3.9};
+    std::vector<ADFunc> multi_vars = multiVar(init_values);
+    ADFunc x = (multi_vars[0]);
+    ADFunc y = (multi_vars[1]);
+    ADFunc z = (multi_vars[2]);
+    ADFunc f1 = 2.0*x + x*y+z/pow(sin(x),0.5);
+    ADFunc f2 = exp(z)/pow(sin(x),2.0)-4*pow(x,3.0);
+    ADFunc f3 = exp(sin(x)*cos(y)-2);
+    std::vector<ADFunc> F = {f1,f2,f3};
+    ADFuncVector Fvec(F);
+	
+	Fvec.clear();
+	Fvec.setSize(2);
+	std::vector<double> new_values = {1.0,2.0};
+	std::vector<ADFunc> new_multi_vars = multiVar(new_values);
+	Fvec.setFuncVec(new_multi_vars);
+    EXPECT_NEAR(Fvec.size(),2.0,DTOL);
 }
 
 TEST(VECTOR,ONE_D_DVAL_SINGLE){
