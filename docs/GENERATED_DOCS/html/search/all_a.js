@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['val_29',['val',['../classADFunc.html#a89e97978ef25fe8019acca624bcbf6bd',1,'ADFunc::val()'],['../classADFuncVector.html#a3013e7a2fdf57725c5db7b19e2d0feae',1,'ADFuncVector::val()']]]
+  ['pow_50',['pow',['../ADFunc_8h.html#a2a7295eda358d2538e31109a1db48411',1,'ADFunc.h']]],
+  ['push_5fback_51',['push_back',['../classADFuncVector.html#a9670367cfea4725769f6e580b64c1223',1,'ADFuncVector']]]
 ];

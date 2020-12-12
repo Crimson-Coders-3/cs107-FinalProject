@@ -1,9 +1,9 @@
 
-set(CTEST_SOURCE_DIRECTORY  "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9")
-set(CTEST_BINARY_DIRECTORY  "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build")
+set(CTEST_SOURCE_DIRECTORY  "/home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9")
+set(CTEST_BINARY_DIRECTORY  "/home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build")
 set(CTEST_CMAKE_GENERATOR   "Unix Makefiles")
-set(CTEST_BUILD_NAME        "darwin-19.6.0-clang++-12.0.0-sse2-64bit-v3.3")
-set(CTEST_SITE              "Wenlins-MacBook-Pro.local")
+set(CTEST_BUILD_NAME        "linux-4.4.0-19041-microsoft-g++-9.3.0-sse2-64bit-v3.3")
+set(CTEST_SITE              "LAPTOP-QQK5KU50")
 
 set(MODEL Experimental)
 if(${CTEST_SCRIPT_ARG} MATCHES Nightly)

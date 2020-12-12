@@ -360,86 +360,253 @@ class ADFunc {
 };
 
 /////////////////////////////////////////// PRINT
+
+//! Print ADFunc Implementation
 std::ostream& operator<<(std::ostream& os, const ADFunc& obj);
 
 /////////////////////////////////////////// ARITHMETIC OPERATORS
-ADFunc operator + ( const ADFunc &lhs, const ADFunc &rhs );  // to do
+
+//! Overload ADFunc + ADFunc
+ADFunc operator + ( const ADFunc &lhs, const ADFunc &rhs ); 
+
+//! Overload ADFunc + scalar number
 ADFunc operator + ( const ADFunc &lhs, double rhs );
+
+//! Overload scalar number + ADFunc
 ADFunc operator + ( double lhs, const ADFunc &rhs);
+
+//! Overload - ADFunc (Negation sign)
 ADFunc operator - ( const ADFunc &obj);
+
+//! Overload ADFunc + ADFunc
 ADFunc operator - ( const ADFunc &lhs, const ADFunc &rhs );
+
+//! Overload ADfunc - scalar number
 ADFunc operator - ( const ADFunc &lhs, double rhs );
+
+//! Overload scalar number - ADFunc
 ADFunc operator - ( double lhs, const ADFunc &rhs);
+
+//! Overload ADFunc * ADFunc
 ADFunc operator * ( const ADFunc &lhs, const ADFunc &rhs );
+
+//! Overload ADFunc * scalar number
 ADFunc operator * ( const ADFunc &lhs, double rhs );
+
+//! Overload scalar number * ADFunc
 ADFunc operator * ( double lhs, const ADFunc &rhs);
+
+//! Overload ADFunc / ADFunc
 ADFunc operator / ( const ADFunc &lhs, const ADFunc &rhs );
+
+//! Overload ADFunc / scalar number
 ADFunc operator / ( const ADFunc &lhs, double rhs );
+
+//! Overload  scarlar number / ADFunc
 ADFunc operator / ( double lhs, const ADFunc &rhs);
 
 /////////////////////////////////////////// RELATIONAL OPERATORS
+//! Check LHS ADFunc's value == rhs
 bool operator==(const ADFunc& lhs, double rhs);
+//! Check RHS ADFunc's value == lhs
 bool operator==(double lhs, const ADFunc& rhs);
+//! Check LHS ADFunc's value == RHS ADFunc's value
 bool operator==(const ADFunc& lhs, const ADFunc& rhs);
 
+//! Check LHS ADFunc's value != RHS scalar number
 bool operator!=(const ADFunc& lhs, double rhs);
+//! Check RHS ADFunc's value != LHS scalar number
 bool operator!=(double lhs, const ADFunc& rhs);
+//! Check LHS ADFunc's value != RHS ADFunc's value
 bool operator!=(const ADFunc& lhs, const ADFunc& rhs);
 
+//! Check LHS ADFunc's value < RHS scalar number
 bool operator<(const ADFunc& lhs, double rhs);
+//! Check LHS scalar number < RHS ADFunc's value
 bool operator<(double lhs, const ADFunc& rhs);
+//! Check LHS ADFunc's value < RHS ADFunc's value
 bool operator<(const ADFunc& lhs, const ADFunc& rhs);
 
+//! Check LHS ADFunc's value <= RHS scalar number
 bool operator<=(const ADFunc& lhs, double rhs);
+//! Check LHS scarlar number <= RHS ADFunc's value
 bool operator<=(double lhs, const ADFunc& rhs);
+//! Check LHS ADFunc's value <= RHS ADFunc's value
 bool operator<=(const ADFunc& lhs, const ADFunc& rhs);
 
+//! Check LHS ADFunc's value > RHS scalar number
 bool operator>(const ADFunc& lhs, double rhs);
+//! Check LHS scalar number > RHS ADFunc's value
 bool operator>(double lhs, const ADFunc& rhs);
+//! Check LHS ADFunc's value <= RHS ADFunc's value
 bool operator>(const ADFunc& lhs, const ADFunc& rhs);
 
+//! Check LHS ADFunc's value >= RHS scalar number
 bool operator>=(const ADFunc& lhs, double rhs);
+//! Check LHS scalar number >= RHS ADFunc's value
 bool operator>=(double lhs, const ADFunc& rhs);
+//! Check LHS ADFunc's value >= RHS ADFunc's value
 bool operator>=(const ADFunc& lhs, const ADFunc& rhs);
 
 /////////////////////////////////////////// MATH LIB FUNCTIONS
+
+/* 
+* It wil throw std::invalid_argument error if LHS and RHS seed vectors' dimension not matched!
+* 
+* If it is in name mode and lhs and rhs objects' names are the same, 
+* it will automatically convert lhs and rhs objects'names to the result.
+* 
+* It will throw std::invalid_argument error if one of LHS and RHS is in name mode, the other is not!
+* 
+* It will throw std::run_time error if LHS and RHS both in name mode but have different names!
+* 
+* It will throw std::domain_error if rhs value less than 0 because derivative NaN occurs!
+* 
+* It will throw std::range_error if rhs value equals 0 because derivative NaN occurs!
+*/
 ADFunc pow ( const ADFunc &lhs, const ADFunc &rhs );
+
+
 ADFunc pow ( const ADFunc &lhs, double rhs );
+
+/*! 
+* It will throw std::domain_error if rhs value less than 0 because derivative NaN occurs!
+* 
+* It will throw std::range_error if rhs value equals 0 because derivative NaN occurs!
+*/
 ADFunc pow ( double lhs, const ADFunc &rhs);
+
+//! cubic root
+/*!
+* It would throw std::domain_error if input value less than 0 as NaN occurs!
+*/
 ADFunc sqrt ( const ADFunc &obj);
+
 ADFunc cbrt ( const ADFunc &obj);
+
+//! the hypotenuse of a right-angled triangle whose legs are lhs and rhs
+/*!
+* It will throw std::invalid_argument if one of LHS and RHS is in name mode, the other is not!
+*/
 ADFunc hypot ( const ADFunc &obj);
+
+//! natrual log
+/*! It will throw std::domain_error if value less than 0! NaN occurs!
+* 
+* It will throw std::range_error if balue equals 0! NaN occurs!
+*/
 ADFunc log(const ADFunc &obj);
+
+//! log at base 10
+/*! It will throw std::domain_error if value less than 0! NaN occurs!
+* 
+* It will throw std::range_error if balue equals 0! NaN occurs!
+*/
 ADFunc log10(const ADFunc &obj);
+
+//! log at base 2
+/*! It will throw std::domain_error if value less than 0! NaN occurs!
+* 
+* It will throw std::range_error if balue equals 0! NaN occurs!
+*/
 ADFunc log2(const ADFunc &obj);  
+
+//! log_e(1+x)
+/*! It will throw std::domain_error if value less than 0! NaN occurs!
+* 
+* It will throw std::range_error if balue equals 0! NaN occurs!
+*/
 ADFunc log1p(const ADFunc &obj); 
+
+/*! If input obj is in name mode, it will convert name vectors to output!
+*/
 ADFunc exp ( const ADFunc &obj );
+
+/*! If input obj is in name mode, it will convert name vectors to output!
+*/
 ADFunc exp2 ( const ADFunc &obj );
+
+//! e ^ ADFunc - 1
+/*! If input obj is in name mode, it will convert name vectors to output!
+*/
 ADFunc expm1 ( const ADFunc &obj );
+
+/*! If input obj is in name mode, it will convert name vectors to output!
+*/
 ADFunc sin(const ADFunc &obj);
+
+/*! If input obj is in name mode, it will convert name vectors to output!
+*/
 ADFunc cos(const ADFunc &obj);
+
+/*! If input obj is in name mode, it will convert name vectors to output!
+*/
 ADFunc tan(const ADFunc &obj);
+
+/*! If input obj is in name mode, it will convert name vectors to output!
+*/
 ADFunc asin(const ADFunc &obj);
+
+/*! If input obj is in name mode, it will convert name vectors to output!
+*/
 ADFunc acos(const ADFunc &obj);
+
+/*! If input obj is in name mode, it will convert name vectors to output!
+*/
 ADFunc atan(const ADFunc &obj);
+
+/*! If input obj is in name mode, it will convert name vectors to output!
+*/
 ADFunc sinh(const ADFunc &obj);
+/*! If input obj is in name mode, it will convert name vectors to output!
+*/
 ADFunc cosh(const ADFunc &obj);
+/*! If input obj is in name mode, it will convert name vectors to output!
+*/
 ADFunc tanh(const ADFunc &obj);
+/*! If input obj is in name mode, it will convert name vectors to output!
+*/
 ADFunc asinh(const ADFunc &obj);
+/*! If input obj is in name mode, it will convert name vectors to output!
+* 
+* It will throw std::domain_error if obj.val()*obj.val()-1 < 0 because NaN occurs!
+* 
+* It will throw std::range_error if obj.val()*obj.val()==0 because denominator equals 0! 
+*/
 ADFunc acosh(const ADFunc &obj);
+/*! If input obj is in name mode, it will convert name vectors to output!
+* 
+* It will throw std::range_error if obj.val()*obj.val()==0 because denominator equals 0! 
+*/
 ADFunc atanh(const ADFunc &obj);
 
 
 /////////////////////////////////////////// NAME MODE
+//! check LHS and RHS ADFunc objects have comptabile name
+/*! It will return true when
+ *
+ * case 1: lhs and rhs both not in name mode
+ *
+ * case 2: lhs and rhs both in name mode, and their variables'names are the same
+ * 
+ * It will raise an error when 
+ * lhs and rhs both in name mode, but have different names for some variables
+ *
+ * It will return false it only one of LHS and RHS is in name mode but not an error.
+*/
 bool checkName(const ADFunc &lhs, const ADFunc & rhs);
 
 ////////////////////////////////////////// VECTOR INPUT
 
-// Create multiple functions/variables and intilaize seed vectors as unit vectors
-// automatically for you
+//! Create Vectorized ADFunc variables
+/*! Create multiple functions/variables given multiple intial values. 
+* By default intilaize seed vectors as unit vectors automatically for you
+*/ 
 std::vector<ADFunc> multiVar(std::vector<double> values);
 
-// set all the seeds of vectorized input back to unit vectors
+//! Set seed vectors back to default (unit vectors)
+/* Set all the seeds vectors of input ADFunc back to unit vectors
+*/
 void setSeedDefault(std::vector<ADFunc> vars);
 
 ///////////////////////////////////////////////////////////////////
