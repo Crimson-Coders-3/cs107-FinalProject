@@ -1,0 +1,9 @@
+prefix=/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/install/3PL/eigen
+exec_prefix=${prefix}
+
+Name: Eigen3
+Description: A C++ template library for linear algebra: vectors, matrices, and related algorithms
+Requires:
+Version: 3.3.9
+Libs:
+Cflags: -I${prefix}/include/eigen3

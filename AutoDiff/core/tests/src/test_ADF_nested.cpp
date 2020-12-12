@@ -101,4 +101,5 @@ TEST(NESTED,VECTORINPUT){
     x->setVal(100.0);
     EXPECT_NEAR( (multi_vars[0]).val(),100.0,DTOL);
     EXPECT_NEAR(x->val(),100.0,DTOL);
+
 }

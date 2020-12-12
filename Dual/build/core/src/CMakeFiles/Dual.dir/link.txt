@@ -1,0 +1,1 @@
+/usr/bin/g++ -g -O0 --coverage -fprofile-arcs -ftest-coverage --coverage -fno-inline -fno-inline-small-functions -fno-default-inline -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -dynamiclib -Wl,-headerpad_max_install_names -o ../../lib/libDual.dylib -install_name @rpath/libDual.dylib CMakeFiles/Dual.dir/Dual.cpp.o 

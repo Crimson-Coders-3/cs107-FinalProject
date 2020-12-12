@@ -12,3 +12,4 @@ all: example.cpp
 
 clean:
 	rm *.o
+

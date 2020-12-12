@@ -1475,47 +1475,4 @@ TEST(TRIG,ATANH){
         EXPECT_EQ(err.what(),std::string("Denominator equals 0!"));
     }
 }
-
-TEST(SEED,SETSEEDDEFAULT){
-	std::vector<double> seed_x;
-	seed_x.push_back(4.0);
-    ADFunc x(-0.5,seed_x);
-	
-	std::vector<double> seed_y;
-	seed_y.push_back(4.0);
-    ADFunc y(-0.5,seed_y);
-	
-	std::vector<double> seed_z;
-	seed_z.push_back(4.0);
-    ADFunc z(-0.5,seed_z);
-	
-    std::vector<ADFunc> F = {x,y,z};
-	
-	setSeedDefault(F);
-	
-	EXPECT_NEAR(F.at(0).val(), -0.5, 0.0001);
-}
-
-TEST(SEED,SETSEEDDEFAULT_ZERO){
-	std::vector<ADFunc> F = {};
-	setSeedDefault(F);
-}
-
-TEST(ADFUNC, DVAL_WRT_INTVEC){
-	std::vector<double> seed_x;
-	seed_x.push_back(4.0);
-    ADFunc x(-0.5,seed_x);
-	
-	std::vector<int> indexes = {0};
-	
-	EXPECT_NEAR(x.dval_wrt(indexes).at(0), 4.0, 0.0001);
-}
-
-TEST(ADFUNC, DVAL_WRT_VECTOR){
-	std::vector<double> seed {1.0, 2.0};
-	ADFunc x = ADFunc(0.2, seed);
-	std::vector<std::string> names {"x","y"};
-	x.setName(names);
-	
-	EXPECT_NEAR(x.dval_wrt(names).at(0), 1.0, 0.0001);
-}
+     
