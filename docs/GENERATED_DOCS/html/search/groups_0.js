@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['adfunc_8',['ADFunc',['../group__ADFunc__group.html',1,'']]]
+  ['adfunc_63',['ADFunc',['../group__AutoDiff__group.html',1,'']]]
 ];

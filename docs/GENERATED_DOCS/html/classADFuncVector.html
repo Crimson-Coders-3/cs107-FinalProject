@@ -68,70 +68,503 @@ $(function() {
 <div class="title">ADFuncVector Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a> represents a vector of functions and performs automatic differentiation on this vectorized functions as a whole. It is a wrapper class of std::vector&lt;ADFunc&gt; to make taking partial derivative from vectorized functions easier (we write the for-loops of .<a class="el" href="classADFuncVector.html#aaab6634e402413d5b19412f4e9571199" title="Get partial derivative.">dval_wrt()</a> for you so all you need to do is declaring a <a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a> and calling its member functions)! You have many options of taking partial derivatives of a <a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a> object, whether you want a scalar number, a 1-d vector, or a 2-D matrix. We also support a function of getting Jacobian matrix for your convenience.  
+ <a href="classADFuncVector.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="ADFuncVector_8h_source.html">ADFuncVector.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aad26fbf119b87e74e751318f35f1d105"><td class="memItemLeft" align="right" valign="top"><a id="aad26fbf119b87e74e751318f35f1d105"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ADFuncVector</b> (int size)</td></tr>
+<tr class="memitem:aad26fbf119b87e74e751318f35f1d105"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classADFuncVector.html#aad26fbf119b87e74e751318f35f1d105">ADFuncVector</a> (int <a class="el" href="classADFuncVector.html#a5987a788ca2971b1cb9b02135ab522af">size</a>)</td></tr>
+<tr class="memdesc:aad26fbf119b87e74e751318f35f1d105"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor.  <a href="classADFuncVector.html#aad26fbf119b87e74e751318f35f1d105">More...</a><br /></td></tr>
 <tr class="separator:aad26fbf119b87e74e751318f35f1d105"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75a9fde024ff8da9ecda85e5ef8e54c3"><td class="memItemLeft" align="right" valign="top"><a id="a75a9fde024ff8da9ecda85e5ef8e54c3"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ADFuncVector</b> (std::vector&lt; <a class="el" href="classADFunc.html">ADFunc</a> &gt; funcVec)</td></tr>
+<tr class="memitem:a75a9fde024ff8da9ecda85e5ef8e54c3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classADFuncVector.html#a75a9fde024ff8da9ecda85e5ef8e54c3">ADFuncVector</a> (std::vector&lt; <a class="el" href="classADFunc.html">ADFunc</a> &gt; funcVec)</td></tr>
+<tr class="memdesc:a75a9fde024ff8da9ecda85e5ef8e54c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor.  <a href="classADFuncVector.html#a75a9fde024ff8da9ecda85e5ef8e54c3">More...</a><br /></td></tr>
 <tr class="separator:a75a9fde024ff8da9ecda85e5ef8e54c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3013e7a2fdf57725c5db7b19e2d0feae"><td class="memItemLeft" align="right" valign="top"><a id="a3013e7a2fdf57725c5db7b19e2d0feae"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>val</b> (int index)</td></tr>
+<tr class="memitem:a3013e7a2fdf57725c5db7b19e2d0feae"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classADFuncVector.html#a3013e7a2fdf57725c5db7b19e2d0feae">val</a> (int index)</td></tr>
+<tr class="memdesc:a3013e7a2fdf57725c5db7b19e2d0feae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get val of a function.  <a href="classADFuncVector.html#a3013e7a2fdf57725c5db7b19e2d0feae">More...</a><br /></td></tr>
 <tr class="separator:a3013e7a2fdf57725c5db7b19e2d0feae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5987a788ca2971b1cb9b02135ab522af"><td class="memItemLeft" align="right" valign="top"><a id="a5987a788ca2971b1cb9b02135ab522af"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> ()</td></tr>
+<tr class="memitem:a5987a788ca2971b1cb9b02135ab522af"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classADFuncVector.html#a5987a788ca2971b1cb9b02135ab522af">size</a> ()</td></tr>
+<tr class="memdesc:a5987a788ca2971b1cb9b02135ab522af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get size of <a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a>.  <a href="classADFuncVector.html#a5987a788ca2971b1cb9b02135ab522af">More...</a><br /></td></tr>
 <tr class="separator:a5987a788ca2971b1cb9b02135ab522af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2e87cc92f889db9d18bcd132dc3a181"><td class="memItemLeft" align="right" valign="top"><a id="ab2e87cc92f889db9d18bcd132dc3a181"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>checkValid</b> ()</td></tr>
+<tr class="memitem:ab2e87cc92f889db9d18bcd132dc3a181"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classADFuncVector.html#ab2e87cc92f889db9d18bcd132dc3a181">checkValid</a> ()</td></tr>
+<tr class="memdesc:ab2e87cc92f889db9d18bcd132dc3a181"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check validity.  <a href="classADFuncVector.html#ab2e87cc92f889db9d18bcd132dc3a181">More...</a><br /></td></tr>
 <tr class="separator:ab2e87cc92f889db9d18bcd132dc3a181"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9af0595eec3d6329300fab1217274663"><td class="memItemLeft" align="right" valign="top"><a id="a9af0595eec3d6329300fab1217274663"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>empty</b> ()</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classADFuncVector.html#a9af0595eec3d6329300fab1217274663">empty</a> ()</td></tr>
+<tr class="memdesc:a9af0595eec3d6329300fab1217274663"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if <a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a> is empty. <br /></td></tr>
 <tr class="separator:a9af0595eec3d6329300fab1217274663"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaab6634e402413d5b19412f4e9571199"><td class="memItemLeft" align="right" valign="top"><a id="aaab6634e402413d5b19412f4e9571199"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>dval_wrt</b> (int index)</td></tr>
+<tr class="memitem:aaab6634e402413d5b19412f4e9571199"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classADFuncVector.html#aaab6634e402413d5b19412f4e9571199">dval_wrt</a> (int index)</td></tr>
+<tr class="memdesc:aaab6634e402413d5b19412f4e9571199"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get partial derivative.  <a href="classADFuncVector.html#aaab6634e402413d5b19412f4e9571199">More...</a><br /></td></tr>
 <tr class="separator:aaab6634e402413d5b19412f4e9571199"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad60b09c90bf3520bd753f40cf0dd1c6c"><td class="memItemLeft" align="right" valign="top"><a id="ad60b09c90bf3520bd753f40cf0dd1c6c"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>dval_wrt</b> (std::string var_name)</td></tr>
+<tr class="memitem:ad60b09c90bf3520bd753f40cf0dd1c6c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classADFuncVector.html#ad60b09c90bf3520bd753f40cf0dd1c6c">dval_wrt</a> (std::string var_name)</td></tr>
+<tr class="memdesc:ad60b09c90bf3520bd753f40cf0dd1c6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get partial derivative.  <a href="classADFuncVector.html#ad60b09c90bf3520bd753f40cf0dd1c6c">More...</a><br /></td></tr>
 <tr class="separator:ad60b09c90bf3520bd753f40cf0dd1c6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad332be3157863fa2a8184ff019998719"><td class="memItemLeft" align="right" valign="top"><a id="ad332be3157863fa2a8184ff019998719"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>dval_wrt</b> (int func_index, int var_index)</td></tr>
+<tr class="memitem:ad332be3157863fa2a8184ff019998719"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classADFuncVector.html#ad332be3157863fa2a8184ff019998719">dval_wrt</a> (int func_index, int var_index)</td></tr>
+<tr class="memdesc:ad332be3157863fa2a8184ff019998719"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get partial derivative.  <a href="classADFuncVector.html#ad332be3157863fa2a8184ff019998719">More...</a><br /></td></tr>
 <tr class="separator:ad332be3157863fa2a8184ff019998719"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a682516d147d4f7b02f36aec829847ea5"><td class="memItemLeft" align="right" valign="top"><a id="a682516d147d4f7b02f36aec829847ea5"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>dval_wrt</b> (int func_index, std::string var_name)</td></tr>
+<tr class="memitem:a682516d147d4f7b02f36aec829847ea5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classADFuncVector.html#a682516d147d4f7b02f36aec829847ea5">dval_wrt</a> (int func_index, std::string var_name)</td></tr>
+<tr class="memdesc:a682516d147d4f7b02f36aec829847ea5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get partial derivative.  <a href="classADFuncVector.html#a682516d147d4f7b02f36aec829847ea5">More...</a><br /></td></tr>
 <tr class="separator:a682516d147d4f7b02f36aec829847ea5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9bc4ef8a13129a7d015d7c27516bfabe"><td class="memItemLeft" align="right" valign="top"><a id="a9bc4ef8a13129a7d015d7c27516bfabe"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>dval_wrt</b> (std::vector&lt; std::pair&lt; int, int &gt; &gt; fun_var)</td></tr>
+<tr class="memitem:a9bc4ef8a13129a7d015d7c27516bfabe"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classADFuncVector.html#a9bc4ef8a13129a7d015d7c27516bfabe">dval_wrt</a> (std::vector&lt; std::pair&lt; int, int &gt; &gt; fun_var)</td></tr>
+<tr class="memdesc:a9bc4ef8a13129a7d015d7c27516bfabe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get partial derivative.  <a href="classADFuncVector.html#a9bc4ef8a13129a7d015d7c27516bfabe">More...</a><br /></td></tr>
 <tr class="separator:a9bc4ef8a13129a7d015d7c27516bfabe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebb0648d865b4f3dd78014c3f454ed84"><td class="memItemLeft" align="right" valign="top"><a id="aebb0648d865b4f3dd78014c3f454ed84"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>dval_wrt</b> (std::vector&lt; std::pair&lt; int, std::string &gt; &gt; fun_var)</td></tr>
+<tr class="memitem:aebb0648d865b4f3dd78014c3f454ed84"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classADFuncVector.html#aebb0648d865b4f3dd78014c3f454ed84">dval_wrt</a> (std::vector&lt; std::pair&lt; int, std::string &gt; &gt; fun_var)</td></tr>
+<tr class="memdesc:aebb0648d865b4f3dd78014c3f454ed84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get partial derivative.  <a href="classADFuncVector.html#aebb0648d865b4f3dd78014c3f454ed84">More...</a><br /></td></tr>
 <tr class="separator:aebb0648d865b4f3dd78014c3f454ed84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89549b50932d88bdf9bbe4cc2323adaa"><td class="memItemLeft" align="right" valign="top"><a id="a89549b50932d88bdf9bbe4cc2323adaa"></a>
-std::vector&lt; std::vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>dval_wrt</b> (std::vector&lt; std::vector&lt; std::pair&lt; int, int &gt; &gt; &gt; fun_var)</td></tr>
+<tr class="memitem:a89549b50932d88bdf9bbe4cc2323adaa"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classADFuncVector.html#a89549b50932d88bdf9bbe4cc2323adaa">dval_wrt</a> (std::vector&lt; std::vector&lt; std::pair&lt; int, int &gt; &gt; &gt; fun_var)</td></tr>
+<tr class="memdesc:a89549b50932d88bdf9bbe4cc2323adaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get partial derivative.  <a href="classADFuncVector.html#a89549b50932d88bdf9bbe4cc2323adaa">More...</a><br /></td></tr>
 <tr class="separator:a89549b50932d88bdf9bbe4cc2323adaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aead0f586d2f925f6d54e7021866e2113"><td class="memItemLeft" align="right" valign="top"><a id="aead0f586d2f925f6d54e7021866e2113"></a>
-std::vector&lt; std::vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>dval_wrt</b> (std::vector&lt; std::vector&lt; std::pair&lt; int, std::string &gt; &gt; &gt; fun_var)</td></tr>
+<tr class="memitem:aead0f586d2f925f6d54e7021866e2113"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classADFuncVector.html#aead0f586d2f925f6d54e7021866e2113">dval_wrt</a> (std::vector&lt; std::vector&lt; std::pair&lt; int, std::string &gt; &gt; &gt; fun_var)</td></tr>
+<tr class="memdesc:aead0f586d2f925f6d54e7021866e2113"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get partial derivative.  <a href="classADFuncVector.html#aead0f586d2f925f6d54e7021866e2113">More...</a><br /></td></tr>
 <tr class="separator:aead0f586d2f925f6d54e7021866e2113"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae2b51ac265896d944defc2ecadf0b96"><td class="memItemLeft" align="right" valign="top"><a id="aae2b51ac265896d944defc2ecadf0b96"></a>
-<a class="el" href="classADFunc.html">ADFunc</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>at</b> (int i)</td></tr>
+<tr class="memitem:af67a67c5dc6d3ecf95532da5d6f99fc5"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classADFuncVector.html#af67a67c5dc6d3ecf95532da5d6f99fc5">jacobian</a> ()</td></tr>
+<tr class="memdesc:af67a67c5dc6d3ecf95532da5d6f99fc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Jacobian matrix.  <a href="classADFuncVector.html#af67a67c5dc6d3ecf95532da5d6f99fc5">More...</a><br /></td></tr>
+<tr class="separator:af67a67c5dc6d3ecf95532da5d6f99fc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae2b51ac265896d944defc2ecadf0b96"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classADFunc.html">ADFunc</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classADFuncVector.html#aae2b51ac265896d944defc2ecadf0b96">at</a> (int i)</td></tr>
+<tr class="memdesc:aae2b51ac265896d944defc2ecadf0b96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get ith <a class="el" href="classADFunc.html" title="ADFunc represents a function that has automatic differentiation property. A ADFunc object represents ...">ADFunc</a>.  <a href="classADFuncVector.html#aae2b51ac265896d944defc2ecadf0b96">More...</a><br /></td></tr>
 <tr class="separator:aae2b51ac265896d944defc2ecadf0b96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a233684e863f991bf41395945c6b3ff36"><td class="memItemLeft" align="right" valign="top"><a id="a233684e863f991bf41395945c6b3ff36"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>countVar</b> ()</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classADFuncVector.html#a233684e863f991bf41395945c6b3ff36">countVar</a> ()</td></tr>
+<tr class="memdesc:a233684e863f991bf41395945c6b3ff36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of variables. <br /></td></tr>
 <tr class="separator:a233684e863f991bf41395945c6b3ff36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afdd36fce022bea5b4f5bc629f071eda5"><td class="memItemLeft" align="right" valign="top"><a id="afdd36fce022bea5b4f5bc629f071eda5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setSize</b> (int size)</td></tr>
+<tr class="memitem:afdd36fce022bea5b4f5bc629f071eda5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classADFuncVector.html#afdd36fce022bea5b4f5bc629f071eda5">setSize</a> (int <a class="el" href="classADFuncVector.html#a5987a788ca2971b1cb9b02135ab522af">size</a>)</td></tr>
+<tr class="memdesc:afdd36fce022bea5b4f5bc629f071eda5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set size.  <a href="classADFuncVector.html#afdd36fce022bea5b4f5bc629f071eda5">More...</a><br /></td></tr>
 <tr class="separator:afdd36fce022bea5b4f5bc629f071eda5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae781cfe3cb16d36b10326f9b1559fcd2"><td class="memItemLeft" align="right" valign="top"><a id="ae781cfe3cb16d36b10326f9b1559fcd2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setFuncVec</b> (std::vector&lt; <a class="el" href="classADFunc.html">ADFunc</a> &gt; funcVec)</td></tr>
+<tr class="memitem:ae781cfe3cb16d36b10326f9b1559fcd2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classADFuncVector.html#ae781cfe3cb16d36b10326f9b1559fcd2">setFuncVec</a> (std::vector&lt; <a class="el" href="classADFunc.html">ADFunc</a> &gt; funcVec)</td></tr>
+<tr class="memdesc:ae781cfe3cb16d36b10326f9b1559fcd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set vector of functions.  <a href="classADFuncVector.html#ae781cfe3cb16d36b10326f9b1559fcd2">More...</a><br /></td></tr>
 <tr class="separator:ae781cfe3cb16d36b10326f9b1559fcd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d97c1b0d3c194d8e5a3788e9cb8c37b"><td class="memItemLeft" align="right" valign="top"><a id="a8d97c1b0d3c194d8e5a3788e9cb8c37b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classADFuncVector.html#a8d97c1b0d3c194d8e5a3788e9cb8c37b">clear</a> ()</td></tr>
+<tr class="memdesc:a8d97c1b0d3c194d8e5a3788e9cb8c37b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear size and <a class="el" href="classADFunc.html" title="ADFunc represents a function that has automatic differentiation property. A ADFunc object represents ...">ADFunc</a> vector. <br /></td></tr>
 <tr class="separator:a8d97c1b0d3c194d8e5a3788e9cb8c37b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9670367cfea4725769f6e580b64c1223"><td class="memItemLeft" align="right" valign="top"><a id="a9670367cfea4725769f6e580b64c1223"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>push_back</b> (<a class="el" href="classADFunc.html">ADFunc</a> func)</td></tr>
+<tr class="memitem:a9670367cfea4725769f6e580b64c1223"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classADFuncVector.html#a9670367cfea4725769f6e580b64c1223">push_back</a> (<a class="el" href="classADFunc.html">ADFunc</a> func)</td></tr>
+<tr class="memdesc:a9670367cfea4725769f6e580b64c1223"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append a <a class="el" href="classADFunc.html" title="ADFunc represents a function that has automatic differentiation property. A ADFunc object represents ...">ADFunc</a>.  <a href="classADFuncVector.html#a9670367cfea4725769f6e580b64c1223">More...</a><br /></td></tr>
 <tr class="separator:a9670367cfea4725769f6e580b64c1223"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a> represents a vector of functions and performs automatic differentiation on this vectorized functions as a whole. It is a wrapper class of std::vector&lt;ADFunc&gt; to make taking partial derivative from vectorized functions easier (we write the for-loops of .<a class="el" href="classADFuncVector.html#aaab6634e402413d5b19412f4e9571199" title="Get partial derivative.">dval_wrt()</a> for you so all you need to do is declaring a <a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a> and calling its member functions)! You have many options of taking partial derivatives of a <a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a> object, whether you want a scalar number, a 1-d vector, or a 2-D matrix. We also support a function of getting Jacobian matrix for your convenience. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aad26fbf119b87e74e751318f35f1d105"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad26fbf119b87e74e751318f35f1d105">&#9670;&nbsp;</a></span>ADFuncVector() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ADFuncVector::ADFuncVector </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A constructor. </p>
+<p>Initializes a <a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a> given the size of the vector of <a class="el" href="classADFunc.html" title="ADFunc represents a function that has automatic differentiation property. A ADFunc object represents ...">ADFunc</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>the total number of functions </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a75a9fde024ff8da9ecda85e5ef8e54c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75a9fde024ff8da9ecda85e5ef8e54c3">&#9670;&nbsp;</a></span>ADFuncVector() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ADFuncVector::ADFuncVector </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classADFunc.html">ADFunc</a> &gt;&#160;</td>
+          <td class="paramname"><em>funcVec</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A constructor. </p>
+<p>Initializes a <a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a> given the size of the vector of <a class="el" href="classADFunc.html" title="ADFunc represents a function that has automatic differentiation property. A ADFunc object represents ...">ADFunc</a>.</p>
+<p>All the input functions should have same have number of varibales. This means their seed vectors should be in the same size and represent variables in the same order for consistency.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">funcVec</td><td>vector of functions in std::vector&lt;ADFunc&gt; </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aae2b51ac265896d944defc2ecadf0b96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae2b51ac265896d944defc2ecadf0b96">&#9670;&nbsp;</a></span>at()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classADFunc.html">ADFunc</a>* ADFuncVector::at </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get ith <a class="el" href="classADFunc.html" title="ADFunc represents a function that has automatic differentiation property. A ADFunc object represents ...">ADFunc</a>. </p>
+<p>It will return a <a class="el" href="classADFunc.html" title="ADFunc represents a function that has automatic differentiation property. A ADFunc object represents ...">ADFunc</a> pointer that enables modifying <a class="el" href="classADFunc.html" title="ADFunc represents a function that has automatic differentiation property. A ADFunc object represents ...">ADFunc</a> </p>
+
+</div>
+</div>
+<a id="ab2e87cc92f889db9d18bcd132dc3a181"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2e87cc92f889db9d18bcd132dc3a181">&#9670;&nbsp;</a></span>checkValid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ADFuncVector::checkValid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check validity. </p>
+<p>It will return true/false the current <a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a> object is valid. If not valid, it will throw clear error messages and suggested solutions. </p>
+
+</div>
+</div>
+<a id="ad332be3157863fa2a8184ff019998719"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad332be3157863fa2a8184ff019998719">&#9670;&nbsp;</a></span>dval_wrt() <span class="overload">[1/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double ADFuncVector::dval_wrt </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>func_index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>var_index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get partial derivative. </p>
+<p>It will return a single partial derivative of <a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a>, the case that a particular function with respect to(wrt) a variable given function index and variable index in seed vector. </p>
+
+</div>
+</div>
+<a id="a682516d147d4f7b02f36aec829847ea5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a682516d147d4f7b02f36aec829847ea5">&#9670;&nbsp;</a></span>dval_wrt() <span class="overload">[2/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double ADFuncVector::dval_wrt </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>func_index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>var_name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get partial derivative. </p>
+<p>It will return a single partial derivative of <a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a>, the case that a particular function with respect to(wrt) a variable given function index and variable name. </p>
+
+</div>
+</div>
+<a id="aaab6634e402413d5b19412f4e9571199"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaab6634e402413d5b19412f4e9571199">&#9670;&nbsp;</a></span>dval_wrt() <span class="overload">[3/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;double&gt; ADFuncVector::dval_wrt </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get partial derivative. </p>
+<p>It will return 1-d vector of partial derivatives of <a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a>, the case that all the functions with respect to(wrt) a variable given this variable's index in seed vector. </p>
+
+</div>
+</div>
+<a id="ad60b09c90bf3520bd753f40cf0dd1c6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad60b09c90bf3520bd753f40cf0dd1c6c">&#9670;&nbsp;</a></span>dval_wrt() <span class="overload">[4/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;double&gt; ADFuncVector::dval_wrt </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>var_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get partial derivative. </p>
+<p>It will return 1-d vector of partial derivatives of <a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a>, the case that all the functions with respect to(wrt) a variable given its variable name. </p>
+
+</div>
+</div>
+<a id="a9bc4ef8a13129a7d015d7c27516bfabe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bc4ef8a13129a7d015d7c27516bfabe">&#9670;&nbsp;</a></span>dval_wrt() <span class="overload">[5/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;double&gt; ADFuncVector::dval_wrt </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::pair&lt; int, int &gt; &gt;&#160;</td>
+          <td class="paramname"><em>fun_var</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get partial derivative. </p>
+<p>It will return 1-d vector of partial derivatives of <a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a>, when each pair of function index and corresponding variable index is given. </p>
+
+</div>
+</div>
+<a id="aebb0648d865b4f3dd78014c3f454ed84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebb0648d865b4f3dd78014c3f454ed84">&#9670;&nbsp;</a></span>dval_wrt() <span class="overload">[6/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;double&gt; ADFuncVector::dval_wrt </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::pair&lt; int, std::string &gt; &gt;&#160;</td>
+          <td class="paramname"><em>fun_var</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get partial derivative. </p>
+<p>It will return 1-d vector of partial derivatives of <a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a>, when each pair of function index and corresponding variable name is given. </p>
+
+</div>
+</div>
+<a id="a89549b50932d88bdf9bbe4cc2323adaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89549b50932d88bdf9bbe4cc2323adaa">&#9670;&nbsp;</a></span>dval_wrt() <span class="overload">[7/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::vector&lt;double&gt; &gt; ADFuncVector::dval_wrt </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::vector&lt; std::pair&lt; int, int &gt; &gt; &gt;&#160;</td>
+          <td class="paramname"><em>fun_var</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get partial derivative. </p>
+<p>It will return 2-d matrix (vector of vector) of partial derivatives of <a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a>, when each pair of function index and corresponding variable index is given. </p>
+
+</div>
+</div>
+<a id="aead0f586d2f925f6d54e7021866e2113"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aead0f586d2f925f6d54e7021866e2113">&#9670;&nbsp;</a></span>dval_wrt() <span class="overload">[8/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::vector&lt;double&gt; &gt; ADFuncVector::dval_wrt </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::vector&lt; std::pair&lt; int, std::string &gt; &gt; &gt;&#160;</td>
+          <td class="paramname"><em>fun_var</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get partial derivative. </p>
+<p>It will return 2-d matrix (vector of vector) of partial derivatives of <a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a>, when each pair of function index and corresponding variable name is given. </p>
+
+</div>
+</div>
+<a id="af67a67c5dc6d3ecf95532da5d6f99fc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af67a67c5dc6d3ecf95532da5d6f99fc5">&#9670;&nbsp;</a></span>jacobian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::vector&lt;double&gt; &gt; ADFuncVector::jacobian </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get Jacobian matrix. </p>
+<p>It will return the jacobian matrix of <a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a>, using the order of functions when <a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a> object is intialized and the order of variables of in the seed vector as coordinates of the returned Jacobian matrix. </p>
+
+</div>
+</div>
+<a id="a9670367cfea4725769f6e580b64c1223"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9670367cfea4725769f6e580b64c1223">&#9670;&nbsp;</a></span>push_back()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ADFuncVector::push_back </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classADFunc.html">ADFunc</a>&#160;</td>
+          <td class="paramname"><em>func</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Append a <a class="el" href="classADFunc.html" title="ADFunc represents a function that has automatic differentiation property. A ADFunc object represents ...">ADFunc</a>. </p>
+<p>Appends a new <a class="el" href="classADFunc.html" title="ADFunc represents a function that has automatic differentiation property. A ADFunc object represents ...">ADFunc</a> to the end of <a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a>. </p>
+
+</div>
+</div>
+<a id="ae781cfe3cb16d36b10326f9b1559fcd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae781cfe3cb16d36b10326f9b1559fcd2">&#9670;&nbsp;</a></span>setFuncVec()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ADFuncVector::setFuncVec </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classADFunc.html">ADFunc</a> &gt;&#160;</td>
+          <td class="paramname"><em>funcVec</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set vector of functions. </p>
+<p>Set vector of functions.</p>
+<p>It will return a std::runtime_error if this input size mismatches with currently defined size! If that is the case, please use <a class="el" href="classADFuncVector.html#a8d97c1b0d3c194d8e5a3788e9cb8c37b" title="Clear size and ADFunc vector.">clear()</a> before setFuncVec.</p>
+<p>All the input functions should have same have number of varibales. This means their seed vectors should be in the same size and represent variables in the same order for consistency. It will throw std::runtime_error if this requirement doesn't met. </p>
+
+</div>
+</div>
+<a id="afdd36fce022bea5b4f5bc629f071eda5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdd36fce022bea5b4f5bc629f071eda5">&#9670;&nbsp;</a></span>setSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ADFuncVector::setSize </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set size. </p>
+<p>Sets size of <a class="el" href="classADFunc.html" title="ADFunc represents a function that has automatic differentiation property. A ADFunc object represents ...">ADFunc</a> vector (the number of functions).</p>
+<p>It will return a std::runtime_error if this input size mismatches with current funcVector! If that is the case, please use <a class="el" href="classADFuncVector.html#a8d97c1b0d3c194d8e5a3788e9cb8c37b" title="Clear size and ADFunc vector.">clear()</a> before set size.</p>
+<p>/param size size of <a class="el" href="classADFunc.html" title="ADFunc represents a function that has automatic differentiation property. A ADFunc object represents ...">ADFunc</a> vector (the number of functions) </p>
+
+</div>
+</div>
+<a id="a5987a788ca2971b1cb9b02135ab522af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5987a788ca2971b1cb9b02135ab522af">&#9670;&nbsp;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ADFuncVector::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get size of <a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a>. </p>
+<p>It will 0 if the vector of functions are not set yet. </p>
+
+</div>
+</div>
+<a id="a3013e7a2fdf57725c5db7b19e2d0feae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3013e7a2fdf57725c5db7b19e2d0feae">&#9670;&nbsp;</a></span>val()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double ADFuncVector::val </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get val of a function. </p>
+<p>It will throw a std::out_of_range error if index is out of range of <a class="el" href="classADFuncVector.html" title="ADFuncVector represents a vector of functions and performs automatic differentiation on this vectoriz...">ADFuncVector</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>function index </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="ADFuncVector_8h_source.html">ADFuncVector.h</a></li>
 </ul>
