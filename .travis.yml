@@ -6,6 +6,8 @@ addons:
   apt:
     packages:
     - lcov
+    - libblas-dev
+    - liblapack-dev
 #    - libeigen3-dev
 
 script:
