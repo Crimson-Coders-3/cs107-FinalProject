@@ -1,1 +1,0 @@
-/usr/bin/g++ -fPIC -O3 -DNDEBUG -Wl,--no-as-needed -shared -Wl,-soname,libROOTSTest.so -o ../../../lib/libROOTSTest.so CMakeFiles/ROOTSTest.dir/test_ROOTS.cpp.o   -L/home/morrisreeves/Documents/coding/cs107/cs107-FinalProject/install/3PL/googletest/lib 

@@ -1,1 +1,0 @@
-/usr/bin/g++ -fPIC -O3 -DNDEBUG -Wl,--no-as-needed -shared -Wl,-soname,libRoots.so -o ../../lib/libRoots.so CMakeFiles/Roots.dir/Roots.cpp.o  -Wl,-rpath,:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: 
