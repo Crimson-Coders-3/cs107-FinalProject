@@ -108,7 +108,7 @@ Click on `docs/GENERAETED_DOCS/html/index.html` and it will launch locally in yo
 10. Navigate to `Files/File List`. Click on the file of interest to you, and scroll down to "Functions."
 Click on any of the functions to arrive at the Reference page, where you will find a description of all that library's functions.
 
-### 1.6 Requirements:
+### 1.5 Requirements:
 
 Here are some requirements you will need. Also see "4.3 Possible Error Messages" in you run into a proble,..
 
@@ -139,14 +139,14 @@ if it is installed correctly
 
 5. C++ 11
 
-### 1.7 Beyond
+### 1.6 Beyond
 
 If you need any help using our library or desire to provide feedback (which we are always very eager for!) contact us here:
 - Scarlett Gong: wenlin_gong@g.harvard.edu 
 - Morris Reeves: morrisreeves@g.harvard.edu 
 - Gayatri Balasubramanian: gayatrib@college.harvard.edu
 
-### 1.8 Broader Impact and Inclusion Statement
+### 1.7 Broader Impact and Inclusion Statement
 
 See our mission and principles in section 2 (right below).
 
