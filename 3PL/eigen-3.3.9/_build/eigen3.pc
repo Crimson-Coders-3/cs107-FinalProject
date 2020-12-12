@@ -1,4 +1,4 @@
-prefix=/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/install/3PL/eigen
+prefix=/home/wenlin/cs107-FinalProject/install/3PL/eigen
 exec_prefix=${prefix}
 
 Name: Eigen3

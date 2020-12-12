@@ -4,17 +4,17 @@
 
 
 # Configuration directories and files
-SourceDirectory: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9
-BuildDirectory: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build
+SourceDirectory: /home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9
+BuildDirectory: /home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build
 
 # Where to place the cost data store
 CostDataFile: 
 
 # Site is something like machine.domain, i.e. pragmatic.crd
-Site: Wenlins-MacBook-Pro.local
+Site: LAPTOP-QQK5KU50
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
-BuildName: darwin-19.6.0-clang++-12.0.0-sse2-64bit-v3.3
+BuildName: linux-4.4.0-19041-microsoft-g++-9.3.0-sse2-64bit-v3.3
 
 # Subprojects
 LabelsForSubprojects: 
@@ -26,8 +26,8 @@ SubmitURL: http://my.cdash.org/submit.php?project=Eigen
 NightlyStartTime: 00:00:00 UTC
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "/usr/local/Cellar/cmake/3.19.1/bin/cmake" "/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9"
-MakeCommand: /usr/local/Cellar/cmake/3.19.1/bin/cmake --build . --target buildtests --config "${CTEST_CONFIGURATION_TYPE}" -- -i 
+ConfigureCommand: "/usr/bin/cmake" "/home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9"
+MakeCommand: /usr/bin/cmake --build . --target buildtests --config "${CTEST_CONFIGURATION_TYPE}" -- -i 
 DefaultCTestConfigurationType: Release
 
 # version control
@@ -39,7 +39,7 @@ CVSCommand: CVSCOMMAND-NOTFOUND
 CVSUpdateOptions: -d -A -P
 
 # Subversion options
-SVNCommand: /usr/bin/svn
+SVNCommand: SVNCOMMAND-NOTFOUND
 SVNOptions: 
 SVNUpdateOptions: 
 
@@ -63,16 +63,12 @@ UpdateType:
 
 # Compiler info
 Compiler: /usr/bin/g++
-CompilerVersion: 12.0.0.12000031
+CompilerVersion: 9.3.0
 
 # Dynamic analysis (MemCheck)
 PurifyCommand: 
 ValgrindCommand: 
 ValgrindCommandOptions: 
-DrMemoryCommand: 
-DrMemoryCommandOptions: 
-CudaSanitizerCommand: 
-CudaSanitizerCommandOptions: 
 MemoryCheckType: 
 MemoryCheckSanitizerOptions: 
 MemoryCheckCommand: MEMORYCHECK_COMMAND-NOTFOUND

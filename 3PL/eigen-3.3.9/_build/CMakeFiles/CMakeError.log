@@ -1,430 +1,163 @@
-Performing C++ SOURCE FILE Test COMPILER_SUPPORT_Wlogicalop failed with the following output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_Wshorten64to32 failed with the following output:
+Change Dir: /home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_d0406/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_d0406.dir/build.make CMakeFiles/cmTC_d0406.dir/build
-Building CXX object CMakeFiles/cmTC_d0406.dir/src.cxx.o
-/usr/bin/g++ -DCOMPILER_SUPPORT_Wlogicalop  -std=c++03 -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wshorten-64-to-32 -Werror -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15   -Wlogical-op -o CMakeFiles/cmTC_d0406.dir/src.cxx.o -c /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp/src.cxx
-error: unknown warning option '-Wlogical-op'; did you mean '-Wlong-long'? [-Werror,-Wunknown-warning-option]
-make[1]: *** [CMakeFiles/cmTC_d0406.dir/src.cxx.o] Error 1
-make: *** [cmTC_d0406/fast] Error 2
+Run Build Command(s):/usr/bin/make cmTC_17aa5/fast && /usr/bin/make -f CMakeFiles/cmTC_17aa5.dir/build.make CMakeFiles/cmTC_17aa5.dir/build
+make[1]: Entering directory '/home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_17aa5.dir/src.cxx.o
+/usr/bin/g++    -std=c++03 -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -DCOMPILER_SUPPORT_Wshorten64to32 -Werror   -Wshorten-64-to-32 -o CMakeFiles/cmTC_17aa5.dir/src.cxx.o -c /home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp/src.cxx
+g++: error: unrecognized command line option '-Wshorten-64-to-32'
+make[1]: *** [CMakeFiles/cmTC_17aa5.dir/build.make:66: CMakeFiles/cmTC_17aa5.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_17aa5/fast] Error 2
 
 
 Source file was:
 int main() { return 0; }
-Performing C++ SOURCE FILE Test COMPILER_SUPPORT_Wnopsabi failed with the following output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_Wenumconversion failed with the following output:
+Change Dir: /home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_b1dc6/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_b1dc6.dir/build.make CMakeFiles/cmTC_b1dc6.dir/build
-Building CXX object CMakeFiles/cmTC_b1dc6.dir/src.cxx.o
-/usr/bin/g++ -DCOMPILER_SUPPORT_Wnopsabi  -std=c++03 -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wshorten-64-to-32 -Wenum-conversion -Wc++11-extensions -Wdouble-promotion -Wshadow -Werror -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15   -Wno-psabi -o CMakeFiles/cmTC_b1dc6.dir/src.cxx.o -c /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp/src.cxx
-error: unknown warning option '-Wno-psabi' [-Werror,-Wunknown-warning-option]
-make[1]: *** [CMakeFiles/cmTC_b1dc6.dir/src.cxx.o] Error 1
-make: *** [cmTC_b1dc6/fast] Error 2
+Run Build Command(s):/usr/bin/make cmTC_59cd5/fast && /usr/bin/make -f CMakeFiles/cmTC_59cd5.dir/build.make CMakeFiles/cmTC_59cd5.dir/build
+make[1]: Entering directory '/home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_59cd5.dir/src.cxx.o
+/usr/bin/g++    -std=c++03 -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wlogical-op -DCOMPILER_SUPPORT_Wenumconversion -Werror   -Wenum-conversion -o CMakeFiles/cmTC_59cd5.dir/src.cxx.o -c /home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp/src.cxx
+g++: error: unrecognized command line option '-Wenum-conversion'; did you mean '-Wno-conversion'?
+make[1]: *** [CMakeFiles/cmTC_59cd5.dir/build.make:66: CMakeFiles/cmTC_59cd5.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_59cd5/fast] Error 2
+
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_Wcpp11extensions failed with the following output:
+Change Dir: /home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_32123/fast && /usr/bin/make -f CMakeFiles/cmTC_32123.dir/build.make CMakeFiles/cmTC_32123.dir/build
+make[1]: Entering directory '/home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_32123.dir/src.cxx.o
+/usr/bin/g++    -std=c++03 -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wlogical-op -DCOMPILER_SUPPORT_Wcpp11extensions -Werror   -Wc++11-extensions -o CMakeFiles/cmTC_32123.dir/src.cxx.o -c /home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp/src.cxx
+g++: error: unrecognized command line option '-Wc++11-extensions'; did you mean '-fms-extensions'?
+make[1]: *** [CMakeFiles/cmTC_32123.dir/build.make:66: CMakeFiles/cmTC_32123.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_32123/fast] Error 2
 
 
 Source file was:
 int main() { return 0; }
 Performing C++ SOURCE FILE Test COMPILER_SUPPORT_wd981 failed with the following output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
+Change Dir: /home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_0b944/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_0b944.dir/build.make CMakeFiles/cmTC_0b944.dir/build
-Building CXX object CMakeFiles/cmTC_0b944.dir/src.cxx.o
-/usr/bin/g++ -DCOMPILER_SUPPORT_wd981  -std=c++03 -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wshorten-64-to-32 -Wenum-conversion -Wc++11-extensions -Wdouble-promotion -Wshadow -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -Werror -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15   -wd981 -o CMakeFiles/cmTC_0b944.dir/src.cxx.o -c /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp/src.cxx
-clang: error: unknown argument: '-wd981'
-make[1]: *** [CMakeFiles/cmTC_0b944.dir/src.cxx.o] Error 1
-make: *** [cmTC_0b944/fast] Error 2
+Run Build Command(s):/usr/bin/make cmTC_00c23/fast && /usr/bin/make -f CMakeFiles/cmTC_00c23.dir/build.make CMakeFiles/cmTC_00c23.dir/build
+make[1]: Entering directory '/home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_00c23.dir/src.cxx.o
+/usr/bin/g++    -std=c++03 -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wlogical-op -Wdouble-promotion -Wno-psabi -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -DCOMPILER_SUPPORT_wd981 -Werror   -wd981 -o CMakeFiles/cmTC_00c23.dir/src.cxx.o -c /home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp/src.cxx
+g++: error: unrecognized command line option '-wd981'
+make[1]: *** [CMakeFiles/cmTC_00c23.dir/build.make:66: CMakeFiles/cmTC_00c23.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_00c23/fast] Error 2
 
 
 Source file was:
 int main() { return 0; }
 Performing C++ SOURCE FILE Test COMPILER_SUPPORT_wd2304 failed with the following output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
+Change Dir: /home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_f8dc4/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_f8dc4.dir/build.make CMakeFiles/cmTC_f8dc4.dir/build
-Building CXX object CMakeFiles/cmTC_f8dc4.dir/src.cxx.o
-/usr/bin/g++ -DCOMPILER_SUPPORT_wd2304  -std=c++03 -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wshorten-64-to-32 -Wenum-conversion -Wc++11-extensions -Wdouble-promotion -Wshadow -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -Werror -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15   -wd2304 -o CMakeFiles/cmTC_f8dc4.dir/src.cxx.o -c /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp/src.cxx
-clang: error: unknown argument: '-wd2304'
-make[1]: *** [CMakeFiles/cmTC_f8dc4.dir/src.cxx.o] Error 1
-make: *** [cmTC_f8dc4/fast] Error 2
+Run Build Command(s):/usr/bin/make cmTC_df571/fast && /usr/bin/make -f CMakeFiles/cmTC_df571.dir/build.make CMakeFiles/cmTC_df571.dir/build
+make[1]: Entering directory '/home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_df571.dir/src.cxx.o
+/usr/bin/g++    -std=c++03 -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wlogical-op -Wdouble-promotion -Wno-psabi -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -DCOMPILER_SUPPORT_wd2304 -Werror   -wd2304 -o CMakeFiles/cmTC_df571.dir/src.cxx.o -c /home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp/src.cxx
+g++: error: unrecognized command line option '-wd2304'
+make[1]: *** [CMakeFiles/cmTC_df571.dir/build.make:66: CMakeFiles/cmTC_df571.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_df571/fast] Error 2
 
 
 Source file was:
 int main() { return 0; }
 Performing C++ SOURCE FILE Test COMPILER_SUPPORT_STRICTANSI failed with the following output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
+Change Dir: /home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_129a4/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_129a4.dir/build.make CMakeFiles/cmTC_129a4.dir/build
-Building CXX object CMakeFiles/cmTC_129a4.dir/src.cxx.o
-/usr/bin/g++ -DCOMPILER_SUPPORT_STRICTANSI  -std=c++03 -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wshorten-64-to-32 -Wenum-conversion -Wc++11-extensions -Wdouble-promotion -Wshadow -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -Werror -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15   -strict-ansi -o CMakeFiles/cmTC_129a4.dir/src.cxx.o -c /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp/src.cxx
-clang: error: unknown argument: '-strict-ansi'
-make[1]: *** [CMakeFiles/cmTC_129a4.dir/src.cxx.o] Error 1
-make: *** [cmTC_129a4/fast] Error 2
-
-
-Source file was:
-int main() { return 0; }
-Performing C++ SOURCE FILE Test COMPILER_SUPPORT_OPENMP failed with the following output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
-
-Run Build Command(s):/usr/bin/make cmTC_6504f/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_6504f.dir/build.make CMakeFiles/cmTC_6504f.dir/build
-Building CXX object CMakeFiles/cmTC_6504f.dir/src.cxx.o
-/usr/bin/g++ -DCOMPILER_SUPPORT_OPENMP  -std=c++03 -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wshorten-64-to-32 -Wenum-conversion -Wc++11-extensions -Wdouble-promotion -Wshadow -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -Qunused-arguments -ansi  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15   -fopenmp -o CMakeFiles/cmTC_6504f.dir/src.cxx.o -c /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp/src.cxx
-clang: error: unsupported option '-fopenmp'
-make[1]: *** [CMakeFiles/cmTC_6504f.dir/src.cxx.o] Error 1
-make: *** [cmTC_6504f/fast] Error 2
+Run Build Command(s):/usr/bin/make cmTC_90ae5/fast && /usr/bin/make -f CMakeFiles/cmTC_90ae5.dir/build.make CMakeFiles/cmTC_90ae5.dir/build
+make[1]: Entering directory '/home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_90ae5.dir/src.cxx.o
+/usr/bin/g++    -std=c++03 -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wlogical-op -Wdouble-promotion -Wno-psabi -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -DCOMPILER_SUPPORT_STRICTANSI -Werror   -strict-ansi -o CMakeFiles/cmTC_90ae5.dir/src.cxx.o -c /home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp/src.cxx
+g++: error: unrecognized command line option '-strict-ansi'; did you mean '-fstrict-enums'?
+make[1]: *** [CMakeFiles/cmTC_90ae5.dir/build.make:66: CMakeFiles/cmTC_90ae5.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_90ae5/fast] Error 2
 
 
 Source file was:
 int main() { return 0; }
-The MPI test test_mpi for C in mode normal failed to compile with the following output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_Qunusedarguments failed with the following output:
+Change Dir: /home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_e0876/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_e0876.dir/build.make CMakeFiles/cmTC_e0876.dir/build
-Building C object CMakeFiles/cmTC_e0876.dir/test_mpi.c.o
-/usr/bin/gcc   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -o CMakeFiles/cmTC_e0876.dir/test_mpi.c.o -c /usr/local/Cellar/cmake/3.19.1/share/cmake/Modules/FindMPI/test_mpi.c
-/usr/local/Cellar/cmake/3.19.1/share/cmake/Modules/FindMPI/test_mpi.c:1:10: fatal error: 'mpi.h' file not found
-#include <mpi.h>
-         ^~~~~~~
-1 error generated.
-make[1]: *** [CMakeFiles/cmTC_e0876.dir/test_mpi.c.o] Error 1
-make: *** [cmTC_e0876/fast] Error 2
-
+Run Build Command(s):/usr/bin/make cmTC_e519c/fast && /usr/bin/make -f CMakeFiles/cmTC_e519c.dir/build.make CMakeFiles/cmTC_e519c.dir/build
+make[1]: Entering directory '/home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_e519c.dir/src.cxx.o
+/usr/bin/g++    -std=c++03 -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wlogical-op -Wdouble-promotion -Wno-psabi -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -DCOMPILER_SUPPORT_Qunusedarguments -Werror   -Qunused-arguments -o CMakeFiles/cmTC_e519c.dir/src.cxx.o -c /home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp/src.cxx
+g++: error: unrecognized command line option '-Qunused-arguments'
+make[1]: *** [CMakeFiles/cmTC_e519c.dir/build.make:66: CMakeFiles/cmTC_e519c.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_e519c/fast] Error 2
 
 
-The MPI test test_mpi for CXX in mode normal failed to compile with the following output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
-
-Run Build Command(s):/usr/bin/make cmTC_d2a42/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_d2a42.dir/build.make CMakeFiles/cmTC_d2a42.dir/build
-Building CXX object CMakeFiles/cmTC_d2a42.dir/test_mpi.cpp.o
-/usr/bin/g++   -std=c++03 -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wshorten-64-to-32 -Wenum-conversion -Wc++11-extensions -Wdouble-promotion -Wshadow -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -Qunused-arguments -ansi  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -o CMakeFiles/cmTC_d2a42.dir/test_mpi.cpp.o -c /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.cpp
-/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.cpp:1:10: fatal error: 'mpi.h' file not found
-#include <mpi.h>
-         ^~~~~~~
-1 error generated.
-make[1]: *** [CMakeFiles/cmTC_d2a42.dir/test_mpi.cpp.o] Error 1
-make: *** [cmTC_d2a42/fast] Error 2
-
-
-
-The MPI test test_mpi for Fortran in mode F77_HEADER failed to compile with the following output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
-
-Run Build Command(s):/usr/bin/make cmTC_b3d80/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_b3d80.dir/build.make CMakeFiles/cmTC_b3d80.dir/build
-Building Fortran object CMakeFiles/cmTC_b3d80.dir/test_mpi.f90.o
-/usr/local/bin/gfortran   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -c /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.f90 -o CMakeFiles/cmTC_b3d80.dir/test_mpi.f90.o
-/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.f90:3: Error: Can't open included file 'mpif.h'
-make[1]: *** [CMakeFiles/cmTC_b3d80.dir/test_mpi.f90.o] Error 1
-make: *** [cmTC_b3d80/fast] Error 2
-
-
-
-The MPI test test_mpi for Fortran in mode F90_MODULE failed to compile with the following output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
-
-Run Build Command(s):/usr/bin/make cmTC_65f47/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_65f47.dir/build.make CMakeFiles/cmTC_65f47.dir/build
-Building Fortran object CMakeFiles/cmTC_65f47.dir/test_mpi.f90.o
-/usr/local/bin/gfortran   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -c /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.f90 -o CMakeFiles/cmTC_65f47.dir/test_mpi.f90.o
-/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.f90:2:11:
-
-    2 |       use mpi
-      |           1
-Fatal Error: Cannot open module file 'mpi.mod' for reading at (1): No such file or directory
-compilation terminated.
-make[1]: *** [CMakeFiles/cmTC_65f47.dir/test_mpi.f90.o] Error 1
-make: *** [cmTC_65f47/fast] Error 2
-
-
-
-The MPI test test_mpi for Fortran in mode F08_MODULE failed to compile with the following output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
-
-Run Build Command(s):/usr/bin/make cmTC_8677f/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_8677f.dir/build.make CMakeFiles/cmTC_8677f.dir/build
-Building Fortran object CMakeFiles/cmTC_8677f.dir/test_mpi.f90.o
-/usr/local/bin/gfortran   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -c /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.f90 -o CMakeFiles/cmTC_8677f.dir/test_mpi.f90.o
-/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.f90:2:11:
-
-    2 |       use mpi_f08
-      |           1
-Fatal Error: Cannot open module file 'mpi_f08.mod' for reading at (1): No such file or directory
-compilation terminated.
-make[1]: *** [CMakeFiles/cmTC_8677f.dir/test_mpi.f90.o] Error 1
-make: *** [cmTC_8677f/fast] Error 2
-
-
-
-The MPI test test_mpi for Fortran in mode F77_HEADER_NOKIND failed to compile with the following output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
-
-Run Build Command(s):/usr/bin/make cmTC_7942d/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_7942d.dir/build.make CMakeFiles/cmTC_7942d.dir/build
-Building Fortran object CMakeFiles/cmTC_7942d.dir/test_mpi.f90.o
-/usr/local/bin/gfortran   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -c /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.f90 -o CMakeFiles/cmTC_7942d.dir/test_mpi.f90.o
-/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.f90:3: Error: Can't open included file 'mpif.h'
-make[1]: *** [CMakeFiles/cmTC_7942d.dir/test_mpi.f90.o] Error 1
-make: *** [cmTC_7942d/fast] Error 2
-
-
-
-Performing C SOURCE FILE Test SCOTCH_Num_4 failed with the following compile output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
-
-Run Build Command(s):/usr/bin/make cmTC_3b865/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_3b865.dir/build.make CMakeFiles/cmTC_3b865.dir/build
-Building C object CMakeFiles/cmTC_3b865.dir/src.c.o
-/usr/bin/gcc -DSCOTCH_Num_4  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -o CMakeFiles/cmTC_3b865.dir/src.c.o -c /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp/src.c
-/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp/src.c:4:10: fatal error: 'scotch.h' file not found
-#include <scotch.h>
-         ^~~~~~~~~~
-1 error generated.
-make[1]: *** [CMakeFiles/cmTC_3b865.dir/src.c.o] Error 1
-make: *** [cmTC_3b865/fast] Error 2
-
-
-...and run output:
-
-Return value: 1
 Source file was:
+int main() { return 0; }
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
 
-#include <stdio.h>
-#include <stdint.h>
-#include <scotch.h>
-int main(int argc, char **argv) {
-  if (sizeof(SCOTCH_Num) == 4)
-    return 0;
-  else
-    return 1;
+Run Build Command(s):/usr/bin/make cmTC_bb5ed/fast && /usr/bin/make -f CMakeFiles/cmTC_bb5ed.dir/build.make CMakeFiles/cmTC_bb5ed.dir/build
+make[1]: Entering directory '/home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_bb5ed.dir/src.c.o
+/usr/bin/gcc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_bb5ed.dir/src.c.o   -c /home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_bb5ed
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bb5ed.dir/link.txt --verbose=1
+/usr/bin/gcc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_bb5ed.dir/src.c.o  -o cmTC_bb5ed 
+/usr/bin/ld: CMakeFiles/cmTC_bb5ed.dir/src.c.o: in function `main':
+src.c:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_bb5ed.dir/build.make:87: cmTC_bb5ed] Error 1
+make[1]: Leaving directory '/home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_bb5ed/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
 }
 
-Performing C SOURCE FILE Test SCOTCH_Num_8 failed with the following compile output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
 
-Run Build Command(s):/usr/bin/make cmTC_87454/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_87454.dir/build.make CMakeFiles/cmTC_87454.dir/build
-Building C object CMakeFiles/cmTC_87454.dir/src.c.o
-/usr/bin/gcc -DSCOTCH_Num_8  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -o CMakeFiles/cmTC_87454.dir/src.c.o -c /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp/src.c
-/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp/src.c:4:10: fatal error: 'scotch.h' file not found
-#include <scotch.h>
-         ^~~~~~~~~~
-1 error generated.
-make[1]: *** [CMakeFiles/cmTC_87454.dir/src.c.o] Error 1
-make: *** [cmTC_87454/fast] Error 2
-
-
-...and run output:
-
-Return value: 1
-Source file was:
-
-#include <stdio.h>
-#include <stdint.h>
-#include <scotch.h>
-int main(int argc, char **argv) {
-  if (sizeof(SCOTCH_Num) == 8)
-    return 0;
-  else
-    return 1;
+  return 0;
 }
 
-The MPI test test_mpi for C in mode normal failed to compile with the following output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_3728a/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_3728a.dir/build.make CMakeFiles/cmTC_3728a.dir/build
-Building C object CMakeFiles/cmTC_3728a.dir/test_mpi.c.o
-/usr/bin/gcc   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -o CMakeFiles/cmTC_3728a.dir/test_mpi.c.o -c /usr/local/Cellar/cmake/3.19.1/share/cmake/Modules/FindMPI/test_mpi.c
-/usr/local/Cellar/cmake/3.19.1/share/cmake/Modules/FindMPI/test_mpi.c:1:10: fatal error: 'mpi.h' file not found
-#include <mpi.h>
-         ^~~~~~~
-1 error generated.
-make[1]: *** [CMakeFiles/cmTC_3728a.dir/test_mpi.c.o] Error 1
-make: *** [cmTC_3728a/fast] Error 2
-
-
-
-The MPI test test_mpi for CXX in mode normal failed to compile with the following output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
-
-Run Build Command(s):/usr/bin/make cmTC_56bf0/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_56bf0.dir/build.make CMakeFiles/cmTC_56bf0.dir/build
-Building CXX object CMakeFiles/cmTC_56bf0.dir/test_mpi.cpp.o
-/usr/bin/g++   -std=c++03 -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wshorten-64-to-32 -Wenum-conversion -Wc++11-extensions -Wdouble-promotion -Wshadow -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -Qunused-arguments -ansi  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -o CMakeFiles/cmTC_56bf0.dir/test_mpi.cpp.o -c /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.cpp
-/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.cpp:1:10: fatal error: 'mpi.h' file not found
-#include <mpi.h>
-         ^~~~~~~
-1 error generated.
-make[1]: *** [CMakeFiles/cmTC_56bf0.dir/test_mpi.cpp.o] Error 1
-make: *** [cmTC_56bf0/fast] Error 2
-
-
-
-The MPI test test_mpi for Fortran in mode F77_HEADER failed to compile with the following output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
-
-Run Build Command(s):/usr/bin/make cmTC_88fdb/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_88fdb.dir/build.make CMakeFiles/cmTC_88fdb.dir/build
-Building Fortran object CMakeFiles/cmTC_88fdb.dir/test_mpi.f90.o
-/usr/local/bin/gfortran   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -c /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.f90 -o CMakeFiles/cmTC_88fdb.dir/test_mpi.f90.o
-/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.f90:3: Error: Can't open included file 'mpif.h'
-make[1]: *** [CMakeFiles/cmTC_88fdb.dir/test_mpi.f90.o] Error 1
-make: *** [cmTC_88fdb/fast] Error 2
-
-
-
-The MPI test test_mpi for Fortran in mode F90_MODULE failed to compile with the following output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
-
-Run Build Command(s):/usr/bin/make cmTC_2d7a3/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_2d7a3.dir/build.make CMakeFiles/cmTC_2d7a3.dir/build
-Building Fortran object CMakeFiles/cmTC_2d7a3.dir/test_mpi.f90.o
-/usr/local/bin/gfortran   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -c /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.f90 -o CMakeFiles/cmTC_2d7a3.dir/test_mpi.f90.o
-/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.f90:2:11:
-
-    2 |       use mpi
-      |           1
-Fatal Error: Cannot open module file 'mpi.mod' for reading at (1): No such file or directory
-compilation terminated.
-make[1]: *** [CMakeFiles/cmTC_2d7a3.dir/test_mpi.f90.o] Error 1
-make: *** [cmTC_2d7a3/fast] Error 2
-
-
-
-The MPI test test_mpi for Fortran in mode F08_MODULE failed to compile with the following output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
-
-Run Build Command(s):/usr/bin/make cmTC_b9c99/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_b9c99.dir/build.make CMakeFiles/cmTC_b9c99.dir/build
-Building Fortran object CMakeFiles/cmTC_b9c99.dir/test_mpi.f90.o
-/usr/local/bin/gfortran   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -c /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.f90 -o CMakeFiles/cmTC_b9c99.dir/test_mpi.f90.o
-/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.f90:2:11:
-
-    2 |       use mpi_f08
-      |           1
-Fatal Error: Cannot open module file 'mpi_f08.mod' for reading at (1): No such file or directory
-compilation terminated.
-make[1]: *** [CMakeFiles/cmTC_b9c99.dir/test_mpi.f90.o] Error 1
-make: *** [cmTC_b9c99/fast] Error 2
-
-
-
-The MPI test test_mpi for Fortran in mode F77_HEADER_NOKIND failed to compile with the following output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
-
-Run Build Command(s):/usr/bin/make cmTC_3ed3d/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_3ed3d.dir/build.make CMakeFiles/cmTC_3ed3d.dir/build
-Building Fortran object CMakeFiles/cmTC_3ed3d.dir/test_mpi.f90.o
-/usr/local/bin/gfortran   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -c /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.f90 -o CMakeFiles/cmTC_3ed3d.dir/test_mpi.f90.o
-/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.f90:3: Error: Can't open included file 'mpif.h'
-make[1]: *** [CMakeFiles/cmTC_3ed3d.dir/test_mpi.f90.o] Error 1
-make: *** [cmTC_3ed3d/fast] Error 2
-
-
-
-Performing C SOURCE FILE Test PTSCOTCH_Num_4 failed with the following compile output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
-
-Run Build Command(s):/usr/bin/make cmTC_5d267/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_5d267.dir/build.make CMakeFiles/cmTC_5d267.dir/build
-Building C object CMakeFiles/cmTC_5d267.dir/src.c.o
-/usr/bin/gcc -DPTSCOTCH_Num_4  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -o CMakeFiles/cmTC_5d267.dir/src.c.o -c /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp/src.c
-/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp/src.c:4:10: fatal error: 'ptscotch.h' file not found
-#include <ptscotch.h>
-         ^~~~~~~~~~~~
-1 error generated.
-make[1]: *** [CMakeFiles/cmTC_5d267.dir/src.c.o] Error 1
-make: *** [cmTC_5d267/fast] Error 2
-
-
-...and run output:
-
-Return value: 1
-Source file was:
-
-#include <stdio.h>
-#include <stdint.h>
-#include <ptscotch.h>
-int main(int argc, char **argv) {
-  if (sizeof(SCOTCH_Num) == 4)
-    return 0;
-  else
-    return 1;
-}
-
-Performing C SOURCE FILE Test PTSCOTCH_Num_8 failed with the following compile output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
-
-Run Build Command(s):/usr/bin/make cmTC_56d4c/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_56d4c.dir/build.make CMakeFiles/cmTC_56d4c.dir/build
-Building C object CMakeFiles/cmTC_56d4c.dir/src.c.o
-/usr/bin/gcc -DPTSCOTCH_Num_8  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -o CMakeFiles/cmTC_56d4c.dir/src.c.o -c /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp/src.c
-/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp/src.c:4:10: fatal error: 'ptscotch.h' file not found
-#include <ptscotch.h>
-         ^~~~~~~~~~~~
-1 error generated.
-make[1]: *** [CMakeFiles/cmTC_56d4c.dir/src.c.o] Error 1
-make: *** [cmTC_56d4c/fast] Error 2
-
-
-...and run output:
-
-Return value: 1
-Source file was:
-
-#include <stdio.h>
-#include <stdint.h>
-#include <ptscotch.h>
-int main(int argc, char **argv) {
-  if (sizeof(SCOTCH_Num) == 8)
-    return 0;
-  else
-    return 1;
-}
-
-The MPI test test_mpi for C in mode normal failed to compile with the following output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
-
-Run Build Command(s):/usr/bin/make cmTC_4881b/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_4881b.dir/build.make CMakeFiles/cmTC_4881b.dir/build
-Building C object CMakeFiles/cmTC_4881b.dir/test_mpi.c.o
-/usr/bin/gcc   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -o CMakeFiles/cmTC_4881b.dir/test_mpi.c.o -c /usr/local/Cellar/cmake/3.19.1/share/cmake/Modules/FindMPI/test_mpi.c
-/usr/local/Cellar/cmake/3.19.1/share/cmake/Modules/FindMPI/test_mpi.c:1:10: fatal error: 'mpi.h' file not found
-#include <mpi.h>
-         ^~~~~~~
-1 error generated.
-make[1]: *** [CMakeFiles/cmTC_4881b.dir/test_mpi.c.o] Error 1
-make: *** [cmTC_4881b/fast] Error 2
-
-
-
-The MPI test test_mpi for CXX in mode normal failed to compile with the following output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
-
-Run Build Command(s):/usr/bin/make cmTC_91e34/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_91e34.dir/build.make CMakeFiles/cmTC_91e34.dir/build
-Building CXX object CMakeFiles/cmTC_91e34.dir/test_mpi.cpp.o
-/usr/bin/g++   -std=c++03 -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wshorten-64-to-32 -Wenum-conversion -Wc++11-extensions -Wdouble-promotion -Wshadow -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -Qunused-arguments -ansi  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -o CMakeFiles/cmTC_91e34.dir/test_mpi.cpp.o -c /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.cpp
-/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.cpp:1:10: fatal error: 'mpi.h' file not found
-#include <mpi.h>
-         ^~~~~~~
-1 error generated.
-make[1]: *** [CMakeFiles/cmTC_91e34.dir/test_mpi.cpp.o] Error 1
-make: *** [cmTC_91e34/fast] Error 2
-
-
-
-The MPI test test_mpi for C in mode normal failed to compile with the following output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
-
-Run Build Command(s):/usr/bin/make cmTC_ce9ce/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_ce9ce.dir/build.make CMakeFiles/cmTC_ce9ce.dir/build
-Building C object CMakeFiles/cmTC_ce9ce.dir/test_mpi.c.o
-/usr/bin/gcc   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -o CMakeFiles/cmTC_ce9ce.dir/test_mpi.c.o -c /usr/local/Cellar/cmake/3.19.1/share/cmake/Modules/FindMPI/test_mpi.c
-/usr/local/Cellar/cmake/3.19.1/share/cmake/Modules/FindMPI/test_mpi.c:1:10: fatal error: 'mpi.h' file not found
-#include <mpi.h>
-         ^~~~~~~
-1 error generated.
-make[1]: *** [CMakeFiles/cmTC_ce9ce.dir/test_mpi.c.o] Error 1
-make: *** [cmTC_ce9ce/fast] Error 2
-
-
-
-The MPI test test_mpi for CXX in mode normal failed to compile with the following output:
-Change Dir: /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp
-
-Run Build Command(s):/usr/bin/make cmTC_5ab36/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_5ab36.dir/build.make CMakeFiles/cmTC_5ab36.dir/build
-Building CXX object CMakeFiles/cmTC_5ab36.dir/test_mpi.cpp.o
-/usr/bin/g++   -std=c++03 -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wshorten-64-to-32 -Wenum-conversion -Wc++11-extensions -Wdouble-promotion -Wshadow -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -Qunused-arguments -ansi  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.0.sdk -mmacosx-version-min=10.15 -o CMakeFiles/cmTC_5ab36.dir/test_mpi.cpp.o -c /Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.cpp
-/Users/wenlingong/Documents/GitHub/Classes/cs107/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/FindMPI/test_mpi.cpp:1:10: fatal error: 'mpi.h' file not found
-#include <mpi.h>
-         ^~~~~~~
-1 error generated.
-make[1]: *** [CMakeFiles/cmTC_5ab36.dir/test_mpi.cpp.o] Error 1
-make: *** [cmTC_5ab36/fast] Error 2
+Run Build Command(s):/usr/bin/make cmTC_eb024/fast && /usr/bin/make -f CMakeFiles/cmTC_eb024.dir/build.make CMakeFiles/cmTC_eb024.dir/build
+make[1]: Entering directory '/home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_eb024.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_eb024.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_eb024
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_eb024.dir/link.txt --verbose=1
+/usr/bin/gcc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_eb024.dir/CheckFunctionExists.c.o  -o cmTC_eb024  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_eb024.dir/build.make:87: cmTC_eb024] Error 1
+make[1]: Leaving directory '/home/wenlin/cs107-FinalProject/3PL/eigen-3.3.9/_build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_eb024/fast] Error 2
 
 
 

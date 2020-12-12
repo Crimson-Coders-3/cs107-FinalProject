@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['multivar_16',['multiVar',['../ADFunc_8h.html#a986e4e5cbe9b4f6202f08e3f8719b26f',1,'ADFunc.h']]]
+  ['log_29',['log',['../ADFunc_8h.html#a9aa84b931ff2dbc58b1369aed6469d9e',1,'ADFunc.h']]],
+  ['log10_30',['log10',['../ADFunc_8h.html#ac92574784d1d9c8e54fed7ca3546f9a9',1,'ADFunc.h']]],
+  ['log1p_31',['log1p',['../ADFunc_8h.html#a952c7a471630610f87592edd0b751161',1,'ADFunc.h']]],
+  ['log2_32',['log2',['../ADFunc_8h.html#acc786fd85199ae264b2d998f5a5ab370',1,'ADFunc.h']]]
 ];
