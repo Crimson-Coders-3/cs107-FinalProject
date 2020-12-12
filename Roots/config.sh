@@ -63,7 +63,7 @@ CC=gcc
 CXX=g++
 
 C_FLAGS=
-CXX_FLAGS=
+CXX_FLAGS=-std=c++17
 FC_FLAGS=
 
 # =========================
