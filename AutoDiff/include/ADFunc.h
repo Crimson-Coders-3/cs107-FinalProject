@@ -299,28 +299,64 @@ class ADFunc {
    std::string getName(int index) const;
 
    /////////////////////////////////////////// SETTER
-   // set value
+   //! Set function value
    void setVal(double val);
 
-   // set dval with respect to a variable
+   //! Set dval with respect to a variable
+   /*!
+      It will throw a std::out_of_range error if index is out of range of the predefined seed vector.
+
+      \param index index of the variable in the seed vector
+      \param dval dval (partial derivative) to be set
+   */
    void set_seed_wrt(int index, double dval);
 
-   // set dvals of all the variables
+   //! Set seed vector (dvals of all the variables)
+   /*!
+      It will throw std::range_error if the new seed vector's dimension not matched 
+      with the name vector's dimension
+      if the ADFunc object is currently in name mode. 
+      If that is the case, please use \sa clearName() first!
+
+      \param dvals gradient (vector of dvals) to be set
+   */
    void set_seed(std::vector<double> dvals);
 
-   // set name of a variable
+   //! Set name of a variable
+   /*!
+      It will throw a std::out_of_range error if index is out of range of the predefined seed vector.
+
+      It will throw std::runtime_error if name mode is not set.
+
+      It will throw std::runtime_error if input variable name is duplicated with the other names in name vector.
+
+      \param index index of the variable in the seed vector
+      \param var_name variable name to be set
+   */
    void setName(int index, std::string var_name);
 
-   // set name of all the variables
+   //! Set name of all the variables
+   /*!
+      It will throw std::range_error if the new seed vector's dimension not matched 
+      with previous name vector's dimension. If that is the case, please use \sa clearName() first!
+
+      It will throw std::range_error if the new seed vector's dimension not matched 
+      with the existed seed vector's dimension. If that is the case, you probably want to do
+      \sa set_seed() first!
+
+      It will throw std::runtime_error if input names are not unique.
+
+      \param names all the variable names to be set
+   */
    void setName(std::vector<std::string> names);
 
-   // turn name mode on
+   //! Turn name mode on
    void setName();
 
-   // turn name mode off
+   //! Turn name mode off
    void clearName();
 
-}; // close ADFunc class
+};
 
 /////////////////////////////////////////// PRINT
 std::ostream& operator<<(std::ostream& os, const ADFunc& obj);
