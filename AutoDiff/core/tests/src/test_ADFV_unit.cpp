@@ -20,7 +20,26 @@ void ADLibrary_vectortest(){
 }
 
 TEST(VECTOR,CONSTRUCTOR_EMPTY){
-	ADFuncVector Fvec();
+	ADFuncVector Fvec;
+	
+	std::vector<ADFunc> emptyvec = {};
+    ADFuncVector Fvec1(emptyvec);
+	Fvec.setFuncVec(emptyvec);
+	
+	EXPECT_NEAR(Fvec.size(),0.0,0.0001);
+	EXPECT_NEAR(Fvec1.size(),0.0,0.0001);
+}
+
+TEST(VECTOR,CONSTRUCTOR_INT){
+	ADFuncVector Fvec(4);
+	
+	try {
+        Fvec.size();
+        FAIL() << "Expected std::runtime_error";
+    }
+    catch(std::runtime_error const & err) {
+        EXPECT_EQ(err.what(),std::string("Internal size not matched with internal std::vector<ADFunc>! Please use setFuncVec() or setSize() to fix it!"));
+    }
 }
 
 TEST(VECTOR,CONSTRUCTOR){
@@ -80,7 +99,7 @@ TEST(VECTOR,SETTER){
 	std::vector<double> new_values = {1.0,2.0};
 	std::vector<ADFunc> new_multi_vars = multiVar(new_values);
 	Fvec.setFuncVec(new_multi_vars);
-  EXPECT_NEAR(Fvec.size(),2.0,DTOL);
+	EXPECT_NEAR(Fvec.size(),2.0,DTOL);
 	
 	try {
         Fvec.setSize(5);
@@ -402,4 +421,35 @@ TEST(VECTOR,VAL){
     ADFuncVector Fvec(F);
 	
 	EXPECT_NEAR(Fvec.val(0),7.27041,0.0001); 
+	
+	try {
+        Fvec.val(6);
+        FAIL() << "Expected std::out_of_range";
+    }
+    catch(std::out_of_range const & err) {
+        EXPECT_EQ(err.what(),std::string("Index out of range!"));
+    }
+}
+
+TEST(VECTOR,JACOBIAN){
+	std::vector<double> init_values = {1.0,2.0,3.0};
+    std::vector<ADFunc> multi_vars = multiVar(init_values);
+	std::vector<std::string> names {"a","b", "c"};
+    ADFunc x = (multi_vars[0]);
+	x.setName(names);
+    ADFunc y = (multi_vars[1]);
+	y.setName(names);
+    ADFunc z = (multi_vars[2]);
+	z.setName(names);
+    ADFunc f1 = 2.0*x + x*y+z/pow(sin(x),0.5);
+    ADFunc f2 = exp(z)/pow(sin(x),2.0)-4*pow(x,3.0);
+    ADFunc f3 = exp(sin(x)*cos(y)-2);
+    std::vector<ADFunc> F = {f1,f2,f3};
+    ADFuncVector Fvec(F);
+	
+	EXPECT_NEAR(Fvec.jacobian().at(0).at(0),2.95005,0.0001); 
+	EXPECT_NEAR(Fvec.jacobian().at(0).at(1),1.0,0.0001); 
+	EXPECT_NEAR(Fvec.jacobian().at(1).at(0),-48.4278,0.0001); 
+	EXPECT_NEAR(Fvec.jacobian().at(1).at(1),0.0,0.0001); 
+	EXPECT_NEAR(Fvec.jacobian().at(2).at(2),0.0,0.0001); 
 }
