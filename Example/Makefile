@@ -8,7 +8,7 @@ AD_LIB_PATH = ${CURDIR}/../AutoDiff/install/lib
 AD_LIB_NAME = AutoDiff
 
 all: example.cpp
-	g++ -Wall -o example -I${AD_INCLUDE} -L${AD_LIB_PATH} example.cpp -Wl,-rpath=${AD_LIB_PATH} -l${AD_LIB_NAME}
+	g++ -Wall -std=c++11 -o example -I${AD_INCLUDE} -L${AD_LIB_PATH} example.cpp -Wl,-rpath=${AD_LIB_PATH} -l${AD_LIB_NAME}
 
 clean:
 	rm *.o

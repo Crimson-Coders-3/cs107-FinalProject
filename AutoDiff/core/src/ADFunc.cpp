@@ -15,6 +15,31 @@ ADFunc::ADFunc(double val, std::vector<double> seed) {
   _hasName = false;
 }
 
+ADFunc::ADFunc(double val, std::string name, std::vector<std::string> var_names) {
+  _val = val;
+  _num_vars = var_names.size();
+  _name_vec = var_names;
+  _hasName = true;
+
+  std::unordered_map<std::string,int>::const_iterator got;
+
+  for(int i=0;i<_num_vars;i++){
+    got = _name_map.find(var_names[i]);
+    if( got!= _name_map.end() ){
+      throw std::runtime_error("Name must be unique!");
+    }
+    _name_map.insert(std::make_pair(var_names[i],i));
+  }
+
+  for(int i=0;i<_num_vars;i++){
+    if(var_names[i]==name){
+      _grad.push_back(1.0);
+    } else {
+      _grad.push_back(0.0);
+    }
+  }
+}
+
 ADFunc::ADFunc(double val, std::vector<double> seed, std::vector<std::string> var_names) {
   if(seed.size()!=var_names.size()){
     throw std::invalid_argument("Dimension of seed vector and name vector not matched!");
@@ -762,7 +787,7 @@ std::vector<double> ADFunc::dval_wrt(std::vector<std::string> names) const {
   std::unordered_map<std::string,int>::const_iterator got;
   
   for(std::string name: names){
-    got = _name_map.find(var_name);
+    got = _name_map.find(name);
     if(got == _name_map.end()) throw std::runtime_error("Input variable name not found!");
     dvals.push_back(_grad[got->second]);
   }
@@ -1004,6 +1029,8 @@ bool checkName(const ADFunc &lhs, const ADFunc & rhs){
   return true;
 }
 
+//////////////////////////////////////////////////////// Vectorized Input
+
 // Create multiple functions/variables and intilaize seed vectors as unit vectors
 // automatically for you
 std::vector<ADFunc> multiVar(std::vector<double> values){
@@ -1019,4 +1046,22 @@ std::vector<ADFunc> multiVar(std::vector<double> values){
     multi_vars.push_back( ADFunc(values[i],seed_copy) );
   }
   return multi_vars;
+}
+
+// set all the seeds of vectorized input back to unit vectors
+void setSeedDefault(std::vector<ADFunc> vars){
+  if(vars.size()==0){
+    return;
+  }
+  std::vector<double> seed_vec(vars.at(0).countVar(),0.0);
+  
+  for(int i=0;i<vars.size();i++){
+    if(i!=0){
+      seed_vec[i-1] = 0.0;
+    }
+    seed_vec[i] = 1.0;
+    std::vector<double> seed_copy = seed_vec;
+
+    vars.at(i).set_seed(seed_copy);
+  }
 }
