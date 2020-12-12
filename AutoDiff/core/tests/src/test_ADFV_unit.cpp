@@ -23,18 +23,6 @@ TEST(VECTOR,CONSTRUCTOR_EMPTY){
 	ADFuncVector Fvec();
 }
 
-TEST(VECTOR,CONSTRUCTOR_INT){
-	ADFuncVector Fvec(4);
-	
-	try {
-        Fvec.size();
-        FAIL() << "Expected std::runtime_error";
-    }
-    catch(std::runtime_error const & err) {
-        EXPECT_EQ(err.what(),std::string("Dimension Not Matched!"));
-    }
-}
-
 TEST(VECTOR,CONSTRUCTOR){
 	std::vector<double> init_values = {1.0,2.0,3.9};
     std::vector<ADFunc> multi_vars = multiVar(init_values);
@@ -99,7 +87,7 @@ TEST(VECTOR,SETTER){
         FAIL() << "Expected std::runtime_error";
     }
     catch(std::runtime_error const & err) {
-        EXPECT_EQ(err.what(),std::string("Input size mismatches with previously defined funcVector! Please use clear() before set size."));
+        EXPECT_EQ(err.what(),std::string("Input size mismatches with current funcVector! Please use clear() before set size."));
     }
 }
 
